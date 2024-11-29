@@ -1,0 +1,86 @@
+UndefineClass('Intelligent_Tecatli')
+DefineClass.Intelligent_Tecatli = {
+	__parents = { "TecatliBase" },
+	__generated_by_class = "ModItemUnitAnimalCompositeDef",
+
+
+	object_class = "TecatliBase",
+	BypassTrapsChance = 90,
+	composite_part_target = "Intelligent_Tecatli",
+	composite_part_groups = {
+		"Tecatli",
+	},
+	EventProgressValue = 750,
+	SpawnDefWeight = 60,
+	CombatGroup = "Insects",
+	CombatUseCover = true,
+	HitNegationChance = {
+		blunt = 45,
+		energy = 45,
+		gas = 40,
+		pacify = 60,
+		piercing = 15,
+	},
+	HumanThreat = true,
+	FieldResearchTech = "Field_Tecatli_T2",
+	Icon = "UI/Icons/Resources/res_tecatli",
+	DisplayName = T(375005765624, --[[ModItemUnitAnimalCompositeDef Intelligent_Tecatli DisplayName]] "Intelligent Tecatli"),
+	DisplayNameUnknown = T(996042991236, --[[ModItemUnitAnimalCompositeDef Intelligent_Tecatli DisplayNameUnknown]] "A... smaller Tecaliti?"),
+	DisplayNameUnknownPL = T(429405169305, --[[ModItemUnitAnimalCompositeDef Intelligent_Tecatli DisplayNameUnknownPL]] "A... smaller Tecaliti?"),
+	Description = T(329787477205, --[[ModItemUnitAnimalCompositeDef Intelligent_Tecatli Description]] "This species has evolved to be smaller, and with that extra energy it's brain is able to process information much better! Deals <color TextNegative>Energy</color> and <color TextPositive>Gas</color> damage."),
+	FoodResources = {
+		"FoodAnimalCarnivore",
+		"Slop",
+		"FoodAnimalHerbivore",
+	},
+	DailyEatingAmount = 4000,
+	Diet = "Omnivore",
+	EatingDuration = 4000,
+	ButcherResources = {
+		PlaceObj('ButcherResAmount', {
+			'resource', "Nuedo",
+			'min_amount', 11000,
+			'max_amount', 20000,
+		}),
+		PlaceObj('ButcherResAmount', {
+			'resource', "RawMeat",
+			'min_amount', 20000,
+			'max_amount', 30000,
+		}),
+		PlaceObj('ButcherResAmount', {
+			'resource', "Toco",
+			'min_amount', 11000,
+			'max_amount', 20000,
+		}),
+	},
+	AnimalPerks = {
+		"DraftableAnimal",
+		"AP_Fortified",
+	},
+	attack_weapon = "TecatliWeapon",
+	anim_idle = {
+		"idle",
+	},
+	anim_idle_playful = {
+		"idle_Playfull",
+		"idle_Playfull2",
+	},
+	Tameable = true,
+	TamingFood = "RawMeat",
+	TamingFoodAmount = 20000,
+	TamingMinimumSkill = 8,
+	TamingChance = 40,
+	TamingAggressiveChance = 20,
+	TamingDistance = 10000,
+	TamedLifetimeMin = 92160000,
+	TamedLifetimeMax = 138240000,
+	CombatSkillInitial = range(5, 6),
+	BondingChance = 5,
+	ReproductionType = "two sexes",
+	ReproductionGroup = "Tecatli",
+	DailyPregnancyChance = 45,
+	PregnancyDuration = 3360000,
+	GrowDuration = 3360000,
+	NewbornClass = "Spellsword_Tecatli",
+}
+
