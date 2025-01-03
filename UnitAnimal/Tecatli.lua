@@ -42,14 +42,6 @@ DefineClass.Tecatli = {
 			'min_amount', 20000,
 			'max_amount', 30000,
 		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Nuedo",
-			'max_amount', 1000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Toco",
-			'max_amount', 1000,
-		}),
 	},
 	SelectionRadius = 2000,
 	ChanceToBeMale = 33,

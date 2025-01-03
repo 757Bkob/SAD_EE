@@ -36,8 +36,8 @@ DefineClass.Frenzied_Dragonfly = {
 	Icon = "UI/Icons/Resources/res_dragonfly",
 	DisplayName = T(827606296623, --[[ModItemUnitAnimalCompositeDef Frenzied_Dragonfly DisplayName]] "Deathfly"),
 	DisplayNamePl = T(740187821407, --[[ModItemUnitAnimalCompositeDef Frenzied_Dragonfly DisplayNamePl]] "Deathfly"),
-	DisplayNameUnknown = T(--[[ModItemUnitAnimalCompositeDef Frenzied_Dragonfly DisplayNameUnknown]] "New Hummingfly Evolution?"),
-	DisplayNameUnknownPL = T(--[[ModItemUnitAnimalCompositeDef Frenzied_Dragonfly DisplayNameUnknownPL]] "New Hummingfly Evolution?"),
+	DisplayNameUnknown = T(284440498649, --[[ModItemUnitAnimalCompositeDef Frenzied_Dragonfly DisplayNameUnknown]] "Unknown Hummingfly Evolution"),
+	DisplayNameUnknownPL = T(238166120256, --[[ModItemUnitAnimalCompositeDef Frenzied_Dragonfly DisplayNameUnknownPL]] "Unknown Hummingfly Evolution"),
 	Description = T(524852674837, --[[ModItemUnitAnimalCompositeDef Frenzied_Dragonfly Description]] "A Hummingfly that has evolved to be able to spit their Greek Fireballs faster, named Dragonfly. Deals <color TextNegative>Energy</color> damage."),
 	BaseMaxHealth = 20000,
 	FoodResources = {
@@ -52,16 +52,6 @@ DefineClass.Frenzied_Dragonfly = {
 		PlaceObj('ButcherResAmount', {
 			'resource', "RawMeatInsect",
 			'min_amount', 8000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Nuedo",
-			'min_amount', 2000,
-			'max_amount', 4000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Adricon",
-			'min_amount', 2000,
-			'max_amount', 4000,
 		}),
 	},
 	SelectionRadius = 1250,

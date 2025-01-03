@@ -29,18 +29,8 @@ DefineClass.Hulk_Juno = {
 	DailyEatingAmount = 3000,
 	ButcherResources = {
 		PlaceObj('ButcherResAmount', {
-			'resource', "Bitherm",
-			'min_amount', 5000,
-			'max_amount', 10000,
-		}),
-		PlaceObj('ButcherResAmount', {
 			'resource', "RawMeatInsect",
 			'min_amount', 75000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Sintis",
-			'min_amount', 5000,
-			'max_amount', 10000,
 		}),
 	},
 	ProduceResources = {

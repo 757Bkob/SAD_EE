@@ -24,8 +24,8 @@ DefineClass.Entombed_Tecatli = {
 	Icon = "UI/Icons/Resources/res_tecatli",
 	DisplayName = T(947892632261, --[[ModItemUnitAnimalCompositeDef Entombed_Tecatli DisplayName]] "Entombed Tecatli"),
 	DisplayNamePl = T(343349551885, --[[ModItemUnitAnimalCompositeDef Entombed_Tecatli DisplayNamePl]] "Entombed Tecatli"),
-	DisplayNameUnknown = T(244909361783, --[[ModItemUnitAnimalCompositeDef Entombed_Tecatli DisplayNameUnknown]] "A bulkier Tecatli?!?"),
-	DisplayNameUnknownPL = T(793178284453, --[[ModItemUnitAnimalCompositeDef Entombed_Tecatli DisplayNameUnknownPL]] "A bulkier Tecatli?!?"),
+	DisplayNameUnknown = T(244909361783, --[[ModItemUnitAnimalCompositeDef Entombed_Tecatli DisplayNameUnknown]] "Unknown Tecatli Evolution"),
+	DisplayNameUnknownPL = T(793178284453, --[[ModItemUnitAnimalCompositeDef Entombed_Tecatli DisplayNameUnknownPL]] "Unknown Tecatli Evolution"),
 	Description = T(581609748142, --[[ModItemUnitAnimalCompositeDef Entombed_Tecatli Description]] "This species has gotten much bulkier... I hope we can pierce it's new hide. Deals <color TextNegative>Energy</color> and <color TextPositive>Gas</color> damage."),
 	FoodResources = {
 		"FoodAnimalCarnivore",
@@ -40,16 +40,6 @@ DefineClass.Entombed_Tecatli = {
 			'resource', "RawMeat",
 			'min_amount', 20000,
 			'max_amount', 30000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Nuedo",
-			'min_amount', 2000,
-			'max_amount', 4000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Toco",
-			'min_amount', 2000,
-			'max_amount', 4000,
 		}),
 	},
 	AnimalPerks = {

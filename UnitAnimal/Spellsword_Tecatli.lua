@@ -26,8 +26,8 @@ DefineClass.Spellsword_Tecatli = {
 	Icon = "UI/Icons/Resources/res_tecatli",
 	DisplayName = T(586792446004, --[[ModItemUnitAnimalCompositeDef Spellsword_Tecatli DisplayName]] "Spellsword Tecatli"),
 	DisplayNamePl = T(726261985535, --[[ModItemUnitAnimalCompositeDef Spellsword_Tecatli DisplayNamePl]] "Spellsword Tecatli"),
-	DisplayNameUnknown = T(961709341942, --[[ModItemUnitAnimalCompositeDef Spellsword_Tecatli DisplayNameUnknown]] "Tecatli's Final Form?"),
-	DisplayNameUnknownPL = T(520953085215, --[[ModItemUnitAnimalCompositeDef Spellsword_Tecatli DisplayNameUnknownPL]] "This creature shimmers in the sun, something has changed"),
+	DisplayNameUnknown = T(961709341942, --[[ModItemUnitAnimalCompositeDef Spellsword_Tecatli DisplayNameUnknown]] "Tecatli Final Form?"),
+	DisplayNameUnknownPL = T(520953085215, --[[ModItemUnitAnimalCompositeDef Spellsword_Tecatli DisplayNameUnknownPL]] "Tecatli Final Form?"),
 	Description = T(563977516885, --[[ModItemUnitAnimalCompositeDef Spellsword_Tecatli Description]] "When this creature hits you, good luck ever feeling the same! Deals <color TextNegative>Energy</color> and <color TextPositive>Gas</color> damage."),
 	FoodResources = {
 		"FoodAnimalCarnivore",
@@ -39,19 +39,9 @@ DefineClass.Spellsword_Tecatli = {
 	EatingDuration = 4000,
 	ButcherResources = {
 		PlaceObj('ButcherResAmount', {
-			'resource', "Nuedo",
-			'min_amount', 35000,
-			'max_amount', 35000,
-		}),
-		PlaceObj('ButcherResAmount', {
 			'resource', "RawMeat",
 			'min_amount', 20000,
 			'max_amount', 30000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Toco",
-			'min_amount', 35000,
-			'max_amount', 35000,
 		}),
 	},
 	AnimalPerks = {

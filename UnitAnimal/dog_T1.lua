@@ -38,8 +38,8 @@ DefineClass.dog_T1 = {
 	Icon = "UI/Icons/Resources/res_dog_great_dane",
 	DisplayName = T(553816104696, --[[ModItemUnitAnimalCompositeDef dog_T1 DisplayName]] "Cold Dog"),
 	DisplayNamePl = T(467328078820, --[[ModItemUnitAnimalCompositeDef dog_T1 DisplayNamePl]] "Cold Dog"),
-	DisplayNameUnknown = T(156975547716, --[[ModItemUnitAnimalCompositeDef dog_T1 DisplayNameUnknown]] "Dog surrounded by a chill in the air"),
-	DisplayNameUnknownPL = T(170552264066, --[[ModItemUnitAnimalCompositeDef dog_T1 DisplayNameUnknownPL]] "Dogs surrounded by a chill in the air"),
+	DisplayNameUnknown = T(156975547716, --[[ModItemUnitAnimalCompositeDef dog_T1 DisplayNameUnknown]] "Unknown Dog Evolution"),
+	DisplayNameUnknownPL = T(170552264066, --[[ModItemUnitAnimalCompositeDef dog_T1 DisplayNameUnknownPL]] "Unknown Dog Evolution"),
 	Description = T(200804568501, --[[ModItemUnitAnimalCompositeDef dog_T1 Description]] "A more aggressive and larger dog. This special species is usually only seen with other species. Unknown the implications or reasons... Deals <color TechSubtitleBlue>Piercing</color> and <color TextNegative>Energy</color> damage."),
 	FoodResources = {
 		"FoodAnimalCarnivore",

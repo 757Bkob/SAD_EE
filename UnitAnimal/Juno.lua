@@ -53,14 +53,6 @@ DefineClass.Juno = {
 			'resource', "RawMeatInsect",
 			'min_amount', 50000,
 		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Bitherm",
-			'max_amount', 1000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Sintis",
-			'max_amount', 1000,
-		}),
 	},
 	SelectionRadius = 2000,
 	ChanceToBeMale = 75,

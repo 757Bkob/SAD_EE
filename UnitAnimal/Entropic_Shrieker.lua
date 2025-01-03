@@ -23,8 +23,8 @@ DefineClass.Entropic_Shrieker = {
 	lead_priority = 6,
 	DisplayName = T(--[[ModItemUnitAnimalCompositeDef Entropic_Shrieker DisplayName]] "Entropic Shrieker"),
 	DisplayNamePl = T(--[[ModItemUnitAnimalCompositeDef Entropic_Shrieker DisplayNamePl]] "Entropic Shrieker"),
-	DisplayNameUnknown = T(--[[ModItemUnitAnimalCompositeDef Entropic_Shrieker DisplayNameUnknown]] "Poison Tipped Shriekers?!?"),
-	DisplayNameUnknownPL = T(--[[ModItemUnitAnimalCompositeDef Entropic_Shrieker DisplayNameUnknownPL]] "Poison Tipped Shriekers?!?"),
+	DisplayNameUnknown = T(507956053632, --[[ModItemUnitAnimalCompositeDef Entropic_Shrieker DisplayNameUnknown]] "Unknown Shrieker Evolution"),
+	DisplayNameUnknownPL = T(458576588964, --[[ModItemUnitAnimalCompositeDef Entropic_Shrieker DisplayNameUnknownPL]] "Unknown Shrieker Evolution"),
 	Description = T(322528609672, --[[ModItemUnitAnimalCompositeDef Entropic_Shrieker Description]] "Shrieker's who have evolved long barbed spikes. Resistant to piercing attacks, the barbs fully pierce and lodge in nearby terrain, lowering movement speed. Deals <color TextButton>Blunt</color> and <color TextSubtitleBlue>Piercing</color> damage."),
 	BaseMaxHealth = 400000,
 	DailyEatingAmount = 2000,
@@ -32,16 +32,6 @@ DefineClass.Entropic_Shrieker = {
 		PlaceObj('ButcherResAmount', {
 			'resource', "RawMeatInsect",
 			'min_amount', 75000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Megdeb",
-			'min_amount', 5000,
-			'max_amount', 10000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Adricon",
-			'min_amount', 5000,
-			'max_amount', 10000,
 		}),
 	},
 	ChanceToBeMale = 50,

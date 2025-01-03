@@ -24,7 +24,8 @@ DefineClass.Heat_Reinforced_Tecatli = {
 	Icon = "UI/Icons/Resources/res_tecatli",
 	DisplayName = T(440729338139, --[[ModItemUnitAnimalCompositeDef Heat_Reinforced_Tecatli DisplayName]] "Heat Reinforced Tecatli"),
 	DisplayNamePl = T(966238638017, --[[ModItemUnitAnimalCompositeDef Heat_Reinforced_Tecatli DisplayNamePl]] "Heat Reinforced Tecatli"),
-	DisplayNameUnknown = T(880956780545, --[[ModItemUnitAnimalCompositeDef Heat_Reinforced_Tecatli DisplayNameUnknown]] "A Tecatli that seems... brighter?"),
+	DisplayNameUnknown = T(880956780545, --[[ModItemUnitAnimalCompositeDef Heat_Reinforced_Tecatli DisplayNameUnknown]] "Unknown Tecatli Evolution"),
+	DisplayNameUnknownPL = T(265627096139, --[[ModItemUnitAnimalCompositeDef Heat_Reinforced_Tecatli DisplayNameUnknownPL]] "Unknown Tecatli Evolution"),
 	Description = T(942702596531, --[[ModItemUnitAnimalCompositeDef Heat_Reinforced_Tecatli Description]] "This creature radiates heat. Deals <color TextNegative>Energy</color> and <color TextPositive>Gas</color> damage."),
 	FoodResources = {
 		"FoodAnimalCarnivore",
@@ -35,16 +36,6 @@ DefineClass.Heat_Reinforced_Tecatli = {
 	Diet = "Omnivore",
 	EatingDuration = 4000,
 	ButcherResources = {
-		PlaceObj('ButcherResAmount', {
-			'resource', "Nuedo",
-			'min_amount', 5000,
-			'max_amount', 10000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Toco",
-			'min_amount', 5000,
-			'max_amount', 10000,
-		}),
 		PlaceObj('ButcherResAmount', {
 			'resource', "RawMeat",
 			'min_amount', 20000,

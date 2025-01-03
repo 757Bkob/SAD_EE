@@ -25,8 +25,8 @@ DefineClass.Intelligent_Tecatli = {
 	FieldResearchTech = "Field_Tecatli_T2",
 	Icon = "UI/Icons/Resources/res_tecatli",
 	DisplayName = T(375005765624, --[[ModItemUnitAnimalCompositeDef Intelligent_Tecatli DisplayName]] "Intelligent Tecatli"),
-	DisplayNameUnknown = T(996042991236, --[[ModItemUnitAnimalCompositeDef Intelligent_Tecatli DisplayNameUnknown]] "A... smaller Tecaliti?"),
-	DisplayNameUnknownPL = T(429405169305, --[[ModItemUnitAnimalCompositeDef Intelligent_Tecatli DisplayNameUnknownPL]] "A... smaller Tecaliti?"),
+	DisplayNameUnknown = T(996042991236, --[[ModItemUnitAnimalCompositeDef Intelligent_Tecatli DisplayNameUnknown]] "Unknown Tecatli Evolution"),
+	DisplayNameUnknownPL = T(429405169305, --[[ModItemUnitAnimalCompositeDef Intelligent_Tecatli DisplayNameUnknownPL]] "Unknown Tecatli Evolution"),
 	Description = T(329787477205, --[[ModItemUnitAnimalCompositeDef Intelligent_Tecatli Description]] "This species has evolved to be smaller, and with that extra energy it's brain is able to process information much better! Deals <color TextNegative>Energy</color> and <color TextPositive>Gas</color> damage."),
 	FoodResources = {
 		"FoodAnimalCarnivore",
@@ -38,19 +38,9 @@ DefineClass.Intelligent_Tecatli = {
 	EatingDuration = 4000,
 	ButcherResources = {
 		PlaceObj('ButcherResAmount', {
-			'resource', "Nuedo",
-			'min_amount', 11000,
-			'max_amount', 20000,
-		}),
-		PlaceObj('ButcherResAmount', {
 			'resource', "RawMeat",
 			'min_amount', 20000,
 			'max_amount', 30000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Toco",
-			'min_amount', 11000,
-			'max_amount', 20000,
 		}),
 	},
 	AnimalPerks = {

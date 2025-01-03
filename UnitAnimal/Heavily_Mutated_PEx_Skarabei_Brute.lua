@@ -69,11 +69,6 @@ DefineClass.Heavily_Mutated_PEx_Skarabei_Brute = {
 			'resource', "RawMeatInsect",
 			'min_amount', 5000,
 		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Megdeb",
-			'min_amount', 8000,
-			'max_amount', 15000,
-		}),
 	},
 	can_be_stomped = true,
 	Intelligent = false,

@@ -50,16 +50,6 @@ DefineClass.Fast_Frenzied_Fortified_Bomber_Dragonfly = {
 	EatingDuration = 4000,
 	ButcherResources = {
 		PlaceObj('ButcherResAmount', {
-			'resource', "Nuedo",
-			'min_amount', 35000,
-			'max_amount', 35000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Adricon",
-			'min_amount', 35000,
-			'max_amount', 35000,
-		}),
-		PlaceObj('ButcherResAmount', {
 			'resource', "RawMeatInsect",
 			'min_amount', 8000,
 		}),

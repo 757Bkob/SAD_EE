@@ -36,8 +36,8 @@ DefineClass.Frenzied_Fortified_Bomber_Dragonfly = {
 	Icon = "UI/Icons/Resources/res_dragonfly",
 	DisplayName = T(406188342891, --[[ModItemUnitAnimalCompositeDef Frenzied_Fortified_Bomber_Dragonfly DisplayName]] "Frenzied Fortified Bomber Deathfly"),
 	DisplayNamePl = T(923848022936, --[[ModItemUnitAnimalCompositeDef Frenzied_Fortified_Bomber_Dragonfly DisplayNamePl]] "Frenzied Fortified Bomber Deathfly"),
-	DisplayNameUnknown = T(--[[ModItemUnitAnimalCompositeDef Frenzied_Fortified_Bomber_Dragonfly DisplayNameUnknown]] "These Dragonfly's seem bulkier than normal"),
-	DisplayNameUnknownPL = T(--[[ModItemUnitAnimalCompositeDef Frenzied_Fortified_Bomber_Dragonfly DisplayNameUnknownPL]] "These Dragonfly's seem bulkier than normal"),
+	DisplayNameUnknown = T(991372140381, --[[ModItemUnitAnimalCompositeDef Frenzied_Fortified_Bomber_Dragonfly DisplayNameUnknown]] "Hummingfly Final Form?"),
+	DisplayNameUnknownPL = T(273592225259, --[[ModItemUnitAnimalCompositeDef Frenzied_Fortified_Bomber_Dragonfly DisplayNameUnknownPL]] "Hummingfly Final Form?"),
 	Description = T(565205596293, --[[ModItemUnitAnimalCompositeDef Frenzied_Fortified_Bomber_Dragonfly Description]] "These Dragonflys have improved defensive capabilities, including it's wings. Generally harder to bring down by any weaponry. Deals <color TextNegative>Energy</color> damage."),
 	BaseMaxHealth = 800000,
 	FoodResources = {
@@ -49,16 +49,6 @@ DefineClass.Frenzied_Fortified_Bomber_Dragonfly = {
 	Diet = "Omnivore",
 	EatingDuration = 4000,
 	ButcherResources = {
-		PlaceObj('ButcherResAmount', {
-			'resource', "Nuedo",
-			'min_amount', 11000,
-			'max_amount', 20000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Adricon",
-			'min_amount', 11000,
-			'max_amount', 20000,
-		}),
 		PlaceObj('ButcherResAmount', {
 			'resource', "RawMeatInsect",
 			'min_amount', 8000,

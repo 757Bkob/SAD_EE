@@ -45,8 +45,8 @@ DefineClass.Mutated_PEx_Skarabei_Brute = {
 	Icon = "UI/Icons/Resources/res_skarabei",
 	DisplayName = T(--[[ModItemUnitAnimalCompositeDef Mutated_PEx_Skarabei_Brute DisplayName]] "Mutated PEx Skarabei Brute"),
 	DisplayNamePl = T(--[[ModItemUnitAnimalCompositeDef Mutated_PEx_Skarabei_Brute DisplayNamePl]] "Mutated PEx Skarabei Brute"),
-	DisplayNameUnknown = T(--[[ModItemUnitAnimalCompositeDef Mutated_PEx_Skarabei_Brute DisplayNameUnknown]] "Something is different about these Skarabei..."),
-	DisplayNameUnknownPL = T(--[[ModItemUnitAnimalCompositeDef Mutated_PEx_Skarabei_Brute DisplayNameUnknownPL]] "Something is different about these Skarabei..."),
+	DisplayNameUnknown = T(647760505585, --[[ModItemUnitAnimalCompositeDef Mutated_PEx_Skarabei_Brute DisplayNameUnknown]] "Unknown Skarabei Evolution"),
+	DisplayNameUnknownPL = T(286154528403, --[[ModItemUnitAnimalCompositeDef Mutated_PEx_Skarabei_Brute DisplayNameUnknownPL]] "Unknown Skarabei Evolution"),
 	Description = T(669250918824, --[[ModItemUnitAnimalCompositeDef Mutated_PEx_Skarabei_Brute Description]] "Never thought I would be scared of a single Skarabei, but here we are. Carapace extremely resistant to pierce and energy attacks.  Deals <color TextButton>Blunt</color> and <color TextPositive>Gas</color> damage."),
 	fx_actor_base_class = "Skarabei",
 	BaseMaxHealth = 750000,
@@ -68,11 +68,6 @@ DefineClass.Mutated_PEx_Skarabei_Brute = {
 		PlaceObj('ButcherResAmount', {
 			'resource', "RawMeatInsect",
 			'min_amount', 5000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Megdeb",
-			'min_amount', 3000,
-			'max_amount', 7000,
 		}),
 	},
 	can_be_stomped = true,

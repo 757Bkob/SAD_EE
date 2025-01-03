@@ -42,8 +42,8 @@ DefineClass.VenomousRaptors = {
 	Icon = "UI/Icons/Resources/res_tecatli",
 	DisplayName = T(634903365979, --[[ModItemUnitAnimalCompositeDef VenomousRaptors DisplayName]] "Venomous Raptor"),
 	DisplayNamePl = T(355114956419, --[[ModItemUnitAnimalCompositeDef VenomousRaptors DisplayNamePl]] "Venomous Raptors"),
-	DisplayNameUnknown = T(633557471551, --[[ModItemUnitAnimalCompositeDef VenomousRaptors DisplayNameUnknown]] "Unknown Raptor"),
-	DisplayNameUnknownPL = T(416990062940, --[[ModItemUnitAnimalCompositeDef VenomousRaptors DisplayNameUnknownPL]] "Unknown Raptor"),
+	DisplayNameUnknown = T(633557471551, --[[ModItemUnitAnimalCompositeDef VenomousRaptors DisplayNameUnknown]] "Unknown Tecatli Evolution"),
+	DisplayNameUnknownPL = T(416990062940, --[[ModItemUnitAnimalCompositeDef VenomousRaptors DisplayNameUnknownPL]] "Unknown Tecatli Evolution"),
 	Description = T(207143499342, --[[ModItemUnitAnimalCompositeDef VenomousRaptors Description]] "Hunts during the night. Is an aggressive sub-species of the Tecatli. Has venomous glands and good awareness, appears to be quite intelligent. Has good defense to poison and gas chemicals, however is weak against piercing, blunt, energy and pacify attacks. If tamed can bring meat from hunting wildlife.  Deals <color TextNegative>Energy</color> and <color TextPositive>Gas</color> damage."),
 	BaseMaxHealth = 250000,
 	FoodResources = {
@@ -59,14 +59,6 @@ DefineClass.VenomousRaptors = {
 			'resource', "RawMeat",
 			'min_amount', 30000,
 			'max_amount', 40000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Toco",
-			'max_amount', 1000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Nuedo",
-			'max_amount', 1000,
 		}),
 	},
 	SelectionRadius = 2000,

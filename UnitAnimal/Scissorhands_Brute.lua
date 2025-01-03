@@ -17,16 +17,6 @@ DefineClass.Scissorhands_Brute = {
 			'resource', "RawMeatInsect",
 			'min_amount', 40000,
 		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Sintis",
-			'min_amount', 2000,
-			'max_amount', 4000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Toco",
-			'min_amount', 2000,
-			'max_amount', 4000,
-		}),
 	},
 	ProduceResources = {
 		PlaceObj('ResAmount', {

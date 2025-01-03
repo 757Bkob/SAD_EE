@@ -69,11 +69,6 @@ DefineClass.PEx_Skarabei = {
 			'resource', "RawMeatInsect",
 			'min_amount', 5000,
 		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Megdeb",
-			'min_amount', 2000,
-			'max_amount', 4000,
-		}),
 	},
 	can_be_stomped = true,
 	Intelligent = false,

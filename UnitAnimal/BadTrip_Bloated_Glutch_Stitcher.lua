@@ -57,16 +57,6 @@ DefineClass.BadTrip_Bloated_Glutch_Stitcher = {
 			'min_amount', 30000,
 			'max_amount', 40000,
 		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Toco",
-			'min_amount', 35000,
-			'max_amount', 35000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Bitherm",
-			'min_amount', 35000,
-			'max_amount', 35000,
-		}),
 	},
 	SelectionRadius = 1250,
 	BodySize = "small",

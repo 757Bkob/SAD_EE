@@ -22,21 +22,11 @@ DefineClass.Sniping_Entropy_Shielded_Shrieker = {
 	lead_priority = 6,
 	DisplayName = T(219852402884, --[[ModItemUnitAnimalCompositeDef Sniping_Entropy_Shielded_Shrieker DisplayName]] "Sniping Entropic Shielded Shrieker"),
 	DisplayNamePl = T(394183373238, --[[ModItemUnitAnimalCompositeDef Sniping_Entropy_Shielded_Shrieker DisplayNamePl]] "Sniping Entropic Shielded Shrieker"),
-	DisplayNameUnknown = T(--[[ModItemUnitAnimalCompositeDef Sniping_Entropy_Shielded_Shrieker DisplayNameUnknown]] "Shrieker's Final Form?"),
-	DisplayNameUnknownPL = T(--[[ModItemUnitAnimalCompositeDef Sniping_Entropy_Shielded_Shrieker DisplayNameUnknownPL]] "Shrieker's Final Form?"),
+	DisplayNameUnknown = T(358521198402, --[[ModItemUnitAnimalCompositeDef Sniping_Entropy_Shielded_Shrieker DisplayNameUnknown]] "Unknown Shrieker Evolution"),
+	DisplayNameUnknownPL = T(224838244446, --[[ModItemUnitAnimalCompositeDef Sniping_Entropy_Shielded_Shrieker DisplayNameUnknownPL]] "Unknown Shrieker Evolution"),
 	Description = T(919946988433, --[[ModItemUnitAnimalCompositeDef Sniping_Entropy_Shielded_Shrieker Description]] "A regenerating, long range, durable Shrieker. The only thing that can reliably hit them are energy weapons, filling their sealed exoskeleton with energy. Deals <color TextButton>Blunt</color> and <color TextSubtitleBlue>Piercing</color> damage."),
 	BaseMaxHealth = 1000000,
 	ButcherResources = {
-		PlaceObj('ButcherResAmount', {
-			'resource', "Megdeb",
-			'min_amount', 35000,
-			'max_amount', 35000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Adricon",
-			'min_amount', 35000,
-			'max_amount', 35000,
-		}),
 		PlaceObj('ButcherResAmount', {
 			'resource', "RawMeatInsect",
 			'min_amount', 75000,

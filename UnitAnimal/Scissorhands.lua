@@ -49,16 +49,6 @@ DefineClass.Scissorhands = {
 			'resource', "RawMeatInsect",
 			'min_amount', 25000,
 		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Sintis",
-			'min_amount', 2000,
-			'max_amount', 4000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Toco",
-			'min_amount', 2000,
-			'max_amount', 4000,
-		}),
 	},
 	SelectionRadius = 1500,
 	ChanceToBeMale = 50,

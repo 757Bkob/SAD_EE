@@ -21,25 +21,15 @@ DefineClass.Brutal_Duelist_Scissorhands = {
 	lead_priority = 12,
 	DisplayName = T(--[[ModItemUnitAnimalCompositeDef Brutal_Duelist_Scissorhands DisplayName]] "Brutal Scissorhand Duelist"),
 	DisplayNamePl = T(--[[ModItemUnitAnimalCompositeDef Brutal_Duelist_Scissorhands DisplayNamePl]] "Brutal Scissorhand Duelist"),
-	DisplayNameUnknown = T(--[[ModItemUnitAnimalCompositeDef Brutal_Duelist_Scissorhands DisplayNameUnknown]] "Graceful Scissorhands?!?"),
-	DisplayNameUnknownPL = T(--[[ModItemUnitAnimalCompositeDef Brutal_Duelist_Scissorhands DisplayNameUnknownPL]] "Graceful Scissorhands?!?"),
+	DisplayNameUnknown = T(568883049640, --[[ModItemUnitAnimalCompositeDef Brutal_Duelist_Scissorhands DisplayNameUnknown]] "Unknown Scissorhands Evolution"),
+	DisplayNameUnknownPL = T(183266165907, --[[ModItemUnitAnimalCompositeDef Brutal_Duelist_Scissorhands DisplayNameUnknownPL]] "Unknown Scissorhands Evolution"),
 	Description = T(810154241954, --[[ModItemUnitAnimalCompositeDef Brutal_Duelist_Scissorhands Description]] "Blades that are honed by attacking or defending from other Scissorhands. If this blade touches us, it will be more likely to deal critical wounds. Able to deftly dodge blunt force, and dissapates any energy attacks with ease. Deals <color TextSubtitleBlue>Piercing</color> damage."),
 	BaseMaxHealth = 400000,
 	DailyEatingAmount = 3000,
 	ButcherResources = {
 		PlaceObj('ButcherResAmount', {
-			'resource', "Sintis",
-			'min_amount', 5000,
-			'max_amount', 10000,
-		}),
-		PlaceObj('ButcherResAmount', {
 			'resource', "RawMeatInsect",
 			'min_amount', 40000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Toco",
-			'min_amount', 5000,
-			'max_amount', 10000,
 		}),
 	},
 	ProduceResources = {

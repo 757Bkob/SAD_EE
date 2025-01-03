@@ -36,8 +36,8 @@ DefineClass.Frenzied_Bomber_Dragonfly = {
 	Icon = "UI/Icons/Resources/res_dragonfly",
 	DisplayName = T(508102423796, --[[ModItemUnitAnimalCompositeDef Frenzied_Bomber_Dragonfly DisplayName]] "Bomber Deathfly"),
 	DisplayNamePl = T(126098911780, --[[ModItemUnitAnimalCompositeDef Frenzied_Bomber_Dragonfly DisplayNamePl]] "Bomber Deathfly"),
-	DisplayNameUnknown = T(--[[ModItemUnitAnimalCompositeDef Frenzied_Bomber_Dragonfly DisplayNameUnknown]] "A Dragonfly who's acid scatters everywhere"),
-	DisplayNameUnknownPL = T(--[[ModItemUnitAnimalCompositeDef Frenzied_Bomber_Dragonfly DisplayNameUnknownPL]] "A Dragonfly who's acid scatters everywhere"),
+	DisplayNameUnknown = T(470610819090, --[[ModItemUnitAnimalCompositeDef Frenzied_Bomber_Dragonfly DisplayNameUnknown]] "Unknown Hummingfly Evolution"),
+	DisplayNameUnknownPL = T(570355189261, --[[ModItemUnitAnimalCompositeDef Frenzied_Bomber_Dragonfly DisplayNameUnknownPL]] "Unknown Hummingfly Evolution"),
 	Description = T(898906357328, --[[ModItemUnitAnimalCompositeDef Frenzied_Bomber_Dragonfly Description]] "A Dragonfly who's spit splashes everywhere, we must split up when attacked by these creatures! Deals <color TextNegative>Energy</color> damage."),
 	BaseMaxHealth = 40000,
 	FoodResources = {
@@ -49,16 +49,6 @@ DefineClass.Frenzied_Bomber_Dragonfly = {
 	Diet = "Omnivore",
 	EatingDuration = 4000,
 	ButcherResources = {
-		PlaceObj('ButcherResAmount', {
-			'resource', "Nuedo",
-			'min_amount', 5000,
-			'max_amount', 10000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Adricon",
-			'min_amount', 5000,
-			'max_amount', 10000,
-		}),
 		PlaceObj('ButcherResAmount', {
 			'resource', "RawMeatInsect",
 			'min_amount', 8000,

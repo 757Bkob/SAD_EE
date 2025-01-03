@@ -39,8 +39,8 @@ DefineClass.Glutch_Stitcher = {
 	Icon = "UI/Icons/Resources/res_glutch_red",
 	DisplayName = T(302321161779, --[[ModItemUnitAnimalCompositeDef Glutch_Stitcher DisplayName]] "Glutch Stitcher"),
 	DisplayNamePl = T(165059518040, --[[ModItemUnitAnimalCompositeDef Glutch_Stitcher DisplayNamePl]] "Glutch Stitcher"),
-	DisplayNameUnknown = T(--[[ModItemUnitAnimalCompositeDef Glutch_Stitcher DisplayNameUnknown]] "Aggressive bloated insects"),
-	DisplayNameUnknownPL = T(--[[ModItemUnitAnimalCompositeDef Glutch_Stitcher DisplayNameUnknownPL]] "Aggressive bloated insects"),
+	DisplayNameUnknown = T(857757081108, --[[ModItemUnitAnimalCompositeDef Glutch_Stitcher DisplayNameUnknown]] "Unknown Glutch Evolution"),
+	DisplayNameUnknownPL = T(667700344725, --[[ModItemUnitAnimalCompositeDef Glutch_Stitcher DisplayNameUnknownPL]] "Unknown Glutch Evolution"),
 	Description = T(152349153102, --[[ModItemUnitAnimalCompositeDef Glutch_Stitcher Description]] "These Glutches are able to regenerate their wounds. Must be due to thier skin being largely gasseous. Dedicated firepower to pierce it like a balloon is needed. VERY resistant to gas/blunt attacks. Deals <color TextPositive>Gas</color> damage."),
 	fx_actor_base_class = "Glutch",
 	FoodResources = {
@@ -55,16 +55,6 @@ DefineClass.Glutch_Stitcher = {
 			'resource', "RawMeatInsect",
 			'min_amount', 30000,
 			'max_amount', 40000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Toco",
-			'min_amount', 2000,
-			'max_amount', 4000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Bitherm",
-			'min_amount', 2000,
-			'max_amount', 4000,
 		}),
 	},
 	SelectionRadius = 1250,

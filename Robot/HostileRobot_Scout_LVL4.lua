@@ -1,0 +1,55 @@
+UndefineClass('HostileRobot_Scout_LVL4')
+DefineClass.HostileRobot_Scout_LVL4 = {
+	__parents = { "CombatRobot" },
+	__generated_by_class = "ModItemRobotCompositeDef",
+
+
+	comment = "Scout T2",
+	object_class = "CombatRobot",
+	UnitTags = set( "Cyber_Eye", "Robot", "Scout_T1" ),
+	pfclass = 17,
+	Health = 400000,
+	MaxHealth = 400000,
+	HitNegationChance_blunt = 10,
+	HitNegationChance_piercing = 10,
+	HitNegationChance_energy = 10,
+	HitNegationChance_gas = 10,
+	HumanThreat = true,
+	Movement = 80000,
+	Combat = 4000,
+	SkinColor = PlaceObj('ColorizationPropSet', {
+		'EditableColor1', RGBA(13, 201, 238, 255),
+		'EditableRoughness1', -50,
+		'EditableColor3', RGBA(55, 55, 55, 255),
+	}),
+	DisplayName = T(508875525953, --[[ModItemRobotCompositeDef HostileRobot_Scout_LVL4 DisplayName]] "D-B4-d34d3y3"),
+	DisplayNameShort = T(898920198613, --[[ModItemRobotCompositeDef HostileRobot_Scout_LVL4 DisplayNameShort]] "DB4"),
+	DisplayNamePl = T(365084805460, --[[ModItemRobotCompositeDef HostileRobot_Scout_LVL4 DisplayNamePl]] "Drone B Series"),
+	Description = T(491894615204, --[[ModItemRobotCompositeDef HostileRobot_Scout_LVL4 Description]] "Durability has finally been dedicated to the Officer series of Consortium bots. This combined with a Cyber Crystal Eye means these robots can spot and target a unit from farther ranges away!Has <color TechSubtitleBlue>10% Piercing Deflection</color>, <color TextButton>10% Blunt Deflection</color>, <color TextNegative>10% Energy Deflection</color>, <color TextPositive>10% Gas Deflection</color>"),
+	SalvageLootTable = "LightHostileRobots_1",
+	Skills = {},
+	SightRange = 40000,
+	HearingRange = 25000,
+	darkness_penalty = 0,
+	EnrageChanceCooldown = 3000,
+	DistressEnrageChance = 100,
+	DistressEnrageCount = 30,
+	DistressCallRange = 20000,
+	DistressCallRangeFirst = 30000,
+	WeaponAffectsSightRange = false,
+	EventProgressValue = 1200,
+	SpawnDefWeight = 15,
+	SpawnTags = set( "Minion" ),
+	can_lead_formation = false,
+	max_skinned_decals = 1,
+	max_skinned_decals_low = 0,
+	Equipment = {
+		PlaceObj('WeightedEquipment', {
+			'Weight', 60,
+			'Equipment', {
+				"Ranged_RailgunSniper",
+			},
+		}),
+	},
+}
+

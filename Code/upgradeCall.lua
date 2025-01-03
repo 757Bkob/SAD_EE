@@ -59,15 +59,202 @@ local base_table = {
 	{id="dog_T3",stop=nil,next="dog_T4"},
 	{id="dog_T4",stop=nil,next="dog_T5"},
 	{id="dog_T5",stop="dog",next=nil},
+	-- Gujo evos
+	{id="Gujo",stop=nil,next=nil},
+	{id="GujoT2",stop=nil,next=nil},
+	{id="GujoT3",stop=nil,next=nil},
+	{id="GujoT4",stop=nil,next=nil},
+	{id="GujoT5",stop="dog",next=nil},
+	--light assault robot
+	{id="LightHostileRobot_LVL1",stop=nil,next='LightHostileRobot_LVL2'},
+	{id="LightHostileRobot_LVL2",stop=nil,next='LightHostileRobot_LVL3'},
+	{id="LightHostileRobot_LVL3",stop=nil,next='LightHostileRobot_LVL4'},
+	{id="LightHostileRobot_LVL4",stop=nil,next='LightHostileRobot_LVL5'},
+	{id="LightHostileRobot_LVL5",stop='Light',next=nil},
+	-- heavy assault robot
+	{id="HeavyHostileRobot_LVL1",stop=nil,next='HeavyHostileRobot_LVL2'},
+	{id="HeavyHostileRobot_LVL2",stop=nil,next='HeavyHostileRobot_LVL3'},
+	{id="HeavyHostileRobot_LVL3",stop=nil,next='HeavyHostileRobot_LVL4'},
+	{id="HeavyHostileRobot_LVL4",stop=nil,next='HeavyHostileRobot_LVL5'},
+	{id="HeavyHostileRobot_LVL5",stop='Heavy',next=nil},
+	-- monk robot
+	{id="HostileRobot_Monk_LVL1",stop=nil,next='HostileRobot_Monk_LVL2'},
+	{id="HostileRobot_Monk_LVL2",stop=nil,next='HostileRobot_Monk_LVL3'},
+	{id="HostileRobot_Monk_LVL3",stop=nil,next='HostileRobot_Monk_LVL4'},
+	{id="HostileRobot_Monk_LVL4",stop=nil,next='HostileRobot_Monk_LVL3'},
+	{id="HostileRobot_Monk_LVL5",stop='Monk',next=nil},
+	--scout robot
+	{id="HostileRobot_Scout_LVL1",stop=nil,next='HostileRobot_Scout_LVL2'},
+	{id="HostileRobot_Scout_LVL2",stop=nil,next='HostileRobot_Scout_LVL3'},
+	{id="HostileRobot_Scout_LVL3",stop=nil,next='HostileRobot_Scout_LVL4'},
+	{id="HostileRobot_Scout_LVL4",stop=nil,next='HostileRobot_Scout_LVL5'},
+	{id="HostileRobot_Scout_LVL5",stop='Scout',next=nil},
+	-- sup art robot
+	{id="HostileCrawler_LaserGun",stop=nil,next='Crawl_APC_LVL1'},
+	{id="HostileCrawler_MachineGun",stop=nil,next='Crawl_APC_LVL1'},
+	{id="Crawl_APC_LVL1",stop=nil,next='Crawl_APC_LVL2'},
+	{id="Crawl_APC_LVL2",stop=nil,next='Crawl_APC_LVL3'},
+	{id="Crawl_APC_LVL3",stop='Crawl_APC',next=nil},
+	-- art art robot
+	{id="Crawl_Cannon_T1",stop=nil,next='Crawl_Cannon_T2'},
+	{id="Crawl_Cannon_T2",stop=nil,next='Crawl_Cannon_T3'},
+	{id="Crawl_Cannon_T3",stop='Cannon',next=nil},
+	-- QuadCopters
+	{id="HostileCombatQuadcopter_LVL1",stop=nil,next='HostileCombatQuadcopter_LVL2'},
+	{id="HostileCombatQuadcopter_LVL2",stop=nil,next='HostileCombatQuadcopter_LVL3'},
+	{id="HostileCombatQuadcopter_LVL3",stop=nil,next='HostileCombatQuadcopter_LVL4'},
+	{id="HostileCombatQuadcopter_LVL4",stop=nil,next='HostileCombatQuadcopter_LVL5'},
+	{id="HostileCombatQuadcopter_LVL5",stop='Quad',next=nil},
 }
+
+local table organs = {
+	"Sintis","Nuedo","Bitherm","ToCo","Megdeb",""
+}
+
+local function is_organ(resource)
+	for _,v in ipairs(organs) do
+		if v == resource then
+			return true
+		end 
+	end
+	return false
+end
+
+local function are_organs_present(butcher_resources)
+	for _,v in ipairs(butcher_resources) do
+		if is_organ(v['resource']) then
+			return true
+		end
+	end
+	return false
+end
+
+local function is_px_loaded()
+	for _,mod in ipairs(ModsLoaded) do
+		if mod.id == 'ucCehPy' then
+			return true
+		end
+	end
+	return false
+end
+
+local function is_animal(mod_item_id)
+	for _,v in ipairs(base_table) do
+		local to_check = v['id']
+		if mod_item_id == to_check then
+			return true
+		end
+	end
+	return false
+end
+
+function unloadTest()
+	if not is_px_loaded() then
+		print("Project-X not found, checking for organ remnants")
+		local found_organs = false
+		for _,mod in ipairs(ModsLoaded) do 
+			if mod.id == 'rtw6tLg' then
+				mod:ForEachItem(function(mc)
+					if is_animal(mc.id) then
+						local local_id = mc.id
+						if are_organs_present(mc.ButcherResources) then
+					 		print("Organs found in animal: ",mc.id)
+							found_organs = true
+						end
+					end
+				end)
+				if found_organs then ForceActivateStoryBit("ILU_restart_required") end
+			end
+		end
+	end
+end
+
+
+local function flip_flop(flip_table)
+	_G.ILU_flipped = false 
+	MapForEach(true, "Human", function(unit,was_flipped)
+		print("Checking: ",unit.id)
+		for _,v in ipairs(flip_table) do
+			for _, effect in ipairs(unit.status_effects or empty_table) do
+				if IsKindOf(effect, "ModItemHealthCondition") and effect.id == v['id'] then
+					print("Swapping a condition for the correct one (Based on mod option)")
+					unit:RemoveHealthCondition(v['id'])
+					unit:AddHealthCondition(v['flip'],'combatflip')
+					print("Trying to mark var as flipped!")
+					_G.ILU_flipped = true
+				end
+			end
+		end
+	end)
+	print("Did I flip something? ",_G.ILU_flipped)
+	return _G.ILU_flipped
+end
+
+function ILU_update_armor_hcs()
+	print("Armor HealthCheck Flips")
+	local flip_table = {}
+	print(_G.ILU_combat_type)
+	if _G.ILU_combat_type == 'simple' then 
+		flip_table = {
+			{id='armor_leather_complex',flip='armor_leather_simple'},
+			{id='armor_vleather_complex',flip='armor_vleather_simple'},
+			{id='armor_synth_complex',flip='armor_synth_simple'},
+			{id='armor_badCarbon_complex',flip='armor_badCarbon_simple'},
+			{id='armor_carbon_complex',flip='armor_carbon_simple'},
+		}
+	elseif _G.ILU_combat_type == 'complex' then
+		flip_table = {
+			{flip='armor_leather_complex',id='armor_leather_simple'},
+			{flip='armor_vleather_complex',id='armor_vleather_simple'},
+			{flip='armor_synth_complex',id='armor_synth_simple'},
+			{flip='armor_badCarbon_complex',id='armor_badCarbon_simple'},
+			{flip='armor_carbon_complex',id='armor_carbon_simple'},
+		}
+	end
+	print("Made the table!")
+	_G.ILU_flipped = true -- setting true to force the first loop
+	while _G.ILU_flipped do
+		flip_flop(flip_table)
+		if _G.ILU_flipped then
+			print("Gotta do it again in case I missed something!")
+		end
+	end
+end
+
+function ilu_set_map_vars()
+	local all_vars = {
+		{name="ILU_max",init=150},
+		{name="ILU_combat_type",init="complex"},
+		{name="ILU_flipped",init=false}
+	}
+	print("Checking what ILU vars I need to add!")
+	for _, var in ipairs(all_vars) do
+		if MapVarValues[var['name']] == nil then
+			MapVar(var['name'],var['init'])
+			print("I added ",var['name'],' to MapVars!')
+		else
+			print("I did not add ",var['name'])
+		end
+	end
+	print("Done! See above logs for which ones I added")
+end
 
 local function ApplyAnimalSet(id)
 	id = id or CurrentModId
 	if CurrentModId ~= id or not CurrentModOptions then return end
+	ilu_set_map_vars() -- make sure we have these started
 	local options = CurrentModOptions
-	const.C_ILU_max = options.O_ILU_max
+	print(options.O_simple_combat)
+	_G.ILU_max = options.O_ILU_max
+	if options.O_simple_combat == true and _G.ILU_combat_type == "complex" then
+		_G.ILU_combat_type = "simple"
+		ILU_update_armor_hcs()
+	elseif options.O_simple_combat == false and _G.ILU_combat_type == "simple" then
+		_G.ILU_combat_type = "complex"
+		ILU_update_armor_hcs()
+	end
 	--armorSwap(options.simple_combat)
-	print("Debug: Changed max spawns to: ",const.C_ILU_max)
+	--unloadTest() -- Want to call this to verify mod won't break
 end
 
 
@@ -75,16 +262,41 @@ function ILU_QA()
 	print(" ")
 	print(" ")
 	print(" ")
+	EventProgress = 1000000 / 40
+	local start = false
+	local dropship_spawn_def = nil
+	local instance = {}
+	local robot_spawn_def = SpawnDefs['Single_Robots']
 	for _,v in ipairs(base_table) do
 		print("Checking this name: ",v['id'])
 		local classdef = g_Classes[v['id'] or false]
 		local ep = classdef.EventProgressValue
-		print(ep)
+		if v['id'] == 'LightHostileRobot_LVL1' then
+			start = true
+			dropship_spawn_def = SpawnDefs["Attack_Dropship"]
+			instance.spawnClass = 'LightHostileRobot_LVL1'
+			instance.AdditionalClassList = {}
+		elseif start then
+			instance.AdditionalClassList[#instance.AdditionalClassList+1] ={v['id'], 100}
+		end
 	end
+	robot_spawn_def = robot_spawn_def:CreateInstance(instance)
+	local count = 1
+	local mod = robot_spawn_def:CalculateInvadersCountMod(robot_spawn_def, 100) or 100	
+	local seed = InteractionRand(nil, "AttackWave")
+	local rand = BraidRandomCreate(seed)
+	count = robot_spawn_def:ModifyCount(count, mod, rand)
+	local MaxInvadersPerDropship = const.Gameplay.MaxInvadersPerDropship
+	local MaxDropshipsPossible = const.Gameplay.MaxAttackDropshipsCount
+	local dropships = Min(DivCeil(count,MaxInvadersPerDropship), MaxDropshipsPossible)
+	robot_spawn_def.Count = count / dropships
+	instance = {}
+	instance.RobotSpawnDef = robot_spawn_def
+	instance.Count = dropships
+	dropship_spawn_def = dropship_spawn_def:CreateInstance(instance)
+	local context = { robot_spawn_def = robot_spawn_def }
+	dropship_spawn_def:ActivateSpawn(nil, context)
 end
-
-OnMsg.ModsReloaded = ApplyAnimalSet
-OnMsg.ApplyModOptions = ApplyAnimalSet
 
 if FirstLoad then
 	ApplyAnimalSet("rtw6tLg")
@@ -96,13 +308,6 @@ local function lookupEP(name)
 	local ep = classdef.EventProgressValue
 	return ep
 end
---[[	for upgrade_index,upgrade_value in ipairs(base_table) do
-		if name == upgrade_value['id'] then
-			return upgrade_value['ep']
-		end
-	end
-	return nil
-end]]
 
 local function getNext(name,og_name)
 	--[[print(base_table)]]
@@ -235,7 +440,7 @@ function check_count_and_upgrade(start_animal,additionalClassList,progress_perce
 	local final_class_list = additionalClassList
 	local count = CalculateInvaders(temp_class_list, progress_percent) /100
 	print(count,' units in this attack wave!')
-	while count > const.C_ILU_max do
+	while count > _G.ILU_max do
 	  print("Which is too many! ",count)
 	  print(temp_class_list)
 		local flag, temp_class_list = upgrade(temp_class_list,true)
@@ -247,7 +452,7 @@ function check_count_and_upgrade(start_animal,additionalClassList,progress_perce
 		print('After upgrade, new count is: ',count,' units in this attack wave!')
 	end
 	--[[If wave is generating 50%+ of spawn max, add a 5% chance to spawn the 'next' tier of the 'next' defined unit.]]
-	if count > const.C_ILU_max / 2 then
+	if count > _G.ILU_max / 2 then
 		print("Trying to add the next tier of unit!")
 		temp_class_list = addSmallnextEvo(temp_class_list)
 	end
@@ -258,6 +463,113 @@ local function HandleLoad()
 	ApplyAnimalSet("rtw6tLg")
 end
 
+local function ILU_fullSuite()
+	ApplyAnimalSet("rtw6tLg")
+	unloadTest()
+end
+
+function ILU_ActivateAttackDropshipSpawnDefs(robot_spawndef, main_unit,added_units, progress_mul)
+	local robot_spawn_def = SpawnDefs[robot_spawndef]
+	if not robot_spawn_def then return end
+	local dropship_spawn_def = SpawnDefs["Attack_Dropship"]
+	if not dropship_spawn_def then return end
+	progress_mul = progress_mul or 100
+--[[
+	local single_early = {'HostileRobot_Monk_LVL1','LightHostileRobot_LVL1'}
+	local single_mid = {'HostileRobot_Monk_LVL1','LightHostileRobot_LVL1','Demo_1'}
+	local single_late = {'HostileRobot_Monk_LVL1','LightHostileRobot_LVL1','HeavyHostileRobot_LVL1','Demo_1'}
+
+	local mixed_mid_support = {'HostileRobot_Scout_LVL1','HostileCrawler_LaserGun','HostileCrawler_MachineGun','HeavyHostileRobot_LVL1'}
+
+	local mixed_late_support = {
+		'HostileRobot_Scout_LVL1',
+		'HostileCrawler_LaserGun',
+		'HostileCrawler_MachineGun',
+		'HostileCombatQuadcopter_LVL1'
+	}
+	local instance = {}
+	local primary = ''
+	local temp_list = {}
+	local temp = ''
+
+	if variant == 'single_early' then -- Only 1 assault unit, no support
+		primary = single_early[math.random(#single_early)]
+	
+	elseif variant == 'single_mid' then -- 1 Assault unit, supported by scout units
+	
+		primary = single_early[math.random(#single_mid)]
+		temp_list = {"HostileRobot_Scout_LVL1",RobotDefs["HostileRobot_Scout_LVL1"]:GetProperty("SpawnDefWeight")}
+	
+	elseif variant == 'single_late' then -- 2 Assault Units, supported by scout units
+		primary = single_late[math.random(#single_late)]
+		temp_list[#temp_list+1] = {'HostileRobot_Scout_LVL1',RobotDefs['HostileRobot_Scout_LVL1']:GetProperty("SpawnDefWeight")}
+		temp = uniqueAttacker(primary,single_late)
+		temp_list[#temp_list+1] = {temp,RobotDefs[temp]:GetProperty("SpawnDefWeight")}
+	
+	elseif variant == 'mixed_mid' then -- 2 assaults with (2 supports or artillery)
+		primary = mixed_mid_support[math.random(#mixed_mid_support)]--table.rand(single_mid, rand())
+		temp = uniqueAttacker(primary,single_mid)
+		temp_list[#temp_list+1] = {temp,RobotDefs[temp]:GetProperty("SpawnDefWeight")}
+		if SyncRand(100) > 40 then
+			temp_list[#temp_list+1] = {'Crawl_Cannon_T1',RobotDefs['Crawl_Cannon_T1']:GetProperty("SpawnDefWeight")}
+		else
+			local first_support = mixed_mid_support[math.random(#mixed_mid_support)]--table.rand(mixed_mid_support, rand())
+			local second_support = uniqueAttacker(first_support,mixed_mid_support)
+			temp_list[#temp_list+1] = {first_support,RobotDefs[first_support]:GetProperty("SpawnDefWeight")}
+			temp_list[#temp_list+1] = {second_support,RobotDefs[second_support]:GetProperty("SpawnDefWeight")}
+		end
+	
+	elseif variant == "mixed_late" then -- 2 assaults, 2 supports, & artillery
+		primary = single_late[math.random(#single_late)]
+		temp = uniqueAttacker(primary,single_late)
+		temp_list[#temp_list+1] = {temp,RobotDefs[temp]:GetProperty("SpawnDefWeight")}
+		local first_support = mixed_mid_support[math.random(#mixed_mid_support)]--table.rand(mixed_mid_support, rand())
+		local second_support = uniqueAttacker(first_support,mixed_mid_support)
+		temp_list[#temp_list+1] = {first_support,RobotDefs[first_support]:GetProperty("SpawnDefWeight")}
+		temp_list[#temp_list+1] = {second_support,RobotDefs[second_support]:GetProperty("SpawnDefWeight")}
+		temp_list[#temp_list+1] = {'Crawl_Cannon_T1',RobotDefs['Crawl_Cannon_T1']:GetProperty("SpawnDefWeight")}
+
+	elseif variant == 'end' then --Everything!
+		primary = 'LightHostileRobot_LVL1'
+		temp_list[#temp_list+1] = {'HostileRobot_Monk_LVL1',RobotDefs['HostileRobot_Monk_LVL1']:GetProperty("SpawnDefWeight")}
+		temp_list[#temp_list+1] = {'HeavyHostileRobot_LVL1',RobotDefs['HeavyHostileRobot_LVL1']:GetProperty("SpawnDefWeight")}
+		temp_list[#temp_list+1] = {'Demo_1',RobotDefs['Demo_1']:GetProperty("SpawnDefWeight")}
+		temp_list[#temp_list+1] = {'HostileRobot_Scout_LVL1',RobotDefs['HostileRobot_Scout_LVL1']:GetProperty("SpawnDefWeight")}
+		temp_list[#temp_list+1] = {'Crawl_Cannon_T1',RobotDefs['Crawl_Cannon_T1']:GetProperty("SpawnDefWeight")}
+		temp_list[#temp_list+1] = {'HostileCombatQuadcopter_LVL1',RobotDefs['HostileCombatQuadcopter_LVL1']:GetProperty("SpawnDefWeight")}
+		temp_list[#temp_list+1] = {'HostileCrawler_LaserGun',RobotDefs['HostileCrawler_LaserGun']:GetProperty("SpawnDefWeight")}
+	end
+	--]]
+	local addedClassList = {}
+	local instance = {}
+	instance.spawnClass, addedClassList = check_count_and_upgrade(main_unit,added_units)
+	instance.AdditionalClassList = {}
+	print("First assault chosen", instance.spawnClass)
+	print(addedClassList)
+	for i=1,#addedClassList do
+		instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
+	end
+	robot_spawn_def = robot_spawn_def:CreateInstance(instance)
+	local seed = InteractionRand(nil, "AttackWave")
+	local rand = BraidRandomCreate(seed)
+	local count = robot_spawn_def.Count + rand(robot_spawn_def.RandomCount + 1)
+	local mod = robot_spawn_def:CalculateInvadersCountMod(robot_spawn_def, progress_mul) or 100
+	count = robot_spawn_def:ModifyCount(count, mod, rand)
+	if count <= 0 then
+		return
+	end
+	local MaxInvadersPerDropship = const.Gameplay.MaxInvadersPerDropship
+	local MaxDropshipsPossible = const.Gameplay.MaxAttackDropshipsCount
+	local dropships = Min(DivCeil(count,MaxInvadersPerDropship), MaxDropshipsPossible)
+	robot_spawn_def.Count = count / dropships
+	instance = {}
+	instance.RobotSpawnDef = robot_spawn_def
+	instance.Count = dropships
+	dropship_spawn_def = dropship_spawn_def:CreateInstance(instance)
+	local context = { robot_spawn_def = robot_spawn_def }
+	dropship_spawn_def:ActivateSpawn(nil, context)
+end
+
 OnMsg.ApplyModOptions = ApplyAnimalSet
-OnMsg.ModsReloaded = ApplyAnimalSet
+OnMsg.ModsReloaded = ILU_fullSuite
 OnMsg.LoadGame = ApplyAnimalSet

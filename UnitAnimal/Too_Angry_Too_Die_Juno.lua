@@ -22,25 +22,15 @@ DefineClass.Too_Angry_Too_Die_Juno = {
 	lead_priority = 6,
 	DisplayName = T(--[[ModItemUnitAnimalCompositeDef Too_Angry_Too_Die_Juno DisplayName]] "Too-Angry-Too-Die Juno"),
 	DisplayNamePl = T(--[[ModItemUnitAnimalCompositeDef Too_Angry_Too_Die_Juno DisplayNamePl]] "Too-Angry-Too-Die Juno"),
-	DisplayNameUnknown = T(--[[ModItemUnitAnimalCompositeDef Too_Angry_Too_Die_Juno DisplayNameUnknown]] "Juno's Final Form?"),
-	DisplayNameUnknownPL = T(--[[ModItemUnitAnimalCompositeDef Too_Angry_Too_Die_Juno DisplayNameUnknownPL]] "Juno's Final Form?"),
+	DisplayNameUnknown = T(434314719262, --[[ModItemUnitAnimalCompositeDef Too_Angry_Too_Die_Juno DisplayNameUnknown]] "Unknown Juno Evolution"),
+	DisplayNameUnknownPL = T(397893098380, --[[ModItemUnitAnimalCompositeDef Too_Angry_Too_Die_Juno DisplayNameUnknownPL]] "Unknown Juno Evolution"),
 	Description = T(967813562361, --[[ModItemUnitAnimalCompositeDef Too_Angry_Too_Die_Juno Description]] "Impossible to be knocked unconscious or pacified, our only option is to cause enough damage to render their bodies impossible to move. Deals <color TextButton>Blunt</color> damage."),
 	BaseMaxHealth = 1800000,
 	DailyEatingAmount = 4000,
 	ButcherResources = {
 		PlaceObj('ButcherResAmount', {
-			'resource', "Bitherm",
-			'min_amount', 11000,
-			'max_amount', 20000,
-		}),
-		PlaceObj('ButcherResAmount', {
 			'resource', "RawMeatInsect",
 			'min_amount', 75000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Sintis",
-			'min_amount', 11000,
-			'max_amount', 20000,
 		}),
 	},
 	ProduceResources = {

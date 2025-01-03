@@ -38,6 +38,8 @@ DefineClass.Junoskar = {
 	Icon = "UI/Icons/Resources/res_juno",
 	DisplayName = T(165312950418, --[[ModItemUnitAnimalCompositeDef Junoskar DisplayName]] "Junoskar"),
 	DisplayNamePl = T(228230442862, --[[ModItemUnitAnimalCompositeDef Junoskar DisplayNamePl]] "Junoskar's"),
+	DisplayNameUnknown = T(644425790231, --[[ModItemUnitAnimalCompositeDef Junoskar DisplayNameUnknown]] "Juno's Final Form?"),
+	DisplayNameUnknownPL = T(285674502291, --[[ModItemUnitAnimalCompositeDef Junoskar DisplayNameUnknownPL]] "Juno's Final Form?"),
 	Description = T(651746830861, --[[ModItemUnitAnimalCompositeDef Junoskar Description]] "It appears to be a Juno, however is much larger in size, different in color and definitely scarier. Upon closer examination these things have the most deadliest strike that can inflict a deadly poison, capable of killing a Human in seconds. Deals <color TextButton>Blunt</color> damage."),
 	BaseMaxHealth = 3000000,
 	FoodResources = {
@@ -55,18 +57,8 @@ DefineClass.Junoskar = {
 	},
 	ButcherResources = {
 		PlaceObj('ButcherResAmount', {
-			'resource', "Bitherm",
-			'min_amount', 35000,
-			'max_amount', 35000,
-		}),
-		PlaceObj('ButcherResAmount', {
 			'resource', "RawMeatInsect",
 			'min_amount', 280000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Sintis",
-			'min_amount', 35000,
-			'max_amount', 35000,
 		}),
 	},
 	SelectionRadius = 2000,

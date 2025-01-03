@@ -46,14 +46,6 @@ DefineClass.Shrieker_Manhunting = {
 			'resource', "RawMeatInsect",
 			'min_amount', 15000,
 		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Megdeb",
-			'max_amount', 1000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Adricon",
-			'max_amount', 1000,
-		}),
 	},
 	SelectionRadius = 1100,
 	ChanceToBeMale = 100,

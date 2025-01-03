@@ -22,25 +22,15 @@ DefineClass.Rage_Fueled_Scissorhand_Duelist = {
 	lead_priority = 12,
 	DisplayName = T(531860184462, --[[ModItemUnitAnimalCompositeDef Rage_Fueled_Scissorhand_Duelist DisplayName]] "Rage Fueled Scissorhand Duelist"),
 	DisplayNamePl = T(--[[ModItemUnitAnimalCompositeDef Rage_Fueled_Scissorhand_Duelist DisplayNamePl]] "Scissorhands demolishers"),
-	DisplayNameUnknown = T(--[[ModItemUnitAnimalCompositeDef Rage_Fueled_Scissorhand_Duelist DisplayNameUnknown]] "Somehow an even more aggressive Scissorhands?!?"),
-	DisplayNameUnknownPL = T(--[[ModItemUnitAnimalCompositeDef Rage_Fueled_Scissorhand_Duelist DisplayNameUnknownPL]] "Somehow an even more aggressive Scissorhands?!?"),
+	DisplayNameUnknown = T(119769262102, --[[ModItemUnitAnimalCompositeDef Rage_Fueled_Scissorhand_Duelist DisplayNameUnknown]] "Unknown Scissorhands Evolution"),
+	DisplayNameUnknownPL = T(657436726773, --[[ModItemUnitAnimalCompositeDef Rage_Fueled_Scissorhand_Duelist DisplayNameUnknownPL]] "Unknown Scissorhands Evolution"),
 	Description = T(156199244050, --[[ModItemUnitAnimalCompositeDef Rage_Fueled_Scissorhand_Duelist Description]] "This species is much more focused on killing than others. Able to deftly dodge blunt force, and dissapates any energy attacks with ease. Deals <color TextSubtitleBlue>Piercing</color> damage."),
 	BaseMaxHealth = 800000,
 	DailyEatingAmount = 4000,
 	ButcherResources = {
 		PlaceObj('ButcherResAmount', {
-			'resource', "Sintis",
-			'min_amount', 11000,
-			'max_amount', 20000,
-		}),
-		PlaceObj('ButcherResAmount', {
 			'resource', "RawMeatInsect",
 			'min_amount', 40000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Toco",
-			'min_amount', 11000,
-			'max_amount', 20000,
 		}),
 	},
 	ProduceResources = {

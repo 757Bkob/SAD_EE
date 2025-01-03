@@ -22,25 +22,15 @@ DefineClass.Rage_Focused_Scissorhands = {
 	lead_priority = 12,
 	DisplayName = T(--[[ModItemUnitAnimalCompositeDef Rage_Focused_Scissorhands DisplayName]] "Rage Focused Scissorhands"),
 	DisplayNamePl = T(--[[ModItemUnitAnimalCompositeDef Rage_Focused_Scissorhands DisplayNamePl]] "Rage Focused Scissorhands"),
-	DisplayNameUnknown = T(--[[ModItemUnitAnimalCompositeDef Rage_Focused_Scissorhands DisplayNameUnknown]] "Scissorhands Final Form?!?"),
-	DisplayNameUnknownPL = T(--[[ModItemUnitAnimalCompositeDef Rage_Focused_Scissorhands DisplayNameUnknownPL]] "Scissorhands Final Form?!?"),
+	DisplayNameUnknown = T(880517562689, --[[ModItemUnitAnimalCompositeDef Rage_Focused_Scissorhands DisplayNameUnknown]] "Scissorhands Final Form?"),
+	DisplayNameUnknownPL = T(561720327903, --[[ModItemUnitAnimalCompositeDef Rage_Focused_Scissorhands DisplayNameUnknownPL]] "Scissorhands Final Form?"),
 	Description = T(992494208410, --[[ModItemUnitAnimalCompositeDef Rage_Focused_Scissorhands Description]] "The blades have been honed to near perfection. If our armour does not block the attack; it will surely cut through our body like a hot knife through butter. Able to deftly dodge blunt force, and dissapates any energy attacks with ease. Deals <color TextSubtitleBlue>Piercing</color> damage."),
 	BaseMaxHealth = 1300000,
 	DailyEatingAmount = 5000,
 	ButcherResources = {
 		PlaceObj('ButcherResAmount', {
-			'resource', "Sintis",
-			'min_amount', 35000,
-			'max_amount', 35000,
-		}),
-		PlaceObj('ButcherResAmount', {
 			'resource', "RawMeatInsect",
 			'min_amount', 40000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Toco",
-			'min_amount', 35000,
-			'max_amount', 35000,
 		}),
 	},
 	ProduceResources = {

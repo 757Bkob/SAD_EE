@@ -17,16 +17,6 @@ DefineClass.Juno_Brute = {
 			'resource', "RawMeatInsect",
 			'min_amount', 75000,
 		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Bitherm",
-			'min_amount', 2000,
-			'max_amount', 4000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Sintis",
-			'min_amount', 2000,
-			'max_amount', 4000,
-		}),
 	},
 	ProduceResources = {
 		PlaceObj('ResAmount', {

@@ -22,22 +22,12 @@ DefineClass.Plague_Sniper_Shrieker = {
 	lead_priority = 6,
 	DisplayName = T(--[[ModItemUnitAnimalCompositeDef Plague_Sniper_Shrieker DisplayName]] "Plague Sniper Shrieker"),
 	DisplayNamePl = T(--[[ModItemUnitAnimalCompositeDef Plague_Sniper_Shrieker DisplayNamePl]] "Plague Sniper Shrieker"),
-	DisplayNameUnknown = T(--[[ModItemUnitAnimalCompositeDef Plague_Sniper_Shrieker DisplayNameUnknown]] "Long Range Shrieker?!?"),
-	DisplayNameUnknownPL = T(--[[ModItemUnitAnimalCompositeDef Plague_Sniper_Shrieker DisplayNameUnknownPL]] "Long Range Shrieker?!?"),
+	DisplayNameUnknown = T(632905210618, --[[ModItemUnitAnimalCompositeDef Plague_Sniper_Shrieker DisplayNameUnknown]] "Unknown Shrieker Evolution"),
+	DisplayNameUnknownPL = T(256115533630, --[[ModItemUnitAnimalCompositeDef Plague_Sniper_Shrieker DisplayNameUnknownPL]] "Unknown Shrieker Evolution"),
 	Description = T(197605412242, --[[ModItemUnitAnimalCompositeDef Plague_Sniper_Shrieker Description]] "Attacks that slow, and longer range than even our upgraded railguns. All while their durability has increased.... Thankfully still weak to energy and gas weapons. Deals <color TextButton>Blunt</color> and <color TextSubtitleBlue>Piercing</color> damage."),
 	BaseMaxHealth = 600000,
 	DailyEatingAmount = 3000,
 	ButcherResources = {
-		PlaceObj('ButcherResAmount', {
-			'resource', "Megdeb",
-			'min_amount', 11000,
-			'max_amount', 20000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Adricon",
-			'min_amount', 11000,
-			'max_amount', 20000,
-		}),
 		PlaceObj('ButcherResAmount', {
 			'resource', "RawMeatInsect",
 			'min_amount', 75000,
