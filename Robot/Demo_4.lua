@@ -6,6 +6,7 @@ DefineClass.Demo_4 = {
 
 	object_class = "HeavyCombatRobot",
 	UnitTags = set( "Demo_T3", "Robot" ),
+	pfclass = 0,
 	Health = 550000,
 	MaxHealth = 550000,
 	damage_reduction = {

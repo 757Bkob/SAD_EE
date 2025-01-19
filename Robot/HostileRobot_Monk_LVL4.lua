@@ -9,6 +9,16 @@ DefineClass.HostileRobot_Monk_LVL4 = {
 	pfclass = 17,
 	Health = 1200000,
 	MaxHealth = 1200000,
+	HitNegationChance = {
+		HitNegationChance_blunt = 10,
+		HitNegationChance_energy = 10,
+		HitNegationChance_gas = 10,
+		HitNegationChance_piercing = 50,
+		blunt = 10,
+		energy = 10,
+		gas = 10,
+		piercing = 50,
+	},
 	HitNegationChance_blunt = 10,
 	HitNegationChance_piercing = 50,
 	HitNegationChance_energy = 10,
@@ -36,6 +46,5 @@ DefineClass.HostileRobot_Monk_LVL4 = {
 	can_lead_formation = false,
 	max_skinned_decals = 1,
 	max_skinned_decals_low = 0,
-	Equipment = {},
 }
 

@@ -9,6 +9,10 @@ DefineClass.HostileRobot_Monk_LVL3 = {
 	pfclass = 17,
 	Health = 600000,
 	MaxHealth = 600000,
+	HitNegationChance = {
+		HitNegationChance_piercing = 33,
+		piercing = 33,
+	},
 	HitNegationChance_piercing = 33,
 	HumanThreat = true,
 	Movement = 130000,
@@ -33,6 +37,5 @@ DefineClass.HostileRobot_Monk_LVL3 = {
 	can_lead_formation = false,
 	max_skinned_decals = 1,
 	max_skinned_decals_low = 0,
-	Equipment = {},
 }
 

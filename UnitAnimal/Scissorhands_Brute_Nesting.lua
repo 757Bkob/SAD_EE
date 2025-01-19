@@ -1,5 +1,5 @@
-UndefineClass('Scissorhands_Brute_Nesting_1')
-DefineClass.Scissorhands_Brute_Nesting_1 = {
+UndefineClass('Scissorhands_Brute_Nesting')
+DefineClass.Scissorhands_Brute_Nesting = {
 	__parents = { "UnitNesting", "Scissorhands" },
 	__generated_by_class = "ModItemUnitAnimalCompositeDef",
 
@@ -8,10 +8,10 @@ DefineClass.Scissorhands_Brute_Nesting_1 = {
 	composite_part_target = "Scissorhands_Brute",
 	EventProgressValue = 180,
 	lead_priority = 12,
-	DisplayName = T(862409597776, --[[ModItemUnitAnimalCompositeDef Scissorhands_Brute_Nesting_1 DisplayName]] "Scissorhands demolisher"),
-	DisplayNamePl = T(225616689551, --[[ModItemUnitAnimalCompositeDef Scissorhands_Brute_Nesting_1 DisplayNamePl]] "Scissorhands demolishers"),
-	DisplayNameUnknown = T(284618171634, --[[ModItemUnitAnimalCompositeDef Scissorhands_Brute_Nesting_1 DisplayNameUnknown]] "Huge purple mantis"),
-	DisplayNameUnknownPL = T(789645003181, --[[ModItemUnitAnimalCompositeDef Scissorhands_Brute_Nesting_1 DisplayNameUnknownPL]] "Huge purple mantises"),
+	DisplayName = T(862409597776, --[[ModItemUnitAnimalCompositeDef Scissorhands_Brute_Nesting DisplayName]] "Scissorhands demolisher"),
+	DisplayNamePl = T(225616689551, --[[ModItemUnitAnimalCompositeDef Scissorhands_Brute_Nesting DisplayNamePl]] "Scissorhands demolishers"),
+	DisplayNameUnknown = T(284618171634, --[[ModItemUnitAnimalCompositeDef Scissorhands_Brute_Nesting DisplayNameUnknown]] "Huge purple mantis"),
+	DisplayNameUnknownPL = T(789645003181, --[[ModItemUnitAnimalCompositeDef Scissorhands_Brute_Nesting DisplayNameUnknownPL]] "Huge purple mantises"),
 	BaseMaxHealth = 200000,
 	ButcherResources = {
 		PlaceObj('ButcherResAmount', {

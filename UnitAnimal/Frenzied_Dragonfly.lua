@@ -24,6 +24,7 @@ DefineClass.Frenzied_Dragonfly = {
 		pacify = 20,
 		piercing = 0,
 	},
+	HitNegationChance_pacify = 20,
 	HumanThreat = true,
 	RobotThreat = true,
 	EnrageChance = 5,

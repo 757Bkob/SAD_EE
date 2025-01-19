@@ -32,6 +32,5 @@ DefineClass.HostileRobot_Monk_LVL1 = {
 	can_lead_formation = false,
 	max_skinned_decals = 1,
 	max_skinned_decals_low = 0,
-	Equipment = {},
 }
 

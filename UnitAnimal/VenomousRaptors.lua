@@ -27,6 +27,11 @@ DefineClass.VenomousRaptors = {
 		pacify = 20,
 		piercing = 10,
 	},
+	HitNegationChance_blunt = 10,
+	HitNegationChance_piercing = 10,
+	HitNegationChance_energy = 10,
+	HitNegationChance_gas = 100,
+	HitNegationChance_pacify = 20,
 	EnrageChance = 50,
 	EnrageChanceCooldown = 30000,
 	DistressEnrageChance = 70,
@@ -116,6 +121,5 @@ DefineClass.VenomousRaptors = {
 	MovementSpeedStarving = 1250,
 	NestDestroyedRange = 50000,
 	FrenzyHealthPct = 80,
-	FrenzyEffects = {},
 }
 

@@ -20,6 +20,7 @@ DefineClass.Shrieker_Manhunting = {
 	HitNegationChance = {
 		piercing = 20,
 	},
+	HitNegationChance_piercing = 20,
 	CombatGiveUpNoHit = 30000,
 	CombatFleeAccuracy = 0,
 	BloodColor = 4278467654,

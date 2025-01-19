@@ -12,6 +12,7 @@ DefineClass.Shrieker_Manhunting_Mother = {
 	HitNegationChance = {
 		piercing = 33,
 	},
+	HitNegationChance_piercing = 33,
 	DistressCallRange = 25000,
 	DistressCallRangeFirst = 25000,
 	max_skinned_decals = 5,

@@ -3,7 +3,12 @@ local title = "Insects Level up All Species"
 local separator = " :: "
 local debugMSG = {"New Game","Game Started"}
 
-
+function SavegameFixups.FixGujoT2()
+	MapForEach("map", "GujoT2", function(obj)
+		obj:ComposeBodyParts()
+		obj:InitEntity()
+	end)
+end
 local base_table = {
 	{id="Juno",stop=nil,next="Juno_Brute"},
 	{id="Juno_Brute",stop=nil,next="Angry_Juno"},
@@ -105,6 +110,36 @@ local base_table = {
 	{id="HostileCombatQuadcopter_LVL3",stop=nil,next='HostileCombatQuadcopter_LVL4'},
 	{id="HostileCombatQuadcopter_LVL4",stop=nil,next='HostileCombatQuadcopter_LVL5'},
 	{id="HostileCombatQuadcopter_LVL5",stop='Quad',next=nil},
+	-- Camel
+	{id="Camel",stop=nil,next="Camel_T2"},
+	{id="Camel_T2",stop=nil,next="Camel_T3"},
+	{id="Camel_T3",stop=nil,next="Camel_T4"},
+	{id="Camel_T4",stop=nil,next="Camel_T5"},
+	{id="Camel_T5",stop="Camel",next=nil},
+	-- Shogu
+	{id="Shogu",stop=nil,next="Shogu_T2"},
+	{id="Shogu_T2",stop=nil,next="Shogu_T3"},
+	{id="Shogu_T3",stop=nil,next="Shogu_T4"},
+	{id="Shogu_T4",stop=nil,next="Shogu_T5"},
+	{id="Shogu_T5",stop="Shogu",next=nil},
+	-- Noth
+	{id="Noth",stop=nil,next="Noth_T2"},
+	{id="Noth_T2",stop=nil,next="Noth_T2"},
+	{id="Noth_T3",stop=nil,next="Noth_T3"},
+	{id="Noth_T4",stop=nil,next="Noth_T4"},
+	{id="Noth_T5",stop="Noth",next=nil},
+	-- Draka
+	{id="Draka",stop=nil,next="Draka_T2"},
+	{id="Draka_T2",stop=nil,next="Draka_T3"},
+	{id="Draka_T3",stop=nil,next="Draka_T4"},
+	{id="Draka_T4",stop=nil,next="Draka_T5"},
+	{id="Draka_T5",stop="Draka",next=nil},
+	-- Ulfen
+	{id="Ulfen",stop=nil,next="Ulfen_T2"},
+	{id="Ulfen_T2",stop=nil,next="Ulfen_T3"},
+	{id="Ulfen_T3",stop=nil,next="Ulfen_T4"},
+	{id="Ulfen_T4",stop=nil,next="Ulfen_T5"},
+	{id="Ulfen_T5",stop="Ulfen",next=nil},
 }
 
 local table organs = {

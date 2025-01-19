@@ -1,5 +1,5 @@
-UndefineClass('Scissorhands_Nesting_1')
-DefineClass.Scissorhands_Nesting_1 = {
+UndefineClass('Scissorhands_Nesting')
+DefineClass.Scissorhands_Nesting = {
 	__parents = { "UnitNesting", "GroundAnimal" },
 	__generated_by_class = "ModItemUnitAnimalCompositeDef",
 
@@ -33,9 +33,9 @@ DefineClass.Scissorhands_Nesting_1 = {
 	ObservationDistanceMax = 1500,
 	lead_priority = 11,
 	Icon = "UI/Icons/Resources/res_scissorhands",
-	DisplayName = T(282850352588, --[[ModItemUnitAnimalCompositeDef Scissorhands_Nesting_1 DisplayName]] "Scissorhands"),
-	DisplayNamePl = T(855408200427, --[[ModItemUnitAnimalCompositeDef Scissorhands_Nesting_1 DisplayNamePl]] "Scissorhands"),
-	Description = T(641150827518, --[[ModItemUnitAnimalCompositeDef Scissorhands_Nesting_1 Description]] "Large highly-intelligent insect."),
+	DisplayName = T(282850352588, --[[ModItemUnitAnimalCompositeDef Scissorhands_Nesting DisplayName]] "Scissorhands"),
+	DisplayNamePl = T(855408200427, --[[ModItemUnitAnimalCompositeDef Scissorhands_Nesting DisplayNamePl]] "Scissorhands"),
+	Description = T(641150827518, --[[ModItemUnitAnimalCompositeDef Scissorhands_Nesting Description]] "Large highly-intelligent insect."),
 	fx_actor_base_class = "Scissorhands",
 	FoodResources = {
 		"FoodAnimalHerbivore",
