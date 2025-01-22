@@ -69,7 +69,7 @@ local base_table = {
 	{id="GujoT2",stop=nil,next=nil},
 	{id="GujoT3",stop=nil,next=nil},
 	{id="GujoT4",stop=nil,next=nil},
-	{id="GujoT5",stop="dog",next=nil},
+	{id="GujoT5",stop="Gujo",next=nil},
 	--light assault robot
 	{id="LightHostileRobot_LVL1",stop=nil,next='LightHostileRobot_LVL2'},
 	{id="LightHostileRobot_LVL2",stop=nil,next='LightHostileRobot_LVL3'},
@@ -142,7 +142,7 @@ local base_table = {
 	{id="Ulfen_T5",stop="Ulfen",next=nil},
 }
 
-local table organs = {
+local organs = {
 	"Sintis","Nuedo","Bitherm","ToCo","Megdeb",""
 }
 
@@ -154,6 +154,95 @@ local function is_organ(resource)
 	end
 	return false
 end
+
+local species_herd_mod = { -- all values * 10 to not have engine round to 0
+	{id='Ulfen',kc= 50 / 4},
+	{id='Draka',kc= 50 / 4 },
+	{id='Noth',kc= 10 / 2},
+	{id='Shogu',kc= 10 / 2},
+	{id='Camel',kc= 10 },
+	{id='Gujo',kc= 80 / 10 },
+	{id='Scissor',kc= 50 / 4},
+	{id='dog',kc= 80 / 10},
+	{id='Shrieker',kc= 50 / 4 },
+	{id='Tecatli',kc= 80 / 10 },
+	{id='Juno',kc= 10 / 2},
+}
+
+
+local function get_stop(class_name)
+	for _,v in ipairs(base_table) do
+		if v['stop'] then
+			if string.match(class_name, v['stop']) then
+				--print("Found a stop for ",v['stop'])
+				return v['stop']
+			end
+		end
+	end
+	return nil
+end
+
+
+function carrying_capacity(species)
+	local cap = (ILU_max / 10) + 5
+	local scaling = 400 - ILU_max
+	local difficulty_scaling = nil
+	local moon_scaling = MoonInstance['modifications']['ProgressResourcesFactor']['mul']
+	local normalize_EP = EventProgress / moon_scaling
+	local cap_up_per_no = EventProgress / scaling
+	local stop = get_stop(species)
+	local mod = nil
+	for _,v in ipairs(species_herd_mod) do
+		if v['id']==stop then
+			mod = v['kc']
+		end
+	end
+	--print("Default Cap based on ILU settings: ",cap)
+	--print("Added cap due to normalized EP: ",cap_up_per_no)
+	--print("Modifier  due to species: ",mod*10,'%')
+	return (cap + cap_up_per_no) * mod / 10
+end
+
+function refresh_tame_counts()
+	local count_table = {}
+	for _,animal in ipairs(UIPlayer.labels.TamedAnimals or empty_table) do
+		--print("looking at ",animal.class)
+		local stop_animal = get_stop(animal.class)
+		--print("It's stop category is: ",stop_animal)
+		local found = false
+		for __,entry in ipairs(count_table) do
+			if entry['id'] == stop_animal then
+				found = true
+				entry['count'] = entry['count']+1
+			end
+		end
+		if found == false then
+			--print("It is not in the table yet!")
+			count_table[#count_table+1] = {id=stop_animal,count=1}
+		end
+	end
+	ILU_Tame_Count = count_table
+end
+
+function new_preg_rate(species_class,rate)
+	--print("Overriding Pregnancy for: ",species_class)
+	local base_rate = rate or 0
+	local stop = get_stop(species_class)
+	local no = 0
+	for _,v in ipairs(ILU_Tame_Count) do
+		if v['id']==stop then
+			--print("There are ",v['count'],' of this species tamed!')
+			no = v['count']
+		end
+	end
+	local cc = carrying_capacity(species_class)
+	--print("Carrying Capacity: ",cc)
+	local fin_mod = 100*(cc - no) / cc
+	--print("Log growth formula mod: ",fin_mod,'%')
+	local to_return = fin_mod * base_rate / 100
+	--print("FInal pregnancy rate: ",to_return,'%')
+	return to_return
+end 
 
 local function are_organs_present(butcher_resources)
 	for _,v in ipairs(butcher_resources) do
@@ -185,7 +274,7 @@ end
 
 function unloadTest()
 	if not is_px_loaded() then
-		print("Project-X not found, checking for organ remnants")
+		--print("Project-X not found, checking for organ remnants")
 		local found_organs = false
 		for _,mod in ipairs(ModsLoaded) do 
 			if mod.id == 'rtw6tLg' then
@@ -193,7 +282,7 @@ function unloadTest()
 					if is_animal(mc.id) then
 						local local_id = mc.id
 						if are_organs_present(mc.ButcherResources) then
-					 		print("Organs found in animal: ",mc.id)
+					 		--print("Organs found in animal: ",mc.id)
 							found_organs = true
 						end
 					end
@@ -208,27 +297,27 @@ end
 local function flip_flop(flip_table)
 	_G.ILU_flipped = false 
 	MapForEach(true, "Human", function(unit,was_flipped)
-		print("Checking: ",unit.id)
+		--print("Checking: ",unit.id)
 		for _,v in ipairs(flip_table) do
 			for _, effect in ipairs(unit.status_effects or empty_table) do
 				if IsKindOf(effect, "ModItemHealthCondition") and effect.id == v['id'] then
-					print("Swapping a condition for the correct one (Based on mod option)")
+					--print("Swapping a condition for the correct one (Based on mod option)")
 					unit:RemoveHealthCondition(v['id'])
 					unit:AddHealthCondition(v['flip'],'combatflip')
-					print("Trying to mark var as flipped!")
+					--print("Trying to mark var as flipped!")
 					_G.ILU_flipped = true
 				end
 			end
 		end
 	end)
-	print("Did I flip something? ",_G.ILU_flipped)
+	--print("Did I flip something? ",_G.ILU_flipped)
 	return _G.ILU_flipped
 end
 
 function ILU_update_armor_hcs()
-	print("Armor HealthCheck Flips")
+	--print("Armor HealthCheck Flips")
 	local flip_table = {}
-	print(_G.ILU_combat_type)
+	--print(_G.ILU_combat_type)
 	if _G.ILU_combat_type == 'simple' then 
 		flip_table = {
 			{id='armor_leather_complex',flip='armor_leather_simple'},
@@ -246,12 +335,12 @@ function ILU_update_armor_hcs()
 			{flip='armor_carbon_complex',id='armor_carbon_simple'},
 		}
 	end
-	print("Made the table!")
+	--print("Made the table!")
 	_G.ILU_flipped = true -- setting true to force the first loop
 	while _G.ILU_flipped do
 		flip_flop(flip_table)
 		if _G.ILU_flipped then
-			print("Gotta do it again in case I missed something!")
+			--print("Gotta do it again in case I missed something!")
 		end
 	end
 end
@@ -260,18 +349,19 @@ function ilu_set_map_vars()
 	local all_vars = {
 		{name="ILU_max",init=150},
 		{name="ILU_combat_type",init="complex"},
-		{name="ILU_flipped",init=false}
+		{name="ILU_flipped",init=false},
+		{name="ILU_Tame_Count",init={}},
 	}
-	print("Checking what ILU vars I need to add!")
+	--print("Checking what ILU vars I need to add!")
 	for _, var in ipairs(all_vars) do
 		if MapVarValues[var['name']] == nil then
 			MapVar(var['name'],var['init'])
-			print("I added ",var['name'],' to MapVars!')
+			--print("I added ",var['name'],' to MapVars!')
 		else
-			print("I did not add ",var['name'])
+			--print("I did not add ",var['name'])
 		end
 	end
-	print("Done! See above logs for which ones I added")
+	--print("Done! See above logs for which ones I added")
 end
 
 local function ApplyAnimalSet(id)
@@ -279,7 +369,7 @@ local function ApplyAnimalSet(id)
 	if CurrentModId ~= id or not CurrentModOptions then return end
 	ilu_set_map_vars() -- make sure we have these started
 	local options = CurrentModOptions
-	print(options.O_simple_combat)
+	--print(options.O_simple_combat)
 	_G.ILU_max = options.O_ILU_max
 	if options.O_simple_combat == true and _G.ILU_combat_type == "complex" then
 		_G.ILU_combat_type = "simple"
@@ -338,23 +428,22 @@ if FirstLoad then
 end
 
 local function lookupEP(name)
-	print("Checking this name: ",name)
+	--print("Checking this name: ",name)
 	local classdef = g_Classes[name or false]
 	local ep = classdef.EventProgressValue
 	return ep
 end
 
 local function getNext(name,og_name)
-	--[[print(base_table)]]
 	for _,v in ipairs(base_table) do
 		--[[if v['stop'] == og_name then]]
 		if v['stop'] then
 			if string.match(og_name, v['stop']) then
-				print("Found a stop for ",v['stop'])
+				--print("Found a stop for ",v['stop'])
 				return nil
 			end
 		elseif v['id'] == name then
-			print('Name:',v['id'],' next:',v['next'],' Stop:',v['stop'])
+			--print('Name:',v['id'],' next:',v['next'],' Stop:',v['stop'])
 			return v['next']
 		end
 	end
@@ -371,15 +460,15 @@ local function upgrade(temp_class_list,flag)
 			max_upgrades = v['up_count']
 		end
 	end
-	print("Max upgrade across this table is: ",max_upgrades)
+	--print("Max upgrade across this table is: ",max_upgrades)
 	while not upgrade_flag and #fully_upgraded<#temp_class_list do
 		for _,val_table in ipairs(temp_class_list) do
-			print("Checking if ",val_table['now'],' has been upgraded at least ',max_upgrades,' times!')
+			--print("Checking if ",val_table['now'],' has been upgraded at least ',max_upgrades,' times!')
 			if val_table['up_count'] < max_upgrades and not upgrade_flag then
-				print("It has not!")
+				--print("It has not!")
 				local up_maybe = getNext(val_table['now'],val_table['start'])
 				if up_maybe and flag then
-				  print("Upgrade Found! ",val_table['now'],' to ',up_maybe)
+				  --print("Upgrade Found! ",val_table['now'],' to ',up_maybe)
 					val_table['up_count'] = val_table['up_count'] + 1
 					val_table['now'] = up_maybe
 					val_table['ep'] = lookupEP(up_maybe)
@@ -388,11 +477,11 @@ local function upgrade(temp_class_list,flag)
 				elseif up_maybe and not flag then
 					return true, up_maybe
 				else
-				  print("There is no upgrade path for this entry!")
+				  --print("There is no upgrade path for this entry!")
 					fully_upgraded[#fully_upgraded+1] = {val_table['start']}
-					print("I have fully upgraded: ",#fully_upgraded," entries of ",#temp_class_list)
+					--print("I have fully upgraded: ",#fully_upgraded," entries of ",#temp_class_list)
 					if #fully_upgraded >= #temp_class_list then
-						print("Oops all entries checked for upgrading!")
+						--print("Oops all entries checked for upgrading!")
 						break
 					end
 				end
@@ -404,7 +493,7 @@ local function upgrade(temp_class_list,flag)
 end
 
 local function CalculateInvaders(spawn_array, percent)
-  print("checking how many this spawnDef would send")
+  --print("checking how many this spawnDef would send")
 	local event_progress = 0
 	local weight_sum = 0
 	for _,upgrade_value in ipairs(spawn_array) do
@@ -425,12 +514,12 @@ local function CalculateInvaders(spawn_array, percent)
 end
 
 local function build_output(final_full_table)
-	print("almost finished, splitting the final table up now")
+	--print("almost finished, splitting the final table up now")
 	local additional_class_list = {}
 	local final_main_name = ''
-	print(#final_full_table)
+	--print(#final_full_table)
 	for i=1,#final_full_table do
-		print(final_full_table[i])
+		--print(final_full_table[i])
 		if i==1 then
 			final_main_name = final_full_table[i]['now']
 		else
@@ -443,7 +532,7 @@ end
 function addSmallnextEvo(temp_class_list)
 	local flag,name = upgrade(temp_class_list,false)
 	if flag then
-		print("Adding ",name,' as a 5% spawn chance!')
+		--print("Adding ",name,' as a 5% spawn chance!')
 		temp_class_list[#temp_class_list+1] = { now = name , weight = 5 }
 	end
 	return temp_class_list
@@ -464,31 +553,28 @@ function check_count_and_upgrade(start_animal,additionalClassList,progress_perce
 		expansion['ep']=lookupEP(additionalClassList[i][1])
 		temp_class_list[i+1] = expansion
 	end
-	--[[for _,value in ipairs(temp_class_list) do
-	    print("Spawn Entry listed! "..value['now'])
-	end]]
-	print("All animal array:")
-	print(temp_class_list)
+	--print("All animal array:")
+	--print(temp_class_list)
 	progress_percent = progress_percent or 100
 	local upgrade_round = 0
 	local final_animal = start_animal
 	local final_class_list = additionalClassList
 	local count = CalculateInvaders(temp_class_list, progress_percent) /100
-	print(count,' units in this attack wave!')
+	--print(count,' units in this attack wave!')
 	while count > _G.ILU_max do
-	  print("Which is too many! ",count)
-	  print(temp_class_list)
+	  --print("Which is too many! ",count)
+	  --print(temp_class_list)
 		local flag, temp_class_list = upgrade(temp_class_list,true)
 		if not flag then
-		  print("This is the best we can do with the upgrade path we have..."..count)
+		  --print("This is the best we can do with the upgrade path we have..."..count)
 			return build_output(temp_class_list)
 		end
 		count = CalculateInvaders(temp_class_list, progress_percent) / 100
-		print('After upgrade, new count is: ',count,' units in this attack wave!')
+		--print('After upgrade, new count is: ',count,' units in this attack wave!')
 	end
 	--[[If wave is generating 50%+ of spawn max, add a 5% chance to spawn the 'next' tier of the 'next' defined unit.]]
 	if count > _G.ILU_max / 2 then
-		print("Trying to add the next tier of unit!")
+		--print("Trying to add the next tier of unit!")
 		temp_class_list = addSmallnextEvo(temp_class_list)
 	end
 	return build_output(temp_class_list)
@@ -509,78 +595,12 @@ function ILU_ActivateAttackDropshipSpawnDefs(robot_spawndef, main_unit,added_uni
 	local dropship_spawn_def = SpawnDefs["Attack_Dropship"]
 	if not dropship_spawn_def then return end
 	progress_mul = progress_mul or 100
---[[
-	local single_early = {'HostileRobot_Monk_LVL1','LightHostileRobot_LVL1'}
-	local single_mid = {'HostileRobot_Monk_LVL1','LightHostileRobot_LVL1','Demo_1'}
-	local single_late = {'HostileRobot_Monk_LVL1','LightHostileRobot_LVL1','HeavyHostileRobot_LVL1','Demo_1'}
-
-	local mixed_mid_support = {'HostileRobot_Scout_LVL1','HostileCrawler_LaserGun','HostileCrawler_MachineGun','HeavyHostileRobot_LVL1'}
-
-	local mixed_late_support = {
-		'HostileRobot_Scout_LVL1',
-		'HostileCrawler_LaserGun',
-		'HostileCrawler_MachineGun',
-		'HostileCombatQuadcopter_LVL1'
-	}
-	local instance = {}
-	local primary = ''
-	local temp_list = {}
-	local temp = ''
-
-	if variant == 'single_early' then -- Only 1 assault unit, no support
-		primary = single_early[math.random(#single_early)]
-	
-	elseif variant == 'single_mid' then -- 1 Assault unit, supported by scout units
-	
-		primary = single_early[math.random(#single_mid)]
-		temp_list = {"HostileRobot_Scout_LVL1",RobotDefs["HostileRobot_Scout_LVL1"]:GetProperty("SpawnDefWeight")}
-	
-	elseif variant == 'single_late' then -- 2 Assault Units, supported by scout units
-		primary = single_late[math.random(#single_late)]
-		temp_list[#temp_list+1] = {'HostileRobot_Scout_LVL1',RobotDefs['HostileRobot_Scout_LVL1']:GetProperty("SpawnDefWeight")}
-		temp = uniqueAttacker(primary,single_late)
-		temp_list[#temp_list+1] = {temp,RobotDefs[temp]:GetProperty("SpawnDefWeight")}
-	
-	elseif variant == 'mixed_mid' then -- 2 assaults with (2 supports or artillery)
-		primary = mixed_mid_support[math.random(#mixed_mid_support)]--table.rand(single_mid, rand())
-		temp = uniqueAttacker(primary,single_mid)
-		temp_list[#temp_list+1] = {temp,RobotDefs[temp]:GetProperty("SpawnDefWeight")}
-		if SyncRand(100) > 40 then
-			temp_list[#temp_list+1] = {'Crawl_Cannon_T1',RobotDefs['Crawl_Cannon_T1']:GetProperty("SpawnDefWeight")}
-		else
-			local first_support = mixed_mid_support[math.random(#mixed_mid_support)]--table.rand(mixed_mid_support, rand())
-			local second_support = uniqueAttacker(first_support,mixed_mid_support)
-			temp_list[#temp_list+1] = {first_support,RobotDefs[first_support]:GetProperty("SpawnDefWeight")}
-			temp_list[#temp_list+1] = {second_support,RobotDefs[second_support]:GetProperty("SpawnDefWeight")}
-		end
-	
-	elseif variant == "mixed_late" then -- 2 assaults, 2 supports, & artillery
-		primary = single_late[math.random(#single_late)]
-		temp = uniqueAttacker(primary,single_late)
-		temp_list[#temp_list+1] = {temp,RobotDefs[temp]:GetProperty("SpawnDefWeight")}
-		local first_support = mixed_mid_support[math.random(#mixed_mid_support)]--table.rand(mixed_mid_support, rand())
-		local second_support = uniqueAttacker(first_support,mixed_mid_support)
-		temp_list[#temp_list+1] = {first_support,RobotDefs[first_support]:GetProperty("SpawnDefWeight")}
-		temp_list[#temp_list+1] = {second_support,RobotDefs[second_support]:GetProperty("SpawnDefWeight")}
-		temp_list[#temp_list+1] = {'Crawl_Cannon_T1',RobotDefs['Crawl_Cannon_T1']:GetProperty("SpawnDefWeight")}
-
-	elseif variant == 'end' then --Everything!
-		primary = 'LightHostileRobot_LVL1'
-		temp_list[#temp_list+1] = {'HostileRobot_Monk_LVL1',RobotDefs['HostileRobot_Monk_LVL1']:GetProperty("SpawnDefWeight")}
-		temp_list[#temp_list+1] = {'HeavyHostileRobot_LVL1',RobotDefs['HeavyHostileRobot_LVL1']:GetProperty("SpawnDefWeight")}
-		temp_list[#temp_list+1] = {'Demo_1',RobotDefs['Demo_1']:GetProperty("SpawnDefWeight")}
-		temp_list[#temp_list+1] = {'HostileRobot_Scout_LVL1',RobotDefs['HostileRobot_Scout_LVL1']:GetProperty("SpawnDefWeight")}
-		temp_list[#temp_list+1] = {'Crawl_Cannon_T1',RobotDefs['Crawl_Cannon_T1']:GetProperty("SpawnDefWeight")}
-		temp_list[#temp_list+1] = {'HostileCombatQuadcopter_LVL1',RobotDefs['HostileCombatQuadcopter_LVL1']:GetProperty("SpawnDefWeight")}
-		temp_list[#temp_list+1] = {'HostileCrawler_LaserGun',RobotDefs['HostileCrawler_LaserGun']:GetProperty("SpawnDefWeight")}
-	end
-	--]]
 	local addedClassList = {}
 	local instance = {}
 	instance.spawnClass, addedClassList = check_count_and_upgrade(main_unit,added_units)
 	instance.AdditionalClassList = {}
-	print("First assault chosen", instance.spawnClass)
-	print(addedClassList)
+	--print("First assault chosen", instance.spawnClass)
+	--print(addedClassList)
 	for i=1,#addedClassList do
 		instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
 	end

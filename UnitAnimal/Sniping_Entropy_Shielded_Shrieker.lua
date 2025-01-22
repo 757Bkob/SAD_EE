@@ -55,7 +55,7 @@ DefineClass.Sniping_Entropy_Shielded_Shrieker = {
 	},
 	TamingMinimumSkill = 8,
 	TamingChance = 25,
-	DailyPregnancyChance = 50,
+	DailyPregnancyChance = 60,
 	PregnancyDuration = 1920000,
 	GrowDuration = 1920000,
 	NewbornClass = "Sniping_Entropy_Shielded_Shrieker",

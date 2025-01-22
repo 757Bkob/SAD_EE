@@ -56,7 +56,7 @@ DefineClass.Entropic_Shrieker = {
 	},
 	attack_weapon = "shriker_range_move",
 	TamingChance = 60,
-	DailyPregnancyChance = 55,
+	DailyPregnancyChance = 65,
 	PregnancyDuration = 3840000,
 	GrowDuration = 3840000,
 	NewbornClass = "Plague_Sniper_Shrieker",

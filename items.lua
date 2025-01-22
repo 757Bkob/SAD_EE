@@ -94,78 +94,6 @@ PlaceObj('ModItemBuildingCompositeDef', {
 	soil_form = "circle",
 	terrain_change = "soil",
 }),
-PlaceObj('ModItemInvaderSpawnDef', {
-	Behaviours = {
-		PlaceObj('InvaderBehaviourIdle', {
-			'Duration', 3840000,
-			'NoSleep', false,
-		}),
-		PlaceObj('InvaderBehaviourDespawn', {
-			'Duration', 240000,
-			'RandomDuration', 240000,
-		}),
-	},
-	ClearArea = 256,
-	ClearRadius = 10000,
-	Comment = "A large seasonal herd, that stays for several days and despawn.",
-	Count = 10,
-	DistFromOthers = 2000,
-	GroupSizeMax = 100,
-	GroupSizeMin = 50,
-	MaxRetries = 25,
-	PostSpawn = function (self, obj, target)
-		Msg("SpawnedMigrationAnimal", obj)
-	end,
-	RandomCount = 10,
-	SpawnAsGroup = true,
-	SpawnClass = "Ulfen",
-	TargetClass = "Human",
-	TargetDistMax = 250000,
-	TargetDistMin = 100000,
-	group = "StoryBits",
-	id = "PassiveAttack",
-}),
-PlaceObj('ModItemWeaponResource', {
-	AlwaysFace = false,
-	AnimTestEntity = "Turret_Gun",
-	AnimateWeapon = true,
-	AttackCooldown = 750,
-	AttackCooldownMaxSkill = 750,
-	AttackMoments = {
-		"hit",
-		"hit2",
-	},
-	AttackRange = 25000,
-	AttackType = "ranged",
-	DamageToBuildings = 30000,
-	DamageTypes = {
-		gas = true,
-	},
-	HitChance = 100,
-	HitChanceMaxSkill = 100,
-	HitEffect = {
-		PlaceObj('HealthConditionOption', {
-			effect = "TurretMinigun_Gunshot",
-			weight = 50,
-		}),
-	},
-	MinAttackRange = 1000,
-	ProjectileEntity = "InvisibleObject",
-	ProjectileFXClass = "Machine_Gun_Projectile",
-	ProjectileSpeed = 40000,
-	ProjectileSpot = "Weaponsight",
-	RangeTerrainDistortion = "always",
-	ScaleDamageWithUnit = false,
-	ScaleRangeWithUnit = false,
-	SortKey = 99990,
-	carry_amount = 1000,
-	display_name = T(788294086529, --[[ModItemWeaponResource toxic_gun display_name]] "Dual machine gun"),
-	id = "toxic_gun",
-	progress = 0,
-	stack_size = 1000,
-	transportable = false,
-	visible = false,
-}),
 PlaceObj('ModItemFolder', {
 	'name', "new tags",
 	'NameColor', RGBA(184, 46, 46, 255),
@@ -3515,6 +3443,186 @@ PlaceObj('ModItemFolder', {
 		money_value = 50000000,
 		tradable = false,
 	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(434620854588, --[[ModItemTech FieldUlfenT3 Description]] "This in an alien planet, so I should not be surprised if our expectations are not followed. \nBut this wasn't on my bingo card! \nUlfen now have larger horns and a new aggressive demeaner!\nWe have started to call them <em>Goren</em> after an incident where we approached a species in a \"wrong\" way.\n\nThe padding that it's thick hide provides makes these Goren <color TextButton>Blunt</color> and <color TextNegative>Energy</color><em> Resistance</em>.\n\nIf we learn how to tame or breed these creatures, they would make wonderful herds for both food and defense!"),
+		DisplayName = T(525874555007, --[[ModItemTech FieldUlfenT3 DisplayName]] "Unknown Ulfen Evolution"),
+		DisplayNamePl = T(747647610094, --[[ModItemTech FieldUlfenT3 DisplayNamePl]] "Unknown Ulfen Evolutions"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Ulfen end,
+		Icon = "UI/Messages/Research/res_Ulfen",
+		LockPrerequisites = {
+			PlaceObj('CheckRegion', {
+				Region = set( "Sobrius" ),
+			}),
+		},
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "FieldUlfenT3",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(558073602568, --[[ModItemTech FieldUlfenT5 Description]] "On my planet, there where large metal animals that you could step inside.\nThey could weight up to 50,000 KGs, and could move hundreds of kilometers in an hour.\nThey are absolute behemoths, and yet, I think these Bestigors would win in a head on.\n\nWe observed one run into a sheet cliff, and cause a gigantic avalanche of Rock and Mud.\nAnd the <em>Bestigor</em> was able to break free of the rubble and walk away unscathed....\n\nWhat evolutionary pressure would be put on a species like this.... to <em>NEED</em> this durability?\nThey are still Herbivors, so something must be able to bring these down.....\n\nIt's hide now has at least 10 thick layers giving <color TextButton>Blunt</color> and <color TextNegative>Energy</color><em> Resistance</em>."),
+		DisplayName = T(591814431141, --[[ModItemTech FieldUlfenT5 DisplayName]] "Unknown Ulfen Evolution"),
+		DisplayNamePl = T(143533447937, --[[ModItemTech FieldUlfenT5 DisplayNamePl]] "Unknown Ulfen Evolutions"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Ulfen end,
+		Icon = "UI/Messages/Research/res_Ulfen",
+		LockPrerequisites = {
+			PlaceObj('CheckRegion', {
+				Region = set( "Sobrius" ),
+			}),
+		},
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "FieldUlfenT5",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(918909534714, --[[ModItemTech FieldDraka_T3 Description]] "The <em>Drakka</em> have now shown to be evolving in a hyper specific manner.\nIt's occasional clickity clack of it's exoskeleton bending and popping now gets louder and louder the more attacks it receives.\nOnce this reaches a critical mass, the DrikaDrakk body will trigger a sonic boom around it! \n\nFor better or for worse, the organs inside are not capable of handling multiple explosions.\nThis usually means the DrikkaDrakk fall unconscious from the force before death.\n\nIt's large forehead and brittle shell gives this creature good <color TextButton>Blunt</color> and <color TextPositive>Energy</color> Deflection chances."),
+		DisplayName = T(414518110756, --[[ModItemTech FieldDraka_T3 DisplayName]] "Unknown Drakka Evolution"),
+		DisplayNamePl = T(134174630715, --[[ModItemTech FieldDraka_T3 DisplayNamePl]] "Unknown Drakka Evolutions"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Draka end,
+		Icon = "UI/Messages/Research/res_Draka",
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "FieldDraka_T3",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(895664539556, --[[ModItemTech FieldDraka_T5 Description]] "The <em>Drakka</em> bodies are now just multiple layers of chitin, much like an onion.\nEach organ has now been wrapped in it's own exoskeleton shell, with small air pockets between each shell.\nThis has made their bodies able to withstand more explosions!\nEven more impressive is the fact that they preserve some of the energy, allowing more frequent eruptions!\n\nIt's large forehead and brittle shell gives this creature good <color TextButton>Blunt</color> and <color TextPositive>Energy</color> Deflection chances."),
+		DisplayName = T(573390196346, --[[ModItemTech FieldDraka_T5 DisplayName]] "Unknown Drakka Evolution"),
+		DisplayNamePl = T(535584479648, --[[ModItemTech FieldDraka_T5 DisplayNamePl]] "Unknown Drakka Evolutions"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Draka end,
+		Icon = "UI/Messages/Research/res_Draka",
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "FieldDraka_T5",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(232248805804, --[[ModItemTech FieldNothT3 Description]] "When semi-domesticated species are left to live in the wild, they can become feral.\nWell the Noth's decided to take that to the extreme, and become much deadlier.\n\nTheir head plate is now harder than steel, capable of shattering whatever material it hit.\nBe careful getting in protracted bouts with this creature, for it will slowly grind down your defenses!\n\nThis does come at a cost, as it's brain is subject to constant blunt force trauma!\nThis means it is much easier to knock this creature out.\n\nDeals <color TextButton>Blunt</color> damage."),
+		DisplayName = T(511119421156, --[[ModItemTech FieldNothT3 DisplayName]] "Unknown Noth Evolution"),
+		DisplayNamePl = T(635590948880, --[[ModItemTech FieldNothT3 DisplayNamePl]] "Unknown Noth Evolutions"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Noth end,
+		Icon = "UI/Messages/Research/res_Noth",
+		LockPrerequisites = {
+			PlaceObj('CheckRegion', {
+				Region = set( "Saltu" ),
+			}),
+		},
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "FieldNothT3",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(296841795702, --[[ModItemTech FieldNothT5 Description]] "The Noth's hide is now a mix between flesh and metal.\nThis has given it immense Piercing and Gas resistance.\n\nIt's headplate also benefits from this increased durability; with greater accuracy and shatter potential!\nNot only will it's hits lower the target's deflection chances, but also make them take increased damage from all sources!\n\nThis does come at a cost, as it's brain is subject to constant blunt force trauma!\nThis means it is much easier to knock this creature out.\n\nDeald <color TextButon>Blunt</color> damage."),
+		DisplayName = T(142281950085, --[[ModItemTech FieldNothT5 DisplayName]] "Unknown Noth Evolution"),
+		DisplayNamePl = T(995536910800, --[[ModItemTech FieldNothT5 DisplayNamePl]] "Unknown Noth Evolutions"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Noth end,
+		Icon = "UI/Messages/Research/res_Noth",
+		LockPrerequisites = {
+			PlaceObj('CheckRegion', {
+				Region = set( "Saltu" ),
+			}),
+		},
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "FieldNothT5",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(351752597077, --[[ModItemTech FieldShoguT3 Description]] "Every wild animal is filled with parasites and diseases, but the Shogu are an exceptionally filled species.\nEven newborns of the species already have the majority of the diseases they will ever have.\n\nFrom what we can tell, the only reason the Shogu do not just die is because the diseases and parasites compete against each other!\n\nDeals <color TextPositive>Gas</color> damage.\nWeak to <color TextNegative>Energy</color> damage."),
+		DisplayName = T(988999460742, --[[ModItemTech FieldShoguT3 DisplayName]] "Unknown Shogu Evolution"),
+		DisplayNamePl = T(931991178329, --[[ModItemTech FieldShoguT3 DisplayNamePl]] "Unknown Shogu Evolutions"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Shogu end,
+		Icon = "UI/Messages/Research/res_Shogu",
+		LockPrerequisites = {
+			PlaceObj('CheckRegion', {
+				Region = set( "Saltu" ),
+			}),
+		},
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "FieldShoguT3",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(473154794773, --[[ModItemTech FieldShoguT5 Description]] "The Shogu that greeted us at the beginning of this adventure is no more.\n\nAll of it's internal organs, nerves, and blood are now replaced with parasites.\nEach one feeding off whatever it can jerkingly puppeteer into it's mouth.\nThe constant movement just under the skin is apparent, as tendrils push the skin to the breaking point.\n\nThis makes this species incredibly hard to kill, and may require multiple attempts....\n\nDeals <color TextPositive>Gas</color> damage.\nWeak to <color TextNegative>Energy</color> damage."),
+		DisplayName = T(354926226217, --[[ModItemTech FieldShoguT5 DisplayName]] "Unknown Shogu Evolution"),
+		DisplayNamePl = T(890282760986, --[[ModItemTech FieldShoguT5 DisplayNamePl]] "Unknown Shogu Evolutions"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Shogu end,
+		Icon = "UI/Messages/Research/res_Shogu",
+		LockPrerequisites = {
+			PlaceObj('CheckRegion', {
+				Region = set( "Saltu" ),
+			}),
+		},
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "FieldShoguT5",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(975185146158, --[[ModItemTech FieldCamelT3 Description]] "The Dromadda have now evolved and grabbed the ability to spit from Earth Camels.\nAmazingly their spit has the same consistency and acidity of the Hummingfly.\n\nThis combined with a general increase in intelligence means we can train and deploy these for defense!\n\nDeals <colro TextNegative>Energy</color> damage."),
+		DisplayName = T(924189431384, --[[ModItemTech FieldCamelT3 DisplayName]] "Humped animal"),
+		DisplayNamePl = T(859058952645, --[[ModItemTech FieldCamelT3 DisplayNamePl]] "Humped animals"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Camel end,
+		Icon = "UI/Messages/Research/res_Camel",
+		LockPrerequisites = {
+			PlaceObj('CheckRegion', {
+				Region = set( "Desertum" ),
+			}),
+		},
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "FieldCamelT3",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(995220278296, --[[ModItemTech FieldCamelT5 Description]] 'The royal purple and burly frame has caused the colony to start calling this species a "<em>Royal Llamels</em>".\nNow possessing high <color TextNegative>Energy</color> and <color TechSubtitleBlue>Piercing</color> resistances, this species can be used to trade fire with anything that assails us!\n\nDeals <colro TextNegative>Energy</color> damage.'),
+		DisplayName = T(346114070115, --[[ModItemTech FieldCamelT5 DisplayName]] "Humped animal"),
+		DisplayNamePl = T(321019568058, --[[ModItemTech FieldCamelT5 DisplayNamePl]] "Humped animals"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Camel end,
+		Icon = "UI/Messages/Research/res_Camel",
+		LockPrerequisites = {
+			PlaceObj('CheckRegion', {
+				Region = set( "Desertum" ),
+			}),
+		},
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "FieldCamelT5",
+		money_value = 50000000,
+		tradable = false,
+	}),
 	}),
 PlaceObj('ModItemFolder', {
 	'name', "Attack Overrides",
@@ -5324,6 +5432,952 @@ PlaceObj('ModItemFolder', {
 			param_bindings = false,
 		}),
 	}),
+	PlaceObj('ModItemStoryBit', {
+		Category = "AttackSpawns",
+		Effects = {
+			PlaceObj('ActivateSpawnDef', {
+				CreateInstance = true,
+				FillInstance = function (self, instance)
+					local spawnClassBest = nil
+					local addedClassList = nil
+					local minion = "Camel"
+					spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
+					instance.SpawnClass = spawnClassBest
+					instance.AdditionalClassList = {}
+					print(spawnClassBest)
+					print(addedClassList)
+					for i=1,#addedClassList do
+						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
+					end
+				end,
+				ProgressMul = 150,
+				SpawnDefId = "OrbitalRadio_Camel",
+				param_bindings = false,
+			}),
+		},
+		Enabled = true,
+		HasNotification = false,
+		HasPopup = false,
+		InheritsObject = false,
+		OneTime = false,
+		Prerequisites = {
+			PlaceObj('CheckGameState', {
+				GameState = "Night",
+				Negate = true,
+				param_bindings = false,
+			}),
+		},
+		SelectObject = false,
+		group = "AttackControllers_Spawners",
+		id = "OrbitalRadio_CamelAttack",
+		qa_info = PlaceObj('PresetQAInfo', {
+			data = {
+				{
+					action = "Modified",
+					time = 1618304612,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1618567764,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1619113707,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620805810,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620900159,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623415500,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623762127,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623927826,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1633597437,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1637742806,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1645458623,
+					user = "Bobby",
+				},
+				{
+					action = "Modified",
+					time = 1653898921,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1667999330,
+					user = "Bobby",
+				},
+			},
+			param_bindings = false,
+		}),
+	}),
+	PlaceObj('ModItemStoryBit', {
+		Category = "AttackSpawns",
+		Effects = {
+			PlaceObj('ActivateSpawnDef', {
+				CreateInstance = true,
+				FillInstance = function (self, instance)
+					local spawnClassBest = nil
+					local addedClassList = nil
+					local minion = "Gujo"
+					spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
+					instance.SpawnClass = spawnClassBest
+					instance.AdditionalClassList = {}
+					print(spawnClassBest)
+					print(addedClassList)
+					for i=1,#addedClassList do
+						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
+					end
+				end,
+				ProgressMul = 150,
+				SpawnDefId = "OrbitalRadio_Gujo",
+				param_bindings = false,
+			}),
+		},
+		Enabled = true,
+		HasNotification = false,
+		HasPopup = false,
+		InheritsObject = false,
+		OneTime = false,
+		Prerequisites = {
+			PlaceObj('CheckGameState', {
+				GameState = "Night",
+				param_bindings = false,
+			}),
+		},
+		SelectObject = false,
+		group = "AttackControllers_Spawners",
+		id = "OrbitalRadio_GujoAttack",
+		qa_info = PlaceObj('PresetQAInfo', {
+			data = {
+				{
+					action = "Modified",
+					time = 1618304612,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1618567764,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1619113707,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620805810,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620900159,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623415500,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623761779,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623927826,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1653898921,
+					user = "Ivan",
+				},
+			},
+			param_bindings = false,
+		}),
+	}),
+	PlaceObj('ModItemStoryBit', {
+		Category = "AttackSpawns",
+		Effects = {
+			PlaceObj('ActivateSpawnDef', {
+				CreateInstance = true,
+				FillInstance = function (self, instance)
+					local spawnClassBest = nil
+					local addedClassList = nil
+					local minion = "Noth"
+					spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
+					instance.SpawnClass = spawnClassBest
+					instance.AdditionalClassList = {}
+					print(spawnClassBest)
+					print(addedClassList)
+					for i=1,#addedClassList do
+						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
+					end
+				end,
+				SpawnDefId = "OrbitalRadio_Noth",
+				param_bindings = false,
+			}),
+		},
+		Enabled = true,
+		HasNotification = false,
+		HasPopup = false,
+		InheritsObject = false,
+		OneTime = false,
+		Prerequisites = {
+			PlaceObj('CheckGameState', {
+				GameState = "Night",
+				Negate = true,
+				param_bindings = false,
+			}),
+		},
+		SelectObject = false,
+		group = "AttackControllers_Spawners",
+		id = "OrbitalRadio_NothAttack",
+		qa_info = PlaceObj('PresetQAInfo', {
+			data = {
+				{
+					action = "Modified",
+					time = 1618304612,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1618567764,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1619113707,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620805810,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620900159,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623415500,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623762127,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623927826,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1633597744,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1637742806,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1645531620,
+					user = "Bobby",
+				},
+				{
+					action = "Modified",
+					time = 1653898921,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1683625240,
+					user = "Bobby",
+				},
+			},
+			param_bindings = false,
+		}),
+	}),
+	PlaceObj('ModItemStoryBit', {
+		Category = "AttackSpawns",
+		Effects = {
+			PlaceObj('ActivateSpawnDef', {
+				CreateInstance = true,
+				FillInstance = function (self, instance)
+					local spawnClassBest = nil
+					local addedClassList = nil
+					local minion = "Skarabei_Manhunting"
+					spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
+					instance.SpawnClass = spawnClassBest
+					instance.AdditionalClassList = {}
+					print(spawnClassBest)
+					print(addedClassList)
+					for i=1,#addedClassList do
+						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
+					end
+				end,
+				ProgressMul = 150,
+				SpawnDefId = "OrbitalRadio_Scarab",
+				param_bindings = false,
+			}),
+		},
+		Enabled = true,
+		HasNotification = false,
+		HasPopup = false,
+		InheritsObject = false,
+		OneTime = false,
+		Prerequisites = {
+			PlaceObj('CheckExpression', {
+				Expression = function (self, obj) return UnlockedInsectMinions["Skarabei"] end,
+				param_bindings = false,
+			}),
+		},
+		group = "AttackControllers_Spawners",
+		id = "OrbitalRadio_ScarabAttack",
+		max_reply_id = 2,
+		qa_info = PlaceObj('PresetQAInfo', {
+			data = {
+				{
+					action = "Modified",
+					time = 1614238878,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1614683508,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1616596369,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1618229657,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1618567754,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1619113707,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620805810,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620900159,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623762127,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623927826,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1653898921,
+					user = "Ivan",
+				},
+			},
+			param_bindings = false,
+		}),
+	}),
+	PlaceObj('ModItemStoryBit', {
+		Category = "AttackSpawns",
+		Effects = {
+			PlaceObj('ActivateSpawnDef', {
+				CreateInstance = true,
+				FillInstance = function (self, instance)
+					local spawnClassBest = nil
+					local addedClassList = nil
+					local minion = "Scissorhands"
+					spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
+					instance.SpawnClass = spawnClassBest
+					instance.AdditionalClassList = {}
+					print(spawnClassBest)
+					print(addedClassList)
+					for i=1,#addedClassList do
+						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
+					end
+				end,
+				ProgressMul = 150,
+				SpawnDefId = "OrbitalRadio_Scissorhands",
+				param_bindings = false,
+			}),
+		},
+		Enabled = true,
+		HasNotification = false,
+		HasPopup = false,
+		InheritsObject = false,
+		OneTime = false,
+		Prerequisites = {
+			PlaceObj('CheckExpression', {
+				Expression = function (self, obj) return UnlockedInsectMinions["Scissorhands"] end,
+				param_bindings = false,
+			}),
+		},
+		group = "AttackControllers_Spawners",
+		id = "OrbitalRadio_ScissorhandsAttack",
+		max_reply_id = 2,
+		qa_info = PlaceObj('PresetQAInfo', {
+			data = {
+				{
+					action = "Modified",
+					time = 1614238878,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1614683508,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1616596369,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1618229657,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1618567754,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1619113707,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620805810,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620900159,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623762127,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623927826,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1633597302,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1653898921,
+					user = "Ivan",
+				},
+			},
+			param_bindings = false,
+		}),
+	}),
+	PlaceObj('ModItemStoryBit', {
+		Category = "AttackSpawns",
+		Effects = {
+			PlaceObj('ActivateSpawnDef', {
+				CreateInstance = true,
+				FillInstance = function (self, instance)
+					local spawnClassBest = nil
+					local addedClassList = nil
+					local minion = "Shogu"
+					spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
+					instance.SpawnClass = spawnClassBest
+					instance.AdditionalClassList = {}
+					print(spawnClassBest)
+					print(addedClassList)
+					for i=1,#addedClassList do
+						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
+					end
+				end,
+				ProgressMul = 150,
+				SpawnDefId = "OrbitalRadio_Shogu",
+				param_bindings = false,
+			}),
+		},
+		Enabled = true,
+		HasNotification = false,
+		HasPopup = false,
+		InheritsObject = false,
+		OneTime = false,
+		Prerequisites = {
+			PlaceObj('CheckGameState', {
+				GameState = "Night",
+				Negate = true,
+				param_bindings = false,
+			}),
+		},
+		SelectObject = false,
+		group = "AttackControllers_Spawners",
+		id = "OrbitalRadio_ShoguAttack",
+		qa_info = PlaceObj('PresetQAInfo', {
+			data = {
+				{
+					action = "Modified",
+					time = 1618304612,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1618567764,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1619113707,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620805810,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620900159,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623415500,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623762127,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623927826,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1633597744,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1637742806,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1645531620,
+					user = "Bobby",
+				},
+				{
+					action = "Modified",
+					time = 1653898921,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1683625240,
+					user = "Bobby",
+				},
+			},
+			param_bindings = false,
+		}),
+	}),
+	PlaceObj('ModItemStoryBit', {
+		Category = "AttackSpawns",
+		Effects = {
+			PlaceObj('ActivateSpawnDef', {
+				CreateInstance = true,
+				FillInstance = function (self, instance)
+					local spawnClassBest = nil
+					local addedClassList = nil
+					local minion = "Shrieker_Manhunting_Mother"
+					spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
+					instance.SpawnClass = spawnClassBest
+					instance.AdditionalClassList = {}
+					print(spawnClassBest)
+					print(addedClassList)
+					for i=1,#addedClassList do
+						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
+					end
+				end,
+				ProgressMul = 150,
+				SpawnDefId = "OrbitalRadio_Shrieker",
+				param_bindings = false,
+			}),
+		},
+		Enabled = true,
+		HasNotification = false,
+		HasPopup = false,
+		InheritsObject = false,
+		OneTime = false,
+		Prerequisites = {
+			PlaceObj('CheckExpression', {
+				Expression = function (self, obj) return UnlockedInsectMinions["Shrieker"] end,
+				param_bindings = false,
+			}),
+		},
+		group = "AttackControllers_Spawners",
+		id = "OrbitalRadio_ShriekerAttack",
+		max_reply_id = 2,
+		qa_info = PlaceObj('PresetQAInfo', {
+			data = {
+				{
+					action = "Modified",
+					time = 1614238878,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1614683508,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1616596369,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1618229657,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1618567754,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1619113707,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620805810,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620900159,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623762127,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623927826,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1653898921,
+					user = "Ivan",
+				},
+			},
+			param_bindings = false,
+		}),
+	}),
+	PlaceObj('ModItemStoryBit', {
+		Category = "AttackSpawns",
+		Effects = {
+			PlaceObj('ActivateSpawnDef', {
+				CreateInstance = true,
+				FillInstance = function (self, instance)
+					local spawnClassBest = nil
+					local addedClassList = nil
+					local minion = "Tecatli"
+					spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
+					instance.SpawnClass = spawnClassBest
+					instance.AdditionalClassList = {}
+					print(spawnClassBest)
+					print(addedClassList)
+					for i=1,#addedClassList do
+						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
+					end
+				end,
+				ProgressMul = 150,
+				SpawnDefId = "OrbitalRadio_Tecatli",
+				param_bindings = false,
+			}),
+		},
+		Enabled = true,
+		HasNotification = false,
+		HasPopup = false,
+		InheritsObject = false,
+		OneTime = false,
+		Prerequisites = {
+			PlaceObj('CheckGameState', {
+				GameState = "Night",
+				param_bindings = false,
+			}),
+		},
+		SelectObject = false,
+		group = "AttackControllers_Spawners",
+		id = "OrbitalRadio_TecatliAttack",
+		qa_info = PlaceObj('PresetQAInfo', {
+			data = {
+				{
+					action = "Modified",
+					time = 1618304612,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1618567764,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1619113707,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620805810,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620900159,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623415500,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623761779,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623927826,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1633597973,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1645456959,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1645458623,
+					user = "Bobby",
+				},
+				{
+					action = "Modified",
+					time = 1653898921,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1667999330,
+					user = "Bobby",
+				},
+			},
+			param_bindings = false,
+		}),
+	}),
+	PlaceObj('ModItemStoryBit', {
+		Category = "AttackSpawns",
+		Effects = {
+			PlaceObj('ActivateSpawnDef', {
+				CreateInstance = true,
+				FillInstance = function (self, instance)
+					local spawnClassBest = nil
+					local addedClassList = nil
+					local minion = "Ulfen"
+					spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
+					instance.SpawnClass = spawnClassBest
+					instance.AdditionalClassList = {}
+					print(spawnClassBest)
+					print(addedClassList)
+					for i=1,#addedClassList do
+						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
+					end
+				end,
+				ProgressMul = 150,
+				SpawnDefId = "OrbitalRadio_Ulfen",
+				param_bindings = false,
+			}),
+		},
+		Enabled = true,
+		HasNotification = false,
+		HasPopup = false,
+		InheritsObject = false,
+		OneTime = false,
+		Prerequisites = {
+			PlaceObj('CheckGameState', {
+				GameState = "Night",
+				Negate = true,
+				param_bindings = false,
+			}),
+		},
+		SelectObject = false,
+		group = "AttackControllers_Spawners",
+		id = "OrbitalRadio_UlfenAttack",
+		qa_info = PlaceObj('PresetQAInfo', {
+			data = {
+				{
+					action = "Modified",
+					time = 1618304612,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1618567764,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1619113707,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620805810,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620900159,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623415500,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623762127,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623927826,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1637742806,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1653898921,
+					user = "Ivan",
+				},
+			},
+			param_bindings = false,
+		}),
+	}),
+	PlaceObj('ModItemInvaderSpawnDef', {
+		Behaviours = {
+			PlaceObj('InvaderBehaviourIdle', {
+				'Duration', 3840000,
+				'NoSleep', false,
+			}),
+			PlaceObj('InvaderBehaviourDespawn', {
+				'Duration', 240000,
+				'RandomDuration', 240000,
+			}),
+		},
+		ClearArea = 256,
+		ClearRadius = 10000,
+		Comment = "A large seasonal herd, that stays for several days and despawn.",
+		Count = 10,
+		DistFromOthers = 2000,
+		GroupSizeMax = 100,
+		GroupSizeMin = 50,
+		MaxRetries = 25,
+		PostSpawn = function (self, obj, target)
+			Msg("SpawnedMigrationAnimal", obj)
+		end,
+		RandomCount = 10,
+		SpawnAsGroup = true,
+		SpawnClass = "Ulfen",
+		TargetClass = "Human",
+		TargetDistMax = 250000,
+		TargetDistMin = 100000,
+		group = "StoryBits",
+		id = "PassiveAttack",
+	}),
 	}),
 PlaceObj('ModItemFolder', {
 	'name', "Status Conditions",
@@ -7030,7 +8084,7 @@ PlaceObj('ModItemFolder', {
 			},
 			ExpirationRandom = 160000,
 			ExpirationTime = 400000,
-			HealthLoss = 15000,
+			HealthLoss = 10000,
 			ManipulationModifier = 30000,
 			ManipulationModifierOpt = 30000,
 			MistreatmentChance = 15,
@@ -7366,6 +8420,518 @@ PlaceObj('ModItemFolder', {
 			Type = "Disease",
 			id = "ShellShocked",
 		}),
+		PlaceObj('ModItemHealthCondition', {
+			AffectableBodyParts = {
+				PlaceObj('HealthConditionBodyParts', {
+					BodyPart = "Torso",
+					BodyPartGroup = "WholeBody",
+					param_bindings = false,
+				}),
+			},
+			Description = T(664662307644, --[[ModItemHealthCondition AnimalPregnancy Description]] "This animal is pregnant and will give birth."),
+			DisplayName = T(676821692257, --[[ModItemHealthCondition AnimalPregnancy DisplayName]] "Pregnant"),
+			Expiration = true,
+			ExpirationTime = 20000,
+			FloatingTextType = "Display name",
+			OnAdd = function (self, owner, ...)
+				self.ExpirationTime = owner.PregnancyDuration
+				owner:RefreshExpiration(self)
+				Msg("AnimalGotPregnant", owner)
+			end,
+			OnRemove = function (self, owner, ...)
+				local spawn_def = SpawnDefs["BabySpawn"]
+				if spawn_def then
+					local instance = {}
+					instance.SpawnClass = owner.NewbornClass or owner.class
+					spawn_def = spawn_def:CreateInstance(instance)
+					spawn_def:ActivateSpawn(owner)
+				end
+			end,
+			ReplaceOldest = false,
+			StackLimit = 1,
+			Type = "Buff",
+			UnitTags = set( "Animal" ),
+			group = "Special",
+			id = "AnimalPregnancy",
+			msg_reactions = {
+				PlaceObj('MsgReaction', {
+					Event = "NewDayStarted",
+					Handler = function (self, year, day)
+						print("Refreshing Tames!")
+						refresh_tame_counts()
+						for _, animal in ipairs(UIPlayer.labels.TamedAnimals or empty_table) do
+							if animal.Gender == "female" and not animal:IsGrowingUp() and not animal:HasHealthConditionById(self.id) and IsAliveAndConscious(animal) and not animal:IsManuallyControlled() then
+								local get_live_preg_chance = new_preg_rate(animal.class,animal.DailyPregnancyChance)
+								if animal:Random(100, "Breeding") < get_live_preg_chance then
+									local male = false
+									animal:UpdatePfClass() -- for CheckConnectivity
+									if animal.ReproductionGroup then
+										male = MapGetFirst(animal, 10*guim, "UnitAnimal", function(unit, animal)
+											return unit.ReproductionGroup == animal.ReproductionGroup and unit.Gender == "male" and animal:CheckConnectivity(unit)
+										end, animal)
+									else
+										male = MapGetFirst(animal, 10*guim, animal.class, function(unit, animal)
+											return unit.Gender == "male" and animal:CheckConnectivity(unit)
+										end, animal)
+									end
+									if male then
+										animal:AddHealthCondition(self.id, "got pregnant")
+									end
+								end
+							end
+						end
+					end,
+					param_bindings = false,
+				}),
+			},
+		}),
+		PlaceObj('ModItemHealthCondition', {
+			AffectableBodyParts = {
+				PlaceObj('HealthConditionBodyParts', {
+					BodyPart = "All",
+					param_bindings = false,
+				}),
+			},
+			Description = T(986945772012, --[[ModItemHealthCondition UlfenHerd Description]] "Has formed a herd with other Ulfen, and when on low health will trigger a frenzy in all nearby allies."),
+			DisplayName = T(192530475851, --[[ModItemHealthCondition UlfenHerd DisplayName]] "Herd Mentality"),
+			FloatingTextType = "Display name",
+			OnAdd = function (self, owner, ...)
+				if owner.frenzy == nil then
+					owner.frenzy = GameTime()
+				end
+			end,
+			StackLimit = 1,
+			Type = "Buff",
+			id = "UlfenHerd",
+			unit_reactions = {
+				PlaceObj('UnitReaction', {
+					Event = "OnObjUpdate",
+					Handler = function (self, target, time, update_interval)
+						if target.Health < target.MaxHealth / 2 and target.frenzy < GameTime() then
+							MapForEach(target,30*guim,"UnitAnimal",function(unit,target)
+							if (unit.class == 'Ulfen_T5' or unit.class == 'Ulfen_T4') and not unit:IsDead() and not unit:IsUnconscious() then
+								unit:AddHealthCondition("UlfRage")
+							end
+							end,target)
+							target.frenzy = GameTime() + 600000 -- can only occur every 60 game minutes
+						end
+					end,
+					param_bindings = false,
+				}),
+			},
+		}),
+		PlaceObj('ModItemHealthCondition', {
+			AffectableBodyParts = {
+				PlaceObj('HealthConditionBodyParts', {
+					BodyPart = "All",
+					param_bindings = false,
+				}),
+			},
+			Description = T(514606535889, --[[ModItemHealthCondition UlfRage Description]] "This creature saw another of it's kin die!\nIt's newfound bloodlust is coursing through its veins.\n\n+10 Damage Resistance, +10% attack speed per stack."),
+			DisplayName = T(587427189008, --[[ModItemHealthCondition UlfRage DisplayName]] "Ulfen Angry!"),
+			FloatingTextType = "Display name",
+			OnAdd = function (self, owner, ...)
+				if owner.anger == nil then
+					owner.anger = 1
+					owner.calm = GameTime() + 60000
+				else
+					owner.anger = owner.anger + 1
+				end
+			end,
+			StackLimit = 1,
+			Type = "Buff",
+			id = "UlfRage",
+			unit_reactions = {
+				PlaceObj('UnitReaction', {
+					Event = "AvoidAttackModify",
+					Handler = function (self, target, hit_chance, attacker, weapon_def, attacker_dist)
+						local denom = ((3 / 20) * target.anger) + 1
+						return hit_chance / denom -- 20 anger stacks = now 25% chance to miss
+					end,
+					param_bindings = false,
+				}),
+				PlaceObj('UnitReaction', {
+					Event = "OnObjUpdate",
+					Handler = function (self, target, time, update_interval)
+						if self.calm < GameTime() then
+							target.anger = target.anger - 1
+							self.calm = GameTime() + 60000 -- every 60 seconds it calms down
+							if target.anger < 1 then
+								owner:RemoveHealthCondition(self)
+							end
+						end
+					end,
+					param_bindings = false,
+				}),
+			},
+		}),
+		PlaceObj('ModItemHealthCondition', {
+			AffectableBodyParts = {
+				PlaceObj('HealthConditionBodyParts', {
+					BodyPart = "All",
+					param_bindings = false,
+				}),
+			},
+			Description = T(636177971626, --[[ModItemHealthCondition Acoustic_T1 Description]] "Every 5 hits against this creature will cause vibrations to intensify enough to fire at the most recent attacker! This quiets the exoskeleton for a time.\nMultiple Sonic Booms sent in a short period of time causes immense headaches and difficulty staying conscious."),
+			DisplayName = T(580224469474, --[[ModItemHealthCondition Acoustic_T1 DisplayName]] "Acoustic Exoskeleton T1"),
+			OnAdd = function (self, owner, ...)
+				if owner.reso == nil then
+					owner.reso = 1
+				end
+			end,
+			Type = "Buff",
+			id = "Acoustic_T1",
+			unit_reactions = {
+				PlaceObj('UnitReaction', {
+					Event = "AvoidAttackModify",
+					Handler = function (self, target, hit_chance, attacker, weapon_def, attacker_dist)
+						target.reso = target.reso +1
+						if target.reso % 5 == 0 then
+							target.reso = target.reso - 5
+							target:AddHealthCondition("ResoBacklash_2")
+							local chance = target:GetWeaponHitChance(weapon_def) - 20
+							local hit = (chance or 100) >= 100 or target:Random(100, "HitChance") < chance
+							local w_d = Resources['Resonance_T1']
+							local deflect = attacker:GetHitNegationChanceForWeapon(w_d)
+							local dodge =  (deflect or 100) >= 100 or attacker:Random(100, "HitChance") > deflect
+							local chance = target:GetWeaponHitChance(weapon_def) - 20
+							if hit and not dodge then
+								attacker:OnAttackReceived(target,w_d,target)
+							end
+						end
+						return hit_chance
+					end,
+					param_bindings = false,
+				}),
+			},
+		}),
+		PlaceObj('ModItemHealthCondition', {
+			AffectableBodyParts = {
+				PlaceObj('HealthConditionBodyParts', {
+					BodyPart = "All",
+					param_bindings = false,
+				}),
+			},
+			Description = T(489746058759, --[[ModItemHealthCondition Acoustic_T2 Description]] "Every 5 hits against this creature will cause vibrations to intensify enough to fire at the most recent attacker! This quiets the exoskeleton for a time.\nMultiple Sonic Booms sent in a short period of time causes immense headaches and difficulty staying conscious.\nAny vibrations make it slightly more difficult to hit with an attack."),
+			DisplayName = T(147141245631, --[[ModItemHealthCondition Acoustic_T2 DisplayName]] "Acoustic Exoskeleton T2"),
+			OnAdd = function (self, owner, ...)
+				if owner.reso == nil then
+					owner.reso = 1
+				end
+			end,
+			Type = "Buff",
+			id = "Acoustic_T2",
+			unit_reactions = {
+				PlaceObj('UnitReaction', {
+					Event = "AvoidAttackModify",
+					Handler = function (self, target, hit_chance, attacker, weapon_def, attacker_dist)
+						target.reso = target.reso +1
+						if target.reso % 5 == 0 then
+							target.reso = target.reso - 5
+							target:AddHealthCondition("ResoBacklash_2")
+							local chance = target:GetWeaponHitChance(weapon_def) - 20
+							local hit = (chance or 100) >= 100 or target:Random(100, "HitChance") < chance
+							local w_d = Resources['Resonance_T1']
+							local deflect = attacker:GetHitNegationChanceForWeapon(w_d)
+							local dodge =  (deflect or 100) >= 100 or attacker:Random(100, "HitChance") > deflect
+							local chance = target:GetWeaponHitChance(weapon_def) - 20
+							if hit and not dodge then
+								attacker:OnAttackReceived(target,w_d,target)
+							end
+						end
+						local denom = ((3 / 40) * target.reso) + 1 -- requires 40 stacks for 25% reduction
+						return hit_chance / denom
+					end,
+					param_bindings = false,
+				}),
+			},
+		}),
+		PlaceObj('ModItemHealthCondition', {
+			AffectableBodyParts = {
+				PlaceObj('HealthConditionBodyParts', {
+					BodyPart = "All",
+					param_bindings = false,
+				}),
+			},
+			Description = T(175132395148, --[[ModItemHealthCondition Acoustic_T3 Description]] "Every 5 hits against this creature will cause vibrations to intensify enough to fire at the most recent attacker!\nMultiple Sonic Booms sent in a short period of time causes immense headaches and difficulty staying conscious.\nAny vibrations make it slightly more difficult to hit with an attack."),
+			DisplayName = T(522415654364, --[[ModItemHealthCondition Acoustic_T3 DisplayName]] "Acoustic Exoskeleton T3"),
+			OnAdd = function (self, owner, ...)
+				if owner.reso == nil then
+					owner.reso = 1
+				end
+			end,
+			Type = "Buff",
+			id = "Acoustic_T3",
+			unit_reactions = {
+				PlaceObj('UnitReaction', {
+					Event = "AvoidAttackModify",
+					Handler = function (self, target, hit_chance, attacker, weapon_def, attacker_dist)
+						target.reso = target.reso +1
+						if target.reso % 5 == 0 then
+							target:AddHealthCondition("ResoBacklash")
+							local chance = target:GetWeaponHitChance(weapon_def) - 20
+							local hit = (chance or 100) >= 100 or target:Random(100, "HitChance") < chance
+							local w_d = Resources['Resonance_T1']
+							local deflect = attacker:GetHitNegationChanceForWeapon(w_d)
+							local dodge =  (deflect or 100) >= 100 or attacker:Random(100, "HitChance") > deflect
+							local chance = target:GetWeaponHitChance(weapon_def) - 20
+							if hit and not dodge then
+								attacker:OnAttackReceived(target,w_d,target)
+							end
+						end
+						local denom = ((3 / 40) * target.reso) + 1 -- requires 40 stacks for 25% reduction
+						return hit_chance / denom
+					end,
+					param_bindings = false,
+				}),
+			},
+		}),
+		PlaceObj('ModItemHealthCondition', {
+			AffectableBodyParts = {
+				PlaceObj('HealthConditionBodyParts', {
+					BodyPart = "All",
+					param_bindings = false,
+				}),
+			},
+			Description = T(255920832469, --[[ModItemHealthCondition Acoustic_T4 Description]] "Every 5 hits against this creature will cause vibrations to intensify enough to fire at the most recent attacker! This quiets the exoskeleton for a time.\nMultiple Sonic Booms sent in a short period of time causes headaches and difficulty staying conscious.\nAny vibrations make it slightly more difficult to hit with an attack."),
+			DisplayName = T(586266057641, --[[ModItemHealthCondition Acoustic_T4 DisplayName]] "Acoustic Exoskeleton T4"),
+			OnAdd = function (self, owner, ...)
+				if owner.reso == nil then
+					print("Set basic reso")
+					owner.reso = 1
+				end
+			end,
+			Type = "Buff",
+			id = "Acoustic_T4",
+			unit_reactions = {
+				PlaceObj('UnitReaction', {
+					Event = "AvoidAttackModify",
+					Handler = function (self, target, hit_chance, attacker, weapon_def, attacker_dist)
+						target.reso = target.reso +1
+						if target.reso % 5 == 0 then
+							print("trying to throw a reverb!")
+							target:AddHealthCondition("ResoBacklash_2")
+							local chance = target:GetWeaponHitChance(weapon_def) - 20
+							local hit = (chance or 100) >= 100 or target:Random(100, "HitChance") < chance
+							local w_d = Resources['Resonance_T1']
+							local deflect = attacker:GetHitNegationChanceForWeapon(w_d)
+							local dodge =  (deflect or 100) >= 100 or attacker:Random(100, "HitChance") > deflect
+							local chance = target:GetWeaponHitChance(weapon_def) - 20
+							if hit and not dodge then
+								attacker:OnAttackReceived(target,w_d,target)
+							end
+						end
+						local denom = ((3 / 40) * target.reso) + 1 -- requires 40 stacks for 25% reduction
+						return hit_chance / denom
+					end,
+					param_bindings = false,
+				}),
+			},
+		}),
+		PlaceObj('ModItemHealthCondition', {
+			AffectableBodyParts = {
+				PlaceObj('HealthConditionBodyParts', {
+					BodyPart = "HeadBrain",
+					BodyPartGroup = "WholeHead",
+					param_bindings = false,
+				}),
+			},
+			AffectedArea = "inside",
+			ConsciousnessModifier = -20000,
+			Description = T(931231343009, --[[ModItemHealthCondition ResoBacklash Description]] "This creature has recently snap, crackled, and popped and is struggling to handle the intensity of the vibrations!"),
+			DisplayName = T(204260954100, --[[ModItemHealthCondition ResoBacklash DisplayName]] "Feedback"),
+			Expiration = true,
+			ExpirationRandom = 160000,
+			ExpirationTime = 240000,
+			FloatingTextType = "Display name",
+			Type = "Injury",
+			id = "ResoBacklash",
+		}),
+		PlaceObj('ModItemHealthCondition', {
+			AffectableBodyParts = {
+				PlaceObj('HealthConditionBodyParts', {
+					BodyPart = "HeadBrain",
+					BodyPartGroup = "WholeHead",
+					param_bindings = false,
+				}),
+			},
+			AffectedArea = "inside",
+			ConsciousnessModifier = -10000,
+			Description = T(204915056183, --[[ModItemHealthCondition ResoBacklash_2 Description]] "This creature has recently snap, crackled, and popped and is struggling to handle the intensity of the vibrations!"),
+			DisplayName = T(131858762366, --[[ModItemHealthCondition ResoBacklash_2 DisplayName]] "Feedback"),
+			Expiration = true,
+			ExpirationRandom = 160000,
+			ExpirationTime = 240000,
+			FloatingTextType = "Display name",
+			Type = "Injury",
+			id = "ResoBacklash_2",
+		}),
+		PlaceObj('ModItemHealthCondition', {
+			AffectableBodyParts = {
+				PlaceObj('HealthConditionBodyParts', {
+					param_bindings = false,
+				}),
+			},
+			AffectedArea = "outline",
+			BleedingModifier = 1000,
+			Description = T(880613586872, --[[ModItemHealthCondition Noth_Shatter_t1 Description]] "Taken a savage hit, and it is now harder to dodge further attacks."),
+			DisplayName = T(557502792855, --[[ModItemHealthCondition Noth_Shatter_t1 DisplayName]] "Shattered Defenses"),
+			HealthLoss = 3000,
+			MistreatmentChance = 5,
+			Modifiers = {
+				PlaceObj('ModifyHuman', {
+					Id = "autoid_rtw6tLg_SLDHQSr",
+					accumulate = true,
+					add = -5,
+					param_bindings = false,
+					prop = "HitNegationChance_blunt",
+				}),
+				PlaceObj('ModifyHuman', {
+					Id = "",
+					accumulate = true,
+					add = -5,
+					param_bindings = false,
+					prop = "HitNegationChance_energy",
+				}),
+				PlaceObj('ModifyHuman', {
+					Id = "autoid_rtw6tLg_c6bU4Gr",
+					accumulate = true,
+					add = -5,
+					param_bindings = false,
+					prop = "HitNegationChance_piercing",
+				}),
+				PlaceObj('ModifyHuman', {
+					Id = "",
+					accumulate = true,
+					add = -5,
+					param_bindings = false,
+					prop = "HitNegationChance_gas",
+				}),
+			},
+			TreatmentMaxSkillLevel = 5,
+			TreatmentMedicineAmount = 1000,
+			TreatmentMedicineResource = "MedBandages",
+			TreatmentMinSkillLevel = 2,
+			TreatmentStatus = "requires treatment",
+			Type = "Injury",
+			group = "AnimalAttacker_SurfaceWound_Common",
+			id = "Noth_Shatter_t1",
+		}),
+		PlaceObj('ModItemHealthCondition', {
+			AffectableBodyParts = {
+				PlaceObj('HealthConditionBodyParts', {
+					param_bindings = false,
+				}),
+			},
+			AffectedArea = "outline",
+			BleedingModifier = 1000,
+			Description = T(791772200308, --[[ModItemHealthCondition Noth_Shatter_t2 Description]] "Taken a savage hit, and it is now harder to dodge further attacks.\nAlso takes 5% more damage per instance."),
+			DisplayName = T(181514080412, --[[ModItemHealthCondition Noth_Shatter_t2 DisplayName]] "Shattered Defenses"),
+			HealthLoss = 3000,
+			MistreatmentChance = 5,
+			Modifiers = {
+				PlaceObj('ModifyHuman', {
+					Id = "",
+					accumulate = true,
+					add = -5,
+					param_bindings = false,
+					prop = "HitNegationChance_blunt",
+				}),
+				PlaceObj('ModifyHuman', {
+					Id = "autoid_rtw6tLg_ukFmdqk",
+					accumulate = true,
+					add = -5,
+					param_bindings = false,
+					prop = "HitNegationChance_energy",
+				}),
+				PlaceObj('ModifyHuman', {
+					Id = "",
+					accumulate = true,
+					add = -5,
+					param_bindings = false,
+					prop = "HitNegationChance_piercing",
+				}),
+				PlaceObj('ModifyHuman', {
+					Id = "autoid_rtw6tLg_btUcMr",
+					accumulate = true,
+					add = -5,
+					param_bindings = false,
+					prop = "HitNegationChance_gas",
+				}),
+			},
+			TreatmentMaxSkillLevel = 5,
+			TreatmentMedicineAmount = 1000,
+			TreatmentMedicineResource = "MedBandages",
+			TreatmentMinSkillLevel = 2,
+			TreatmentStatus = "requires treatment",
+			Type = "Injury",
+			group = "AnimalAttacker_SurfaceWound_Common",
+			id = "Noth_Shatter_t2",
+			unit_reactions = {
+				PlaceObj('UnitReaction', {
+					Event = "ModifyDamageReceived",
+					Handler = function (self, target, damage, weapon_def, attacker)
+						return damage + (damage / 20) --5% increase
+					end,
+					param_bindings = false,
+				}),
+			},
+		}),
+		PlaceObj('ModItemHealthCondition', {
+			AffectableBodyParts = {
+				PlaceObj('HealthConditionBodyParts', {
+					BodyPart = "All",
+					param_bindings = false,
+				}),
+			},
+			AffectedArea = "outline",
+			Description = T(184431831747, --[[ModItemHealthCondition Shogu_Fly_Swarm Description]] "This unit is a creature of filth and disease!\nAny melee attacker is drenched in filth!"),
+			DisplayName = T(790939562140, --[[ModItemHealthCondition Shogu_Fly_Swarm DisplayName]] "Concentrated Decay"),
+			Expiration = true,
+			ExpirationTime = 40000,
+			FloatingTextType = "Display name",
+			Type = "Buff",
+			id = "Shogu_Fly_Swarm",
+			unit_reactions = {
+				PlaceObj('UnitReaction', {
+					Event = "ModifyDamageReceived",
+					Handler = function (self, target, damage, weapon_def, attacker)
+						if attacker:GetTargetDist(target, attacker) / guim > 5 and (IsKindOf(attacker,'Human') or IsKindOf(attacker,"UnitAnimal")) then
+							attacker:AddHealthCondition("Shogu_Splash")
+						end
+						return damage
+					end,
+					param_bindings = false,
+				}),
+			},
+		}),
+		PlaceObj('ModItemHealthCondition', {
+			AffectableBodyParts = {
+				PlaceObj('HealthConditionBodyParts', {
+					BodyPart = "All",
+					param_bindings = false,
+				}),
+			},
+			AffectedArea = "outline",
+			BleedingModifier = 1000,
+			ConsciousnessModifier = -10000,
+			Description = T(663496715576, --[[ModItemHealthCondition Shogu_Splash Description]] "This unit is drenched in parasites and bile!\nMaking it more difficult to attack"),
+			DisplayName = T(171686183606, --[[ModItemHealthCondition Shogu_Splash DisplayName]] "Covered in filth"),
+			Expiration = true,
+			ExpirationTime = 40000,
+			FloatingTextType = "Display name",
+			Type = "Debuff",
+			id = "Shogu_Splash",
+			unit_reactions = {
+				PlaceObj('UnitReaction', {
+					Event = "ModifyAttackCooldown",
+					Handler = function (self, target, cooldown, weapon_def)
+						return cooldown + (cooldown / 10)  --10% atk spd debuff
+					end,
+					param_bindings = false,
+				}),
+			},
+		}),
 		}),
 	PlaceObj('ModItemFolder', {
 		'name', "Robot HCs",
@@ -7517,7 +9083,7 @@ PlaceObj('ModItemFolder', {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyAttackCooldown",
 					Handler = function (self, target, cooldown, weapon_def)
-						return cooldown * 2 / 3
+						return cooldown * 10 / 11
 					end,
 					param_bindings = false,
 				}),
@@ -7531,7 +9097,6 @@ PlaceObj('ModItemFolder', {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyWeaponHitChance",
 					Handler = function (self, target, chance, weapon_def)
-						self:ChangeHealth(-5,"overclock")
 						return chance * 3 / 4
 					end,
 					param_bindings = false,
@@ -7555,7 +9120,7 @@ PlaceObj('ModItemFolder', {
 						if not target.ILU_t then
 							target.ILU_t = attacked_unit
 							CreateFloatingText(target, "Focus fire on my target!", "FloatingPositive", "Task", false)		
-						elseif attached_unit ~= target.ILU_t then
+						elseif attacked_unit ~= target.ILU_t then
 							target.ILU_t = attacked_unit
 							CreateFloatingText(target, "Switching targets!", "Floating", "Task", false)
 						end
@@ -7567,7 +9132,7 @@ PlaceObj('ModItemFolder', {
 								robot.ILU_t = attacked_unit
 							end
 						end)
-						return effects
+						return base_chance
 					end,
 					param_bindings = false,
 				}),
@@ -7590,7 +9155,7 @@ PlaceObj('ModItemFolder', {
 						if not target.ILU_t then
 							target.ILU_t = attacked_unit
 							CreateFloatingText(target, "Focus fire on my target!", "FloatingPositive", "Task", false)		
-						elseif attached_unit ~= target.ILU_t then
+						elseif attacked_unit ~= target.ILU_t then
 							target.ILU_t = attacked_unit
 							CreateFloatingText(target, "Switching targets!", "Floating", "Task", false)
 						end
@@ -7602,7 +9167,7 @@ PlaceObj('ModItemFolder', {
 								robot.ILU_t = attacked_unit
 							end
 						end)
-						return effects
+						return base_chance
 					end,
 					param_bindings = false,
 				}),
@@ -10019,6 +11584,447 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		}),
+	PlaceObj('ModItemAnimalPerk', {
+		Description = T(714684334806, --[[ModItemAnimalPerk Default UlfenRage Description]] "In a herd, and will call out when in danger!"),
+		DisplayName = T(111736795096, --[[ModItemAnimalPerk Default UlfenRage DisplayName]] "Ulfen Mafia"),
+		id = "UlfenRage",
+	}),
+	PlaceObj('ModItemCompositeBodyPreset', {
+		'Group', "Noth",
+		'Id', "NothBodyElder_1",
+		'Target', "NothT2",
+		'Parts', set( "Body" ),
+		'Entity', "Noth",
+		'Scale', range(100, 110),
+		'Colors', {
+			PlaceObj('CompositeBodyPresetColor', {
+				'EditableColor1', RGBA(44, 84, 168, 255),
+				'EditableColor2', RGBA(168, 78, 19, 255),
+				'EditableColor3', RGBA(180, 44, 44, 255),
+			}),
+		},
+	}),
+	PlaceObj('ModItemCompositeBodyPreset', {
+		'Group', "Noth",
+		'Id', "NothBodyElder_2",
+		'Target', "NothT3",
+		'Parts', set( "Body" ),
+		'Entity', "Noth",
+		'Scale', range(100, 110),
+		'Colors', {
+			PlaceObj('CompositeBodyPresetColor', {
+				'EditableColor1', RGBA(24, 31, 46, 255),
+				'EditableColor2', RGBA(168, 78, 19, 255),
+				'EditableColor3', RGBA(74, 12, 12, 255),
+			}),
+		},
+	}),
+	PlaceObj('ModItemCompositeBodyPreset', {
+		'Group', "Noth",
+		'Id', "NothBodyElder_3",
+		'Target', "NothT4",
+		'Parts', set( "Body" ),
+		'Entity', "Noth",
+		'Scale', range(100, 110),
+		'Colors', {
+			PlaceObj('CompositeBodyPresetColor', {
+				'EditableColor1', RGBA(12, 65, 1, 255),
+				'EditableColor2', RGBA(105, 94, 6, 255),
+				'EditableColor3', RGBA(0, 0, 0, 255),
+			}),
+		},
+	}),
+	PlaceObj('ModItemCompositeBodyPreset', {
+		'Group', "Noth",
+		'Id', "NothBodyElder_4",
+		'Target', "NothT5",
+		'Parts', set( "Body" ),
+		'Entity', "Noth",
+		'Scale', range(100, 110),
+		'Colors', {
+			PlaceObj('CompositeBodyPresetColor', {
+				'EditableColor1', RGBA(116, 45, 3, 255),
+				'EditableColor2', RGBA(125, 109, 4, 255),
+				'EditableColor3', RGBA(0, 0, 0, 255),
+			}),
+		},
+	}),
+	PlaceObj('ModItemCompositeBodyPreset', {
+		'Group', "DrakaT2",
+		'Id', "DrakaBodyElder_2",
+		'Target', "Draka",
+		'Parts', set( "Body" ),
+		'Entity', "Draka",
+		'Scale', range(100, 110),
+		'Colors', {
+			PlaceObj('CompositeBodyPresetColor', {
+				'EditableColor1', RGBA(21, 62, 54, 255),
+				'EditableColor2', RGBA(173, 105, 26, 255),
+				'EditableColor3', RGBA(157, 80, 38, 255),
+			}),
+			PlaceObj('CompositeBodyPresetColor', {
+				'EditableColor1', RGBA(33, 67, 60, 255),
+				'EditableColor2', RGBA(173, 105, 26, 255),
+				'EditableColor3', RGBA(157, 80, 38, 255),
+			}),
+			PlaceObj('CompositeBodyPresetColor', {
+				'EditableColor1', RGBA(31, 58, 69, 255),
+				'EditableColor2', RGBA(173, 91, 26, 255),
+				'EditableColor3', RGBA(157, 77, 38, 255),
+			}),
+		},
+	}),
+	PlaceObj('ModItemCompositeBodyPreset', {
+		'Group', "DrakaT3",
+		'Id', "DrakaBodyElder_3",
+		'Target', "Draka",
+		'Parts', set( "Body" ),
+		'Entity', "Draka",
+		'Scale', range(100, 110),
+		'Colors', {
+			PlaceObj('CompositeBodyPresetColor', {
+				'EditableColor1', RGBA(141, 63, 12, 255),
+				'EditableColor2', RGBA(4, 83, 114, 255),
+				'EditableColor3', RGBA(10, 138, 189, 255),
+			}),
+			PlaceObj('CompositeBodyPresetColor', {
+				'EditableColor1', RGBA(33, 67, 60, 255),
+				'EditableColor2', RGBA(138, 68, 21, 255),
+				'EditableColor3', RGBA(111, 123, 128, 255),
+			}),
+		},
+	}),
+	PlaceObj('ModItemCompositeBodyPreset', {
+		'Group', "DrakaT4",
+		'Id', "DrakaBodyElder_4",
+		'Target', "Draka",
+		'Parts', set( "Body" ),
+		'Entity', "Draka",
+		'Scale', range(100, 110),
+		'Colors', {
+			PlaceObj('CompositeBodyPresetColor', {
+				'EditableColor1', RGBA(131, 115, 106, 255),
+				'EditableColor2', RGBA(4, 83, 114, 255),
+				'EditableColor3', RGBA(129, 147, 154, 255),
+			}),
+			PlaceObj('CompositeBodyPresetColor', {
+				'EditableColor1', RGBA(111, 101, 95, 255),
+				'EditableColor2', RGBA(40, 225, 220, 255),
+				'EditableColor3', RGBA(111, 123, 128, 255),
+			}),
+		},
+	}),
+	PlaceObj('ModItemCompositeBodyPreset', {
+		'Group', "DrakaT5",
+		'Id', "DrakaBodyElder_5",
+		'Target', "Draka",
+		'Parts', set( "Body" ),
+		'Entity', "Draka",
+		'Scale', range(100, 110),
+		'Colors', {
+			PlaceObj('CompositeBodyPresetColor', {
+				'EditableColor1', RGBA(131, 115, 106, 255),
+				'EditableColor2', RGBA(4, 83, 114, 255),
+				'EditableColor3', RGBA(129, 147, 154, 255),
+			}),
+			PlaceObj('CompositeBodyPresetColor', {
+				'EditableColor1', RGBA(111, 101, 95, 255),
+				'EditableColor2', RGBA(40, 225, 220, 255),
+				'EditableColor3', RGBA(111, 123, 128, 255),
+			}),
+		},
+	}),
+	PlaceObj('ModItemCompositeBodyPreset', {
+		'Group', "DrakaT2",
+		'Id', "DrakaHornsForehead04",
+		'Target', "Draka",
+		'Parts', set( "Forehead" ),
+		'Entity', "Draka_Forehead_01",
+		'ColorInherit', "Body",
+	}),
+	PlaceObj('ModItemCompositeBodyPreset', {
+		'Group', "DrakaT3",
+		'Id', "DrakaHornsForehead03",
+		'Target', "Draka",
+		'Parts', set( "Forehead" ),
+		'Entity', "Draka_Forehead_01",
+		'ColorInherit', "Body",
+	}),
+	PlaceObj('ModItemCompositeBodyPreset', {
+		'Group', "DrakaT4",
+		'Id', "DrakaHornsForehead05",
+		'Target', "Draka",
+		'Parts', set( "Forehead" ),
+		'Entity', "Draka_Forehead_01",
+		'ColorInherit', "Body",
+	}),
+	PlaceObj('ModItemCompositeBodyPreset', {
+		'Group', "DrakaT5",
+		'Id', "DrakaHornsForehead06",
+		'Target', "Draka",
+		'Parts', set( "Forehead" ),
+		'Entity', "Draka_Forehead_01",
+		'ColorInherit', "Body",
+	}),
+	PlaceObj('ModItemCompositeBodyPreset', {
+		'Group', "DrakaT2",
+		'Id', "DrakaHornsLeft01_1",
+		'Target', "Draka",
+		'Parts', set( "HornLeft" ),
+		'Entity', "Draka_Horns_01",
+		'Filters', {
+			PlaceObj('CompositeBodyPresetFilter', {
+				'Name', "Age",
+				'Value', 0,
+				'Test', ">",
+			}),
+		},
+		'ColorInherit', "Body",
+	}),
+	PlaceObj('ModItemCompositeBodyPreset', {
+		'Group', "DrakaT3",
+		'Id', "DrakaHornsLeft01_2",
+		'Target', "Draka",
+		'Parts', set( "HornLeft" ),
+		'Entity', "Draka_Horns_01",
+		'Filters', {
+			PlaceObj('CompositeBodyPresetFilter', {
+				'Name', "Age",
+				'Value', 0,
+				'Test', ">",
+			}),
+		},
+		'ColorInherit', "Body",
+	}),
+	PlaceObj('ModItemCompositeBodyPreset', {
+		'Group', "DrakaT4",
+		'Id', "DrakaHornsLeft01_3",
+		'Target', "Draka",
+		'Parts', set( "HornLeft" ),
+		'Entity', "Draka_Horns_01",
+		'Filters', {
+			PlaceObj('CompositeBodyPresetFilter', {
+				'Name', "Age",
+				'Value', 0,
+				'Test', ">",
+			}),
+		},
+		'ColorInherit', "Body",
+	}),
+	PlaceObj('ModItemCompositeBodyPreset', {
+		'Group', "DrakaT5",
+		'Id', "DrakaHornsLeft01_4",
+		'Target', "Draka",
+		'Parts', set( "HornLeft" ),
+		'Entity', "Draka_Horns_01",
+		'Filters', {
+			PlaceObj('CompositeBodyPresetFilter', {
+				'Name', "Age",
+				'Value', 0,
+				'Test', ">",
+			}),
+		},
+		'ColorInherit', "Body",
+	}),
+	PlaceObj('ModItemCompositeBodyPreset', {
+		'Group', "DrakaT2",
+		'Id', "DrakaHornsRight01_1",
+		'Target', "Draka",
+		'Parts', set( "HornRight" ),
+		'Entity', "Draka_Horns_01",
+		'Mirrored', true,
+		'Filters', {
+			PlaceObj('CompositeBodyPresetFilter', {
+				'Name', "Age",
+				'Value', 0,
+				'Test', ">",
+			}),
+		},
+		'ColorInherit', "Body",
+	}),
+	PlaceObj('ModItemCompositeBodyPreset', {
+		'Group', "DrakaT3",
+		'Id', "DrakaHornsRight01_2",
+		'Target', "Draka",
+		'Parts', set( "HornRight" ),
+		'Entity', "Draka_Horns_01",
+		'Mirrored', true,
+		'Filters', {
+			PlaceObj('CompositeBodyPresetFilter', {
+				'Name', "Age",
+				'Value', 0,
+				'Test', ">",
+			}),
+		},
+		'ColorInherit', "Body",
+	}),
+	PlaceObj('ModItemCompositeBodyPreset', {
+		'Group', "DrakaT4",
+		'Id', "DrakaHornsRight01_3",
+		'Target', "Draka",
+		'Parts', set( "HornRight" ),
+		'Entity', "Draka_Horns_01",
+		'Mirrored', true,
+		'Filters', {
+			PlaceObj('CompositeBodyPresetFilter', {
+				'Name', "Age",
+				'Value', 0,
+				'Test', ">",
+			}),
+		},
+		'ColorInherit', "Body",
+	}),
+	PlaceObj('ModItemCompositeBodyPreset', {
+		'Group', "DrakaT5",
+		'Id', "DrakaHornsRight01_4",
+		'Target', "Draka",
+		'Parts', set( "HornRight" ),
+		'Entity', "Draka_Horns_01",
+		'Mirrored', true,
+		'Filters', {
+			PlaceObj('CompositeBodyPresetFilter', {
+				'Name', "Age",
+				'Value', 0,
+				'Test', ">",
+			}),
+		},
+		'ColorInherit', "Body",
+	}),
+	PlaceObj('ModItemAnimalPerk', {
+		Description = T(530392310997, --[[ModItemAnimalPerk Default DrakaAcoustic Description]] "This animal is able to use it's imperfect exoskeleton to attack with sonic booms from built up vibrations."),
+		DisplayName = T(581820424831, --[[ModItemAnimalPerk Default DrakaAcoustic DisplayName]] "Acoustic"),
+		id = "DrakaAcoustic",
+	}),
+	PlaceObj('ModItemCompositeBodyPreset', {
+		'Group', "Shogu",
+		'Id', "ShoguBodyAdult_1",
+		'Target', "ShoguT2",
+		'Parts', set( "Body" ),
+		'Entity', "Shogu",
+		'Scale', range(85, 95),
+		'Colors', {
+			PlaceObj('CompositeBodyPresetColor', {
+				'EditableColor1', RGBA(90, 33, 5, 255),
+				'EditableColor2', RGBA(128, 18, 0, 255),
+				'EditableColor3', RGBA(37, 6, 15, 255),
+			}),
+		},
+	}),
+	PlaceObj('ModItemCompositeBodyPreset', {
+		'Group', "Shogu",
+		'Id', "ShoguBodyAdult_2",
+		'Target', "ShoguT3",
+		'Parts', set( "Body" ),
+		'Entity', "Shogu",
+		'Scale', range(85, 95),
+		'Colors', {
+			PlaceObj('CompositeBodyPresetColor', {
+				'EditableColor1', RGBA(13, 43, 18, 255),
+				'EditableColor2', RGBA(128, 18, 0, 255),
+				'EditableColor3', RGBA(37, 6, 15, 255),
+			}),
+		},
+	}),
+	PlaceObj('ModItemCompositeBodyPreset', {
+		'Group', "Shogu",
+		'Id', "ShoguBodyAdult_3",
+		'Target', "ShoguT4",
+		'Parts', set( "Body" ),
+		'Entity', "Shogu",
+		'Scale', range(85, 95),
+		'Colors', {
+			PlaceObj('CompositeBodyPresetColor', {
+				'EditableColor1', RGBA(0, 24, 14, 255),
+				'EditableColor2', RGBA(120, 106, 0, 255),
+				'EditableColor3', RGBA(37, 6, 15, 255),
+			}),
+		},
+	}),
+	PlaceObj('ModItemCompositeBodyPreset', {
+		'Group', "Shogu",
+		'Id', "ShoguBodyAdult_4",
+		'Target', "ShoguT5",
+		'Parts', set( "Body" ),
+		'Entity', "Shogu",
+		'Scale', range(85, 95),
+		'Colors', {
+			PlaceObj('CompositeBodyPresetColor', {
+				'EditableColor1', RGBA(4, 9, 5, 255),
+				'EditableColor2', RGBA(118, 105, 7, 255),
+				'EditableColor3', RGBA(77, 77, 77, 255),
+			}),
+		},
+	}),
+	PlaceObj('ModItemCompositeBodyPreset', {
+		'Group', "Camel",
+		'Id', "CamelT2",
+		'Target', "CamelT2",
+		'Parts', set( "Body" ),
+		'Entity', "GiantCamel",
+		'Scale', range(70, 80),
+		'Colors', {
+			PlaceObj('CompositeBodyPresetColor', {
+				'EditableColor1', RGBA(255, 71, 0, 255),
+				'EditableColor2', RGBA(0, 186, 255, 255),
+				'EditableColor3', RGBA(0, 38, 62, 255),
+			}),
+			PlaceObj('CompositeBodyPresetColor', {
+				'EditableColor1', RGBA(255, 71, 0, 255),
+				'EditableColor2', RGBA(0, 90, 124, 255),
+				'EditableColor3', RGBA(0, 38, 62, 255),
+			}),
+			PlaceObj('CompositeBodyPresetColor', {
+				'EditableColor1', RGBA(250, 88, 32, 255),
+				'EditableColor2', RGBA(0, 89, 146, 255),
+				'EditableColor3', RGBA(0, 38, 62, 255),
+			}),
+		},
+	}),
+	PlaceObj('ModItemCompositeBodyPreset', {
+		'Group', "Camel",
+		'Id', "CamelT3",
+		'Target', "CamelT3",
+		'Parts', set( "Body" ),
+		'Entity', "GiantCamel",
+		'Scale', range(70, 80),
+		'Colors', {
+			PlaceObj('CompositeBodyPresetColor', {
+				'EditableColor1', RGBA(132, 82, 65, 255),
+				'EditableColor2', RGBA(0, 186, 255, 255),
+				'EditableColor3', RGBA(0, 38, 62, 255),
+			}),
+		},
+	}),
+	PlaceObj('ModItemCompositeBodyPreset', {
+		'Group', "Camel",
+		'Id', "CamelT4",
+		'Target', "CamelT4",
+		'Parts', set( "Body" ),
+		'Entity', "GiantCamel",
+		'Scale', range(70, 80),
+		'Colors', {
+			PlaceObj('CompositeBodyPresetColor', {
+				'EditableColor1', RGBA(142, 129, 31, 255),
+				'EditableColor2', RGBA(0, 186, 255, 255),
+				'EditableColor3', RGBA(0, 38, 62, 255),
+			}),
+		},
+	}),
+	PlaceObj('ModItemCompositeBodyPreset', {
+		'Group', "Camel",
+		'Id', "CamelT5",
+		'Target', "CamelT5",
+		'Parts', set( "Body" ),
+		'Entity', "GiantCamel",
+		'Scale', range(70, 80),
+		'Colors', {
+			PlaceObj('CompositeBodyPresetColor', {
+				'EditableColor1', RGBA(255, 227, 0, 255),
+				'EditableColor2', RGBA(154, 0, 250, 255),
+				'EditableColor3', RGBA(42, 0, 33, 255),
+			}),
+		},
+	}),
 	}),
 PlaceObj('ModItemFolder', {
 	'name', "Weapons",
@@ -11272,6 +13278,301 @@ PlaceObj('ModItemFolder', {
 		id = "UlfenT2",
 		progress = 0,
 		stack_size = 0,
+		transportable = false,
+		visible = false,
+	}),
+	PlaceObj('ModItemWeaponResource', {
+		AimAnimIdle = "attack_Idle",
+		AnimTestEntity = "Draka",
+		AttackAngleTolerance = 1200,
+		AttackAnimAlt = "attack2",
+		AttackCooldown = 3000,
+		AttackCooldownMaxSkill = 2000,
+		AttackCooldownRand = 20,
+		AttackRange = 60000,
+		AttackType = "ranged",
+		CanCharge = false,
+		CritChanceMaxSkill = 30,
+		CritHitEffect = {
+			PlaceObj('HealthConditionOption', {
+				effect = "Arrow_Shot_Critical_Human",
+			}),
+			PlaceObj('HealthConditionOption', {
+				effect = "Arrow_Shot_Critical",
+				weight = 5,
+			}),
+			PlaceObj('HealthConditionOption', {
+				effect = "LaserStab_Critical",
+				weight = 3,
+			}),
+		},
+		DamageToBuildings = 10000,
+		DamageTypes = {
+			energy = true,
+		},
+		HitChance = 70,
+		HitChanceMaxSkill = 100,
+		HitEffect = {
+			PlaceObj('HealthConditionOption', {
+				effect = "Arrow_Shot",
+			}),
+			PlaceObj('HealthConditionOption', {
+				effect = "LaserStab_Common",
+			}),
+		},
+		MinAttackRange = 1000,
+		ProjectileAttachMoment = "hit",
+		ProjectileEntity = "ShortBow_Arrow",
+		ProjectileSpeed = 20000,
+		ProjectileSpeedRand = 10000,
+		ScaleRangeWithUnit = false,
+		SortKey = 99990,
+		carry_amount = 0,
+		display_name = T(443208797802, --[[ModItemWeaponResource Resonance_T1 display_name]] "Draka Weapon"),
+		group = "Weapons_Animal",
+		id = "Resonance_T1",
+		progress = 0,
+		stack_size = 0,
+		transportable = false,
+		visible = false,
+	}),
+	PlaceObj('ModItemWeaponResource', {
+		AimAnimIdle = "attack_Idle",
+		AnimTestEntity = "Noth",
+		AttackAngleTolerance = 420,
+		AttackCooldown = 3000,
+		AttackCooldownMaxSkill = 3000,
+		AttackCooldownRand = 20,
+		AttackRange = 2000,
+		CritHitEffect = {
+			PlaceObj('HealthConditionOption', {
+				effect = "Noth_Shatter_t2",
+			}),
+		},
+		DamageToBuildings = 10000,
+		DamageTypes = {
+			blunt = true,
+		},
+		HitChance = 70,
+		HitChanceMaxSkill = 100,
+		HitEffect = {
+			PlaceObj('HealthConditionOption', {
+				effect = "Noth_Shatter_t1",
+				weight = 75,
+			}),
+		},
+		MinAttackRange = 1300,
+		SortKey = 99990,
+		carry_amount = 0,
+		display_name = T(826529483679, --[[ModItemWeaponResource Noth_T2 display_name]] "Dromadda Weapon"),
+		group = "Weapons_Animal",
+		id = "Noth_T2",
+		progress = 0,
+		stack_size = 0,
+		transportable = false,
+		visible = false,
+	}),
+	PlaceObj('ModItemWeaponResource', {
+		AimAnimIdle = "attack_Idle",
+		AnimTestEntity = "Noth",
+		AttackAngleTolerance = 420,
+		AttackCooldown = 3000,
+		AttackCooldownMaxSkill = 3000,
+		AttackCooldownRand = 20,
+		AttackRange = 2000,
+		CritHitEffect = {
+			PlaceObj('HealthConditionOption', {
+				effect = "Juno_ShatteredBones",
+			}),
+		},
+		DamageToBuildings = 10000,
+		DamageTypes = {
+			blunt = true,
+		},
+		HitChance = 90,
+		HitChanceMaxSkill = 100,
+		HitEffect = {
+			PlaceObj('HealthConditionOption', {
+				effect = "Noth_Shatter_t2",
+				weight = 75,
+			}),
+		},
+		MinAttackRange = 1300,
+		SortKey = 99990,
+		carry_amount = 0,
+		display_name = T(654454853267, --[[ModItemWeaponResource Noth_T4 display_name]] "Dromadda Weapon"),
+		group = "Weapons_Animal",
+		id = "Noth_T4",
+		progress = 0,
+		stack_size = 0,
+		transportable = false,
+		visible = false,
+	}),
+	PlaceObj('ModItemWeaponResource', {
+		AimAnimIdle = "attack_Idle",
+		AnimTestEntity = "Shogu",
+		AttackAngleTolerance = 1200,
+		AttackAnimAlt = "attack2",
+		AttackCooldown = 3000,
+		AttackCooldownMaxSkill = 3000,
+		AttackCooldownRand = 20,
+		AttackRange = 2000,
+		CritHitEffect = {
+			PlaceObj('HealthConditionOption', {
+				effect = "Poisoning_2_Moderate",
+			}),
+			PlaceObj('HealthConditionOption', {
+				effect = "SwarmFever_2_Moderate",
+				weight = 3,
+			}),
+		},
+		DamageToBuildings = 10000,
+		DamageTypes = {
+			gas = true,
+		},
+		HitChance = 70,
+		HitChanceMaxSkill = 100,
+		HitEffect = {
+			PlaceObj('HealthConditionOption', {
+				effect = "BrainParasite_Treatable",
+				weight = 1,
+			}),
+			PlaceObj('HealthConditionOption', {
+				effect = "Poisoning_1_Mild",
+				weight = 1,
+			}),
+			PlaceObj('HealthConditionOption', {
+				effect = "SwarmFever_1_Mild",
+			}),
+		},
+		MinAttackRange = 1200,
+		SortKey = 99990,
+		carry_amount = 0,
+		display_name = T(903194174100, --[[ModItemWeaponResource Shogu_poison display_name]] "Shogu Weapon"),
+		group = "Weapons_Animal",
+		id = "Shogu_poison",
+		progress = 0,
+		stack_size = 0,
+		transportable = false,
+		visible = false,
+	}),
+	PlaceObj('ModItemWeaponResource', {
+		AnimTestEntity = "Shrieker_01",
+		AttackAngleTolerance = 420,
+		AttackCooldown = 1500,
+		AttackRange = 14000,
+		AttackType = "ranged",
+		CritChance = 5,
+		CritChanceMaxSkill = 10,
+		CritHitEffect = {
+			PlaceObj('HealthConditionOption', {
+				effect = "Dragonfly_AcidBurn",
+			}),
+		},
+		DamageToBuildings = 15000,
+		DamageTypes = {
+			piercing = true,
+		},
+		HitChance = 40,
+		HitChanceMaxSkill = 60,
+		HitEffect = {
+			PlaceObj('HealthConditionOption', {
+				effect = "Dragonfly_AcidSpit",
+			}),
+		},
+		MinAttackRange = 5000,
+		ProjectileEntity = "Shrieker_Projectile",
+		ProjectileGravity = true,
+		ProjectileSpeed = 20000,
+		ProjectileSpeedRand = 10000,
+		SortKey = 99990,
+		carry_amount = 0,
+		display_name = T(306641461850, --[[ModItemWeaponResource Camel_Spit display_name]] "Shrieker Ranged"),
+		group = "Weapons_Animal",
+		id = "Camel_Spit",
+		progress = 0,
+		stack_size = 0,
+		transportable = false,
+		visible = false,
+	}),
+	PlaceObj('ModItemWeaponResource', {
+		AnimTestEntity = "Shrieker_01",
+		AttackAngleTolerance = 420,
+		AttackCooldown = 1500,
+		AttackRange = 14000,
+		AttackType = "ranged",
+		CritChance = 0,
+		CritChanceMaxSkill = 0,
+		DamageToBuildings = 30000,
+		DamageTypes = {
+			piercing = true,
+		},
+		HitChance = 40,
+		HitChanceMaxSkill = 60,
+		HitEffect = {
+			PlaceObj('HealthConditionOption', {
+				effect = "Dragonfly_AcidSpit",
+			}),
+			PlaceObj('HealthConditionOption', {
+				effect = "LaserBlaster_Burn",
+			}),
+			PlaceObj('HealthConditionOption', {
+				effect = "Shrieker_SpikePuncture",
+			}),
+		},
+		MinAttackRange = 5000,
+		ProjectileEntity = "Shrieker_Projectile",
+		ProjectileGravity = true,
+		ProjectileSpeed = 20000,
+		ProjectileSpeedRand = 10000,
+		SortKey = 99990,
+		carry_amount = 0,
+		display_name = T(327462678622, --[[ModItemWeaponResource Camel_Spit_T2 display_name]] "Shrieker Ranged"),
+		group = "Weapons_Animal",
+		id = "Camel_Spit_T2",
+		progress = 0,
+		stack_size = 0,
+		transportable = false,
+		visible = false,
+	}),
+	PlaceObj('ModItemWeaponResource', {
+		AlwaysFace = false,
+		AnimTestEntity = "Turret_Gun",
+		AnimateWeapon = true,
+		AttackCooldown = 750,
+		AttackCooldownMaxSkill = 750,
+		AttackMoments = {
+			"hit",
+			"hit2",
+		},
+		AttackRange = 25000,
+		AttackType = "ranged",
+		DamageToBuildings = 30000,
+		DamageTypes = {
+			gas = true,
+		},
+		HitChance = 100,
+		HitChanceMaxSkill = 100,
+		HitEffect = {
+			PlaceObj('HealthConditionOption', {
+				effect = "TurretMinigun_Gunshot",
+				weight = 50,
+			}),
+		},
+		MinAttackRange = 1000,
+		ProjectileEntity = "InvisibleObject",
+		ProjectileFXClass = "Machine_Gun_Projectile",
+		ProjectileSpeed = 40000,
+		ProjectileSpot = "Weaponsight",
+		RangeTerrainDistortion = "always",
+		ScaleDamageWithUnit = false,
+		ScaleRangeWithUnit = false,
+		SortKey = 99990,
+		carry_amount = 1000,
+		display_name = T(788294086529, --[[ModItemWeaponResource toxic_gun display_name]] "Dual machine gun"),
+		id = "toxic_gun",
+		progress = 0,
+		stack_size = 1000,
 		transportable = false,
 		visible = false,
 	}),
@@ -13022,7 +15323,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 5,
 			'ReproductionType', "two sexes",
-			'DailyPregnancyChance', 50,
+			'DailyPregnancyChance', 60,
 			'PregnancyDuration', 1920000,
 			'GrowDuration', 1920000,
 			'MinGrownScale', 75,
@@ -13146,7 +15447,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 5,
 			'ReproductionType', "two sexes",
-			'DailyPregnancyChance', 65,
+			'DailyPregnancyChance', 75,
 			'PregnancyDuration', 1920000,
 			'GrowDuration', 1920000,
 			'NewbornClass', "GujoT5",
@@ -13269,7 +15570,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 5,
 			'ReproductionType', "two sexes",
-			'DailyPregnancyChance', 55,
+			'DailyPregnancyChance', 65,
 			'PregnancyDuration', 2880000,
 			'GrowDuration', 2880000,
 			'NewbornClass', "GujoT4",
@@ -13392,7 +15693,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 5,
 			'ReproductionType', "two sexes",
-			'DailyPregnancyChance', 45,
+			'DailyPregnancyChance', 55,
 			'PregnancyDuration', 4800000,
 			'GrowDuration', 4800000,
 			'NewbornClass', "GujoT3",
@@ -13505,7 +15806,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 5,
 			'ReproductionType', "two sexes",
-			'DailyPregnancyChance', 50,
+			'DailyPregnancyChance', 60,
 			'PregnancyDuration', 3840000,
 			'GrowDuration', 3840000,
 			'NewbornClass', "GujoT2",
@@ -13743,7 +16044,7 @@ PlaceObj('ModItemFolder', {
 			'BondingChance', 20,
 			'ReproductionType', "two sexes",
 			'ReproductionGroup', "Dogs",
-			'DailyPregnancyChance', 50,
+			'DailyPregnancyChance', 60,
 			'PregnancyDuration', 1920000,
 			'GrowDuration', 1920000,
 			'NewbornClass', "dog_T5",
@@ -13889,7 +16190,7 @@ PlaceObj('ModItemFolder', {
 			'BondingChance', 20,
 			'ReproductionType', "two sexes",
 			'ReproductionGroup', "Dogs",
-			'DailyPregnancyChance', 65,
+			'DailyPregnancyChance', 75,
 			'PregnancyDuration', 1920000,
 			'GrowDuration', 1920000,
 			'NewbornClass', "dog_T5",
@@ -14035,7 +16336,7 @@ PlaceObj('ModItemFolder', {
 			'BondingChance', 20,
 			'ReproductionType', "two sexes",
 			'ReproductionGroup', "Dogs",
-			'DailyPregnancyChance', 55,
+			'DailyPregnancyChance', 65,
 			'PregnancyDuration', 2880000,
 			'GrowDuration', 2880000,
 			'NewbornClass', "dog_T4",
@@ -14179,7 +16480,7 @@ PlaceObj('ModItemFolder', {
 			'BondingChance', 20,
 			'ReproductionType', "two sexes",
 			'ReproductionGroup', "Dogs",
-			'DailyPregnancyChance', 45,
+			'DailyPregnancyChance', 55,
 			'PregnancyDuration', 4800000,
 			'GrowDuration', 4800000,
 			'NewbornClass', "dog_T3",
@@ -15380,7 +17681,7 @@ PlaceObj('ModItemFolder', {
 			'BondingChance', 10,
 			'ReproductionType', "two sexes",
 			'ReproductionGroup', "Tecatli",
-			'DailyPregnancyChance', 50,
+			'DailyPregnancyChance', 60,
 			'PregnancyDuration', 2880000,
 			'GrowDuration', 2880000,
 			'NewbornClass', "Spellsword_Tecatli",
@@ -15457,7 +17758,7 @@ PlaceObj('ModItemFolder', {
 			'BondingChance', 5,
 			'ReproductionType', "two sexes",
 			'ReproductionGroup', "Tecatli",
-			'DailyPregnancyChance', 45,
+			'DailyPregnancyChance', 55,
 			'PregnancyDuration', 3360000,
 			'GrowDuration', 3360000,
 			'NewbornClass', "Spellsword_Tecatli",
@@ -15534,7 +17835,7 @@ PlaceObj('ModItemFolder', {
 			'BondingChance', 5,
 			'ReproductionType', "two sexes",
 			'ReproductionGroup', "Tecatli",
-			'DailyPregnancyChance', 45,
+			'DailyPregnancyChance', 55,
 			'PregnancyDuration', 3840000,
 			'GrowDuration', 3840000,
 			'NewbornClass', "Intelligent_Tecatli",
@@ -15609,7 +17910,7 @@ PlaceObj('ModItemFolder', {
 			'BondingChance', 5,
 			'ReproductionType', "two sexes",
 			'ReproductionGroup', "Tecatli",
-			'DailyPregnancyChance', 45,
+			'DailyPregnancyChance', 55,
 			'PregnancyDuration', 4320000,
 			'GrowDuration', 4320000,
 			'NewbornClass', "Heat_Reinforced_Tecatli",
@@ -15690,7 +17991,7 @@ PlaceObj('ModItemFolder', {
 			'BondingChance', 5,
 			'ReproductionType', "two sexes",
 			'ReproductionGroup', "Tecatli",
-			'DailyPregnancyChance', 45,
+			'DailyPregnancyChance', 55,
 			'PregnancyDuration', 4800000,
 			'GrowDuration', 4800000,
 			'NewbornClass', "Entombed_Tecatli",
@@ -15809,7 +18110,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 5,
 			'ReproductionType', "two sexes",
-			'DailyPregnancyChance', 45,
+			'DailyPregnancyChance', 55,
 			'PregnancyDuration', 4800000,
 			'GrowDuration', 4800000,
 			'NewbornClass', "Tecatli",
@@ -15876,7 +18177,7 @@ PlaceObj('ModItemFolder', {
 			'attack_weapon', "Scissorhands_duelist",
 			'TamingMinimumSkill', 8,
 			'TamingChance', 25,
-			'DailyPregnancyChance', 50,
+			'DailyPregnancyChance', 60,
 			'PregnancyDuration', 1920000,
 			'GrowDuration', 1920000,
 			'NewbornClass', "Rage_Focused_Scissorhands",
@@ -15941,7 +18242,7 @@ PlaceObj('ModItemFolder', {
 			},
 			'attack_weapon', "ScissorhandsMelee_Brute",
 			'TamingChance', 60,
-			'DailyPregnancyChance', 55,
+			'DailyPregnancyChance', 65,
 			'PregnancyDuration', 3840000,
 			'GrowDuration', 3840000,
 			'NewbornClass', "Rage_Fueled_Scissorhand_Duelist",
@@ -16005,7 +18306,7 @@ PlaceObj('ModItemFolder', {
 				"DraftableAnimal",
 			},
 			'attack_weapon', "Scissorhands_duelist_rage",
-			'DailyPregnancyChance', 65,
+			'DailyPregnancyChance', 75,
 			'PregnancyDuration', 2880000,
 			'GrowDuration', 2880000,
 			'NewbornClass', "Rage_Focused_Scissorhands",
@@ -16129,7 +18430,7 @@ PlaceObj('ModItemFolder', {
 			'BondingChance', 5,
 			'ReproductionType', "two sexes",
 			'ReproductionGroup', "Junos",
-			'DailyPregnancyChance', 45,
+			'DailyPregnancyChance', 55,
 			'PregnancyDuration', 4800000,
 			'GrowDuration', 4800000,
 			'NewbornClass', "Juno_Brute",
@@ -16231,7 +18532,7 @@ PlaceObj('ModItemFolder', {
 				"DraftableAnimal",
 			},
 			'attack_weapon', "JunoMelee_Brute",
-			'DailyPregnancyChance', 75,
+			'DailyPregnancyChance', 85,
 			'PregnancyDuration', 3840000,
 			'GrowDuration', 3840000,
 			'NewbornClass', "Hulk_Juno",
@@ -16298,7 +18599,7 @@ PlaceObj('ModItemFolder', {
 			},
 			'attack_weapon', "Juno_Hulk",
 			'TamingChance', 40,
-			'DailyPregnancyChance', 65,
+			'DailyPregnancyChance', 75,
 			'PregnancyDuration', 2880000,
 			'GrowDuration', 2880000,
 			'UnitPerkFrenzy', true,
@@ -16435,7 +18736,7 @@ PlaceObj('ModItemFolder', {
 			'BondingChance', 5,
 			'ReproductionType', "two sexes",
 			'ReproductionGroup', "Junoskar",
-			'DailyPregnancyChance', 50,
+			'DailyPregnancyChance', 60,
 			'PregnancyDuration', 1920000,
 			'GrowDuration', 1920000,
 			'NewbornClass', "Junoskar",
@@ -16544,7 +18845,7 @@ PlaceObj('ModItemFolder', {
 			'BondingChance', 5,
 			'ReproductionType', "two sexes",
 			'ReproductionGroup', "Shriekers",
-			'DailyPregnancyChance', 45,
+			'DailyPregnancyChance', 55,
 			'PregnancyDuration', 4800000,
 			'GrowDuration', 4800000,
 			'NewbornClass', "Entropic_Shrieker",
@@ -16685,7 +18986,7 @@ PlaceObj('ModItemFolder', {
 			},
 			'attack_weapon', "shriker_range_move",
 			'TamingChance', 60,
-			'DailyPregnancyChance', 55,
+			'DailyPregnancyChance', 65,
 			'PregnancyDuration', 3840000,
 			'GrowDuration', 3840000,
 			'NewbornClass', "Plague_Sniper_Shrieker",
@@ -16767,7 +19068,7 @@ PlaceObj('ModItemFolder', {
 			},
 			'attack_weapon', "shriker_range_long",
 			'TamingChance', 50,
-			'DailyPregnancyChance', 65,
+			'DailyPregnancyChance', 75,
 			'PregnancyDuration', 2880000,
 			'GrowDuration', 2880000,
 			'NewbornClass', "Sniping_Entropy_Shielded_Shrieker",
@@ -16850,7 +19151,7 @@ PlaceObj('ModItemFolder', {
 			},
 			'TamingMinimumSkill', 8,
 			'TamingChance', 25,
-			'DailyPregnancyChance', 50,
+			'DailyPregnancyChance', 60,
 			'PregnancyDuration', 1920000,
 			'GrowDuration', 1920000,
 			'NewbornClass', "Sniping_Entropy_Shielded_Shrieker",
@@ -16983,7 +19284,7 @@ PlaceObj('ModItemFolder', {
 			'BondingChance', 5,
 			'ReproductionType', "two sexes",
 			'ReproductionGroup', "Scissorhands",
-			'DailyPregnancyChance', 45,
+			'DailyPregnancyChance', 55,
 			'PregnancyDuration', 4800000,
 			'GrowDuration', 4800000,
 			'NewbornClass', "Scissorhands_Brute",
@@ -17142,6 +19443,7 @@ PlaceObj('ModItemFolder', {
 			'BondingChance', 5,
 			'ReproductionType', "two sexes",
 			'ReproductionGroup', "Scissorhands",
+			'DailyPregnancyChance', 55,
 			'NewbornClass', "Scissorhands_Brute",
 			'MinGrownScale', 100,
 			'MaxGrownScale', 110,
@@ -17313,7 +19615,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 10,
 			'ReproductionType', "two sexes",
-			'DailyPregnancyChance', 45,
+			'DailyPregnancyChance', 55,
 			'PregnancyDuration', 4800000,
 			'GrowDuration', 4800000,
 			'NewbornClass', "Ulfen_T3",
@@ -17457,7 +19759,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 10,
 			'ReproductionType', "two sexes",
-			'DailyPregnancyChance', 55,
+			'DailyPregnancyChance', 65,
 			'PregnancyDuration', 2880000,
 			'GrowDuration', 2880000,
 			'NewbornClass', "Ulfen_T4",
@@ -17608,7 +19910,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 10,
 			'ReproductionType', "two sexes",
-			'DailyPregnancyChance', 65,
+			'DailyPregnancyChance', 75,
 			'PregnancyDuration', 2000000,
 			'GrowDuration', 2000000,
 			'NewbornClass', "Ulfen_T5",
@@ -17777,7 +20079,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 10,
 			'ReproductionType', "two sexes",
-			'DailyPregnancyChance', 50,
+			'DailyPregnancyChance', 60,
 			'PregnancyDuration', 1800000,
 			'GrowDuration', 1800000,
 			'NewbornClass', "Ulfen_T5",
@@ -17867,7 +20169,7 @@ PlaceObj('ModItemFolder', {
 			},
 			'attack_weapon', "Juno_Hulk",
 			'TamingChance', 40,
-			'DailyPregnancyChance', 75,
+			'DailyPregnancyChance', 85,
 			'PregnancyDuration', 1920000,
 			'GrowDuration', 1920000,
 			'NewbornClass', "Junoskar",
@@ -17881,4945 +20183,2699 @@ PlaceObj('ModItemFolder', {
 				"Frenzy_Fast",
 			},
 		}),
+		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Id', "Noth",
+			'object_class', "UlfenBase",
+			'SpeciesGroup', "hoofed",
+			'RoamRadius', 15000,
+			'RoamIntervalMin', 40000,
+			'RoamIntervalMax', 120000,
+			'composite_part_target', "Noth",
+			'composite_part_groups', {
+				"Noth",
+			},
+			'PainMask', "PainMask",
+			'EventProgressValue', 50,
+			'SightRange', 10000,
+			'CombatGroup', "Noths",
+			'EnrageChance', 3,
+			'AttackMemory', 45000,
+			'CombatGiveUpNoHit', 30000,
+			'CombatFleeAccuracy', 0,
+			'ButcherDuration', 20000,
+			'max_skinned_decals_low', -1,
+			'FieldResearchTech', "FieldNoth",
+			'ObservationDistanceMin', 15000,
+			'ObservationDistanceMax', 20000,
+			'Icon', "UI/Icons/Resources/res_noth",
+			'DisplayName', T(890512375005, --[[ModItemUnitAnimalCompositeDef Noth DisplayName]] "Noth"),
+			'DisplayNamePl', T(321321661145, --[[ModItemUnitAnimalCompositeDef Noth DisplayNamePl]] "Noths"),
+			'Description', T(284975794180, --[[ModItemUnitAnimalCompositeDef Noth Description]] "Usually passive. Small chance to retaliate when attacked."),
+			'FoodResources', {
+				"FoodAnimalHerbivore",
+				"Slop",
+			},
+			'DailyEatingAmount', 1000,
+			'Diet', "Herbivore",
+			'EatingDuration', 4000,
+			'FoodSourceClasses', {
+				"ResourcePile",
+				"Plant",
+				"AnimalFeeder",
+			},
+			'ButcherResources', {
+				PlaceObj('ButcherResAmount', {
+					'resource', "RawMeat",
+					'min_amount', 40000,
+					'max_amount', 60000,
+				}),
+				PlaceObj('ButcherResAmount', {
+					'resource', "LeatherRaw",
+					'min_amount', 10000,
+					'max_amount', 30000,
+				}),
+			},
+			'SelectionRadius', 1500,
+			'BodySize', "medium",
+			'ProduceResources', {
+				PlaceObj('ResAmount', {
+					'resource', "FuelManure",
+					'amount', 10000,
+				}),
+			},
+			'ProduceResInterval', 960000,
+			'AnimalPerks', {
+				"ManureProducer",
+			},
+			'pfclass_tamed', 10,
+			'pfclass_tamed_lead', 13,
+			'attack_weapon', "NothWeapon",
+			'EatStartAnim', "eat_Start",
+			'EatIdleAnim', {
+				"eat_Idle",
+			},
+			'EatEndAnim', "eat_End",
+			'anim_idle', {
+				"idle",
+				"idle_Active",
+			},
+			'SleepStartAnim', "sleep_Start",
+			'SleepIdleAnim', "sleep_Idle",
+			'SleepEndAnim', "sleep_End",
+			'Tameable', true,
+			'Petable', true,
+			'TamingFood', "Pumpkin",
+			'TamingFoodAmount', 10000,
+			'TamingMinimumSkill', 3,
+			'TamingChance', 70,
+			'TamingAggressiveChance', 10,
+			'TamingDistance', 10000,
+			'TamedLifetimeMin', 92160000,
+			'TamedLifetimeMax', 138240000,
+			'BondingChance', 10,
+			'ReproductionType', "two sexes",
+			'DailyPregnancyChance', 55,
+			'PregnancyDuration', 4800000,
+			'GrowDuration', 4800000,
+			'NewbornClass', "Noth_T2",
+			'FieldVisibilityCold', 75000,
+			'FieldVisibilityWarm', 25000,
+			'MoveSpeedCold', 1000,
+			'PlantsToEatMin', 40,
+			'PlantsToEatMax', 60,
+			'HerdMergeClass', "Noth",
 		}),
-	}),
-PlaceObj('ModItemTech', {
-	Activity = "FieldResearch",
-	Description = T(434620854588, --[[ModItemTech FieldUlfenT3 Description]] "This in an alien planet, so I should not be surprised if our expectations are not followed. \nBut this wasn't on my bingo card! \nUlfen now have larger horns and a new aggressive demeaner!\nWe have started to call them <em>Goren</em> after an incident where we approached a species in a \"wrong\" way.\n\nThe padding that it's thick hide provides makes these Goren <color TextButton>Blunt</color> and <color TextNegative>Energy</color><em> Resistance</em>.\n\nIf we learn how to tame or breed these creatures, they would make wonderful herds for both food and defense!"),
-	DisplayName = T(525874555007, --[[ModItemTech FieldUlfenT3 DisplayName]] "Unknown Ulfen Evolution"),
-	DisplayNamePl = T(747647610094, --[[ModItemTech FieldUlfenT3 DisplayNamePl]] "Unknown Ulfen Evolutions"),
-	FieldResearchCategory = "Fauna",
-	FieldResearchTemplateExpression = function (self) return Ulfen end,
-	Icon = "UI/Messages/Research/res_Ulfen",
-	LockPrerequisites = {
-		PlaceObj('CheckRegion', {
-			Region = set( "Sobrius" ),
+		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Id', "Noth_T2",
+			'object_class', "UlfenBase",
+			'SpeciesGroup', "hoofed",
+			'RoamRadius', 15000,
+			'RoamIntervalMin', 40000,
+			'RoamIntervalMax', 120000,
+			'composite_part_target', "NothT2",
+			'composite_part_groups', {
+				"Noth",
+			},
+			'PainMask', "PainMask",
+			'EventProgressValue', 120,
+			'SightRange', 10000,
+			'CombatGroup', "Noths",
+			'HitNegationChance', {
+				HitNegationChance_energy = 20,
+				HitNegationChance_pacify = 20,
+				energy = 20,
+				pacify = 20,
+			},
+			'HitNegationChance_energy', 20,
+			'HitNegationChance_pacify', 20,
+			'EnrageChance', 3,
+			'AttackMemory', 45000,
+			'CombatGiveUpNoHit', 30000,
+			'CombatFleeAccuracy', 0,
+			'ButcherDuration', 20000,
+			'max_skinned_decals_low', -1,
+			'FieldResearchTech', "FieldNoth",
+			'ObservationDistanceMin', 15000,
+			'ObservationDistanceMax', 20000,
+			'Icon', "UI/Icons/Resources/res_noth",
+			'DisplayName', T(428897806632, --[[ModItemUnitAnimalCompositeDef Noth_T2 DisplayName]] "Doth"),
+			'DisplayNamePl', T(556112310692, --[[ModItemUnitAnimalCompositeDef Noth_T2 DisplayNamePl]] "Doths"),
+			'Description', T(855728463757, --[[ModItemUnitAnimalCompositeDef Noth_T2 Description]] "Usually passive. Small chance to retaliate when attacked. It's main defense is how hefty it is."),
+			'BaseMaxHealth', 500000,
+			'FoodResources', {
+				"FoodAnimalHerbivore",
+				"Slop",
+			},
+			'DailyEatingAmount', 2000,
+			'Diet', "Herbivore",
+			'EatingDuration', 4000,
+			'FoodSourceClasses', {
+				"ResourcePile",
+				"Plant",
+				"AnimalFeeder",
+			},
+			'ButcherResources', {
+				PlaceObj('ButcherResAmount', {
+					'resource', "RawMeat",
+					'min_amount', 40000,
+					'max_amount', 60000,
+				}),
+				PlaceObj('ButcherResAmount', {
+					'resource', "LeatherRaw",
+					'min_amount', 10000,
+					'max_amount', 30000,
+				}),
+			},
+			'SelectionRadius', 1500,
+			'BodySize', "medium",
+			'ProduceResources', {
+				PlaceObj('ResAmount', {
+					'resource', "FuelManure",
+					'amount', 10000,
+				}),
+			},
+			'ProduceResInterval', 960000,
+			'AnimalPerks', {
+				"ManureProducer",
+				"DraftableAnimal",
+			},
+			'pfclass_tamed', 10,
+			'pfclass_tamed_lead', 13,
+			'attack_weapon', "Noth_T2",
+			'EatStartAnim', "eat_Start",
+			'EatIdleAnim', {
+				"eat_Idle",
+			},
+			'EatEndAnim', "eat_End",
+			'anim_idle', {
+				"idle",
+				"idle_Active",
+			},
+			'SleepStartAnim', "sleep_Start",
+			'SleepIdleAnim', "sleep_Idle",
+			'SleepEndAnim', "sleep_End",
+			'Tameable', true,
+			'Petable', true,
+			'TamingFood', "Pumpkin",
+			'TamingFoodAmount', 10000,
+			'TamingMinimumSkill', 3,
+			'TamingChance', 70,
+			'TamingAggressiveChance', 10,
+			'TamingDistance', 10000,
+			'TamedLifetimeMin', 92160000,
+			'TamedLifetimeMax', 138240000,
+			'CombatSkillInitial', range(5, 6),
+			'BondingChance', 10,
+			'ReproductionType', "two sexes",
+			'DailyPregnancyChance', 65,
+			'PregnancyDuration', 2880000,
+			'GrowDuration', 2880000,
+			'NewbornClass', "Noth_T3",
+			'FieldVisibilityCold', 75000,
+			'FieldVisibilityWarm', 25000,
+			'MoveSpeedCold', 1000,
+			'PlantsToEatMin', 40,
+			'PlantsToEatMax', 60,
+			'HerdMergeClass', "Noth",
 		}),
-	},
-	ResearchPoints = 6000,
-	group = "Field",
-	id = "FieldUlfenT3",
-	money_value = 50000000,
-	tradable = false,
-}),
-PlaceObj('ModItemTech', {
-	Activity = "FieldResearch",
-	Description = T(558073602568, --[[ModItemTech FieldUlfenT5 Description]] "On my planet, there where large metal animals that you could step inside.\nThey could weight up to 50,000 KGs, and could move hundreds of kilometers in an hour.\nThey are absolute behemoths, and yet, I think these Bestigors would win in a head on.\n\nWe observed one run into a sheet cliff, and cause a gigantic avalanche of Rock and Mud.\nAnd the <em>Bestigor</em> was able to break free of the rubble and walk away unscathed....\n\nWhat evolutionary pressure would be put on a species like this.... to <em>NEED</em> this durability?\nThey are still Herbivors, so something must be able to bring these down.....\n\nIt's hide now has at least 10 thick layers giving <color TextButton>Blunt</color> and <color TextNegative>Energy</color><em> Resistance</em>."),
-	DisplayName = T(591814431141, --[[ModItemTech FieldUlfenT5 DisplayName]] "Unknown Ulfen Evolution"),
-	DisplayNamePl = T(143533447937, --[[ModItemTech FieldUlfenT5 DisplayNamePl]] "Unknown Ulfen Evolutions"),
-	FieldResearchCategory = "Fauna",
-	FieldResearchTemplateExpression = function (self) return Ulfen end,
-	Icon = "UI/Messages/Research/res_Ulfen",
-	LockPrerequisites = {
-		PlaceObj('CheckRegion', {
-			Region = set( "Sobrius" ),
+		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Id', "Noth_T3",
+			'object_class', "UlfenBase",
+			'SpeciesGroup', "hoofed",
+			'RoamRadius', 15000,
+			'RoamIntervalMin', 40000,
+			'RoamIntervalMax', 120000,
+			'composite_part_target', "NothT3",
+			'composite_part_groups', {
+				"Noth",
+			},
+			'PainMask', "PainMask",
+			'EventProgressValue', 240,
+			'SightRange', 10000,
+			'CombatGroup', "Noths",
+			'CombatHostile', true,
+			'HitNegationChance', {
+				HitNegationChance_energy = 30,
+				HitNegationChance_pacify = 40,
+				HitNegationChance_piercing = 10,
+				energy = 30,
+				pacify = 40,
+				piercing = 10,
+			},
+			'HitNegationChance_piercing', 10,
+			'HitNegationChance_energy', 30,
+			'HitNegationChance_pacify', 40,
+			'EnrageChance', 3,
+			'AttackMemory', 45000,
+			'CombatGiveUpNoHit', 30000,
+			'CombatFleeAccuracy', 0,
+			'ButcherDuration', 20000,
+			'max_skinned_decals_low', -1,
+			'FieldResearchTech', "FieldNothT3",
+			'ObservationDistanceMin', 15000,
+			'ObservationDistanceMax', 20000,
+			'Icon', "UI/Icons/Resources/res_noth",
+			'DisplayName', T(987839064234, --[[ModItemUnitAnimalCompositeDef Noth_T3 DisplayName]] "DuNoth"),
+			'DisplayNamePl', T(760617251943, --[[ModItemUnitAnimalCompositeDef Noth_T3 DisplayNamePl]] "DuNoths"),
+			'Description', T(201444620241, --[[ModItemUnitAnimalCompositeDef Noth_T3 Description]] "With a smaller brain, but a thicker forehead plate; this creature sports a newfound love of headbutting."),
+			'BaseMaxHealth', 1000000,
+			'FoodResources', {
+				"FoodAnimalHerbivore",
+				"Slop",
+			},
+			'DailyEatingAmount', 3000,
+			'Diet', "Herbivore",
+			'EatingDuration', 4000,
+			'FoodSourceClasses', {
+				"ResourcePile",
+				"Plant",
+				"AnimalFeeder",
+			},
+			'ButcherResources', {
+				PlaceObj('ButcherResAmount', {
+					'resource', "RawMeat",
+					'min_amount', 40000,
+					'max_amount', 60000,
+				}),
+				PlaceObj('ButcherResAmount', {
+					'resource', "LeatherRaw",
+					'min_amount', 10000,
+					'max_amount', 30000,
+				}),
+			},
+			'SelectionRadius', 1500,
+			'BodySize', "medium",
+			'ProduceResources', {
+				PlaceObj('ResAmount', {
+					'resource', "FuelManure",
+					'amount', 10000,
+				}),
+			},
+			'ProduceResInterval', 960000,
+			'AnimalPerks', {
+				"ManureProducer",
+				"DraftableAnimal",
+				"AP_StatDamage",
+			},
+			'pfclass_tamed', 10,
+			'pfclass_tamed_lead', 13,
+			'attack_weapon', "Noth_T2",
+			'EatStartAnim', "eat_Start",
+			'EatIdleAnim', {
+				"eat_Idle",
+			},
+			'EatEndAnim', "eat_End",
+			'anim_idle', {
+				"idle",
+				"idle_Active",
+			},
+			'SleepStartAnim', "sleep_Start",
+			'SleepIdleAnim', "sleep_Idle",
+			'SleepEndAnim', "sleep_End",
+			'Tameable', true,
+			'Petable', true,
+			'TamingFood', "Pumpkin",
+			'TamingFoodAmount', 10000,
+			'TamingMinimumSkill', 3,
+			'TamingChance', 70,
+			'TamingAggressiveChance', 10,
+			'TamingDistance', 10000,
+			'TamedLifetimeMin', 92160000,
+			'TamedLifetimeMax', 138240000,
+			'CombatSkillInitial', range(5, 6),
+			'BondingChance', 10,
+			'ReproductionType', "two sexes",
+			'DailyPregnancyChance', 65,
+			'PregnancyDuration', 2880000,
+			'GrowDuration', 2880000,
+			'NewbornClass', "Noth_T4",
+			'FieldVisibilityCold', 75000,
+			'FieldVisibilityWarm', 25000,
+			'MoveSpeedCold', 1000,
+			'PlantsToEatMin', 40,
+			'PlantsToEatMax', 60,
+			'HerdMergeClass', "Noth",
+			'UnitPerkFrenzy', true,
+			'FrenzyEffects', {
+				"Frenzy_Conscious_1",
+			},
 		}),
-	},
-	ResearchPoints = 6000,
-	group = "Field",
-	id = "FieldUlfenT5",
-	money_value = 50000000,
-	tradable = false,
-}),
-PlaceObj('ModItemHealthCondition', {
-	AffectableBodyParts = {
-		PlaceObj('HealthConditionBodyParts', {
-			BodyPart = "All",
-			param_bindings = false,
+		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Id', "Noth_T4",
+			'object_class', "UlfenBase",
+			'SpeciesGroup', "hoofed",
+			'RoamRadius', 15000,
+			'RoamIntervalMin', 40000,
+			'RoamIntervalMax', 120000,
+			'composite_part_target', "NothT4",
+			'composite_part_groups', {
+				"Noth",
+			},
+			'PainMask', "PainMask",
+			'EventProgressValue', 600,
+			'SightRange', 10000,
+			'CombatGroup', "Noths",
+			'CombatHostile', true,
+			'HitNegationChance', {
+				HitNegationChance_energy = 40,
+				HitNegationChance_pacify = 60,
+				HitNegationChance_piercing = 50,
+				energy = 40,
+				pacify = 60,
+				piercing = 50,
+			},
+			'HitNegationChance_piercing', 50,
+			'HitNegationChance_energy', 40,
+			'HitNegationChance_pacify', 60,
+			'EnrageChance', 3,
+			'AttackMemory', 45000,
+			'CombatGiveUpNoHit', 30000,
+			'CombatFleeAccuracy', 0,
+			'ButcherDuration', 20000,
+			'max_skinned_decals_low', -1,
+			'FieldResearchTech', "FieldNothT3",
+			'ObservationDistanceMin', 15000,
+			'ObservationDistanceMax', 20000,
+			'Icon', "UI/Icons/Resources/res_noth",
+			'DisplayName', T(325860930156, --[[ModItemUnitAnimalCompositeDef Noth_T4 DisplayName]] "Slidrugtanni"),
+			'DisplayNamePl', T(549501833355, --[[ModItemUnitAnimalCompositeDef Noth_T4 DisplayNamePl]] "Slidrugtannis"),
+			'Description', T(130013877284, --[[ModItemUnitAnimalCompositeDef Noth_T4 Description]] "Flesh that has properties of metal with an aggressive demeanor. Be careful trying to give this an Eskimo kiss!"),
+			'BaseMaxHealth', 1700000,
+			'FoodResources', {
+				"FoodAnimalHerbivore",
+				"Slop",
+			},
+			'DailyEatingAmount', 4000,
+			'Diet', "Herbivore",
+			'EatingDuration', 4000,
+			'FoodSourceClasses', {
+				"ResourcePile",
+				"Plant",
+				"AnimalFeeder",
+			},
+			'ButcherResources', {
+				PlaceObj('ButcherResAmount', {
+					'resource', "ScrapMetal",
+					'min_amount', 40000,
+					'max_amount', 60000,
+				}),
+				PlaceObj('ButcherResAmount', {
+					'resource', "Metal",
+					'min_amount', 10000,
+					'max_amount', 30000,
+				}),
+			},
+			'SelectionRadius', 1500,
+			'BodySize', "medium",
+			'ProduceResources', {
+				PlaceObj('ResAmount', {
+					'resource', "ScrapMetal",
+					'amount', 10000,
+				}),
+			},
+			'ProduceResInterval', 960000,
+			'AnimalPerks', {
+				"ManureProducer",
+				"DraftableAnimal",
+				"AP_StatDamage",
+			},
+			'pfclass_tamed', 10,
+			'pfclass_tamed_lead', 13,
+			'attack_weapon', "Noth_T4",
+			'EatStartAnim', "eat_Start",
+			'EatIdleAnim', {
+				"eat_Idle",
+			},
+			'EatEndAnim', "eat_End",
+			'anim_idle', {
+				"idle",
+				"idle_Active",
+			},
+			'SleepStartAnim', "sleep_Start",
+			'SleepIdleAnim', "sleep_Idle",
+			'SleepEndAnim', "sleep_End",
+			'Tameable', true,
+			'Petable', true,
+			'TamingFood', "Pumpkin",
+			'TamingFoodAmount', 10000,
+			'TamingMinimumSkill', 3,
+			'TamingChance', 70,
+			'TamingAggressiveChance', 10,
+			'TamingDistance', 10000,
+			'TamedLifetimeMin', 92160000,
+			'TamedLifetimeMax', 138240000,
+			'CombatSkillInitial', range(5, 6),
+			'BondingChance', 10,
+			'ReproductionType', "two sexes",
+			'DailyPregnancyChance', 75,
+			'PregnancyDuration', 2000000,
+			'GrowDuration', 2000000,
+			'NewbornClass', "Noth_T5",
+			'FieldVisibilityCold', 75000,
+			'FieldVisibilityWarm', 25000,
+			'MoveSpeedCold', 1000,
+			'PlantsToEatMin', 40,
+			'PlantsToEatMax', 60,
+			'HerdMergeClass', "Noth",
+			'UnitPerkFrenzy', true,
+			'FrenzyEffects', {
+				"Frenzy_Conscious_2",
+			},
 		}),
-	},
-	Description = T(986945772012, --[[ModItemHealthCondition UlfenHerd Description]] "Has formed a herd with other Ulfen, and when on low health will trigger a frenzy in all nearby allies."),
-	DisplayName = T(192530475851, --[[ModItemHealthCondition UlfenHerd DisplayName]] "Herd Mentality"),
-	FloatingTextType = "Display name",
-	OnAdd = function (self, owner, ...)
-		if owner.frenzy == nil then
-			owner.frenzy = GameTime()
-		end
-	end,
-	StackLimit = 1,
-	Type = "Buff",
-	id = "UlfenHerd",
-	unit_reactions = {
-		PlaceObj('UnitReaction', {
-			Event = "OnObjUpdate",
-			Handler = function (self, target, time, update_interval)
-				if target.Health < target.MaxHealth / 2 and target.frenzy < GameTime() then
-					MapForEach(target,30*guim,"UnitAnimal",function(unit,target)
-					if (unit.class == 'Ulfen_T5' or unit.class == 'Ulfen_T4') and not unit:IsDead() and not unit:IsUnconscious() then
-						unit:AddHealthCondition("UlfRage")
-					end
-					end,target)
-					target.frenzy = GameTime() + 600000 -- can only occur every 60 game minutes
-				end
-			end,
-			param_bindings = false,
+		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Id', "Noth_T5",
+			'object_class', "UlfenBase",
+			'SpeciesGroup', "hoofed",
+			'RoamRadius', 15000,
+			'RoamIntervalMin', 40000,
+			'RoamIntervalMax', 120000,
+			'composite_part_target', "NothT5",
+			'composite_part_groups', {
+				"Noth",
+			},
+			'PainMask', "PainMask",
+			'EventProgressValue', 1500,
+			'SightRange', 10000,
+			'CombatGroup', "Noths",
+			'CombatHostile', true,
+			'HitNegationChance', {
+				HitNegationChance_energy = 70,
+				HitNegationChance_pacify = 80,
+				HitNegationChance_piercing = 90,
+				energy = 70,
+				pacify = 80,
+				piercing = 90,
+			},
+			'HitNegationChance_piercing', 90,
+			'HitNegationChance_energy', 70,
+			'HitNegationChance_pacify', 80,
+			'EnrageChance', 3,
+			'AttackMemory', 45000,
+			'CombatGiveUpNoHit', 30000,
+			'CombatFleeAccuracy', 0,
+			'ButcherDuration', 20000,
+			'max_skinned_decals_low', -1,
+			'FieldResearchTech', "FieldNothT5",
+			'ObservationDistanceMin', 15000,
+			'ObservationDistanceMax', 20000,
+			'Icon', "UI/Icons/Resources/res_noth",
+			'DisplayName', T(486600116398, --[[ModItemUnitAnimalCompositeDef Noth_T5 DisplayName]] "Gullinbursti"),
+			'DisplayNamePl', T(913171357773, --[[ModItemUnitAnimalCompositeDef Noth_T5 DisplayNamePl]] "Gullinburstis"),
+			'Description', T(214347615620, --[[ModItemUnitAnimalCompositeDef Noth_T5 Description]] "Metallic Flesh, aggressive demeanor, loves to headbutt. Careful!"),
+			'BaseMaxHealth', 2500000,
+			'FoodResources', {
+				"FoodAnimalHerbivore",
+				"Slop",
+			},
+			'DailyEatingAmount', 5000,
+			'Diet', "Herbivore",
+			'EatingDuration', 4000,
+			'FoodSourceClasses', {
+				"ResourcePile",
+				"Plant",
+				"AnimalFeeder",
+			},
+			'ButcherResources', {
+				PlaceObj('ButcherResAmount', {
+					'resource', "ScrapMetal",
+					'min_amount', 40000,
+					'max_amount', 60000,
+				}),
+				PlaceObj('ButcherResAmount', {
+					'resource', "Metal",
+					'min_amount', 10000,
+					'max_amount', 30000,
+				}),
+			},
+			'SelectionRadius', 1500,
+			'BodySize', "medium",
+			'ProduceResources', {
+				PlaceObj('ResAmount', {
+					'resource', "ScrapMetal",
+					'amount', 10000,
+				}),
+			},
+			'ProduceResInterval', 960000,
+			'AnimalPerks', {
+				"ManureProducer",
+				"DraftableAnimal",
+				"AP_StatDamage",
+			},
+			'pfclass_tamed', 10,
+			'pfclass_tamed_lead', 13,
+			'attack_weapon', "Noth_T4",
+			'EatStartAnim', "eat_Start",
+			'EatIdleAnim', {
+				"eat_Idle",
+			},
+			'EatEndAnim', "eat_End",
+			'anim_idle', {
+				"idle",
+				"idle_Active",
+			},
+			'SleepStartAnim', "sleep_Start",
+			'SleepIdleAnim', "sleep_Idle",
+			'SleepEndAnim', "sleep_End",
+			'Tameable', true,
+			'Petable', true,
+			'TamingFood', "Pumpkin",
+			'TamingFoodAmount', 10000,
+			'TamingMinimumSkill', 3,
+			'TamingChance', 70,
+			'TamingAggressiveChance', 10,
+			'TamingDistance', 10000,
+			'TamedLifetimeMin', 92160000,
+			'TamedLifetimeMax', 138240000,
+			'CombatSkillInitial', range(5, 6),
+			'BondingChance', 10,
+			'ReproductionType', "two sexes",
+			'DailyPregnancyChance', 60,
+			'PregnancyDuration', 1800000,
+			'GrowDuration', 1800000,
+			'FieldVisibilityCold', 75000,
+			'FieldVisibilityWarm', 25000,
+			'MoveSpeedCold', 1000,
+			'PlantsToEatMin', 40,
+			'PlantsToEatMax', 60,
+			'HerdMergeClass', "Noth",
+			'UnitPerkFrenzy', true,
+			'FrenzyEffects', {
+				"Frenzy_Conscious_3",
+			},
 		}),
-	},
-}),
-PlaceObj('ModItemHealthCondition', {
-	AffectableBodyParts = {
-		PlaceObj('HealthConditionBodyParts', {
-			BodyPart = "All",
-			param_bindings = false,
-		}),
-	},
-	Description = T(514606535889, --[[ModItemHealthCondition UlfRage Description]] "This creature saw another of it's kin die!\nIt's newfound bloodlust is coursing through its veins.\n\n+10 Damage Resistance, +10% attack speed per stack."),
-	DisplayName = T(587427189008, --[[ModItemHealthCondition UlfRage DisplayName]] "Ulfen Angry!"),
-	FloatingTextType = "Display name",
-	OnAdd = function (self, owner, ...)
-		if owner.anger == nil then
-			owner.anger = 1
-			owner.calm = GameTime() + 60000
-		else
-			owner.anger = owner.anger + 1
-		end
-	end,
-	StackLimit = 1,
-	Type = "Buff",
-	id = "UlfRage",
-	unit_reactions = {
-		PlaceObj('UnitReaction', {
-			Event = "AvoidAttackModify",
-			Handler = function (self, target, hit_chance, attacker, weapon_def, attacker_dist)
-				local denom = ((3 / 20) * target.anger) + 1
-				return hit_chance / denom -- 20 anger stacks = now 25% chance to miss
-			end,
-			param_bindings = false,
-		}),
-		PlaceObj('UnitReaction', {
-			Event = "OnObjUpdate",
-			Handler = function (self, target, time, update_interval)
-				if self.calm < GameTime() then
-					target.anger = target.anger - 1
-					self.calm = GameTime() + 60000 -- every 60 seconds it calms down
-					if target.anger < 1 then
-						owner:RemoveHealthCondition(self)
-					end
-				end
-			end,
-			param_bindings = false,
-		}),
-	},
-}),
-PlaceObj('ModItemAnimalPerk', {
-	Description = T(714684334806, --[[ModItemAnimalPerk Default UlfenRage Description]] "In a herd, and will call out when in danger!"),
-	DisplayName = T(111736795096, --[[ModItemAnimalPerk Default UlfenRage DisplayName]] "Ulfen Mafia"),
-	id = "UlfenRage",
-}),
-PlaceObj('ModItemUnitAnimalCompositeDef', {
-	'Id', "Noth",
-	'object_class', "UlfenBase",
-	'SpeciesGroup', "hoofed",
-	'RoamRadius', 15000,
-	'RoamIntervalMin', 40000,
-	'RoamIntervalMax', 120000,
-	'composite_part_target', "Noth",
-	'composite_part_groups', {
-		"Noth",
-	},
-	'PainMask', "PainMask",
-	'EventProgressValue', 50,
-	'SightRange', 10000,
-	'CombatGroup', "Noths",
-	'EnrageChance', 3,
-	'AttackMemory', 45000,
-	'CombatGiveUpNoHit', 30000,
-	'CombatFleeAccuracy', 0,
-	'ButcherDuration', 20000,
-	'max_skinned_decals_low', -1,
-	'FieldResearchTech', "FieldNoth",
-	'ObservationDistanceMin', 15000,
-	'ObservationDistanceMax', 20000,
-	'Icon', "UI/Icons/Resources/res_noth",
-	'DisplayName', T(890512375005, --[[ModItemUnitAnimalCompositeDef Noth DisplayName]] "Noth"),
-	'DisplayNamePl', T(321321661145, --[[ModItemUnitAnimalCompositeDef Noth DisplayNamePl]] "Noths"),
-	'Description', T(284975794180, --[[ModItemUnitAnimalCompositeDef Noth Description]] "Usually passive. Small chance to retaliate when attacked."),
-	'FoodResources', {
-		"FoodAnimalHerbivore",
-		"Slop",
-	},
-	'DailyEatingAmount', 1000,
-	'Diet', "Herbivore",
-	'EatingDuration', 4000,
-	'FoodSourceClasses', {
-		"ResourcePile",
-		"Plant",
-		"AnimalFeeder",
-	},
-	'ButcherResources', {
-		PlaceObj('ButcherResAmount', {
-			'resource', "RawMeat",
-			'min_amount', 40000,
-			'max_amount', 60000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "LeatherRaw",
-			'min_amount', 10000,
-			'max_amount', 30000,
-		}),
-	},
-	'SelectionRadius', 1500,
-	'BodySize', "medium",
-	'ProduceResources', {
-		PlaceObj('ResAmount', {
-			'resource', "FuelManure",
-			'amount', 10000,
-		}),
-	},
-	'ProduceResInterval', 960000,
-	'AnimalPerks', {
-		"ManureProducer",
-	},
-	'pfclass_tamed', 10,
-	'pfclass_tamed_lead', 13,
-	'attack_weapon', "NothWeapon",
-	'EatStartAnim', "eat_Start",
-	'EatIdleAnim', {
-		"eat_Idle",
-	},
-	'EatEndAnim', "eat_End",
-	'anim_idle', {
-		"idle",
-		"idle_Active",
-	},
-	'SleepStartAnim', "sleep_Start",
-	'SleepIdleAnim', "sleep_Idle",
-	'SleepEndAnim', "sleep_End",
-	'Tameable', true,
-	'Petable', true,
-	'TamingFood', "Pumpkin",
-	'TamingFoodAmount', 10000,
-	'TamingMinimumSkill', 3,
-	'TamingChance', 70,
-	'TamingAggressiveChance', 10,
-	'TamingDistance', 10000,
-	'TamedLifetimeMin', 92160000,
-	'TamedLifetimeMax', 138240000,
-	'BondingChance', 10,
-	'ReproductionType', "two sexes",
-	'DailyPregnancyChance', 45,
-	'PregnancyDuration', 4800000,
-	'GrowDuration', 4800000,
-	'NewbornClass', "Noth_T2",
-	'FieldVisibilityCold', 75000,
-	'FieldVisibilityWarm', 25000,
-	'MoveSpeedCold', 1000,
-	'PlantsToEatMin', 40,
-	'PlantsToEatMax', 60,
-	'HerdMergeClass', "Noth",
-}),
-PlaceObj('ModItemUnitAnimalCompositeDef', {
-	'Id', "Noth_T2",
-	'object_class', "UlfenBase",
-	'SpeciesGroup', "hoofed",
-	'RoamRadius', 15000,
-	'RoamIntervalMin', 40000,
-	'RoamIntervalMax', 120000,
-	'composite_part_target', "NothT2",
-	'composite_part_groups', {
-		"Noth",
-	},
-	'PainMask', "PainMask",
-	'EventProgressValue', 120,
-	'SightRange', 10000,
-	'CombatGroup', "Noths",
-	'HitNegationChance', {
-		HitNegationChance_energy = 20,
-		HitNegationChance_pacify = 20,
-		energy = 20,
-		pacify = 20,
-	},
-	'HitNegationChance_energy', 20,
-	'HitNegationChance_pacify', 20,
-	'EnrageChance', 3,
-	'AttackMemory', 45000,
-	'CombatGiveUpNoHit', 30000,
-	'CombatFleeAccuracy', 0,
-	'ButcherDuration', 20000,
-	'max_skinned_decals_low', -1,
-	'FieldResearchTech', "FieldNoth",
-	'ObservationDistanceMin', 15000,
-	'ObservationDistanceMax', 20000,
-	'Icon', "UI/Icons/Resources/res_noth",
-	'DisplayName', T(428897806632, --[[ModItemUnitAnimalCompositeDef Noth_T2 DisplayName]] "Doth"),
-	'DisplayNamePl', T(556112310692, --[[ModItemUnitAnimalCompositeDef Noth_T2 DisplayNamePl]] "Doths"),
-	'Description', T(855728463757, --[[ModItemUnitAnimalCompositeDef Noth_T2 Description]] "Usually passive. Small chance to retaliate when attacked. It's main defense is how hefty it is."),
-	'BaseMaxHealth', 500000,
-	'FoodResources', {
-		"FoodAnimalHerbivore",
-		"Slop",
-	},
-	'DailyEatingAmount', 2000,
-	'Diet', "Herbivore",
-	'EatingDuration', 4000,
-	'FoodSourceClasses', {
-		"ResourcePile",
-		"Plant",
-		"AnimalFeeder",
-	},
-	'ButcherResources', {
-		PlaceObj('ButcherResAmount', {
-			'resource', "RawMeat",
-			'min_amount', 40000,
-			'max_amount', 60000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "LeatherRaw",
-			'min_amount', 10000,
-			'max_amount', 30000,
-		}),
-	},
-	'SelectionRadius', 1500,
-	'BodySize', "medium",
-	'ProduceResources', {
-		PlaceObj('ResAmount', {
-			'resource', "FuelManure",
-			'amount', 10000,
-		}),
-	},
-	'ProduceResInterval', 960000,
-	'AnimalPerks', {
-		"ManureProducer",
-		"DraftableAnimal",
-	},
-	'pfclass_tamed', 10,
-	'pfclass_tamed_lead', 13,
-	'attack_weapon', "Noth_T2",
-	'EatStartAnim', "eat_Start",
-	'EatIdleAnim', {
-		"eat_Idle",
-	},
-	'EatEndAnim', "eat_End",
-	'anim_idle', {
-		"idle",
-		"idle_Active",
-	},
-	'SleepStartAnim', "sleep_Start",
-	'SleepIdleAnim', "sleep_Idle",
-	'SleepEndAnim', "sleep_End",
-	'Tameable', true,
-	'Petable', true,
-	'TamingFood', "Pumpkin",
-	'TamingFoodAmount', 10000,
-	'TamingMinimumSkill', 3,
-	'TamingChance', 70,
-	'TamingAggressiveChance', 10,
-	'TamingDistance', 10000,
-	'TamedLifetimeMin', 92160000,
-	'TamedLifetimeMax', 138240000,
-	'CombatSkillInitial', range(5, 6),
-	'BondingChance', 10,
-	'ReproductionType', "two sexes",
-	'DailyPregnancyChance', 55,
-	'PregnancyDuration', 2880000,
-	'GrowDuration', 2880000,
-	'NewbornClass', "Noth_T3",
-	'FieldVisibilityCold', 75000,
-	'FieldVisibilityWarm', 25000,
-	'MoveSpeedCold', 1000,
-	'PlantsToEatMin', 40,
-	'PlantsToEatMax', 60,
-	'HerdMergeClass', "Noth",
-}),
-PlaceObj('ModItemUnitAnimalCompositeDef', {
-	'Id', "Noth_T3",
-	'object_class', "UlfenBase",
-	'SpeciesGroup', "hoofed",
-	'RoamRadius', 15000,
-	'RoamIntervalMin', 40000,
-	'RoamIntervalMax', 120000,
-	'composite_part_target', "NothT3",
-	'composite_part_groups', {
-		"Noth",
-	},
-	'PainMask', "PainMask",
-	'EventProgressValue', 240,
-	'SightRange', 10000,
-	'CombatGroup', "Noths",
-	'CombatHostile', true,
-	'HitNegationChance', {
-		HitNegationChance_energy = 30,
-		HitNegationChance_pacify = 40,
-		HitNegationChance_piercing = 10,
-		energy = 30,
-		pacify = 40,
-		piercing = 10,
-	},
-	'HitNegationChance_piercing', 10,
-	'HitNegationChance_energy', 30,
-	'HitNegationChance_pacify', 40,
-	'EnrageChance', 3,
-	'AttackMemory', 45000,
-	'CombatGiveUpNoHit', 30000,
-	'CombatFleeAccuracy', 0,
-	'ButcherDuration', 20000,
-	'max_skinned_decals_low', -1,
-	'FieldResearchTech', "FieldNothT3",
-	'ObservationDistanceMin', 15000,
-	'ObservationDistanceMax', 20000,
-	'Icon', "UI/Icons/Resources/res_noth",
-	'DisplayName', T(987839064234, --[[ModItemUnitAnimalCompositeDef Noth_T3 DisplayName]] "DuNoth"),
-	'DisplayNamePl', T(760617251943, --[[ModItemUnitAnimalCompositeDef Noth_T3 DisplayNamePl]] "DuNoths"),
-	'Description', T(201444620241, --[[ModItemUnitAnimalCompositeDef Noth_T3 Description]] "With a smaller brain, but a thicker forehead plate; this creature sports a newfound love of headbutting."),
-	'BaseMaxHealth', 1000000,
-	'FoodResources', {
-		"FoodAnimalHerbivore",
-		"Slop",
-	},
-	'DailyEatingAmount', 3000,
-	'Diet', "Herbivore",
-	'EatingDuration', 4000,
-	'FoodSourceClasses', {
-		"ResourcePile",
-		"Plant",
-		"AnimalFeeder",
-	},
-	'ButcherResources', {
-		PlaceObj('ButcherResAmount', {
-			'resource', "RawMeat",
-			'min_amount', 40000,
-			'max_amount', 60000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "LeatherRaw",
-			'min_amount', 10000,
-			'max_amount', 30000,
-		}),
-	},
-	'SelectionRadius', 1500,
-	'BodySize', "medium",
-	'ProduceResources', {
-		PlaceObj('ResAmount', {
-			'resource', "FuelManure",
-			'amount', 10000,
-		}),
-	},
-	'ProduceResInterval', 960000,
-	'AnimalPerks', {
-		"ManureProducer",
-		"DraftableAnimal",
-		"AP_StatDamage",
-	},
-	'pfclass_tamed', 10,
-	'pfclass_tamed_lead', 13,
-	'attack_weapon', "Noth_T2",
-	'EatStartAnim', "eat_Start",
-	'EatIdleAnim', {
-		"eat_Idle",
-	},
-	'EatEndAnim', "eat_End",
-	'anim_idle', {
-		"idle",
-		"idle_Active",
-	},
-	'SleepStartAnim', "sleep_Start",
-	'SleepIdleAnim', "sleep_Idle",
-	'SleepEndAnim', "sleep_End",
-	'Tameable', true,
-	'Petable', true,
-	'TamingFood', "Pumpkin",
-	'TamingFoodAmount', 10000,
-	'TamingMinimumSkill', 3,
-	'TamingChance', 70,
-	'TamingAggressiveChance', 10,
-	'TamingDistance', 10000,
-	'TamedLifetimeMin', 92160000,
-	'TamedLifetimeMax', 138240000,
-	'CombatSkillInitial', range(5, 6),
-	'BondingChance', 10,
-	'ReproductionType', "two sexes",
-	'DailyPregnancyChance', 55,
-	'PregnancyDuration', 2880000,
-	'GrowDuration', 2880000,
-	'NewbornClass', "Noth_T4",
-	'FieldVisibilityCold', 75000,
-	'FieldVisibilityWarm', 25000,
-	'MoveSpeedCold', 1000,
-	'PlantsToEatMin', 40,
-	'PlantsToEatMax', 60,
-	'HerdMergeClass', "Noth",
-	'UnitPerkFrenzy', true,
-	'FrenzyEffects', {
-		"Frenzy_Conscious_1",
-	},
-}),
-PlaceObj('ModItemUnitAnimalCompositeDef', {
-	'Id', "Noth_T4",
-	'object_class', "UlfenBase",
-	'SpeciesGroup', "hoofed",
-	'RoamRadius', 15000,
-	'RoamIntervalMin', 40000,
-	'RoamIntervalMax', 120000,
-	'composite_part_target', "NothT4",
-	'composite_part_groups', {
-		"Noth",
-	},
-	'PainMask', "PainMask",
-	'EventProgressValue', 600,
-	'SightRange', 10000,
-	'CombatGroup', "Noths",
-	'CombatHostile', true,
-	'HitNegationChance', {
-		HitNegationChance_energy = 40,
-		HitNegationChance_pacify = 60,
-		HitNegationChance_piercing = 50,
-		energy = 40,
-		pacify = 60,
-		piercing = 50,
-	},
-	'HitNegationChance_piercing', 50,
-	'HitNegationChance_energy', 40,
-	'HitNegationChance_pacify', 60,
-	'EnrageChance', 3,
-	'AttackMemory', 45000,
-	'CombatGiveUpNoHit', 30000,
-	'CombatFleeAccuracy', 0,
-	'ButcherDuration', 20000,
-	'max_skinned_decals_low', -1,
-	'FieldResearchTech', "FieldNothT3",
-	'ObservationDistanceMin', 15000,
-	'ObservationDistanceMax', 20000,
-	'Icon', "UI/Icons/Resources/res_noth",
-	'DisplayName', T(325860930156, --[[ModItemUnitAnimalCompositeDef Noth_T4 DisplayName]] "Slidrugtanni"),
-	'DisplayNamePl', T(549501833355, --[[ModItemUnitAnimalCompositeDef Noth_T4 DisplayNamePl]] "Slidrugtannis"),
-	'Description', T(130013877284, --[[ModItemUnitAnimalCompositeDef Noth_T4 Description]] "Flesh that has properties of metal with an aggressive demeanor. Be careful trying to give this an Eskimo kiss!"),
-	'BaseMaxHealth', 1700000,
-	'FoodResources', {
-		"FoodAnimalHerbivore",
-		"Slop",
-	},
-	'DailyEatingAmount', 4000,
-	'Diet', "Herbivore",
-	'EatingDuration', 4000,
-	'FoodSourceClasses', {
-		"ResourcePile",
-		"Plant",
-		"AnimalFeeder",
-	},
-	'ButcherResources', {
-		PlaceObj('ButcherResAmount', {
-			'resource', "ScrapMetal",
-			'min_amount', 40000,
-			'max_amount', 60000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Metal",
-			'min_amount', 10000,
-			'max_amount', 30000,
-		}),
-	},
-	'SelectionRadius', 1500,
-	'BodySize', "medium",
-	'ProduceResources', {
-		PlaceObj('ResAmount', {
-			'resource', "ScrapMetal",
-			'amount', 10000,
-		}),
-	},
-	'ProduceResInterval', 960000,
-	'AnimalPerks', {
-		"ManureProducer",
-		"DraftableAnimal",
-		"AP_StatDamage",
-	},
-	'pfclass_tamed', 10,
-	'pfclass_tamed_lead', 13,
-	'attack_weapon', "Noth_T4",
-	'EatStartAnim', "eat_Start",
-	'EatIdleAnim', {
-		"eat_Idle",
-	},
-	'EatEndAnim', "eat_End",
-	'anim_idle', {
-		"idle",
-		"idle_Active",
-	},
-	'SleepStartAnim', "sleep_Start",
-	'SleepIdleAnim', "sleep_Idle",
-	'SleepEndAnim', "sleep_End",
-	'Tameable', true,
-	'Petable', true,
-	'TamingFood', "Pumpkin",
-	'TamingFoodAmount', 10000,
-	'TamingMinimumSkill', 3,
-	'TamingChance', 70,
-	'TamingAggressiveChance', 10,
-	'TamingDistance', 10000,
-	'TamedLifetimeMin', 92160000,
-	'TamedLifetimeMax', 138240000,
-	'CombatSkillInitial', range(5, 6),
-	'BondingChance', 10,
-	'ReproductionType', "two sexes",
-	'DailyPregnancyChance', 65,
-	'PregnancyDuration', 2000000,
-	'GrowDuration', 2000000,
-	'NewbornClass', "Noth_T5",
-	'FieldVisibilityCold', 75000,
-	'FieldVisibilityWarm', 25000,
-	'MoveSpeedCold', 1000,
-	'PlantsToEatMin', 40,
-	'PlantsToEatMax', 60,
-	'HerdMergeClass', "Noth",
-	'UnitPerkFrenzy', true,
-	'FrenzyEffects', {
-		"Frenzy_Conscious_2",
-	},
-}),
-PlaceObj('ModItemUnitAnimalCompositeDef', {
-	'Id', "Noth_T5",
-	'object_class', "UlfenBase",
-	'SpeciesGroup', "hoofed",
-	'RoamRadius', 15000,
-	'RoamIntervalMin', 40000,
-	'RoamIntervalMax', 120000,
-	'composite_part_target', "NothT5",
-	'composite_part_groups', {
-		"Noth",
-	},
-	'PainMask', "PainMask",
-	'EventProgressValue', 1500,
-	'SightRange', 10000,
-	'CombatGroup', "Noths",
-	'CombatHostile', true,
-	'HitNegationChance', {
-		HitNegationChance_energy = 70,
-		HitNegationChance_pacify = 80,
-		HitNegationChance_piercing = 90,
-		energy = 70,
-		pacify = 80,
-		piercing = 90,
-	},
-	'HitNegationChance_piercing', 90,
-	'HitNegationChance_energy', 70,
-	'HitNegationChance_pacify', 80,
-	'EnrageChance', 3,
-	'AttackMemory', 45000,
-	'CombatGiveUpNoHit', 30000,
-	'CombatFleeAccuracy', 0,
-	'ButcherDuration', 20000,
-	'max_skinned_decals_low', -1,
-	'FieldResearchTech', "FieldNothT5",
-	'ObservationDistanceMin', 15000,
-	'ObservationDistanceMax', 20000,
-	'Icon', "UI/Icons/Resources/res_noth",
-	'DisplayName', T(486600116398, --[[ModItemUnitAnimalCompositeDef Noth_T5 DisplayName]] "Gullinbursti"),
-	'DisplayNamePl', T(913171357773, --[[ModItemUnitAnimalCompositeDef Noth_T5 DisplayNamePl]] "Gullinburstis"),
-	'Description', T(214347615620, --[[ModItemUnitAnimalCompositeDef Noth_T5 Description]] "Metallic Flesh, aggressive demeanor, loves to headbutt. Careful!"),
-	'BaseMaxHealth', 2500000,
-	'FoodResources', {
-		"FoodAnimalHerbivore",
-		"Slop",
-	},
-	'DailyEatingAmount', 5000,
-	'Diet', "Herbivore",
-	'EatingDuration', 4000,
-	'FoodSourceClasses', {
-		"ResourcePile",
-		"Plant",
-		"AnimalFeeder",
-	},
-	'ButcherResources', {
-		PlaceObj('ButcherResAmount', {
-			'resource', "ScrapMetal",
-			'min_amount', 40000,
-			'max_amount', 60000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "Metal",
-			'min_amount', 10000,
-			'max_amount', 30000,
-		}),
-	},
-	'SelectionRadius', 1500,
-	'BodySize', "medium",
-	'ProduceResources', {
-		PlaceObj('ResAmount', {
-			'resource', "ScrapMetal",
-			'amount', 10000,
-		}),
-	},
-	'ProduceResInterval', 960000,
-	'AnimalPerks', {
-		"ManureProducer",
-		"DraftableAnimal",
-		"AP_StatDamage",
-	},
-	'pfclass_tamed', 10,
-	'pfclass_tamed_lead', 13,
-	'attack_weapon', "Noth_T4",
-	'EatStartAnim', "eat_Start",
-	'EatIdleAnim', {
-		"eat_Idle",
-	},
-	'EatEndAnim', "eat_End",
-	'anim_idle', {
-		"idle",
-		"idle_Active",
-	},
-	'SleepStartAnim', "sleep_Start",
-	'SleepIdleAnim', "sleep_Idle",
-	'SleepEndAnim', "sleep_End",
-	'Tameable', true,
-	'Petable', true,
-	'TamingFood', "Pumpkin",
-	'TamingFoodAmount', 10000,
-	'TamingMinimumSkill', 3,
-	'TamingChance', 70,
-	'TamingAggressiveChance', 10,
-	'TamingDistance', 10000,
-	'TamedLifetimeMin', 92160000,
-	'TamedLifetimeMax', 138240000,
-	'CombatSkillInitial', range(5, 6),
-	'BondingChance', 10,
-	'ReproductionType', "two sexes",
-	'DailyPregnancyChance', 50,
-	'PregnancyDuration', 1800000,
-	'GrowDuration', 1800000,
-	'FieldVisibilityCold', 75000,
-	'FieldVisibilityWarm', 25000,
-	'MoveSpeedCold', 1000,
-	'PlantsToEatMin', 40,
-	'PlantsToEatMax', 60,
-	'HerdMergeClass', "Noth",
-	'UnitPerkFrenzy', true,
-	'FrenzyEffects', {
-		"Frenzy_Conscious_3",
-	},
-}),
-PlaceObj('ModItemCompositeBodyPreset', {
-	'Group', "Noth",
-	'Id', "NothBodyElder_1",
-	'Target', "NothT2",
-	'Parts', set( "Body" ),
-	'Entity', "Noth",
-	'Scale', range(100, 110),
-	'Colors', {
-		PlaceObj('CompositeBodyPresetColor', {
-			'EditableColor1', RGBA(44, 84, 168, 255),
-			'EditableColor2', RGBA(168, 78, 19, 255),
-			'EditableColor3', RGBA(180, 44, 44, 255),
-		}),
-	},
-}),
-PlaceObj('ModItemCompositeBodyPreset', {
-	'Group', "Noth",
-	'Id', "NothBodyElder_2",
-	'Target', "NothT3",
-	'Parts', set( "Body" ),
-	'Entity', "Noth",
-	'Scale', range(100, 110),
-	'Colors', {
-		PlaceObj('CompositeBodyPresetColor', {
-			'EditableColor1', RGBA(24, 31, 46, 255),
-			'EditableColor2', RGBA(168, 78, 19, 255),
-			'EditableColor3', RGBA(74, 12, 12, 255),
-		}),
-	},
-}),
-PlaceObj('ModItemCompositeBodyPreset', {
-	'Group', "Noth",
-	'Id', "NothBodyElder_3",
-	'Target', "NothT4",
-	'Parts', set( "Body" ),
-	'Entity', "Noth",
-	'Scale', range(100, 110),
-	'Colors', {
-		PlaceObj('CompositeBodyPresetColor', {
-			'EditableColor1', RGBA(12, 65, 1, 255),
-			'EditableColor2', RGBA(105, 94, 6, 255),
-			'EditableColor3', RGBA(0, 0, 0, 255),
-		}),
-	},
-}),
-PlaceObj('ModItemCompositeBodyPreset', {
-	'Group', "Noth",
-	'Id', "NothBodyElder_4",
-	'Target', "NothT5",
-	'Parts', set( "Body" ),
-	'Entity', "Noth",
-	'Scale', range(100, 110),
-	'Colors', {
-		PlaceObj('CompositeBodyPresetColor', {
-			'EditableColor1', RGBA(116, 45, 3, 255),
-			'EditableColor2', RGBA(125, 109, 4, 255),
-			'EditableColor3', RGBA(0, 0, 0, 255),
-		}),
-	},
-}),
-PlaceObj('ModItemCompositeBodyPreset', {
-	'Group', "DrakaT2",
-	'Id', "DrakaBodyElder_2",
-	'Target', "Draka",
-	'Parts', set( "Body" ),
-	'Entity', "Draka",
-	'Scale', range(100, 110),
-	'Colors', {
-		PlaceObj('CompositeBodyPresetColor', {
-			'EditableColor1', RGBA(21, 62, 54, 255),
-			'EditableColor2', RGBA(173, 105, 26, 255),
-			'EditableColor3', RGBA(157, 80, 38, 255),
-		}),
-		PlaceObj('CompositeBodyPresetColor', {
-			'EditableColor1', RGBA(33, 67, 60, 255),
-			'EditableColor2', RGBA(173, 105, 26, 255),
-			'EditableColor3', RGBA(157, 80, 38, 255),
-		}),
-		PlaceObj('CompositeBodyPresetColor', {
-			'EditableColor1', RGBA(31, 58, 69, 255),
-			'EditableColor2', RGBA(173, 91, 26, 255),
-			'EditableColor3', RGBA(157, 77, 38, 255),
-		}),
-	},
-}),
-PlaceObj('ModItemCompositeBodyPreset', {
-	'Group', "DrakaT3",
-	'Id', "DrakaBodyElder_3",
-	'Target', "Draka",
-	'Parts', set( "Body" ),
-	'Entity', "Draka",
-	'Scale', range(100, 110),
-	'Colors', {
-		PlaceObj('CompositeBodyPresetColor', {
-			'EditableColor1', RGBA(141, 63, 12, 255),
-			'EditableColor2', RGBA(4, 83, 114, 255),
-			'EditableColor3', RGBA(10, 138, 189, 255),
-		}),
-		PlaceObj('CompositeBodyPresetColor', {
-			'EditableColor1', RGBA(33, 67, 60, 255),
-			'EditableColor2', RGBA(138, 68, 21, 255),
-			'EditableColor3', RGBA(111, 123, 128, 255),
-		}),
-	},
-}),
-PlaceObj('ModItemCompositeBodyPreset', {
-	'Group', "DrakaT4",
-	'Id', "DrakaBodyElder_4",
-	'Target', "Draka",
-	'Parts', set( "Body" ),
-	'Entity', "Draka",
-	'Scale', range(100, 110),
-	'Colors', {
-		PlaceObj('CompositeBodyPresetColor', {
-			'EditableColor1', RGBA(131, 115, 106, 255),
-			'EditableColor2', RGBA(4, 83, 114, 255),
-			'EditableColor3', RGBA(129, 147, 154, 255),
-		}),
-		PlaceObj('CompositeBodyPresetColor', {
-			'EditableColor1', RGBA(111, 101, 95, 255),
-			'EditableColor2', RGBA(40, 225, 220, 255),
-			'EditableColor3', RGBA(111, 123, 128, 255),
-		}),
-	},
-}),
-PlaceObj('ModItemCompositeBodyPreset', {
-	'Group', "DrakaT5",
-	'Id', "DrakaBodyElder_5",
-	'Target', "Draka",
-	'Parts', set( "Body" ),
-	'Entity', "Draka",
-	'Scale', range(100, 110),
-	'Colors', {
-		PlaceObj('CompositeBodyPresetColor', {
-			'EditableColor1', RGBA(131, 115, 106, 255),
-			'EditableColor2', RGBA(4, 83, 114, 255),
-			'EditableColor3', RGBA(129, 147, 154, 255),
-		}),
-		PlaceObj('CompositeBodyPresetColor', {
-			'EditableColor1', RGBA(111, 101, 95, 255),
-			'EditableColor2', RGBA(40, 225, 220, 255),
-			'EditableColor3', RGBA(111, 123, 128, 255),
-		}),
-	},
-}),
-PlaceObj('ModItemCompositeBodyPreset', {
-	'Group', "DrakaT2",
-	'Id', "DrakaHornsForehead04",
-	'Target', "Draka",
-	'Parts', set( "Forehead" ),
-	'Entity', "Draka_Forehead_01",
-	'ColorInherit', "Body",
-}),
-PlaceObj('ModItemCompositeBodyPreset', {
-	'Group', "DrakaT3",
-	'Id', "DrakaHornsForehead03",
-	'Target', "Draka",
-	'Parts', set( "Forehead" ),
-	'Entity', "Draka_Forehead_01",
-	'ColorInherit', "Body",
-}),
-PlaceObj('ModItemCompositeBodyPreset', {
-	'Group', "DrakaT4",
-	'Id', "DrakaHornsForehead05",
-	'Target', "Draka",
-	'Parts', set( "Forehead" ),
-	'Entity', "Draka_Forehead_01",
-	'ColorInherit', "Body",
-}),
-PlaceObj('ModItemCompositeBodyPreset', {
-	'Group', "DrakaT5",
-	'Id', "DrakaHornsForehead06",
-	'Target', "Draka",
-	'Parts', set( "Forehead" ),
-	'Entity', "Draka_Forehead_01",
-	'ColorInherit', "Body",
-}),
-PlaceObj('ModItemCompositeBodyPreset', {
-	'Group', "DrakaT2",
-	'Id', "DrakaHornsLeft01_1",
-	'Target', "Draka",
-	'Parts', set( "HornLeft" ),
-	'Entity', "Draka_Horns_01",
-	'Filters', {
-		PlaceObj('CompositeBodyPresetFilter', {
-			'Name', "Age",
-			'Value', 0,
-			'Test', ">",
-		}),
-	},
-	'ColorInherit', "Body",
-}),
-PlaceObj('ModItemCompositeBodyPreset', {
-	'Group', "DrakaT3",
-	'Id', "DrakaHornsLeft01_2",
-	'Target', "Draka",
-	'Parts', set( "HornLeft" ),
-	'Entity', "Draka_Horns_01",
-	'Filters', {
-		PlaceObj('CompositeBodyPresetFilter', {
-			'Name', "Age",
-			'Value', 0,
-			'Test', ">",
-		}),
-	},
-	'ColorInherit', "Body",
-}),
-PlaceObj('ModItemCompositeBodyPreset', {
-	'Group', "DrakaT4",
-	'Id', "DrakaHornsLeft01_3",
-	'Target', "Draka",
-	'Parts', set( "HornLeft" ),
-	'Entity', "Draka_Horns_01",
-	'Filters', {
-		PlaceObj('CompositeBodyPresetFilter', {
-			'Name', "Age",
-			'Value', 0,
-			'Test', ">",
-		}),
-	},
-	'ColorInherit', "Body",
-}),
-PlaceObj('ModItemCompositeBodyPreset', {
-	'Group', "DrakaT5",
-	'Id', "DrakaHornsLeft01_4",
-	'Target', "Draka",
-	'Parts', set( "HornLeft" ),
-	'Entity', "Draka_Horns_01",
-	'Filters', {
-		PlaceObj('CompositeBodyPresetFilter', {
-			'Name', "Age",
-			'Value', 0,
-			'Test', ">",
-		}),
-	},
-	'ColorInherit', "Body",
-}),
-PlaceObj('ModItemCompositeBodyPreset', {
-	'Group', "DrakaT2",
-	'Id', "DrakaHornsRight01_1",
-	'Target', "Draka",
-	'Parts', set( "HornRight" ),
-	'Entity', "Draka_Horns_01",
-	'Mirrored', true,
-	'Filters', {
-		PlaceObj('CompositeBodyPresetFilter', {
-			'Name', "Age",
-			'Value', 0,
-			'Test', ">",
-		}),
-	},
-	'ColorInherit', "Body",
-}),
-PlaceObj('ModItemCompositeBodyPreset', {
-	'Group', "DrakaT3",
-	'Id', "DrakaHornsRight01_2",
-	'Target', "Draka",
-	'Parts', set( "HornRight" ),
-	'Entity', "Draka_Horns_01",
-	'Mirrored', true,
-	'Filters', {
-		PlaceObj('CompositeBodyPresetFilter', {
-			'Name', "Age",
-			'Value', 0,
-			'Test', ">",
-		}),
-	},
-	'ColorInherit', "Body",
-}),
-PlaceObj('ModItemCompositeBodyPreset', {
-	'Group', "DrakaT4",
-	'Id', "DrakaHornsRight01_3",
-	'Target', "Draka",
-	'Parts', set( "HornRight" ),
-	'Entity', "Draka_Horns_01",
-	'Mirrored', true,
-	'Filters', {
-		PlaceObj('CompositeBodyPresetFilter', {
-			'Name', "Age",
-			'Value', 0,
-			'Test', ">",
-		}),
-	},
-	'ColorInherit', "Body",
-}),
-PlaceObj('ModItemCompositeBodyPreset', {
-	'Group', "DrakaT5",
-	'Id', "DrakaHornsRight01_4",
-	'Target', "Draka",
-	'Parts', set( "HornRight" ),
-	'Entity', "Draka_Horns_01",
-	'Mirrored', true,
-	'Filters', {
-		PlaceObj('CompositeBodyPresetFilter', {
-			'Name', "Age",
-			'Value', 0,
-			'Test', ">",
-		}),
-	},
-	'ColorInherit', "Body",
-}),
-PlaceObj('ModItemUnitAnimalCompositeDef', {
-	'Id', "Draka",
-	'object_class', "DrakaBase",
-	'SpeciesGroup', "hoofed",
-	'RoamRadius', 30000,
-	'RoamMinDist', 5000,
-	'RoamMaxDist', 20000,
-	'RoamIntervalMax', 60000,
-	'composite_part_parent', {
-		Test = "Forehead",
-	},
-	'composite_part_spots', {
-		Forehead = "Horns",
-		HornLeft = "Horns",
-		HornRight = "Horns",
-		Test = "Origin",
-	},
-	'PainMask', "PainMask",
-	'EventProgressValue', 50,
-	'CombatGroup', "Drakkas",
-	'EnrageChance', 15,
-	'AttackMemory', 45000,
-	'CombatGiveUpNoHit', 30000,
-	'CombatFleeAccuracy', 0,
-	'ButcherDuration', 20000,
-	'max_skinned_decals_low', -2,
-	'FieldResearchTech', "FieldDraka",
-	'ObservationDistanceMin', 15000,
-	'ObservationDistanceMax', 20000,
-	'Icon', "UI/Icons/Resources/res_draka",
-	'DisplayName', T(553265468235, --[[ModItemUnitAnimalCompositeDef Draka DisplayName]] "Drakka"),
-	'DisplayNamePl', T(215750510541, --[[ModItemUnitAnimalCompositeDef Draka DisplayNamePl]] "Drakkas"),
-	'Description', T(871759141708, --[[ModItemUnitAnimalCompositeDef Draka Description]] "Usually passive. High chance to retaliate when attacked."),
-	'FoodResources', {
-		"FoodAnimalHerbivore",
-		"Slop",
-	},
-	'DailyEatingAmount', 1000,
-	'Diet', "Herbivore",
-	'EatingDuration', 4000,
-	'FoodSourceClasses', {
-		"ResourcePile",
-		"Plant",
-		"AnimalFeeder",
-	},
-	'ButcherResources', {
-		PlaceObj('ButcherResAmount', {
-			'resource', "RawMeat",
-			'min_amount', 40000,
-			'max_amount', 60000,
-		}),
-	},
-	'SelectionRadius', 2000,
-	'ChanceToBeMale', 30,
-	'BodySize', "large",
-	'ProduceResources', {
-		PlaceObj('ResAmount', {
-			'resource', "FuelManure",
-			'amount', 15000,
-		}),
-	},
-	'ProduceResInterval', 1920000,
-	'CmdProduceResources', function (animal)
-		if not animal:IsTamed() then
-			if animal:Random(100, "no produce chance") > 40 then
-				return animal:UpdateProductionTime()
-			end
-		end
-		return animal:DoProduceResources()
-	end,
-	'AnimalPerks', {
-		"ManureProducer",
-	},
-	'pfclass_tamed', 10,
-	'pfclass_tamed_lead', 13,
-	'EnrageChanceOtherAnimals', 50,
-	'EatStartAnim', "eat_Start",
-	'EatIdleAnim', {
-		"eat_Idle",
-	},
-	'EatEndAnim', "eat_End",
-	'anim_idle', {
-		"idle",
-		"idle_Active",
-		"idle_Active2",
-	},
-	'anim_idle_nervous', {
-		"idle_Nervous",
-	},
-	'SleepStartAnim', "sleep_Start",
-	'SleepIdleAnim', "sleep_Idle",
-	'SleepEndAnim', "sleep_End",
-	'SleepInterruptedAnim', "sleep_Interrupted",
-	'Tameable', true,
-	'TamingFood', "Grain",
-	'TamingFoodAmount', 10000,
-	'TamingMinimumSkill', 5,
-	'TamingChance', 50,
-	'TamingAggressiveChance', 20,
-	'TamingDistance', 10000,
-	'TamedLifetimeMin', 92160000,
-	'TamedLifetimeMax', 138240000,
-	'CombatSkillInitial', range(5, 6),
-	'BondingChance', 5,
-	'ReproductionType', "two sexes",
-	'DailyPregnancyChance', 45,
-	'PregnancyDuration', 4800000,
-	'GrowDuration', 4800000,
-	'NewbornClass', "Draka_T2",
-	'MaxGrownScale', 100,
-	'FieldVisibilityCold', 30000,
-	'FieldVisibilityWarm', 10000,
-	'MoveSpeedCold', 1000,
-	'PlantsToEatMin', 40,
-	'PlantsToEatMax', 60,
-	'HerdMergeClass', "Draka",
-}),
-PlaceObj('ModItemUnitAnimalCompositeDef', {
-	'Id', "Draka_T2",
-	'object_class', "DrakaBase",
-	'SpeciesGroup', "hoofed",
-	'RoamRadius', 30000,
-	'RoamMinDist', 5000,
-	'RoamMaxDist', 20000,
-	'RoamIntervalMax', 60000,
-	'composite_part_groups', {
-		"DrakaT2",
-	},
-	'composite_part_parent', {
-		Test = "Forehead",
-	},
-	'composite_part_spots', {
-		Forehead = "Horns",
-		HornLeft = "Horns",
-		HornRight = "Horns",
-		Test = "Origin",
-	},
-	'PainMask', "PainMask",
-	'EventProgressValue', 200,
-	'CombatGroup', "Drakkas",
-	'CombatHostile', true,
-	'HitNegationChance', {
-		HitNegationChance_blunt = 15,
-		HitNegationChance_energy = 15,
-		HitNegationChance_pacify = 20,
-		blunt = 15,
-		energy = 15,
-		pacify = 20,
-	},
-	'HitNegationChance_blunt', 15,
-	'HitNegationChance_energy', 15,
-	'HitNegationChance_pacify', 20,
-	'EnrageChance', 15,
-	'AttackMemory', 45000,
-	'CombatGiveUpNoHit', 30000,
-	'CombatFleeAccuracy', 0,
-	'ButcherDuration', 20000,
-	'max_skinned_decals_low', -2,
-	'FieldResearchTech', "FieldDraka",
-	'ObservationDistanceMin', 15000,
-	'ObservationDistanceMax', 20000,
-	'Icon', "UI/Icons/Resources/res_draka",
-	'DisplayName', T(188299442951, --[[ModItemUnitAnimalCompositeDef Draka_T2 DisplayName]] "Drikka"),
-	'DisplayNamePl', T(380323294146, --[[ModItemUnitAnimalCompositeDef Draka_T2 DisplayNamePl]] "Drikkas"),
-	'Description', T(698713214828, --[[ModItemUnitAnimalCompositeDef Draka_T2 Description]] "Aggressive Evolution of the Drakka. The exoskeleton clicks and clacks."),
-	'BaseMaxHealth', 350000,
-	'FoodResources', {
-		"FoodAnimalHerbivore",
-		"Slop",
-	},
-	'DailyEatingAmount', 2000,
-	'Diet', "Herbivore",
-	'EatingDuration', 4000,
-	'FoodSourceClasses', {
-		"ResourcePile",
-		"Plant",
-		"AnimalFeeder",
-	},
-	'ButcherResources', {
-		PlaceObj('ButcherResAmount', {
-			'resource', "RawMeat",
-			'min_amount', 40000,
-			'max_amount', 60000,
-		}),
-	},
-	'SelectionRadius', 2000,
-	'ChanceToBeMale', 35,
-	'BodySize', "large",
-	'ProduceResources', {
-		PlaceObj('ResAmount', {
-			'resource', "FuelManure",
-			'amount', 15000,
-		}),
-	},
-	'ProduceResInterval', 1920000,
-	'CmdProduceResources', function (animal)
-		if not animal:IsTamed() then
-			if animal:Random(100, "no produce chance") > 40 then
-				return animal:UpdateProductionTime()
-			end
-		end
-		return animal:DoProduceResources()
-	end,
-	'AnimalPerks', {
-		"ManureProducer",
-		"DraftableAnimal",
-		"DrakaAcoustic",
-	},
-	'pfclass_tamed', 10,
-	'pfclass_tamed_lead', 13,
-	'EnrageChanceOtherAnimals', 50,
-	'EatStartAnim', "eat_Start",
-	'EatIdleAnim', {
-		"eat_Idle",
-	},
-	'EatEndAnim', "eat_End",
-	'anim_idle', {
-		"idle",
-		"idle_Active",
-		"idle_Active2",
-	},
-	'anim_idle_nervous', {
-		"idle_Nervous",
-	},
-	'SleepStartAnim', "sleep_Start",
-	'SleepIdleAnim', "sleep_Idle",
-	'SleepEndAnim', "sleep_End",
-	'SleepInterruptedAnim', "sleep_Interrupted",
-	'Tameable', true,
-	'TamingFood', "Grain",
-	'TamingFoodAmount', 10000,
-	'TamingMinimumSkill', 5,
-	'TamingChance', 50,
-	'TamingAggressiveChance', 20,
-	'TamingDistance', 10000,
-	'TamedLifetimeMin', 92160000,
-	'TamedLifetimeMax', 138240000,
-	'CombatSkillInitial', range(5, 6),
-	'BondingChance', 5,
-	'ReproductionType', "two sexes",
-	'DailyPregnancyChance', 45,
-	'PregnancyDuration', 4800000,
-	'GrowDuration', 4800000,
-	'NewbornClass', "Draka_T3",
-	'MaxGrownScale', 100,
-	'FieldVisibilityCold', 30000,
-	'FieldVisibilityWarm', 10000,
-	'MoveSpeedCold', 1000,
-	'PlantsToEatMin', 40,
-	'PlantsToEatMax', 60,
-	'HerdMergeClass', "Draka",
-	'UnitPerkFrenzy', true,
-	'FrenzyEffects', {
-		"Frenzy_Conscious_1",
-		"Acoustic_T1",
-	},
-}),
-PlaceObj('ModItemUnitAnimalCompositeDef', {
-	'Id', "Draka_T3",
-	'object_class', "DrakaBase",
-	'SpeciesGroup', "hoofed",
-	'RoamRadius', 30000,
-	'RoamMinDist', 5000,
-	'RoamMaxDist', 20000,
-	'RoamIntervalMax', 60000,
-	'composite_part_groups', {
-		"DrakaT3",
-	},
-	'composite_part_parent', {
-		Test = "Forehead",
-	},
-	'composite_part_spots', {
-		Forehead = "Horns",
-		HornLeft = "Horns",
-		HornRight = "Horns",
-		Test = "Origin",
-	},
-	'PainMask', "PainMask",
-	'EventProgressValue', 450,
-	'CombatGroup', "Drakkas",
-	'CombatHostile', true,
-	'HitNegationChance', {
-		HitNegationChance_blunt = 30,
-		HitNegationChance_energy = 30,
-		HitNegationChance_pacify = 40,
-		blunt = 30,
-		energy = 30,
-		pacify = 40,
-	},
-	'HitNegationChance_blunt', 30,
-	'HitNegationChance_energy', 30,
-	'HitNegationChance_pacify', 40,
-	'EnrageChance', 15,
-	'AttackMemory', 45000,
-	'CombatGiveUpNoHit', 30000,
-	'CombatFleeAccuracy', 0,
-	'ButcherDuration', 20000,
-	'max_skinned_decals_low', -2,
-	'FieldResearchTech', "FieldDraka_T3",
-	'ObservationDistanceMin', 15000,
-	'ObservationDistanceMax', 20000,
-	'Icon', "UI/Icons/Resources/res_draka",
-	'DisplayName', T(384580682194, --[[ModItemUnitAnimalCompositeDef Draka_T3 DisplayName]] "DrikaDrakk"),
-	'DisplayNamePl', T(959449292169, --[[ModItemUnitAnimalCompositeDef Draka_T3 DisplayNamePl]] "DrikaDrakk"),
-	'Description', T(807758166765, --[[ModItemUnitAnimalCompositeDef Draka_T3 Description]] "Aggressive Evolution of the Drakka. Can weaponize it's acoustic outer shell."),
-	'BaseMaxHealth', 800000,
-	'FoodResources', {
-		"FoodAnimalHerbivore",
-		"Slop",
-	},
-	'DailyEatingAmount', 3000,
-	'Diet', "Herbivore",
-	'EatingDuration', 4000,
-	'FoodSourceClasses', {
-		"ResourcePile",
-		"Plant",
-		"AnimalFeeder",
-	},
-	'ButcherResources', {
-		PlaceObj('ButcherResAmount', {
-			'resource', "RawMeat",
-			'min_amount', 40000,
-			'max_amount', 60000,
-		}),
-	},
-	'SelectionRadius', 2000,
-	'ChanceToBeMale', 40,
-	'BodySize', "large",
-	'ProduceResources', {
-		PlaceObj('ResAmount', {
-			'resource', "FuelManure",
-			'amount', 15000,
-		}),
-	},
-	'ProduceResInterval', 1920000,
-	'CmdProduceResources', function (animal)
-		if not animal:IsTamed() then
-			if animal:Random(100, "no produce chance") > 40 then
-				return animal:UpdateProductionTime()
-			end
-		end
-		return animal:DoProduceResources()
-	end,
-	'AnimalPerks', {
-		"ManureProducer",
-		"DraftableAnimal",
-		"DrakaAcoustic",
-	},
-	'pfclass_tamed', 10,
-	'pfclass_tamed_lead', 13,
-	'EnrageChanceOtherAnimals', 50,
-	'EatStartAnim', "eat_Start",
-	'EatIdleAnim', {
-		"eat_Idle",
-	},
-	'EatEndAnim', "eat_End",
-	'anim_idle', {
-		"idle",
-		"idle_Active",
-		"idle_Active2",
-	},
-	'anim_idle_nervous', {
-		"idle_Nervous",
-	},
-	'SleepStartAnim', "sleep_Start",
-	'SleepIdleAnim', "sleep_Idle",
-	'SleepEndAnim', "sleep_End",
-	'SleepInterruptedAnim', "sleep_Interrupted",
-	'Tameable', true,
-	'TamingFood', "Grain",
-	'TamingFoodAmount', 10000,
-	'TamingMinimumSkill', 5,
-	'TamingChance', 50,
-	'TamingAggressiveChance', 20,
-	'TamingDistance', 10000,
-	'TamedLifetimeMin', 92160000,
-	'TamedLifetimeMax', 138240000,
-	'CombatSkillInitial', range(5, 6),
-	'BondingChance', 5,
-	'ReproductionType', "two sexes",
-	'DailyPregnancyChance', 55,
-	'PregnancyDuration', 2880000,
-	'GrowDuration', 2880000,
-	'NewbornClass', "Draka_T4",
-	'MaxGrownScale', 100,
-	'FieldVisibilityCold', 30000,
-	'FieldVisibilityWarm', 10000,
-	'MoveSpeedCold', 1000,
-	'PlantsToEatMin', 40,
-	'PlantsToEatMax', 60,
-	'HerdMergeClass', "Draka",
-	'UnitPerkFrenzy', true,
-	'FrenzyEffects', {
-		"Frenzy_Conscious_2",
-		"Acoustic_T2",
-	},
-}),
-PlaceObj('ModItemUnitAnimalCompositeDef', {
-	'Id', "Draka_T4",
-	'object_class', "DrakaBase",
-	'SpeciesGroup', "hoofed",
-	'RoamRadius', 30000,
-	'RoamMinDist', 5000,
-	'RoamMaxDist', 20000,
-	'RoamIntervalMax', 60000,
-	'composite_part_groups', {
-		"DrakaT4",
-	},
-	'composite_part_parent', {
-		Test = "Forehead",
-	},
-	'composite_part_spots', {
-		Forehead = "Horns",
-		HornLeft = "Horns",
-		HornRight = "Horns",
-		Test = "Origin",
-	},
-	'PainMask', "PainMask",
-	'EventProgressValue', 800,
-	'CombatGroup', "Drakkas",
-	'HitNegationChance', {
-		HitNegationChance_blunt = 40,
-		HitNegationChance_energy = 40,
-		HitNegationChance_pacify = 60,
-		blunt = 40,
-		energy = 40,
-		pacify = 60,
-	},
-	'HitNegationChance_blunt', 40,
-	'HitNegationChance_energy', 40,
-	'HitNegationChance_pacify', 60,
-	'EnrageChance', 15,
-	'AttackMemory', 45000,
-	'CombatGiveUpNoHit', 30000,
-	'CombatFleeAccuracy', 0,
-	'ButcherDuration', 20000,
-	'max_skinned_decals_low', -2,
-	'FieldResearchTech', "FieldDraka_T3",
-	'ObservationDistanceMin', 15000,
-	'ObservationDistanceMax', 20000,
-	'Icon', "UI/Icons/Resources/res_draka",
-	'DisplayName', T(342153828864, --[[ModItemUnitAnimalCompositeDef Draka_T4 DisplayName]] "DrikaDrakka"),
-	'DisplayNamePl', T(300064191432, --[[ModItemUnitAnimalCompositeDef Draka_T4 DisplayNamePl]] "DrikaDrakkas"),
-	'Description', T(894512638170, --[[ModItemUnitAnimalCompositeDef Draka_T4 Description]] "Aggressive Evolution of the Drakka. This species now emits sound waves long after the impacts that caused it."),
-	'BaseMaxHealth', 1200000,
-	'FoodResources', {
-		"FoodAnimalHerbivore",
-		"Slop",
-	},
-	'DailyEatingAmount', 4000,
-	'Diet', "Herbivore",
-	'EatingDuration', 4000,
-	'FoodSourceClasses', {
-		"ResourcePile",
-		"Plant",
-		"AnimalFeeder",
-	},
-	'ButcherResources', {
-		PlaceObj('ButcherResAmount', {
-			'resource', "RawMeat",
-			'min_amount', 40000,
-			'max_amount', 60000,
-		}),
-	},
-	'SelectionRadius', 2000,
-	'ChanceToBeMale', 45,
-	'BodySize', "large",
-	'ProduceResources', {
-		PlaceObj('ResAmount', {
-			'resource', "FuelManure",
-			'amount', 15000,
-		}),
-	},
-	'ProduceResInterval', 1920000,
-	'CmdProduceResources', function (animal)
-		if not animal:IsTamed() then
-			if animal:Random(100, "no produce chance") > 40 then
-				return animal:UpdateProductionTime()
-			end
-		end
-		return animal:DoProduceResources()
-	end,
-	'AnimalPerks', {
-		"ManureProducer",
-		"DraftableAnimal",
-		"DrakaAcoustic",
-	},
-	'pfclass_tamed', 10,
-	'pfclass_tamed_lead', 13,
-	'EnrageChanceOtherAnimals', 50,
-	'EatStartAnim', "eat_Start",
-	'EatIdleAnim', {
-		"eat_Idle",
-	},
-	'EatEndAnim', "eat_End",
-	'anim_idle', {
-		"idle",
-		"idle_Active",
-		"idle_Active2",
-	},
-	'anim_idle_nervous', {
-		"idle_Nervous",
-	},
-	'SleepStartAnim', "sleep_Start",
-	'SleepIdleAnim', "sleep_Idle",
-	'SleepEndAnim', "sleep_End",
-	'SleepInterruptedAnim', "sleep_Interrupted",
-	'Tameable', true,
-	'TamingFood', "Grain",
-	'TamingFoodAmount', 10000,
-	'TamingMinimumSkill', 5,
-	'TamingChance', 25,
-	'TamingAggressiveChance', 80,
-	'TamingDistance', 10000,
-	'TamedLifetimeMin', 92160000,
-	'TamedLifetimeMax', 138240000,
-	'CombatSkillInitial', range(5, 6),
-	'BondingChance', 5,
-	'ReproductionType', "two sexes",
-	'DailyPregnancyChance', 65,
-	'PregnancyDuration', 2000000,
-	'GrowDuration', 2000000,
-	'NewbornClass', "Draka_T5",
-	'MaxGrownScale', 100,
-	'FieldVisibilityCold', 30000,
-	'FieldVisibilityWarm', 10000,
-	'MoveSpeedCold', 1000,
-	'PlantsToEatMin', 40,
-	'PlantsToEatMax', 60,
-	'HerdMergeClass', "Draka",
-	'UnitPerkFrenzy', true,
-	'FrenzyEffects', {
-		"Frenzy_Conscious_3",
-		"Acoustic_T3",
-	},
-}),
-PlaceObj('ModItemUnitAnimalCompositeDef', {
-	'Id', "Draka_T5",
-	'object_class', "DrakaBase",
-	'SpeciesGroup', "hoofed",
-	'RoamRadius', 30000,
-	'RoamMinDist', 5000,
-	'RoamMaxDist', 20000,
-	'RoamIntervalMax', 60000,
-	'composite_part_groups', {
-		"DrakaT5",
-	},
-	'composite_part_parent', {
-		Test = "Forehead",
-	},
-	'composite_part_spots', {
-		Forehead = "Horns",
-		HornLeft = "Horns",
-		HornRight = "Horns",
-		Test = "Origin",
-	},
-	'PainMask', "PainMask",
-	'EventProgressValue', 1600,
-	'CombatGroup', "Drakkas",
-	'HitNegationChance', {
-		HitNegationChance_blunt = 50,
-		HitNegationChance_energy = 50,
-		HitNegationChance_gas = 10,
-		HitNegationChance_pacify = 80,
-		HitNegationChance_piercing = 10,
-		blunt = 50,
-		energy = 50,
-		gas = 10,
-		pacify = 80,
-		piercing = 10,
-	},
-	'HitNegationChance_blunt', 50,
-	'HitNegationChance_piercing', 10,
-	'HitNegationChance_energy', 50,
-	'HitNegationChance_gas', 10,
-	'HitNegationChance_pacify', 80,
-	'EnrageChance', 15,
-	'AttackMemory', 45000,
-	'CombatGiveUpNoHit', 30000,
-	'CombatFleeAccuracy', 0,
-	'ButcherDuration', 20000,
-	'max_skinned_decals_low', -2,
-	'FieldResearchTech', "FieldDraka_T5",
-	'ObservationDistanceMin', 15000,
-	'ObservationDistanceMax', 20000,
-	'Icon', "UI/Icons/Resources/res_draka",
-	'DisplayName', T(387009331496, --[[ModItemUnitAnimalCompositeDef Draka_T5 DisplayName]] "DrikaDrekaDrakka"),
-	'DisplayNamePl', T(518841717627, --[[ModItemUnitAnimalCompositeDef Draka_T5 DisplayNamePl]] "DrikaDrekaDrakkas"),
-	'Description', T(222805768873, --[[ModItemUnitAnimalCompositeDef Draka_T5 Description]] "Aggressive Evolution of the Drakka. More stability means this creature can emit louder and louder sonic booms."),
-	'BaseMaxHealth', 1500000,
-	'FoodResources', {
-		"FoodAnimalHerbivore",
-		"Slop",
-	},
-	'DailyEatingAmount', 5000,
-	'Diet', "Herbivore",
-	'EatingDuration', 4000,
-	'FoodSourceClasses', {
-		"ResourcePile",
-		"Plant",
-		"AnimalFeeder",
-	},
-	'ButcherResources', {
-		PlaceObj('ButcherResAmount', {
-			'resource', "RawMeat",
-			'min_amount', 40000,
-			'max_amount', 60000,
-		}),
-	},
-	'SelectionRadius', 2000,
-	'ChanceToBeMale', 50,
-	'BodySize', "large",
-	'ProduceResources', {
-		PlaceObj('ResAmount', {
-			'resource', "FuelManure",
-			'amount', 15000,
-		}),
-	},
-	'ProduceResInterval', 1920000,
-	'CmdProduceResources', function (animal)
-		if not animal:IsTamed() then
-			if animal:Random(100, "no produce chance") > 40 then
-				return animal:UpdateProductionTime()
-			end
-		end
-		return animal:DoProduceResources()
-	end,
-	'AnimalPerks', {
-		"ManureProducer",
-		"DraftableAnimal",
-		"DrakaAcoustic",
-	},
-	'pfclass_tamed', 10,
-	'pfclass_tamed_lead', 13,
-	'EnrageChanceOtherAnimals', 50,
-	'EatStartAnim', "eat_Start",
-	'EatIdleAnim', {
-		"eat_Idle",
-	},
-	'EatEndAnim', "eat_End",
-	'anim_idle', {
-		"idle",
-		"idle_Active",
-		"idle_Active2",
-	},
-	'anim_idle_nervous', {
-		"idle_Nervous",
-	},
-	'SleepStartAnim', "sleep_Start",
-	'SleepIdleAnim', "sleep_Idle",
-	'SleepEndAnim', "sleep_End",
-	'SleepInterruptedAnim', "sleep_Interrupted",
-	'Tameable', true,
-	'TamingFood', "Grain",
-	'TamingFoodAmount', 10000,
-	'TamingMinimumSkill', 5,
-	'TamingChance', 50,
-	'TamingAggressiveChance', 20,
-	'TamingDistance', 10000,
-	'TamedLifetimeMin', 92160000,
-	'TamedLifetimeMax', 138240000,
-	'CombatSkillInitial', range(5, 6),
-	'BondingChance', 5,
-	'ReproductionType', "two sexes",
-	'DailyPregnancyChance', 50,
-	'PregnancyDuration', 1800000,
-	'GrowDuration', 1800000,
-	'MaxGrownScale', 100,
-	'FieldVisibilityCold', 30000,
-	'FieldVisibilityWarm', 10000,
-	'MoveSpeedCold', 1000,
-	'PlantsToEatMin', 40,
-	'PlantsToEatMax', 60,
-	'HerdMergeClass', "Draka",
-	'UnitPerkFrenzy', true,
-	'FrenzyEffects', {
-		"Frenzy_Conscious_4",
-		"Acoustic_T4",
-	},
-}),
-PlaceObj('ModItemTech', {
-	Activity = "FieldResearch",
-	Description = T(918909534714, --[[ModItemTech FieldDraka_T3 Description]] "The <em>Drakka</em> have now shown to be evolving in a hyper specific manner.\nIt's occasional clickity clack of it's exoskeleton bending and popping now gets louder and louder the more attacks it receives.\nOnce this reaches a critical mass, the DrikaDrakk body will trigger a sonic boom around it! \n\nFor better or for worse, the organs inside are not capable of handling multiple explosions.\nThis usually means the DrikkaDrakk fall unconscious from the force before death.\n\nIt's large forehead and brittle shell gives this creature good <color TextButton>Blunt</color> and <color TextPositive>Energy</color> Deflection chances."),
-	DisplayName = T(414518110756, --[[ModItemTech FieldDraka_T3 DisplayName]] "Unknown Drakka Evolution"),
-	DisplayNamePl = T(134174630715, --[[ModItemTech FieldDraka_T3 DisplayNamePl]] "Unknown Drakka Evolutions"),
-	FieldResearchCategory = "Fauna",
-	FieldResearchTemplateExpression = function (self) return Draka end,
-	Icon = "UI/Messages/Research/res_Draka",
-	ResearchPoints = 6000,
-	group = "Field",
-	id = "FieldDraka_T3",
-	money_value = 50000000,
-	tradable = false,
-}),
-PlaceObj('ModItemTech', {
-	Activity = "FieldResearch",
-	Description = T(895664539556, --[[ModItemTech FieldDraka_T5 Description]] "The <em>Drakka</em> bodies are now just multiple layers of chitin, much like an onion.\nEach organ has now been wrapped in it's own exoskeleton shell, with small air pockets between each shell.\nThis has made their bodies able to withstand more explosions!\nEven more impressive is the fact that they preserve some of the energy, allowing more frequent eruptions!\n\nIt's large forehead and brittle shell gives this creature good <color TextButton>Blunt</color> and <color TextPositive>Energy</color> Deflection chances."),
-	DisplayName = T(573390196346, --[[ModItemTech FieldDraka_T5 DisplayName]] "Unknown Drakka Evolution"),
-	DisplayNamePl = T(535584479648, --[[ModItemTech FieldDraka_T5 DisplayNamePl]] "Unknown Drakka Evolutions"),
-	FieldResearchCategory = "Fauna",
-	FieldResearchTemplateExpression = function (self) return Draka end,
-	Icon = "UI/Messages/Research/res_Draka",
-	ResearchPoints = 6000,
-	group = "Field",
-	id = "FieldDraka_T5",
-	money_value = 50000000,
-	tradable = false,
-}),
-PlaceObj('ModItemUnitAnimalCompositeDef', {
-	'Id', "Ulfen",
-	'object_class', "UlfenBase",
-	'SpeciesGroup', "hoofed",
-	'RoamRadius', 15000,
-	'RoamIntervalMin', 40000,
-	'RoamIntervalMax', 120000,
-	'PainMask', "PainMask",
-	'EventProgressValue', 30,
-	'CombatGroup', "Ulfens",
-	'EnrageChance', 3,
-	'AttackMemory', 45000,
-	'CombatGiveUpNoHit', 30000,
-	'CombatFleeAccuracy', 0,
-	'aim_spot', "Aim",
-	'ButcherDuration', 20000,
-	'max_skinned_decals_low', -1,
-	'FieldResearchTech', "FieldUlfen",
-	'ObservationDistanceMin', 15000,
-	'ObservationDistanceMax', 20000,
-	'Icon', "UI/Icons/Resources/res_ulfen",
-	'DisplayName', T(756384334076, --[[ModItemUnitAnimalCompositeDef Ulfen DisplayName]] "Ulfen"),
-	'DisplayNamePl', T(905161765277, --[[ModItemUnitAnimalCompositeDef Ulfen DisplayNamePl]] "Ulfens"),
-	'Description', T(109888884422, --[[ModItemUnitAnimalCompositeDef Ulfen Description]] "Usually passive. Small chance to retaliate when attacked."),
-	'FoodResources', {
-		"FoodAnimalHerbivore",
-		"Slop",
-	},
-	'DailyEatingAmount', 10000,
-	'Diet', "Herbivore",
-	'EatingDuration', 4000,
-	'FoodSourceClasses', {
-		"ResourcePile",
-		"Plant",
-		"AnimalFeeder",
-	},
-	'ButcherResources', {
-		PlaceObj('ButcherResAmount', {
-			'resource', "RawMeat",
-			'min_amount', 40000,
-			'max_amount', 60000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "LeatherRaw",
-			'min_amount', 20000,
-			'max_amount', 40000,
-		}),
-	},
-	'SelectionRadius', 2000,
-	'ChanceToBeMale', 40,
-	'BodySize', "large",
-	'ProduceResources', {
-		PlaceObj('ResAmount', {
-			'resource', "FuelManure",
-			'amount', 20000,
-		}),
-	},
-	'ProduceResInterval', 1920000,
-	'CmdProduceResources', function (animal)
-		if not animal:IsTamed() then
-			if animal:Random(100, "no produce chance") > 40 then
-				return animal:UpdateProductionTime()
-			end
-		end
-		return animal:DoProduceResources()
-	end,
-	'AnimalPerks', {
-		"ManureProducer",
-	},
-	'collision_radius_mod', 1250,
-	'pfclass_tamed', 10,
-	'pfclass_tamed_lead', 13,
-	'EatStartAnim', "eat_Start",
-	'EatIdleAnim', {
-		"eat_Idle",
-	},
-	'EatEndAnim', "eat_End",
-	'anim_idle_nervous', {
-		"idle_Nervous",
-	},
-	'anim_idle_playful', {
-		"idle_Playfull",
-		"idle_Playfull2",
-	},
-	'SleepStartAnim', "sleep_Start",
-	'SleepIdleAnim', "sleep_Idle",
-	'SleepEndAnim', "sleep_End",
-	'SleepInterruptedAnim', "sleep_Interrupted",
-	'SleepStartAnim2', "sleep_Start2",
-	'SleepIdleAnim2', "sleep_Idle2",
-	'SleepEndAnim2', "sleep_End2",
-	'SleepInterruptedAnim2', "sleep_Interrupted2",
-	'Tameable', true,
-	'Petable', true,
-	'TamingFood', "Berry",
-	'TamingFoodAmount', 10000,
-	'TamingMinimumSkill', 3,
-	'TamingChance', 70,
-	'TamingAggressiveChance', 10,
-	'TamingDistance', 10000,
-	'TamedLifetimeMin', 92160000,
-	'TamedLifetimeMax', 138240000,
-	'BondingChance', 10,
-	'ReproductionType', "two sexes",
-	'DailyPregnancyChance', 50,
-	'PregnancyDuration', 3840000,
-	'GrowDuration', 3840000,
-	'NewbornClass', "Ulfen_T2",
-	'MinGrownScale', 70,
-	'MaxGrownScale', 90,
-	'FieldVisibilityCold', 30000,
-	'FieldVisibilityWarm', 10000,
-	'MoveSpeedCold', 1000,
-	'PlantsToEatMin', 40,
-	'PlantsToEatMax', 60,
-}),
-PlaceObj('ModItemAnimalPerk', {
-	Description = T(530392310997, --[[ModItemAnimalPerk Default DrakaAcoustic Description]] "This animal is able to use it's imperfect exoskeleton to attack with sonic booms from built up vibrations."),
-	DisplayName = T(581820424831, --[[ModItemAnimalPerk Default DrakaAcoustic DisplayName]] "Acoustic"),
-	id = "DrakaAcoustic",
-}),
-PlaceObj('ModItemHealthCondition', {
-	AffectableBodyParts = {
-		PlaceObj('HealthConditionBodyParts', {
-			BodyPart = "All",
-			param_bindings = false,
-		}),
-	},
-	Description = T(636177971626, --[[ModItemHealthCondition Acoustic_T1 Description]] "Every 5 hits against this creature will cause vibrations to intensify enough to fire at the most recent attacker! This quiets the exoskeleton for a time.\nMultiple Sonic Booms sent in a short period of time causes immense headaches and difficulty staying conscious."),
-	DisplayName = T(580224469474, --[[ModItemHealthCondition Acoustic_T1 DisplayName]] "Acoustic Exoskeleton T1"),
-	OnAdd = function (self, owner, ...)
-		if owner.reso == nil then
-			owner.reso = 1
-		end
-	end,
-	Type = "Buff",
-	id = "Acoustic_T1",
-	unit_reactions = {
-		PlaceObj('UnitReaction', {
-			Event = "AvoidAttackModify",
-			Handler = function (self, target, hit_chance, attacker, weapon_def, attacker_dist)
-				target.reso = target.reso +1
-				if target.reso % 5 == 0 then
-					target.reso = target.reso - 5
-					target:AddHealthCondition("ResoBacklash_2")
-					local chance = target:GetWeaponHitChance(weapon_def) - 20
-					local hit = (chance or 100) >= 100 or target:Random(100, "HitChance") < chance
-					local w_d = Resources['Resonance_T1']
-					local deflect = attacker:GetHitNegationChanceForWeapon(w_d)
-					local dodge =  (deflect or 100) >= 100 or attacker:Random(100, "HitChance") > deflect
-					local chance = target:GetWeaponHitChance(weapon_def) - 20
-					if hit and not dodge then
-						attacker:OnAttackReceived(target,w_d,target)
+		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Id', "Draka",
+			'object_class', "DrakaBase",
+			'SpeciesGroup', "hoofed",
+			'RoamRadius', 30000,
+			'RoamMinDist', 5000,
+			'RoamMaxDist', 20000,
+			'RoamIntervalMax', 60000,
+			'composite_part_parent', {
+				Test = "Forehead",
+			},
+			'composite_part_spots', {
+				Forehead = "Horns",
+				HornLeft = "Horns",
+				HornRight = "Horns",
+				Test = "Origin",
+			},
+			'PainMask', "PainMask",
+			'EventProgressValue', 50,
+			'CombatGroup', "Drakkas",
+			'EnrageChance', 15,
+			'AttackMemory', 45000,
+			'CombatGiveUpNoHit', 30000,
+			'CombatFleeAccuracy', 0,
+			'ButcherDuration', 20000,
+			'max_skinned_decals_low', -2,
+			'FieldResearchTech', "FieldDraka",
+			'ObservationDistanceMin', 15000,
+			'ObservationDistanceMax', 20000,
+			'Icon', "UI/Icons/Resources/res_draka",
+			'DisplayName', T(553265468235, --[[ModItemUnitAnimalCompositeDef Draka DisplayName]] "Drakka"),
+			'DisplayNamePl', T(215750510541, --[[ModItemUnitAnimalCompositeDef Draka DisplayNamePl]] "Drakkas"),
+			'Description', T(871759141708, --[[ModItemUnitAnimalCompositeDef Draka Description]] "Usually passive. High chance to retaliate when attacked."),
+			'FoodResources', {
+				"FoodAnimalHerbivore",
+				"Slop",
+			},
+			'DailyEatingAmount', 1000,
+			'Diet', "Herbivore",
+			'EatingDuration', 4000,
+			'FoodSourceClasses', {
+				"ResourcePile",
+				"Plant",
+				"AnimalFeeder",
+			},
+			'ButcherResources', {
+				PlaceObj('ButcherResAmount', {
+					'resource', "RawMeat",
+					'min_amount', 40000,
+					'max_amount', 60000,
+				}),
+			},
+			'SelectionRadius', 2000,
+			'ChanceToBeMale', 30,
+			'BodySize', "large",
+			'ProduceResources', {
+				PlaceObj('ResAmount', {
+					'resource', "FuelManure",
+					'amount', 15000,
+				}),
+			},
+			'ProduceResInterval', 1920000,
+			'CmdProduceResources', function (animal)
+				if not animal:IsTamed() then
+					if animal:Random(100, "no produce chance") > 40 then
+						return animal:UpdateProductionTime()
 					end
 				end
-				return hit_chance
+				return animal:DoProduceResources()
 			end,
-			param_bindings = false,
+			'AnimalPerks', {
+				"ManureProducer",
+			},
+			'pfclass_tamed', 10,
+			'pfclass_tamed_lead', 13,
+			'EnrageChanceOtherAnimals', 50,
+			'EatStartAnim', "eat_Start",
+			'EatIdleAnim', {
+				"eat_Idle",
+			},
+			'EatEndAnim', "eat_End",
+			'anim_idle', {
+				"idle",
+				"idle_Active",
+				"idle_Active2",
+			},
+			'anim_idle_nervous', {
+				"idle_Nervous",
+			},
+			'SleepStartAnim', "sleep_Start",
+			'SleepIdleAnim', "sleep_Idle",
+			'SleepEndAnim', "sleep_End",
+			'SleepInterruptedAnim', "sleep_Interrupted",
+			'Tameable', true,
+			'TamingFood', "Grain",
+			'TamingFoodAmount', 10000,
+			'TamingMinimumSkill', 5,
+			'TamingChance', 50,
+			'TamingAggressiveChance', 20,
+			'TamingDistance', 10000,
+			'TamedLifetimeMin', 92160000,
+			'TamedLifetimeMax', 138240000,
+			'CombatSkillInitial', range(5, 6),
+			'BondingChance', 5,
+			'ReproductionType', "two sexes",
+			'DailyPregnancyChance', 55,
+			'PregnancyDuration', 4800000,
+			'GrowDuration', 4800000,
+			'NewbornClass', "Draka_T2",
+			'MaxGrownScale', 100,
+			'FieldVisibilityCold', 30000,
+			'FieldVisibilityWarm', 10000,
+			'MoveSpeedCold', 1000,
+			'PlantsToEatMin', 40,
+			'PlantsToEatMax', 60,
+			'HerdMergeClass', "Draka",
 		}),
-	},
-}),
-PlaceObj('ModItemHealthCondition', {
-	AffectableBodyParts = {
-		PlaceObj('HealthConditionBodyParts', {
-			BodyPart = "All",
-			param_bindings = false,
-		}),
-	},
-	Description = T(489746058759, --[[ModItemHealthCondition Acoustic_T2 Description]] "Every 5 hits against this creature will cause vibrations to intensify enough to fire at the most recent attacker! This quiets the exoskeleton for a time.\nMultiple Sonic Booms sent in a short period of time causes immense headaches and difficulty staying conscious.\nAny vibrations make it slightly more difficult to hit with an attack."),
-	DisplayName = T(147141245631, --[[ModItemHealthCondition Acoustic_T2 DisplayName]] "Acoustic Exoskeleton T2"),
-	OnAdd = function (self, owner, ...)
-		if owner.reso == nil then
-			owner.reso = 1
-		end
-	end,
-	Type = "Buff",
-	id = "Acoustic_T2",
-	unit_reactions = {
-		PlaceObj('UnitReaction', {
-			Event = "AvoidAttackModify",
-			Handler = function (self, target, hit_chance, attacker, weapon_def, attacker_dist)
-				target.reso = target.reso +1
-				if target.reso % 5 == 0 then
-					target.reso = target.reso - 5
-					target:AddHealthCondition("ResoBacklash_2")
-					local chance = target:GetWeaponHitChance(weapon_def) - 20
-					local hit = (chance or 100) >= 100 or target:Random(100, "HitChance") < chance
-					local w_d = Resources['Resonance_T1']
-					local deflect = attacker:GetHitNegationChanceForWeapon(w_d)
-					local dodge =  (deflect or 100) >= 100 or attacker:Random(100, "HitChance") > deflect
-					local chance = target:GetWeaponHitChance(weapon_def) - 20
-					if hit and not dodge then
-						attacker:OnAttackReceived(target,w_d,target)
+		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Id', "Draka_T2",
+			'object_class', "DrakaBase",
+			'SpeciesGroup', "hoofed",
+			'RoamRadius', 30000,
+			'RoamMinDist', 5000,
+			'RoamMaxDist', 20000,
+			'RoamIntervalMax', 60000,
+			'composite_part_groups', {
+				"DrakaT2",
+			},
+			'composite_part_parent', {
+				Test = "Forehead",
+			},
+			'composite_part_spots', {
+				Forehead = "Horns",
+				HornLeft = "Horns",
+				HornRight = "Horns",
+				Test = "Origin",
+			},
+			'PainMask', "PainMask",
+			'EventProgressValue', 200,
+			'CombatGroup', "Drakkas",
+			'CombatHostile', true,
+			'HitNegationChance', {
+				HitNegationChance_blunt = 15,
+				HitNegationChance_energy = 15,
+				HitNegationChance_pacify = 20,
+				blunt = 15,
+				energy = 15,
+				pacify = 20,
+			},
+			'HitNegationChance_blunt', 15,
+			'HitNegationChance_energy', 15,
+			'HitNegationChance_pacify', 20,
+			'EnrageChance', 15,
+			'AttackMemory', 45000,
+			'CombatGiveUpNoHit', 30000,
+			'CombatFleeAccuracy', 0,
+			'ButcherDuration', 20000,
+			'max_skinned_decals_low', -2,
+			'FieldResearchTech', "FieldDraka",
+			'ObservationDistanceMin', 15000,
+			'ObservationDistanceMax', 20000,
+			'Icon', "UI/Icons/Resources/res_draka",
+			'DisplayName', T(188299442951, --[[ModItemUnitAnimalCompositeDef Draka_T2 DisplayName]] "Drikka"),
+			'DisplayNamePl', T(380323294146, --[[ModItemUnitAnimalCompositeDef Draka_T2 DisplayNamePl]] "Drikkas"),
+			'Description', T(698713214828, --[[ModItemUnitAnimalCompositeDef Draka_T2 Description]] "Aggressive Evolution of the Drakka. The exoskeleton clicks and clacks."),
+			'BaseMaxHealth', 350000,
+			'FoodResources', {
+				"FoodAnimalHerbivore",
+				"Slop",
+			},
+			'DailyEatingAmount', 2000,
+			'Diet', "Herbivore",
+			'EatingDuration', 4000,
+			'FoodSourceClasses', {
+				"ResourcePile",
+				"Plant",
+				"AnimalFeeder",
+			},
+			'ButcherResources', {
+				PlaceObj('ButcherResAmount', {
+					'resource', "RawMeat",
+					'min_amount', 40000,
+					'max_amount', 60000,
+				}),
+			},
+			'SelectionRadius', 2000,
+			'ChanceToBeMale', 35,
+			'BodySize', "large",
+			'ProduceResources', {
+				PlaceObj('ResAmount', {
+					'resource', "FuelManure",
+					'amount', 15000,
+				}),
+			},
+			'ProduceResInterval', 1920000,
+			'CmdProduceResources', function (animal)
+				if not animal:IsTamed() then
+					if animal:Random(100, "no produce chance") > 40 then
+						return animal:UpdateProductionTime()
 					end
 				end
-				local denom = ((3 / 40) * target.reso) + 1 -- requires 40 stacks for 25% reduction
-				return hit_chance / denom
+				return animal:DoProduceResources()
 			end,
-			param_bindings = false,
+			'AnimalPerks', {
+				"ManureProducer",
+				"DraftableAnimal",
+				"DrakaAcoustic",
+			},
+			'pfclass_tamed', 10,
+			'pfclass_tamed_lead', 13,
+			'EnrageChanceOtherAnimals', 50,
+			'EatStartAnim', "eat_Start",
+			'EatIdleAnim', {
+				"eat_Idle",
+			},
+			'EatEndAnim', "eat_End",
+			'anim_idle', {
+				"idle",
+				"idle_Active",
+				"idle_Active2",
+			},
+			'anim_idle_nervous', {
+				"idle_Nervous",
+			},
+			'SleepStartAnim', "sleep_Start",
+			'SleepIdleAnim', "sleep_Idle",
+			'SleepEndAnim', "sleep_End",
+			'SleepInterruptedAnim', "sleep_Interrupted",
+			'Tameable', true,
+			'TamingFood', "Grain",
+			'TamingFoodAmount', 10000,
+			'TamingMinimumSkill', 5,
+			'TamingChance', 50,
+			'TamingAggressiveChance', 20,
+			'TamingDistance', 10000,
+			'TamedLifetimeMin', 92160000,
+			'TamedLifetimeMax', 138240000,
+			'CombatSkillInitial', range(5, 6),
+			'BondingChance', 5,
+			'ReproductionType', "two sexes",
+			'DailyPregnancyChance', 55,
+			'PregnancyDuration', 4800000,
+			'GrowDuration', 4800000,
+			'NewbornClass', "Draka_T3",
+			'MaxGrownScale', 100,
+			'FieldVisibilityCold', 30000,
+			'FieldVisibilityWarm', 10000,
+			'MoveSpeedCold', 1000,
+			'PlantsToEatMin', 40,
+			'PlantsToEatMax', 60,
+			'HerdMergeClass', "Draka",
+			'UnitPerkFrenzy', true,
+			'FrenzyEffects', {
+				"Frenzy_Conscious_1",
+				"Acoustic_T1",
+			},
 		}),
-	},
-}),
-PlaceObj('ModItemHealthCondition', {
-	AffectableBodyParts = {
-		PlaceObj('HealthConditionBodyParts', {
-			BodyPart = "All",
-			param_bindings = false,
-		}),
-	},
-	Description = T(175132395148, --[[ModItemHealthCondition Acoustic_T3 Description]] "Every 5 hits against this creature will cause vibrations to intensify enough to fire at the most recent attacker!\nMultiple Sonic Booms sent in a short period of time causes immense headaches and difficulty staying conscious.\nAny vibrations make it slightly more difficult to hit with an attack."),
-	DisplayName = T(522415654364, --[[ModItemHealthCondition Acoustic_T3 DisplayName]] "Acoustic Exoskeleton T3"),
-	OnAdd = function (self, owner, ...)
-		if owner.reso == nil then
-			owner.reso = 1
-		end
-	end,
-	Type = "Buff",
-	id = "Acoustic_T3",
-	unit_reactions = {
-		PlaceObj('UnitReaction', {
-			Event = "AvoidAttackModify",
-			Handler = function (self, target, hit_chance, attacker, weapon_def, attacker_dist)
-				target.reso = target.reso +1
-				if target.reso % 5 == 0 then
-					target:AddHealthCondition("ResoBacklash")
-					local chance = target:GetWeaponHitChance(weapon_def) - 20
-					local hit = (chance or 100) >= 100 or target:Random(100, "HitChance") < chance
-					local w_d = Resources['Resonance_T1']
-					local deflect = attacker:GetHitNegationChanceForWeapon(w_d)
-					local dodge =  (deflect or 100) >= 100 or attacker:Random(100, "HitChance") > deflect
-					local chance = target:GetWeaponHitChance(weapon_def) - 20
-					if hit and not dodge then
-						attacker:OnAttackReceived(target,w_d,target)
+		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Id', "Draka_T3",
+			'object_class', "DrakaBase",
+			'SpeciesGroup', "hoofed",
+			'RoamRadius', 30000,
+			'RoamMinDist', 5000,
+			'RoamMaxDist', 20000,
+			'RoamIntervalMax', 60000,
+			'composite_part_groups', {
+				"DrakaT3",
+			},
+			'composite_part_parent', {
+				Test = "Forehead",
+			},
+			'composite_part_spots', {
+				Forehead = "Horns",
+				HornLeft = "Horns",
+				HornRight = "Horns",
+				Test = "Origin",
+			},
+			'PainMask', "PainMask",
+			'EventProgressValue', 450,
+			'CombatGroup', "Drakkas",
+			'CombatHostile', true,
+			'HitNegationChance', {
+				HitNegationChance_blunt = 30,
+				HitNegationChance_energy = 30,
+				HitNegationChance_pacify = 40,
+				blunt = 30,
+				energy = 30,
+				pacify = 40,
+			},
+			'HitNegationChance_blunt', 30,
+			'HitNegationChance_energy', 30,
+			'HitNegationChance_pacify', 40,
+			'EnrageChance', 15,
+			'AttackMemory', 45000,
+			'CombatGiveUpNoHit', 30000,
+			'CombatFleeAccuracy', 0,
+			'ButcherDuration', 20000,
+			'max_skinned_decals_low', -2,
+			'FieldResearchTech', "FieldDraka_T3",
+			'ObservationDistanceMin', 15000,
+			'ObservationDistanceMax', 20000,
+			'Icon', "UI/Icons/Resources/res_draka",
+			'DisplayName', T(384580682194, --[[ModItemUnitAnimalCompositeDef Draka_T3 DisplayName]] "DrikaDrakk"),
+			'DisplayNamePl', T(959449292169, --[[ModItemUnitAnimalCompositeDef Draka_T3 DisplayNamePl]] "DrikaDrakk"),
+			'Description', T(807758166765, --[[ModItemUnitAnimalCompositeDef Draka_T3 Description]] "Aggressive Evolution of the Drakka. Can weaponize it's acoustic outer shell."),
+			'BaseMaxHealth', 800000,
+			'FoodResources', {
+				"FoodAnimalHerbivore",
+				"Slop",
+			},
+			'DailyEatingAmount', 3000,
+			'Diet', "Herbivore",
+			'EatingDuration', 4000,
+			'FoodSourceClasses', {
+				"ResourcePile",
+				"Plant",
+				"AnimalFeeder",
+			},
+			'ButcherResources', {
+				PlaceObj('ButcherResAmount', {
+					'resource', "RawMeat",
+					'min_amount', 40000,
+					'max_amount', 60000,
+				}),
+			},
+			'SelectionRadius', 2000,
+			'ChanceToBeMale', 40,
+			'BodySize', "large",
+			'ProduceResources', {
+				PlaceObj('ResAmount', {
+					'resource', "FuelManure",
+					'amount', 15000,
+				}),
+			},
+			'ProduceResInterval', 1920000,
+			'CmdProduceResources', function (animal)
+				if not animal:IsTamed() then
+					if animal:Random(100, "no produce chance") > 40 then
+						return animal:UpdateProductionTime()
 					end
 				end
-				local denom = ((3 / 40) * target.reso) + 1 -- requires 40 stacks for 25% reduction
-				return hit_chance / denom
+				return animal:DoProduceResources()
 			end,
-			param_bindings = false,
+			'AnimalPerks', {
+				"ManureProducer",
+				"DraftableAnimal",
+				"DrakaAcoustic",
+			},
+			'pfclass_tamed', 10,
+			'pfclass_tamed_lead', 13,
+			'EnrageChanceOtherAnimals', 50,
+			'EatStartAnim', "eat_Start",
+			'EatIdleAnim', {
+				"eat_Idle",
+			},
+			'EatEndAnim', "eat_End",
+			'anim_idle', {
+				"idle",
+				"idle_Active",
+				"idle_Active2",
+			},
+			'anim_idle_nervous', {
+				"idle_Nervous",
+			},
+			'SleepStartAnim', "sleep_Start",
+			'SleepIdleAnim', "sleep_Idle",
+			'SleepEndAnim', "sleep_End",
+			'SleepInterruptedAnim', "sleep_Interrupted",
+			'Tameable', true,
+			'TamingFood', "Grain",
+			'TamingFoodAmount', 10000,
+			'TamingMinimumSkill', 5,
+			'TamingChance', 50,
+			'TamingAggressiveChance', 20,
+			'TamingDistance', 10000,
+			'TamedLifetimeMin', 92160000,
+			'TamedLifetimeMax', 138240000,
+			'CombatSkillInitial', range(5, 6),
+			'BondingChance', 5,
+			'ReproductionType', "two sexes",
+			'DailyPregnancyChance', 65,
+			'PregnancyDuration', 2880000,
+			'GrowDuration', 2880000,
+			'NewbornClass', "Draka_T4",
+			'MaxGrownScale', 100,
+			'FieldVisibilityCold', 30000,
+			'FieldVisibilityWarm', 10000,
+			'MoveSpeedCold', 1000,
+			'PlantsToEatMin', 40,
+			'PlantsToEatMax', 60,
+			'HerdMergeClass', "Draka",
+			'UnitPerkFrenzy', true,
+			'FrenzyEffects', {
+				"Frenzy_Conscious_2",
+				"Acoustic_T2",
+			},
 		}),
-	},
-}),
-PlaceObj('ModItemHealthCondition', {
-	AffectableBodyParts = {
-		PlaceObj('HealthConditionBodyParts', {
-			BodyPart = "All",
-			param_bindings = false,
-		}),
-	},
-	Description = T(255920832469, --[[ModItemHealthCondition Acoustic_T4 Description]] "Every 5 hits against this creature will cause vibrations to intensify enough to fire at the most recent attacker! This quiets the exoskeleton for a time.\nMultiple Sonic Booms sent in a short period of time causes headaches and difficulty staying conscious.\nAny vibrations make it slightly more difficult to hit with an attack."),
-	DisplayName = T(586266057641, --[[ModItemHealthCondition Acoustic_T4 DisplayName]] "Acoustic Exoskeleton T4"),
-	OnAdd = function (self, owner, ...)
-		if owner.reso == nil then
-			print("Set basic reso")
-			owner.reso = 1
-		end
-	end,
-	Type = "Buff",
-	id = "Acoustic_T4",
-	unit_reactions = {
-		PlaceObj('UnitReaction', {
-			Event = "AvoidAttackModify",
-			Handler = function (self, target, hit_chance, attacker, weapon_def, attacker_dist)
-				target.reso = target.reso +1
-				if target.reso % 5 == 0 then
-					print("trying to throw a reverb!")
-					target:AddHealthCondition("ResoBacklash_2")
-					local chance = target:GetWeaponHitChance(weapon_def) - 20
-					local hit = (chance or 100) >= 100 or target:Random(100, "HitChance") < chance
-					local w_d = Resources['Resonance_T1']
-					local deflect = attacker:GetHitNegationChanceForWeapon(w_d)
-					local dodge =  (deflect or 100) >= 100 or attacker:Random(100, "HitChance") > deflect
-					local chance = target:GetWeaponHitChance(weapon_def) - 20
-					if hit and not dodge then
-						attacker:OnAttackReceived(target,w_d,target)
+		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Id', "Draka_T4",
+			'object_class', "DrakaBase",
+			'SpeciesGroup', "hoofed",
+			'RoamRadius', 30000,
+			'RoamMinDist', 5000,
+			'RoamMaxDist', 20000,
+			'RoamIntervalMax', 60000,
+			'composite_part_groups', {
+				"DrakaT4",
+			},
+			'composite_part_parent', {
+				Test = "Forehead",
+			},
+			'composite_part_spots', {
+				Forehead = "Horns",
+				HornLeft = "Horns",
+				HornRight = "Horns",
+				Test = "Origin",
+			},
+			'PainMask', "PainMask",
+			'EventProgressValue', 800,
+			'CombatGroup', "Drakkas",
+			'HitNegationChance', {
+				HitNegationChance_blunt = 40,
+				HitNegationChance_energy = 40,
+				HitNegationChance_pacify = 60,
+				blunt = 40,
+				energy = 40,
+				pacify = 60,
+			},
+			'HitNegationChance_blunt', 40,
+			'HitNegationChance_energy', 40,
+			'HitNegationChance_pacify', 60,
+			'EnrageChance', 15,
+			'AttackMemory', 45000,
+			'CombatGiveUpNoHit', 30000,
+			'CombatFleeAccuracy', 0,
+			'ButcherDuration', 20000,
+			'max_skinned_decals_low', -2,
+			'FieldResearchTech', "FieldDraka_T3",
+			'ObservationDistanceMin', 15000,
+			'ObservationDistanceMax', 20000,
+			'Icon', "UI/Icons/Resources/res_draka",
+			'DisplayName', T(342153828864, --[[ModItemUnitAnimalCompositeDef Draka_T4 DisplayName]] "DrikaDrakka"),
+			'DisplayNamePl', T(300064191432, --[[ModItemUnitAnimalCompositeDef Draka_T4 DisplayNamePl]] "DrikaDrakkas"),
+			'Description', T(894512638170, --[[ModItemUnitAnimalCompositeDef Draka_T4 Description]] "Aggressive Evolution of the Drakka. This species now emits sound waves long after the impacts that caused it."),
+			'BaseMaxHealth', 1200000,
+			'FoodResources', {
+				"FoodAnimalHerbivore",
+				"Slop",
+			},
+			'DailyEatingAmount', 4000,
+			'Diet', "Herbivore",
+			'EatingDuration', 4000,
+			'FoodSourceClasses', {
+				"ResourcePile",
+				"Plant",
+				"AnimalFeeder",
+			},
+			'ButcherResources', {
+				PlaceObj('ButcherResAmount', {
+					'resource', "RawMeat",
+					'min_amount', 40000,
+					'max_amount', 60000,
+				}),
+			},
+			'SelectionRadius', 2000,
+			'ChanceToBeMale', 45,
+			'BodySize', "large",
+			'ProduceResources', {
+				PlaceObj('ResAmount', {
+					'resource', "FuelManure",
+					'amount', 15000,
+				}),
+			},
+			'ProduceResInterval', 1920000,
+			'CmdProduceResources', function (animal)
+				if not animal:IsTamed() then
+					if animal:Random(100, "no produce chance") > 40 then
+						return animal:UpdateProductionTime()
 					end
 				end
-				local denom = ((3 / 40) * target.reso) + 1 -- requires 40 stacks for 25% reduction
-				return hit_chance / denom
+				return animal:DoProduceResources()
 			end,
-			param_bindings = false,
+			'AnimalPerks', {
+				"ManureProducer",
+				"DraftableAnimal",
+				"DrakaAcoustic",
+			},
+			'pfclass_tamed', 10,
+			'pfclass_tamed_lead', 13,
+			'EnrageChanceOtherAnimals', 50,
+			'EatStartAnim', "eat_Start",
+			'EatIdleAnim', {
+				"eat_Idle",
+			},
+			'EatEndAnim', "eat_End",
+			'anim_idle', {
+				"idle",
+				"idle_Active",
+				"idle_Active2",
+			},
+			'anim_idle_nervous', {
+				"idle_Nervous",
+			},
+			'SleepStartAnim', "sleep_Start",
+			'SleepIdleAnim', "sleep_Idle",
+			'SleepEndAnim', "sleep_End",
+			'SleepInterruptedAnim', "sleep_Interrupted",
+			'Tameable', true,
+			'TamingFood', "Grain",
+			'TamingFoodAmount', 10000,
+			'TamingMinimumSkill', 5,
+			'TamingChance', 25,
+			'TamingAggressiveChance', 80,
+			'TamingDistance', 10000,
+			'TamedLifetimeMin', 92160000,
+			'TamedLifetimeMax', 138240000,
+			'CombatSkillInitial', range(5, 6),
+			'BondingChance', 5,
+			'ReproductionType', "two sexes",
+			'DailyPregnancyChance', 75,
+			'PregnancyDuration', 2000000,
+			'GrowDuration', 2000000,
+			'NewbornClass', "Draka_T5",
+			'MaxGrownScale', 100,
+			'FieldVisibilityCold', 30000,
+			'FieldVisibilityWarm', 10000,
+			'MoveSpeedCold', 1000,
+			'PlantsToEatMin', 40,
+			'PlantsToEatMax', 60,
+			'HerdMergeClass', "Draka",
+			'UnitPerkFrenzy', true,
+			'FrenzyEffects', {
+				"Frenzy_Conscious_3",
+				"Acoustic_T3",
+			},
 		}),
-	},
-}),
-PlaceObj('ModItemHealthCondition', {
-	AffectableBodyParts = {
-		PlaceObj('HealthConditionBodyParts', {
-			BodyPart = "HeadBrain",
-			BodyPartGroup = "WholeHead",
-			param_bindings = false,
-		}),
-	},
-	AffectedArea = "inside",
-	ConsciousnessModifier = -20000,
-	Description = T(931231343009, --[[ModItemHealthCondition ResoBacklash Description]] "This creature has recently snap, crackled, and popped and is struggling to handle the intensity of the vibrations!"),
-	DisplayName = T(204260954100, --[[ModItemHealthCondition ResoBacklash DisplayName]] "Feedback"),
-	Expiration = true,
-	ExpirationRandom = 160000,
-	ExpirationTime = 240000,
-	FloatingTextType = "Display name",
-	Type = "Injury",
-	id = "ResoBacklash",
-}),
-PlaceObj('ModItemHealthCondition', {
-	AffectableBodyParts = {
-		PlaceObj('HealthConditionBodyParts', {
-			BodyPart = "HeadBrain",
-			BodyPartGroup = "WholeHead",
-			param_bindings = false,
-		}),
-	},
-	AffectedArea = "inside",
-	ConsciousnessModifier = -10000,
-	Description = T(204915056183, --[[ModItemHealthCondition ResoBacklash_2 Description]] "This creature has recently snap, crackled, and popped and is struggling to handle the intensity of the vibrations!"),
-	DisplayName = T(131858762366, --[[ModItemHealthCondition ResoBacklash_2 DisplayName]] "Feedback"),
-	Expiration = true,
-	ExpirationRandom = 160000,
-	ExpirationTime = 240000,
-	FloatingTextType = "Display name",
-	Type = "Injury",
-	id = "ResoBacklash_2",
-}),
-PlaceObj('ModItemWeaponResource', {
-	AimAnimIdle = "attack_Idle",
-	AnimTestEntity = "Draka",
-	AttackAngleTolerance = 1200,
-	AttackAnimAlt = "attack2",
-	AttackCooldown = 3000,
-	AttackCooldownMaxSkill = 2000,
-	AttackCooldownRand = 20,
-	AttackRange = 60000,
-	AttackType = "ranged",
-	CanCharge = false,
-	CritChanceMaxSkill = 30,
-	CritHitEffect = {
-		PlaceObj('HealthConditionOption', {
-			effect = "Arrow_Shot_Critical_Human",
-		}),
-		PlaceObj('HealthConditionOption', {
-			effect = "Arrow_Shot_Critical",
-			weight = 5,
-		}),
-		PlaceObj('HealthConditionOption', {
-			effect = "LaserStab_Critical",
-			weight = 3,
-		}),
-	},
-	DamageToBuildings = 10000,
-	DamageTypes = {
-		energy = true,
-	},
-	HitChance = 70,
-	HitChanceMaxSkill = 100,
-	HitEffect = {
-		PlaceObj('HealthConditionOption', {
-			effect = "Arrow_Shot",
-		}),
-		PlaceObj('HealthConditionOption', {
-			effect = "LaserStab_Common",
-		}),
-	},
-	MinAttackRange = 1000,
-	ProjectileAttachMoment = "hit",
-	ProjectileEntity = "ShortBow_Arrow",
-	ProjectileSpeed = 20000,
-	ProjectileSpeedRand = 10000,
-	ScaleRangeWithUnit = false,
-	SortKey = 99990,
-	carry_amount = 0,
-	display_name = T(443208797802, --[[ModItemWeaponResource Resonance_T1 display_name]] "Draka Weapon"),
-	group = "Weapons_Animal",
-	id = "Resonance_T1",
-	progress = 0,
-	stack_size = 0,
-	transportable = false,
-	visible = false,
-}),
-PlaceObj('ModItemHealthCondition', {
-	AffectableBodyParts = {
-		PlaceObj('HealthConditionBodyParts', {
-			BodyPart = "All",
-			param_bindings = false,
-		}),
-	},
-	MovementModifier = -500000,
-	id = "stop",
-}),
-PlaceObj('ModItemTech', {
-	Activity = "FieldResearch",
-	Description = T(232248805804, --[[ModItemTech FieldNothT3 Description]] "When semi-domesticated species are left to live in the wild, they can become feral.\nWell the Noth's decided to take that to the extreme, and become much deadlier.\n\nTheir head plate is now harder than steel, capable of shattering whatever material it hit.\nBe careful getting in protracted bouts with this creature, for it will slowly grind down your defenses!\n\nThis does come at a cost, as it's brain is subject to constant blunt force trauma!\nThis means it is much easier to knock this creature out.\n\nDeals <color TextButton>Blunt</color> damage."),
-	DisplayName = T(511119421156, --[[ModItemTech FieldNothT3 DisplayName]] "Unknown Noth Evolution"),
-	DisplayNamePl = T(635590948880, --[[ModItemTech FieldNothT3 DisplayNamePl]] "Unknown Noth Evolutions"),
-	FieldResearchCategory = "Fauna",
-	FieldResearchTemplateExpression = function (self) return Noth end,
-	Icon = "UI/Messages/Research/res_Noth",
-	LockPrerequisites = {
-		PlaceObj('CheckRegion', {
-			Region = set( "Saltu" ),
-		}),
-	},
-	ResearchPoints = 6000,
-	group = "Field",
-	id = "FieldNothT3",
-	money_value = 50000000,
-	tradable = false,
-}),
-PlaceObj('ModItemTech', {
-	Activity = "FieldResearch",
-	Description = T(296841795702, --[[ModItemTech FieldNothT5 Description]] "The Noth's hide is now a mix between flesh and metal.\nThis has given it immense Piercing and Gas resistance.\n\nIt's headplate also benefits from this increased durability; with greater accuracy and shatter potential!\nNot only will it's hits lower the target's deflection chances, but also make them take increased damage from all sources!\n\nThis does come at a cost, as it's brain is subject to constant blunt force trauma!\nThis means it is much easier to knock this creature out.\n\nDeald <color TextButon>Blunt</color> damage."),
-	DisplayName = T(142281950085, --[[ModItemTech FieldNothT5 DisplayName]] "Unknown Noth Evolution"),
-	DisplayNamePl = T(995536910800, --[[ModItemTech FieldNothT5 DisplayNamePl]] "Unknown Noth Evolutions"),
-	FieldResearchCategory = "Fauna",
-	FieldResearchTemplateExpression = function (self) return Noth end,
-	Icon = "UI/Messages/Research/res_Noth",
-	LockPrerequisites = {
-		PlaceObj('CheckRegion', {
-			Region = set( "Saltu" ),
-		}),
-	},
-	ResearchPoints = 6000,
-	group = "Field",
-	id = "FieldNothT5",
-	money_value = 50000000,
-	tradable = false,
-}),
-PlaceObj('ModItemWeaponResource', {
-	AimAnimIdle = "attack_Idle",
-	AnimTestEntity = "Noth",
-	AttackAngleTolerance = 420,
-	AttackCooldown = 3000,
-	AttackCooldownMaxSkill = 3000,
-	AttackCooldownRand = 20,
-	AttackRange = 2000,
-	CritHitEffect = {
-		PlaceObj('HealthConditionOption', {
-			effect = "Noth_Shatter_t2",
-		}),
-	},
-	DamageToBuildings = 10000,
-	DamageTypes = {
-		blunt = true,
-	},
-	HitChance = 70,
-	HitChanceMaxSkill = 100,
-	HitEffect = {
-		PlaceObj('HealthConditionOption', {
-			effect = "Noth_Shatter_t1",
-			weight = 75,
-		}),
-	},
-	MinAttackRange = 1300,
-	SortKey = 99990,
-	carry_amount = 0,
-	display_name = T(826529483679, --[[ModItemWeaponResource Noth_T2 display_name]] "Dromadda Weapon"),
-	group = "Weapons_Animal",
-	id = "Noth_T2",
-	progress = 0,
-	stack_size = 0,
-	transportable = false,
-	visible = false,
-}),
-PlaceObj('ModItemWeaponResource', {
-	AimAnimIdle = "attack_Idle",
-	AnimTestEntity = "Noth",
-	AttackAngleTolerance = 420,
-	AttackCooldown = 3000,
-	AttackCooldownMaxSkill = 3000,
-	AttackCooldownRand = 20,
-	AttackRange = 2000,
-	CritHitEffect = {
-		PlaceObj('HealthConditionOption', {
-			effect = "Juno_ShatteredBones",
-		}),
-	},
-	DamageToBuildings = 10000,
-	DamageTypes = {
-		blunt = true,
-	},
-	HitChance = 90,
-	HitChanceMaxSkill = 100,
-	HitEffect = {
-		PlaceObj('HealthConditionOption', {
-			effect = "Noth_Shatter_t2",
-			weight = 75,
-		}),
-	},
-	MinAttackRange = 1300,
-	SortKey = 99990,
-	carry_amount = 0,
-	display_name = T(654454853267, --[[ModItemWeaponResource Noth_T4 display_name]] "Dromadda Weapon"),
-	group = "Weapons_Animal",
-	id = "Noth_T4",
-	progress = 0,
-	stack_size = 0,
-	transportable = false,
-	visible = false,
-}),
-PlaceObj('ModItemHealthCondition', {
-	AffectableBodyParts = {
-		PlaceObj('HealthConditionBodyParts', {
-			param_bindings = false,
-		}),
-	},
-	AffectedArea = "outline",
-	BleedingModifier = 1000,
-	Description = T(880613586872, --[[ModItemHealthCondition Noth_Shatter_t1 Description]] "Taken a savage hit, and it is now harder to dodge further attacks."),
-	DisplayName = T(557502792855, --[[ModItemHealthCondition Noth_Shatter_t1 DisplayName]] "Shattered Defenses"),
-	HealthLoss = 3000,
-	MistreatmentChance = 5,
-	Modifiers = {
-		PlaceObj('ModifyHuman', {
-			Id = "autoid_rtw6tLg_SLDHQSr",
-			accumulate = true,
-			add = -5,
-			param_bindings = false,
-			prop = "HitNegationChance_blunt",
-		}),
-		PlaceObj('ModifyHuman', {
-			Id = "",
-			accumulate = true,
-			add = -5,
-			param_bindings = false,
-			prop = "HitNegationChance_energy",
-		}),
-		PlaceObj('ModifyHuman', {
-			Id = "autoid_rtw6tLg_c6bU4Gr",
-			accumulate = true,
-			add = -5,
-			param_bindings = false,
-			prop = "HitNegationChance_piercing",
-		}),
-		PlaceObj('ModifyHuman', {
-			Id = "",
-			accumulate = true,
-			add = -5,
-			param_bindings = false,
-			prop = "HitNegationChance_gas",
-		}),
-	},
-	TreatmentMaxSkillLevel = 5,
-	TreatmentMedicineAmount = 1000,
-	TreatmentMedicineResource = "MedBandages",
-	TreatmentMinSkillLevel = 2,
-	TreatmentStatus = "requires treatment",
-	Type = "Injury",
-	group = "AnimalAttacker_SurfaceWound_Common",
-	id = "Noth_Shatter_t1",
-}),
-PlaceObj('ModItemHealthCondition', {
-	AffectableBodyParts = {
-		PlaceObj('HealthConditionBodyParts', {
-			param_bindings = false,
-		}),
-	},
-	AffectedArea = "outline",
-	BleedingModifier = 1000,
-	Description = T(791772200308, --[[ModItemHealthCondition Noth_Shatter_t2 Description]] "Taken a savage hit, and it is now harder to dodge further attacks.\nAlso takes 5% more damage per instance."),
-	DisplayName = T(181514080412, --[[ModItemHealthCondition Noth_Shatter_t2 DisplayName]] "Shattered Defenses"),
-	HealthLoss = 3000,
-	MistreatmentChance = 5,
-	Modifiers = {
-		PlaceObj('ModifyHuman', {
-			Id = "",
-			accumulate = true,
-			add = -5,
-			param_bindings = false,
-			prop = "HitNegationChance_blunt",
-		}),
-		PlaceObj('ModifyHuman', {
-			Id = "autoid_rtw6tLg_ukFmdqk",
-			accumulate = true,
-			add = -5,
-			param_bindings = false,
-			prop = "HitNegationChance_energy",
-		}),
-		PlaceObj('ModifyHuman', {
-			Id = "",
-			accumulate = true,
-			add = -5,
-			param_bindings = false,
-			prop = "HitNegationChance_piercing",
-		}),
-		PlaceObj('ModifyHuman', {
-			Id = "autoid_rtw6tLg_btUcMr",
-			accumulate = true,
-			add = -5,
-			param_bindings = false,
-			prop = "HitNegationChance_gas",
-		}),
-	},
-	TreatmentMaxSkillLevel = 5,
-	TreatmentMedicineAmount = 1000,
-	TreatmentMedicineResource = "MedBandages",
-	TreatmentMinSkillLevel = 2,
-	TreatmentStatus = "requires treatment",
-	Type = "Injury",
-	group = "AnimalAttacker_SurfaceWound_Common",
-	id = "Noth_Shatter_t2",
-	unit_reactions = {
-		PlaceObj('UnitReaction', {
-			Event = "ModifyDamageReceived",
-			Handler = function (self, target, damage, weapon_def, attacker)
-				return damage + (damage / 20) --5% increase
-			end,
-			param_bindings = false,
-		}),
-	},
-}),
-PlaceObj('ModItemCompositeBodyPreset', {
-	'Group', "Shogu",
-	'Id', "ShoguBodyAdult_1",
-	'Target', "ShoguT2",
-	'Parts', set( "Body" ),
-	'Entity', "Shogu",
-	'Scale', range(85, 95),
-	'Colors', {
-		PlaceObj('CompositeBodyPresetColor', {
-			'EditableColor1', RGBA(90, 33, 5, 255),
-			'EditableColor2', RGBA(128, 18, 0, 255),
-			'EditableColor3', RGBA(37, 6, 15, 255),
-		}),
-	},
-}),
-PlaceObj('ModItemCompositeBodyPreset', {
-	'Group', "Shogu",
-	'Id', "ShoguBodyAdult_2",
-	'Target', "ShoguT3",
-	'Parts', set( "Body" ),
-	'Entity', "Shogu",
-	'Scale', range(85, 95),
-	'Colors', {
-		PlaceObj('CompositeBodyPresetColor', {
-			'EditableColor1', RGBA(13, 43, 18, 255),
-			'EditableColor2', RGBA(128, 18, 0, 255),
-			'EditableColor3', RGBA(37, 6, 15, 255),
-		}),
-	},
-}),
-PlaceObj('ModItemCompositeBodyPreset', {
-	'Group', "Shogu",
-	'Id', "ShoguBodyAdult_3",
-	'Target', "ShoguT4",
-	'Parts', set( "Body" ),
-	'Entity', "Shogu",
-	'Scale', range(85, 95),
-	'Colors', {
-		PlaceObj('CompositeBodyPresetColor', {
-			'EditableColor1', RGBA(0, 24, 14, 255),
-			'EditableColor2', RGBA(120, 106, 0, 255),
-			'EditableColor3', RGBA(37, 6, 15, 255),
-		}),
-	},
-}),
-PlaceObj('ModItemCompositeBodyPreset', {
-	'Group', "Shogu",
-	'Id', "ShoguBodyAdult_4",
-	'Target', "ShoguT5",
-	'Parts', set( "Body" ),
-	'Entity', "Shogu",
-	'Scale', range(85, 95),
-	'Colors', {
-		PlaceObj('CompositeBodyPresetColor', {
-			'EditableColor1', RGBA(4, 9, 5, 255),
-			'EditableColor2', RGBA(118, 105, 7, 255),
-			'EditableColor3', RGBA(77, 77, 77, 255),
-		}),
-	},
-}),
-PlaceObj('ModItemUnitAnimalCompositeDef', {
-	'Group', "Jungle",
-	'Id', "Shogu",
-	'object_class', "ShoguBase",
-	'SpeciesGroup', "hoofed",
-	'RoamRadius', 15000,
-	'RoamIntervalMin', 40000,
-	'RoamIntervalMax', 120000,
-	'composite_part_groups', {
-		"Shogu",
-	},
-	'PainMask', "PainMask",
-	'EventProgressValue', 30,
-	'CombatGroup', "Shogu",
-	'EnrageChance', 25,
-	'AttackMemory', 45000,
-	'CombatGiveUpNoHit', 30000,
-	'CombatFleeAccuracy', 0,
-	'ButcherDuration', 20000,
-	'max_skinned_decals_low', -1,
-	'FieldResearchTech', "FieldShogu",
-	'ObservationDistanceMin', 15000,
-	'ObservationDistanceMax', 20000,
-	'Icon', "UI/Icons/Resources/res_shogu",
-	'DisplayName', T(911613609666, --[[ModItemUnitAnimalCompositeDef Shogu DisplayName]] "Shogu"),
-	'DisplayNamePl', T(495064956878, --[[ModItemUnitAnimalCompositeDef Shogu DisplayNamePl]] "Shogus"),
-	'Description', T(711949076470, --[[ModItemUnitAnimalCompositeDef Shogu Description]] "Usually passive. Chance to retaliate when attacked."),
-	'BaseMaxHealth', 50000,
-	'FoodResources', {
-		"FoodAnimalHerbivore",
-		"FoodAnimalCarnivore",
-		"Slop",
-	},
-	'DailyEatingAmount', 1000,
-	'Diet', "Omnivore",
-	'EatingDuration', 4000,
-	'FoodSourceClasses', {
-		"ResourcePile",
-		"UnitCorpse",
-		"AnimalFeeder",
-		"Plant",
-	},
-	'ButcherResources', {
-		PlaceObj('ButcherResAmount', {
-			'resource', "RawMeat",
-			'min_amount', 30000,
-			'max_amount', 50000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "LeatherRaw",
-			'min_amount', 10000,
-			'max_amount', 30000,
-		}),
-	},
-	'BodySize', "medium",
-	'ProduceResources', {
-		PlaceObj('ResAmount', {
-			'resource', "Potato",
-			'amount', 20000,
-		}),
-	},
-	'ProduceResInterval', 1920000,
-	'CmdProduceResources', function (animal)
-		if not animal:IsTamed() then return animal:UpdateProductionTime() end
-		return animal:DoProduceResources()
-	end,
-	'AnimalPerks', {
-		"ChewRootsDigger",
-		"DraftableAnimal",
-	},
-	'radius', 400,
-	'pfclass_tamed', 7,
-	'pfclass_tamed_lead', 12,
-	'EnrageChanceOtherAnimals', 75,
-	'EatStartAnim', "eat_Start",
-	'EatIdleAnim', {
-		"eat_Idle",
-	},
-	'EatEndAnim', "eat_End",
-	'anim_idle', {
-		"idle",
-		"idle_Active1",
-		"idle_Active2",
-	},
-	'anim_idle_nervous', {
-		"idle_Nervous",
-	},
-	'SleepStartAnim', "sleep_Start",
-	'SleepIdleAnim', "sleep_Idle",
-	'SleepEndAnim', "sleep_End",
-	'SleepStartAnim2', "sleep_Start2",
-	'SleepIdleAnim2', "sleep_Idle2",
-	'SleepEndAnim2', "sleep_End2",
-	'Tameable', true,
-	'TamingFood', "Palmfruits",
-	'TamingFoodAmount', 20000,
-	'TamingMinimumSkill', 5,
-	'TamingChance', 50,
-	'TamingAggressiveChance', 50,
-	'TamingDistance', 10000,
-	'TamedLifetimeMin', 92160000,
-	'TamedLifetimeMax', 138240000,
-	'CombatSkillInitial', range(2, 4),
-	'BondingChance', 5,
-	'ReproductionType', "two sexes",
-	'DailyPregnancyChance', 60,
-	'PregnancyDuration', 4800000,
-	'GrowDuration', 4800000,
-	'NewbornClass', "Shogu_T2",
-	'FieldVisibilityCold', 0,
-	'FieldVisibilityWarm', 0,
-	'MoveSpeedCold', 1000,
-	'PlantsToEatMin', 0,
-	'PlantsToEatMax', 0,
-	'GrazingChance', 3,
-	'HerdMergeClass', "Shogu",
-}),
-PlaceObj('ModItemUnitAnimalCompositeDef', {
-	'Group', "Jungle",
-	'Id', "Shogu_T2",
-	'object_class', "ShoguBase",
-	'SpeciesGroup', "hoofed",
-	'RoamRadius', 15000,
-	'RoamIntervalMin', 40000,
-	'RoamIntervalMax', 120000,
-	'composite_part_target', "ShoguT2",
-	'composite_part_groups', {
-		"Shogu",
-	},
-	'PainMask', "PainMask",
-	'EventProgressValue', 70,
-	'CombatGroup', "Shogu",
-	'CombatHostile', true,
-	'HitNegationChance', {
-		HitNegationChance_gas = 15,
-		HitNegationChance_pacify = 20,
-		HitNegationChance_piercing = 10,
-		gas = 15,
-		pacify = 20,
-		piercing = 10,
-	},
-	'HitNegationChance_piercing', 10,
-	'HitNegationChance_gas', 15,
-	'HitNegationChance_pacify', 20,
-	'EnrageChance', 25,
-	'AttackMemory', 45000,
-	'CombatGiveUpNoHit', 30000,
-	'CombatFleeAccuracy', 0,
-	'ButcherDuration', 20000,
-	'max_skinned_decals_low', -1,
-	'FieldResearchTech', "FieldShogu",
-	'ObservationDistanceMin', 15000,
-	'ObservationDistanceMax', 20000,
-	'Icon', "UI/Icons/Resources/res_shogu",
-	'DisplayName', T(887545666757, --[[ModItemUnitAnimalCompositeDef Shogu_T2 DisplayName]] "Infected Shogu"),
-	'DisplayNamePl', T(990957586290, --[[ModItemUnitAnimalCompositeDef Shogu_T2 DisplayNamePl]] "Infected Shogus"),
-	'Description', T(115355775673, --[[ModItemUnitAnimalCompositeDef Shogu_T2 Description]] "Evolution of the Shogu that is prone to disease and ill health."),
-	'BaseMaxHealth', 50000,
-	'FoodResources', {
-		"FoodAnimalHerbivore",
-		"FoodAnimalCarnivore",
-		"Slop",
-	},
-	'DailyEatingAmount', 2000,
-	'Diet', "Omnivore",
-	'EatingDuration', 4000,
-	'FoodSourceClasses', {
-		"ResourcePile",
-		"UnitCorpse",
-		"AnimalFeeder",
-		"Plant",
-	},
-	'ButcherResources', {
-		PlaceObj('ButcherResAmount', {
-			'resource', "RawMeat",
-			'min_amount', 30000,
-			'max_amount', 50000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "LeatherRaw",
-			'min_amount', 10000,
-			'max_amount', 30000,
-		}),
-	},
-	'BodySize', "medium",
-	'ProduceResources', {
-		PlaceObj('ResAmount', {
-			'resource', "Potato",
-			'amount', 20000,
-		}),
-	},
-	'ProduceResInterval', 1920000,
-	'CmdProduceResources', function (animal)
-		if not animal:IsTamed() then return animal:UpdateProductionTime() end
-		return animal:DoProduceResources()
-	end,
-	'AnimalPerks', {
-		"ChewRootsDigger",
-		"DraftableAnimal",
-	},
-	'radius', 400,
-	'pfclass_tamed', 7,
-	'pfclass_tamed_lead', 12,
-	'EnrageChanceOtherAnimals', 75,
-	'EatStartAnim', "eat_Start",
-	'EatIdleAnim', {
-		"eat_Idle",
-	},
-	'EatEndAnim', "eat_End",
-	'anim_idle', {
-		"idle",
-		"idle_Active1",
-		"idle_Active2",
-	},
-	'anim_idle_nervous', {
-		"idle_Nervous",
-	},
-	'SleepStartAnim', "sleep_Start",
-	'SleepIdleAnim', "sleep_Idle",
-	'SleepEndAnim', "sleep_End",
-	'SleepStartAnim2', "sleep_Start2",
-	'SleepIdleAnim2', "sleep_Idle2",
-	'SleepEndAnim2', "sleep_End2",
-	'Tameable', true,
-	'TamingFood', "Palmfruits",
-	'TamingFoodAmount', 20000,
-	'TamingMinimumSkill', 5,
-	'TamingChance', 50,
-	'TamingAggressiveChance', 50,
-	'TamingDistance', 10000,
-	'TamedLifetimeMin', 92160000,
-	'TamedLifetimeMax', 138240000,
-	'CombatSkillInitial', range(5, 6),
-	'BondingChance', 5,
-	'ReproductionType', "two sexes",
-	'DailyPregnancyChance', 45,
-	'PregnancyDuration', 4800000,
-	'GrowDuration', 4800000,
-	'NewbornClass', "Shogu_T3",
-	'FieldVisibilityCold', 0,
-	'FieldVisibilityWarm', 0,
-	'MoveSpeedCold', 1000,
-	'PlantsToEatMin', 0,
-	'PlantsToEatMax', 0,
-	'GrazingChance', 3,
-	'HerdMergeClass', "Shogu",
-	'UnitPerkFrenzy', true,
-	'AffectRadius', 5000,
-	'AffectClass', "UnitAnimal",
-	'FrenzyEffects', {
-		"Frenzy_Conscious_1",
-		"Shogu_Fly_Swarm",
-	},
-}),
-PlaceObj('ModItemUnitAnimalCompositeDef', {
-	'Group', "Jungle",
-	'Id', "Shogu_T3",
-	'object_class', "ShoguBase",
-	'SpeciesGroup', "hoofed",
-	'RoamRadius', 15000,
-	'RoamIntervalMin', 40000,
-	'RoamIntervalMax', 120000,
-	'composite_part_target', "ShoguT3",
-	'composite_part_groups', {
-		"Shogu",
-	},
-	'PainMask', "PainMask",
-	'damage_reduction', {
-		energy = -15,
-	},
-	'EventProgressValue', 150,
-	'CombatGroup', "Shogu",
-	'CombatHostile', true,
-	'HitNegationChance', {
-		HitNegationChance_energy = -15,
-		HitNegationChance_gas = 30,
-		HitNegationChance_pacify = 40,
-		HitNegationChance_piercing = 20,
-		energy = -15,
-		gas = 30,
-		pacify = 40,
-		piercing = 20,
-	},
-	'HitNegationChance_piercing', 20,
-	'HitNegationChance_energy', -15,
-	'HitNegationChance_gas', 30,
-	'HitNegationChance_pacify', 40,
-	'EnrageChance', 25,
-	'AttackMemory', 45000,
-	'CombatGiveUpNoHit', 30000,
-	'CombatFleeAccuracy', 0,
-	'ButcherDuration', 20000,
-	'max_skinned_decals_low', -1,
-	'FieldResearchTech', "FieldShoguT3",
-	'ObservationDistanceMin', 15000,
-	'ObservationDistanceMax', 20000,
-	'Icon', "UI/Icons/Resources/res_shogu",
-	'DisplayName', T(504320282932, --[[ModItemUnitAnimalCompositeDef Shogu_T3 DisplayName]] "Poxu"),
-	'DisplayNamePl', T(958903764635, --[[ModItemUnitAnimalCompositeDef Shogu_T3 DisplayNamePl]] "Poxus"),
-	'Description', T(484543651722, --[[ModItemUnitAnimalCompositeDef Shogu_T3 Description]] "Evolution has decreed that this creature suffer from all manner of ailments. And it's tusks can easily spread it's gifts."),
-	'BaseMaxHealth', 50000,
-	'FoodResources', {
-		"FoodAnimalHerbivore",
-		"FoodAnimalCarnivore",
-		"Slop",
-	},
-	'DailyEatingAmount', 3000,
-	'Diet', "Omnivore",
-	'EatingDuration', 4000,
-	'FoodSourceClasses', {
-		"ResourcePile",
-		"UnitCorpse",
-		"AnimalFeeder",
-		"Plant",
-	},
-	'ButcherResources', {
-		PlaceObj('ButcherResAmount', {
-			'resource', "RawMeat",
-			'min_amount', 30000,
-			'max_amount', 50000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "LeatherRaw",
-			'min_amount', 10000,
-			'max_amount', 30000,
-		}),
-	},
-	'BodySize', "medium",
-	'ProduceResources', {
-		PlaceObj('ResAmount', {
-			'resource', "Potato",
-			'amount', 20000,
-		}),
-	},
-	'ProduceResInterval', 1920000,
-	'CmdProduceResources', function (animal)
-		if not animal:IsTamed() then return animal:UpdateProductionTime() end
-		return animal:DoProduceResources()
-	end,
-	'AnimalPerks', {
-		"ChewRootsDigger",
-		"DraftableAnimal",
-		"AP_StatDamage",
-	},
-	'radius', 400,
-	'pfclass_tamed', 7,
-	'pfclass_tamed_lead', 12,
-	'EnrageChanceOtherAnimals', 75,
-	'attack_weapon', "Shogu_poison",
-	'EatStartAnim', "eat_Start",
-	'EatIdleAnim', {
-		"eat_Idle",
-	},
-	'EatEndAnim', "eat_End",
-	'anim_idle', {
-		"idle",
-		"idle_Active1",
-		"idle_Active2",
-	},
-	'anim_idle_nervous', {
-		"idle_Nervous",
-	},
-	'SleepStartAnim', "sleep_Start",
-	'SleepIdleAnim', "sleep_Idle",
-	'SleepEndAnim', "sleep_End",
-	'SleepStartAnim2', "sleep_Start2",
-	'SleepIdleAnim2', "sleep_Idle2",
-	'SleepEndAnim2', "sleep_End2",
-	'Tameable', true,
-	'TamingFood', "Palmfruits",
-	'TamingFoodAmount', 20000,
-	'TamingMinimumSkill', 5,
-	'TamingChance', 50,
-	'TamingAggressiveChance', 50,
-	'TamingDistance', 10000,
-	'TamedLifetimeMin', 92160000,
-	'TamedLifetimeMax', 138240000,
-	'CombatSkillInitial', range(5, 6),
-	'BondingChance', 5,
-	'ReproductionType', "two sexes",
-	'DailyPregnancyChance', 55,
-	'PregnancyDuration', 2880000,
-	'GrowDuration', 2880000,
-	'NewbornClass', "Shogu_T4",
-	'FieldVisibilityCold', 0,
-	'FieldVisibilityWarm', 0,
-	'MoveSpeedCold', 1000,
-	'PlantsToEatMin', 0,
-	'PlantsToEatMax', 0,
-	'GrazingChance', 3,
-	'HerdMergeClass', "Shogu",
-	'UnitPerkFrenzy', true,
-	'FrenzyEffects', {
-		"Frenzy_Conscious_2",
-		"Shogu_Fly_Swarm",
-	},
-}),
-PlaceObj('ModItemUnitAnimalCompositeDef', {
-	'Group', "Jungle",
-	'Id', "Shogu_T4",
-	'object_class', "ShoguBase",
-	'SpeciesGroup', "hoofed",
-	'RoamRadius', 15000,
-	'RoamIntervalMin', 40000,
-	'RoamIntervalMax', 120000,
-	'composite_part_target', "ShoguT4",
-	'composite_part_groups', {
-		"Shogu",
-	},
-	'PainMask', "PainMask",
-	'damage_reduction', {
-		energy = -30,
-	},
-	'EventProgressValue', 320,
-	'CombatGroup', "Shogu",
-	'CombatHostile', true,
-	'HitNegationChance', {
-		HitNegationChance_energy = -30,
-		HitNegationChance_gas = 55,
-		HitNegationChance_pacify = 60,
-		HitNegationChance_piercing = 40,
-		energy = -30,
-		gas = 55,
-		pacify = 60,
-		piercing = 40,
-	},
-	'HitNegationChance_piercing', 40,
-	'HitNegationChance_energy', -30,
-	'HitNegationChance_gas', 55,
-	'HitNegationChance_pacify', 60,
-	'EnrageChance', 25,
-	'AttackMemory', 45000,
-	'CombatGiveUpNoHit', 30000,
-	'CombatFleeAccuracy', 0,
-	'ButcherDuration', 20000,
-	'max_skinned_decals_low', -1,
-	'FieldResearchTech', "FieldShoguT3",
-	'ObservationDistanceMin', 15000,
-	'ObservationDistanceMax', 20000,
-	'Icon', "UI/Icons/Resources/res_shogu",
-	'DisplayName', T(238232468743, --[[ModItemUnitAnimalCompositeDef Shogu_T4 DisplayName]] "Poxugor"),
-	'DisplayNamePl', T(946414543372, --[[ModItemUnitAnimalCompositeDef Shogu_T4 DisplayNamePl]] "Poxugors"),
-	'Description', T(702253245244, --[[ModItemUnitAnimalCompositeDef Shogu_T4 Description]] "A diseased creature seemingly only allowed to exist to spread it's poxes. Aggressively searches for food."),
-	'BaseMaxHealth', 50000,
-	'FoodResources', {
-		"FoodAnimalHerbivore",
-		"FoodAnimalCarnivore",
-		"Slop",
-	},
-	'DailyEatingAmount', 4000,
-	'Diet', "Omnivore",
-	'EatingDuration', 4000,
-	'FoodSourceClasses', {
-		"ResourcePile",
-		"UnitCorpse",
-		"AnimalFeeder",
-		"Plant",
-	},
-	'ButcherResources', {
-		PlaceObj('ButcherResAmount', {
-			'resource', "Slop",
-			'min_amount', 30000,
-			'max_amount', 50000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "LeatherRaw",
-			'min_amount', 10000,
-			'max_amount', 30000,
-		}),
-	},
-	'BodySize', "medium",
-	'ProduceResources', {
-		PlaceObj('ResAmount', {
-			'resource', "Potato",
-			'amount', 20000,
-		}),
-	},
-	'ProduceResInterval', 1920000,
-	'CmdProduceResources', function (animal)
-		if not animal:IsTamed() then return animal:UpdateProductionTime() end
-		return animal:DoProduceResources()
-	end,
-	'AnimalPerks', {
-		"ChewRootsDigger",
-		"DraftableAnimal",
-		"AP_StatDamage",
-	},
-	'radius', 400,
-	'pfclass_tamed', 7,
-	'pfclass_tamed_lead', 12,
-	'EnrageChanceOtherAnimals', 75,
-	'attack_weapon', "Shogu_poison",
-	'EatStartAnim', "eat_Start",
-	'EatIdleAnim', {
-		"eat_Idle",
-	},
-	'EatEndAnim', "eat_End",
-	'anim_idle', {
-		"idle",
-		"idle_Active1",
-		"idle_Active2",
-	},
-	'anim_idle_nervous', {
-		"idle_Nervous",
-	},
-	'SleepStartAnim', "sleep_Start",
-	'SleepIdleAnim', "sleep_Idle",
-	'SleepEndAnim', "sleep_End",
-	'SleepStartAnim2', "sleep_Start2",
-	'SleepIdleAnim2', "sleep_Idle2",
-	'SleepEndAnim2', "sleep_End2",
-	'Tameable', true,
-	'TamingFood', "Palmfruits",
-	'TamingFoodAmount', 20000,
-	'TamingMinimumSkill', 5,
-	'TamingChance', 50,
-	'TamingAggressiveChance', 50,
-	'TamingDistance', 10000,
-	'TamedLifetimeMin', 92160000,
-	'TamedLifetimeMax', 138240000,
-	'CombatSkillInitial', range(5, 6),
-	'BondingChance', 5,
-	'ReproductionType', "two sexes",
-	'DailyPregnancyChance', 65,
-	'PregnancyDuration', 2000000,
-	'GrowDuration', 2000000,
-	'NewbornClass', "Shogu_T5",
-	'FieldVisibilityCold', 0,
-	'FieldVisibilityWarm', 0,
-	'MoveSpeedCold', 1000,
-	'PlantsToEatMin', 0,
-	'PlantsToEatMax', 0,
-	'GrazingChance', 3,
-	'HerdMergeClass', "Shogu",
-	'UnitPerkFrenzy', true,
-	'FrenzyEffects', {
-		"Shogu_Fly_Swarm",
-		"Frenzy_Conscious_3",
-	},
-}),
-PlaceObj('ModItemUnitAnimalCompositeDef', {
-	'Group', "Jungle",
-	'Id', "Shogu_T5",
-	'object_class', "ShoguBase",
-	'SpeciesGroup', "hoofed",
-	'RoamRadius', 15000,
-	'RoamIntervalMin', 40000,
-	'RoamIntervalMax', 120000,
-	'composite_part_target', "ShoguT5",
-	'composite_part_groups', {
-		"Shogu",
-	},
-	'PainMask', "PainMask",
-	'damage_reduction', {
-		energy = -45,
-	},
-	'EventProgressValue', 700,
-	'CombatGroup', "Shogu",
-	'CombatHostile', true,
-	'HitNegationChance', {
-		HitNegationChance_energy = -45,
-		HitNegationChance_gas = 70,
-		HitNegationChance_pacify = 80,
-		HitNegationChance_piercing = 50,
-		energy = -45,
-		gas = 70,
-		pacify = 80,
-		piercing = 50,
-	},
-	'HitNegationChance_piercing', 50,
-	'HitNegationChance_energy', -45,
-	'HitNegationChance_gas', 70,
-	'HitNegationChance_pacify', 80,
-	'EnrageChance', 25,
-	'AttackMemory', 45000,
-	'CombatGiveUpNoHit', 30000,
-	'CombatFleeAccuracy', 0,
-	'ButcherDuration', 20000,
-	'max_skinned_decals_low', -1,
-	'FieldResearchTech', "FieldShoguT5",
-	'ObservationDistanceMin', 15000,
-	'ObservationDistanceMax', 20000,
-	'Icon', "UI/Icons/Resources/res_shogu",
-	'DisplayName', T(286973149884, --[[ModItemUnitAnimalCompositeDef Shogu_T5 DisplayName]] "Poxumagus"),
-	'DisplayNamePl', T(659216291714, --[[ModItemUnitAnimalCompositeDef Shogu_T5 DisplayNamePl]] "Poxumagus"),
-	'Description', T(392714846508, --[[ModItemUnitAnimalCompositeDef Shogu_T5 Description]] "Filled so full of parasites, it's essentially a walking corpse. Aggressively jerks around for food."),
-	'BaseMaxHealth', 50000,
-	'FoodResources', {
-		"FoodAnimalHerbivore",
-		"FoodAnimalCarnivore",
-		"Slop",
-	},
-	'DailyEatingAmount', 5000,
-	'Diet', "Omnivore",
-	'EatingDuration', 4000,
-	'FoodSourceClasses', {
-		"ResourcePile",
-		"UnitCorpse",
-		"AnimalFeeder",
-		"Plant",
-	},
-	'ButcherResources', {
-		PlaceObj('ButcherResAmount', {
-			'resource', "Slop",
-			'min_amount', 30000,
-			'max_amount', 50000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "LeatherRaw",
-			'min_amount', 10000,
-			'max_amount', 30000,
-		}),
-	},
-	'BodySize', "medium",
-	'ProduceResources', {
-		PlaceObj('ResAmount', {
-			'resource', "Potato",
-			'amount', 20000,
-		}),
-	},
-	'ProduceResInterval', 1920000,
-	'CmdProduceResources', function (animal)
-		if not animal:IsTamed() then return animal:UpdateProductionTime() end
-		return animal:DoProduceResources()
-	end,
-	'AnimalPerks', {
-		"ChewRootsDigger",
-		"DraftableAnimal",
-		"AP_StatDamage",
-	},
-	'radius', 400,
-	'pfclass_tamed', 7,
-	'pfclass_tamed_lead', 12,
-	'EnrageChanceOtherAnimals', 75,
-	'attack_weapon', "Shogu_poison",
-	'EatStartAnim', "eat_Start",
-	'EatIdleAnim', {
-		"eat_Idle",
-	},
-	'EatEndAnim', "eat_End",
-	'anim_idle', {
-		"idle",
-		"idle_Active1",
-		"idle_Active2",
-	},
-	'anim_idle_nervous', {
-		"idle_Nervous",
-	},
-	'SleepStartAnim', "sleep_Start",
-	'SleepIdleAnim', "sleep_Idle",
-	'SleepEndAnim', "sleep_End",
-	'SleepStartAnim2', "sleep_Start2",
-	'SleepIdleAnim2', "sleep_Idle2",
-	'SleepEndAnim2', "sleep_End2",
-	'Tameable', true,
-	'TamingFood', "Palmfruits",
-	'TamingFoodAmount', 20000,
-	'TamingMinimumSkill', 5,
-	'TamingChance', 50,
-	'TamingAggressiveChance', 50,
-	'TamingDistance', 10000,
-	'TamedLifetimeMin', 92160000,
-	'TamedLifetimeMax', 138240000,
-	'CombatSkillInitial', range(5, 6),
-	'BondingChance', 5,
-	'ReproductionType', "two sexes",
-	'DailyPregnancyChance', 50,
-	'PregnancyDuration', 1800000,
-	'GrowDuration', 1800000,
-	'FieldVisibilityCold', 0,
-	'FieldVisibilityWarm', 0,
-	'MoveSpeedCold', 1000,
-	'PlantsToEatMin', 0,
-	'PlantsToEatMax', 0,
-	'GrazingChance', 3,
-	'HerdMergeClass', "Shogu",
-	'UnitPerkFrenzy', true,
-	'UnitReanimate', true,
-	'AffectRadius', 5000,
-	'AffectClass', "UnitAnimal",
-	'Disabled', function (self)
-		return self:IsDead() or self:IsUnconscious()
-	end,
-	'AffectFilter', function (self, target)
-		return (target.class == "Ulfen_T5" or target.class == "Ulfen_T4")
-			and not target:IsDead()
-			and not target:IsUnconscious()
-	end,
-	'FrenzyEffects', {
-		"Frenzy_Conscious_4",
-		"Shogu_Fly_Swarm",
-	},
-	'ReanimateChance', 50,
-	'ReanimateHealthMin', 50,
-	'ReanimateDelayMax', 15000,
-}),
-PlaceObj('ModItemHealthCondition', {
-	AffectableBodyParts = {
-		PlaceObj('HealthConditionBodyParts', {
-			BodyPart = "All",
-			param_bindings = false,
-		}),
-	},
-	AffectedArea = "outline",
-	Description = T(184431831747, --[[ModItemHealthCondition Shogu_Fly_Swarm Description]] "This unit is a creature of filth and disease!\nAny melee attacker is drenched in filth!"),
-	DisplayName = T(790939562140, --[[ModItemHealthCondition Shogu_Fly_Swarm DisplayName]] "Concentrated Decay"),
-	Expiration = true,
-	ExpirationTime = 40000,
-	FloatingTextType = "Display name",
-	Type = "Buff",
-	id = "Shogu_Fly_Swarm",
-	unit_reactions = {
-		PlaceObj('UnitReaction', {
-			Event = "ModifyDamageReceived",
-			Handler = function (self, target, damage, weapon_def, attacker)
-				if attacker:GetTargetDist(target, attacker) / guim > 5 and (IsKindOf(attacker,'Human') or IsKindOf(attacker,"UnitAnimal")) then
-					attacker:AddHealthCondition("Shogu_Splash")
+		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Id', "Draka_T5",
+			'object_class', "DrakaBase",
+			'SpeciesGroup', "hoofed",
+			'RoamRadius', 30000,
+			'RoamMinDist', 5000,
+			'RoamMaxDist', 20000,
+			'RoamIntervalMax', 60000,
+			'composite_part_groups', {
+				"DrakaT5",
+			},
+			'composite_part_parent', {
+				Test = "Forehead",
+			},
+			'composite_part_spots', {
+				Forehead = "Horns",
+				HornLeft = "Horns",
+				HornRight = "Horns",
+				Test = "Origin",
+			},
+			'PainMask', "PainMask",
+			'EventProgressValue', 1600,
+			'CombatGroup', "Drakkas",
+			'HitNegationChance', {
+				HitNegationChance_blunt = 50,
+				HitNegationChance_energy = 50,
+				HitNegationChance_gas = 10,
+				HitNegationChance_pacify = 80,
+				HitNegationChance_piercing = 10,
+				blunt = 50,
+				energy = 50,
+				gas = 10,
+				pacify = 80,
+				piercing = 10,
+			},
+			'HitNegationChance_blunt', 50,
+			'HitNegationChance_piercing', 10,
+			'HitNegationChance_energy', 50,
+			'HitNegationChance_gas', 10,
+			'HitNegationChance_pacify', 80,
+			'EnrageChance', 15,
+			'AttackMemory', 45000,
+			'CombatGiveUpNoHit', 30000,
+			'CombatFleeAccuracy', 0,
+			'ButcherDuration', 20000,
+			'max_skinned_decals_low', -2,
+			'FieldResearchTech', "FieldDraka_T5",
+			'ObservationDistanceMin', 15000,
+			'ObservationDistanceMax', 20000,
+			'Icon', "UI/Icons/Resources/res_draka",
+			'DisplayName', T(387009331496, --[[ModItemUnitAnimalCompositeDef Draka_T5 DisplayName]] "DrikaDrekaDrakka"),
+			'DisplayNamePl', T(518841717627, --[[ModItemUnitAnimalCompositeDef Draka_T5 DisplayNamePl]] "DrikaDrekaDrakkas"),
+			'Description', T(222805768873, --[[ModItemUnitAnimalCompositeDef Draka_T5 Description]] "Aggressive Evolution of the Drakka. More stability means this creature can emit louder and louder sonic booms."),
+			'BaseMaxHealth', 1500000,
+			'FoodResources', {
+				"FoodAnimalHerbivore",
+				"Slop",
+			},
+			'DailyEatingAmount', 5000,
+			'Diet', "Herbivore",
+			'EatingDuration', 4000,
+			'FoodSourceClasses', {
+				"ResourcePile",
+				"Plant",
+				"AnimalFeeder",
+			},
+			'ButcherResources', {
+				PlaceObj('ButcherResAmount', {
+					'resource', "RawMeat",
+					'min_amount', 40000,
+					'max_amount', 60000,
+				}),
+			},
+			'SelectionRadius', 2000,
+			'ChanceToBeMale', 50,
+			'BodySize', "large",
+			'ProduceResources', {
+				PlaceObj('ResAmount', {
+					'resource', "FuelManure",
+					'amount', 15000,
+				}),
+			},
+			'ProduceResInterval', 1920000,
+			'CmdProduceResources', function (animal)
+				if not animal:IsTamed() then
+					if animal:Random(100, "no produce chance") > 40 then
+						return animal:UpdateProductionTime()
+					end
 				end
-				return damage
+				return animal:DoProduceResources()
 			end,
-			param_bindings = false,
+			'AnimalPerks', {
+				"ManureProducer",
+				"DraftableAnimal",
+				"DrakaAcoustic",
+			},
+			'pfclass_tamed', 10,
+			'pfclass_tamed_lead', 13,
+			'EnrageChanceOtherAnimals', 50,
+			'EatStartAnim', "eat_Start",
+			'EatIdleAnim', {
+				"eat_Idle",
+			},
+			'EatEndAnim', "eat_End",
+			'anim_idle', {
+				"idle",
+				"idle_Active",
+				"idle_Active2",
+			},
+			'anim_idle_nervous', {
+				"idle_Nervous",
+			},
+			'SleepStartAnim', "sleep_Start",
+			'SleepIdleAnim', "sleep_Idle",
+			'SleepEndAnim', "sleep_End",
+			'SleepInterruptedAnim', "sleep_Interrupted",
+			'Tameable', true,
+			'TamingFood', "Grain",
+			'TamingFoodAmount', 10000,
+			'TamingMinimumSkill', 5,
+			'TamingChance', 50,
+			'TamingAggressiveChance', 20,
+			'TamingDistance', 10000,
+			'TamedLifetimeMin', 92160000,
+			'TamedLifetimeMax', 138240000,
+			'CombatSkillInitial', range(5, 6),
+			'BondingChance', 5,
+			'ReproductionType', "two sexes",
+			'DailyPregnancyChance', 60,
+			'PregnancyDuration', 1800000,
+			'GrowDuration', 1800000,
+			'MaxGrownScale', 100,
+			'FieldVisibilityCold', 30000,
+			'FieldVisibilityWarm', 10000,
+			'MoveSpeedCold', 1000,
+			'PlantsToEatMin', 40,
+			'PlantsToEatMax', 60,
+			'HerdMergeClass', "Draka",
+			'UnitPerkFrenzy', true,
+			'FrenzyEffects', {
+				"Frenzy_Conscious_4",
+				"Acoustic_T4",
+			},
 		}),
-	},
-}),
-PlaceObj('ModItemHealthCondition', {
-	AffectableBodyParts = {
-		PlaceObj('HealthConditionBodyParts', {
-			BodyPart = "All",
-			param_bindings = false,
-		}),
-	},
-	AffectedArea = "outline",
-	BleedingModifier = 1000,
-	ConsciousnessModifier = -10000,
-	Description = T(663496715576, --[[ModItemHealthCondition Shogu_Splash Description]] "This unit is drenched in parasites and bile!\nMaking it more difficult to attack"),
-	DisplayName = T(171686183606, --[[ModItemHealthCondition Shogu_Splash DisplayName]] "Covered in filth"),
-	Expiration = true,
-	ExpirationTime = 40000,
-	FloatingTextType = "Display name",
-	Type = "Debuff",
-	id = "Shogu_Splash",
-	unit_reactions = {
-		PlaceObj('UnitReaction', {
-			Event = "ModifyAttackCooldown",
-			Handler = function (self, target, cooldown, weapon_def)
-				return cooldown + (cooldown / 10)  --10% atk spd debuff
-			end,
-			param_bindings = false,
-		}),
-	},
-}),
-PlaceObj('ModItemTech', {
-	Activity = "FieldResearch",
-	Description = T(351752597077, --[[ModItemTech FieldShoguT3 Description]] "Every wild animal is filled with parasites and diseases, but the Shogu are an exceptionally filled species.\nEven newborns of the species already have the majority of the diseases they will ever have.\n\nFrom what we can tell, the only reason the Shogu do not just die is because the diseases and parasites compete against each other!\n\nDeals <color TextPositive>Gas</color> damage.\nWeak to <color TextNegative>Energy</color> damage."),
-	DisplayName = T(988999460742, --[[ModItemTech FieldShoguT3 DisplayName]] "Unknown Shogu Evolution"),
-	DisplayNamePl = T(931991178329, --[[ModItemTech FieldShoguT3 DisplayNamePl]] "Unknown Shogu Evolutions"),
-	FieldResearchCategory = "Fauna",
-	FieldResearchTemplateExpression = function (self) return Shogu end,
-	Icon = "UI/Messages/Research/res_Shogu",
-	LockPrerequisites = {
-		PlaceObj('CheckRegion', {
-			Region = set( "Saltu" ),
-		}),
-	},
-	ResearchPoints = 6000,
-	group = "Field",
-	id = "FieldShoguT3",
-	money_value = 50000000,
-	tradable = false,
-}),
-PlaceObj('ModItemTech', {
-	Activity = "FieldResearch",
-	Description = T(473154794773, --[[ModItemTech FieldShoguT5 Description]] "The Shogu that greeted us at the beginning of this adventure is no more.\n\nAll of it's internal organs, nerves, and blood are now replaced with parasites.\nEach one feeding off whatever it can jerkingly puppeteer into it's mouth.\nThe constant movement just under the skin is apparent, as tendrils push the skin to the breaking point.\n\nThis makes this species incredibly hard to kill, and may require multiple attempts....\n\nDeals <color TextPositive>Gas</color> damage.\nWeak to <color TextNegative>Energy</color> damage."),
-	DisplayName = T(354926226217, --[[ModItemTech FieldShoguT5 DisplayName]] "Unknown Shogu Evolution"),
-	DisplayNamePl = T(890282760986, --[[ModItemTech FieldShoguT5 DisplayNamePl]] "Unknown Shogu Evolutions"),
-	FieldResearchCategory = "Fauna",
-	FieldResearchTemplateExpression = function (self) return Shogu end,
-	Icon = "UI/Messages/Research/res_Shogu",
-	LockPrerequisites = {
-		PlaceObj('CheckRegion', {
-			Region = set( "Saltu" ),
-		}),
-	},
-	ResearchPoints = 6000,
-	group = "Field",
-	id = "FieldShoguT5",
-	money_value = 50000000,
-	tradable = false,
-}),
-PlaceObj('ModItemWeaponResource', {
-	AimAnimIdle = "attack_Idle",
-	AnimTestEntity = "Shogu",
-	AttackAngleTolerance = 1200,
-	AttackAnimAlt = "attack2",
-	AttackCooldown = 3000,
-	AttackCooldownMaxSkill = 3000,
-	AttackCooldownRand = 20,
-	AttackRange = 2000,
-	CritHitEffect = {
-		PlaceObj('HealthConditionOption', {
-			effect = "Poisoning_2_Moderate",
-		}),
-		PlaceObj('HealthConditionOption', {
-			effect = "SwarmFever_2_Moderate",
-			weight = 3,
-		}),
-	},
-	DamageToBuildings = 10000,
-	DamageTypes = {
-		gas = true,
-	},
-	HitChance = 70,
-	HitChanceMaxSkill = 100,
-	HitEffect = {
-		PlaceObj('HealthConditionOption', {
-			effect = "BrainParasite_Treatable",
-			weight = 1,
-		}),
-		PlaceObj('HealthConditionOption', {
-			effect = "Poisoning_1_Mild",
-			weight = 1,
-		}),
-		PlaceObj('HealthConditionOption', {
-			effect = "SwarmFever_1_Mild",
-		}),
-	},
-	MinAttackRange = 1200,
-	SortKey = 99990,
-	carry_amount = 0,
-	display_name = T(903194174100, --[[ModItemWeaponResource Shogu_poison display_name]] "Shogu Weapon"),
-	group = "Weapons_Animal",
-	id = "Shogu_poison",
-	progress = 0,
-	stack_size = 0,
-	transportable = false,
-	visible = false,
-}),
-PlaceObj('ModItemUnitAnimalCompositeDef', {
-	'Group', "Desert",
-	'Id', "Camel",
-	'object_class', "CamelBase",
-	'SpeciesGroup', "hoofed",
-	'RoamRadius', 15000,
-	'RoamIntervalMin', 40000,
-	'RoamIntervalMax', 120000,
-	'composite_part_groups', {
-		"Camel",
-	},
-	'PainMask', "PainMask",
-	'EventProgressValue', 30,
-	'CombatGroup', "Camels",
-	'EnrageChance', 3,
-	'AttackMemory', 45000,
-	'CombatGiveUpNoHit', 30000,
-	'CombatFleeAccuracy', 0,
-	'ButcherDuration', 20000,
-	'max_skinned_decals_low', -2,
-	'FieldResearchTech', "FieldCamel",
-	'ObservationDistanceMin', 15000,
-	'ObservationDistanceMax', 20000,
-	'Icon', "UI/Icons/Resources/res_camel",
-	'DisplayName', T(653588382027, --[[ModItemUnitAnimalCompositeDef Camel DisplayName]] "Dromadda"),
-	'DisplayNamePl', T(611903095501, --[[ModItemUnitAnimalCompositeDef Camel DisplayNamePl]] "Dromaddas"),
-	'Description', T(193272964752, --[[ModItemUnitAnimalCompositeDef Camel Description]] "Usually passive. Small chance to retaliate when attacked."),
-	'BaseMaxHealth', 80000,
-	'FoodResources', {
-		"FoodAnimalHerbivore",
-		"Slop",
-	},
-	'DailyEatingAmount', 1000,
-	'Diet', "Herbivore",
-	'EatingDuration', 4000,
-	'FoodSourceClasses', {
-		"ResourcePile",
-		"Plant",
-		"AnimalFeeder",
-	},
-	'ButcherResources', {
-		PlaceObj('ButcherResAmount', {
-			'resource', "RawMeat",
-			'min_amount', 30000,
-			'max_amount', 50000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "LeatherRaw",
-			'min_amount', 20000,
-			'max_amount', 40000,
-		}),
-	},
-	'SelectionRadius', 1500,
-	'ChanceToBeMale', 40,
-	'BodySize', "large",
-	'ProduceResources', {
-		PlaceObj('ResAmount', {
-			'resource', "FuelManure",
-			'amount', 20000,
-		}),
-	},
-	'ProduceResInterval', 1920000,
-	'AnimalPerks', {
-		"ManureProducer",
-	},
-	'pfclass_tamed', 10,
-	'pfclass_tamed_lead', 13,
-	'EatStartAnim', "eat_Start",
-	'EatIdleAnim', {
-		"eat_Idle",
-	},
-	'EatEndAnim', "eat_End",
-	'anim_idle', {
-		"idle",
-		"idle_Active",
-	},
-	'anim_idle_playful', {
-		"idle_Playfull",
-		"idle_Playfull2",
-	},
-	'SleepStartAnim', "sleep_Start",
-	'SleepIdleAnim', "sleep_Idle",
-	'SleepEndAnim', "sleep_End",
-	'Tameable', true,
-	'TamingFood', "CactusFruit",
-	'TamingFoodAmount', 20000,
-	'TamingMinimumSkill', 3,
-	'TamingChance', 70,
-	'TamingAggressiveChance', 10,
-	'TamingDistance', 10000,
-	'TamedLifetimeMin', 92160000,
-	'TamedLifetimeMax', 138240000,
-	'BondingChance', 10,
-	'ReproductionType', "two sexes",
-	'DailyPregnancyChance', 60,
-	'PregnancyDuration', 4800000,
-	'GrowDuration', 4800000,
-	'NewbornClass', "Camel_T2",
-	'MinGrownScale', 70,
-	'MaxGrownScale', 85,
-	'FieldVisibilityCold', 75000,
-	'FieldVisibilityWarm', 25000,
-	'PlantsToEatMin', 40,
-	'PlantsToEatMax', 60,
-	'HerdMergeClass', "Camel",
-}),
-PlaceObj('ModItemUnitAnimalCompositeDef', {
-	'Group', "Desert",
-	'Id', "Camel_T2",
-	'object_class', "CamelBase",
-	'SpeciesGroup', "hoofed",
-	'RoamRadius', 15000,
-	'RoamIntervalMin', 40000,
-	'RoamIntervalMax', 120000,
-	'composite_part_target', "CamelT2",
-	'composite_part_groups', {
-		"Camel",
-	},
-	'PainMask', "PainMask",
-	'EventProgressValue', 70,
-	'CombatGroup', "Camels",
-	'EnrageChance', 3,
-	'AttackMemory', 45000,
-	'CombatGiveUpNoHit', 30000,
-	'CombatFleeAccuracy', 0,
-	'ButcherDuration', 20000,
-	'max_skinned_decals_low', -2,
-	'FieldResearchTech', "FieldCamel",
-	'ObservationDistanceMin', 15000,
-	'ObservationDistanceMax', 20000,
-	'Icon', "UI/Icons/Resources/res_camel",
-	'DisplayName', T(860337454211, --[[ModItemUnitAnimalCompositeDef Camel_T2 DisplayName]] "Llamel"),
-	'DisplayNamePl', T(683878998499, --[[ModItemUnitAnimalCompositeDef Camel_T2 DisplayNamePl]] "Llamels"),
-	'DisplayNameUnknown', T(123371203784, --[[ModItemUnitAnimalCompositeDef Camel_T2 DisplayNameUnknown]] "Unknown Dromadda Evolution"),
-	'DisplayNameUnknownPL', T(226359582646, --[[ModItemUnitAnimalCompositeDef Camel_T2 DisplayNameUnknownPL]] "Unknown Dromadda Evolutions"),
-	'Description', T(710987730029, --[[ModItemUnitAnimalCompositeDef Camel_T2 Description]] "Dromadary with the ability to shoot spit from long distances away."),
-	'BaseMaxHealth', 150000,
-	'FoodResources', {
-		"FoodAnimalHerbivore",
-		"Slop",
-	},
-	'DailyEatingAmount', 2000,
-	'Diet', "Herbivore",
-	'EatingDuration', 4000,
-	'FoodSourceClasses', {
-		"ResourcePile",
-		"Plant",
-		"AnimalFeeder",
-	},
-	'ButcherResources', {
-		PlaceObj('ButcherResAmount', {
-			'resource', "RawMeat",
-			'min_amount', 30000,
-			'max_amount', 50000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "LeatherRaw",
-			'min_amount', 20000,
-			'max_amount', 40000,
-		}),
-	},
-	'SelectionRadius', 1500,
-	'ChanceToBeMale', 40,
-	'BodySize', "large",
-	'ProduceResources', {
-		PlaceObj('ResAmount', {
-			'resource', "FuelManure",
-			'amount', 20000,
-		}),
-	},
-	'ProduceResInterval', 1920000,
-	'AnimalPerks', {
-		"ManureProducer",
-		"DraftableAnimal",
-	},
-	'pfclass_tamed', 10,
-	'pfclass_tamed_lead', 13,
-	'attack_weapon', "Camel_Spit",
-	'attack_weapon_alt', "CamelWeapon",
-	'EatStartAnim', "eat_Start",
-	'EatIdleAnim', {
-		"eat_Idle",
-	},
-	'EatEndAnim', "eat_End",
-	'anim_idle', {
-		"idle",
-		"idle_Active",
-	},
-	'anim_idle_playful', {
-		"idle_Playfull",
-		"idle_Playfull2",
-	},
-	'SleepStartAnim', "sleep_Start",
-	'SleepIdleAnim', "sleep_Idle",
-	'SleepEndAnim', "sleep_End",
-	'Tameable', true,
-	'TamingFood', "CactusFruit",
-	'TamingFoodAmount', 20000,
-	'TamingMinimumSkill', 3,
-	'TamingChance', 70,
-	'TamingAggressiveChance', 10,
-	'TamingDistance', 10000,
-	'TamedLifetimeMin', 92160000,
-	'TamedLifetimeMax', 138240000,
-	'CombatSkillInitial', range(5, 6),
-	'BondingChance', 10,
-	'ReproductionType', "two sexes",
-	'DailyPregnancyChance', 45,
-	'PregnancyDuration', 4800000,
-	'GrowDuration', 4800000,
-	'NewbornClass', "Camel_T3",
-	'MinGrownScale', 70,
-	'MaxGrownScale', 85,
-	'FieldVisibilityCold', 75000,
-	'FieldVisibilityWarm', 25000,
-	'PlantsToEatMin', 40,
-	'PlantsToEatMax', 60,
-	'HerdMergeClass', "Camel",
-	'UnitPerkFrenzy', true,
-	'FrenzyEffects', {
-		"Frenzy_Conscious_1",
-	},
-}),
-PlaceObj('ModItemUnitAnimalCompositeDef', {
-	'Group', "Desert",
-	'Id', "Camel_T3",
-	'object_class', "CamelBase",
-	'SpeciesGroup', "hoofed",
-	'RoamRadius', 15000,
-	'RoamIntervalMin', 40000,
-	'RoamIntervalMax', 120000,
-	'composite_part_target', "CamelT3",
-	'composite_part_groups', {
-		"Camel",
-	},
-	'PainMask', "PainMask",
-	'EventProgressValue', 150,
-	'CombatGroup', "Camels",
-	'CombatHostile', true,
-	'HitNegationChance', {
-		HitNegationChance_energy = 20,
-		HitNegationChance_pacify = 40,
-		HitNegationChance_piercing = 10,
-		energy = 20,
-		pacify = 40,
-		piercing = 10,
-	},
-	'HitNegationChance_piercing', 10,
-	'HitNegationChance_energy', 20,
-	'HitNegationChance_pacify', 40,
-	'EnrageChance', 3,
-	'AttackMemory', 45000,
-	'CombatGiveUpNoHit', 30000,
-	'CombatFleeAccuracy', 0,
-	'ButcherDuration', 20000,
-	'max_skinned_decals_low', -2,
-	'FieldResearchTech', "FieldCamelT3",
-	'ObservationDistanceMin', 15000,
-	'ObservationDistanceMax', 20000,
-	'Icon', "UI/Icons/Resources/res_camel",
-	'DisplayName', T(946154925318, --[[ModItemUnitAnimalCompositeDef Camel_T3 DisplayName]] "Llamel Brute"),
-	'DisplayNamePl', T(478971232664, --[[ModItemUnitAnimalCompositeDef Camel_T3 DisplayNamePl]] "Llamel Brutes"),
-	'DisplayNameUnknown', T(755225927923, --[[ModItemUnitAnimalCompositeDef Camel_T3 DisplayNameUnknown]] "Unknown Dromadda Evolution"),
-	'DisplayNameUnknownPL', T(141098364520, --[[ModItemUnitAnimalCompositeDef Camel_T3 DisplayNameUnknownPL]] "Unknown Dromadda Evolutions"),
-	'Description', T(768013042972, --[[ModItemUnitAnimalCompositeDef Camel_T3 Description]] "Aggressive spitting dromedary"),
-	'BaseMaxHealth', 300000,
-	'FoodResources', {
-		"FoodAnimalHerbivore",
-		"Slop",
-	},
-	'DailyEatingAmount', 3000,
-	'Diet', "Herbivore",
-	'EatingDuration', 4000,
-	'FoodSourceClasses', {
-		"ResourcePile",
-		"Plant",
-		"AnimalFeeder",
-	},
-	'ButcherResources', {
-		PlaceObj('ButcherResAmount', {
-			'resource', "RawMeat",
-			'min_amount', 30000,
-			'max_amount', 50000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "LeatherRaw",
-			'min_amount', 20000,
-			'max_amount', 40000,
-		}),
-	},
-	'SelectionRadius', 1500,
-	'ChanceToBeMale', 40,
-	'BodySize', "large",
-	'ProduceResources', {
-		PlaceObj('ResAmount', {
-			'resource', "FuelManure",
-			'amount', 20000,
-		}),
-	},
-	'ProduceResInterval', 1920000,
-	'AnimalPerks', {
-		"ManureProducer",
-		"DraftableAnimal",
-	},
-	'pfclass_tamed', 10,
-	'pfclass_tamed_lead', 13,
-	'attack_weapon', "Camel_Spit_T2",
-	'attack_weapon_alt', "CamelWeapon",
-	'EatStartAnim', "eat_Start",
-	'EatIdleAnim', {
-		"eat_Idle",
-	},
-	'EatEndAnim', "eat_End",
-	'anim_idle', {
-		"idle",
-		"idle_Active",
-	},
-	'anim_idle_playful', {
-		"idle_Playfull",
-		"idle_Playfull2",
-	},
-	'SleepStartAnim', "sleep_Start",
-	'SleepIdleAnim', "sleep_Idle",
-	'SleepEndAnim', "sleep_End",
-	'Tameable', true,
-	'TamingFood', "CactusFruit",
-	'TamingFoodAmount', 20000,
-	'TamingMinimumSkill', 3,
-	'TamingChance', 70,
-	'TamingAggressiveChance', 10,
-	'TamingDistance', 10000,
-	'TamedLifetimeMin', 92160000,
-	'TamedLifetimeMax', 138240000,
-	'CombatSkillInitial', range(5, 6),
-	'BondingChance', 10,
-	'ReproductionType', "two sexes",
-	'DailyPregnancyChance', 55,
-	'PregnancyDuration', 2880000,
-	'GrowDuration', 2880000,
-	'NewbornClass', "Camel_T4",
-	'MinGrownScale', 70,
-	'MaxGrownScale', 85,
-	'FieldVisibilityCold', 75000,
-	'FieldVisibilityWarm', 25000,
-	'PlantsToEatMin', 40,
-	'PlantsToEatMax', 60,
-	'HerdMergeClass', "Camel",
-	'UnitPerkFrenzy', true,
-	'FrenzyEffects', {
-		"Frenzy_Conscious_2",
-	},
-}),
-PlaceObj('ModItemUnitAnimalCompositeDef', {
-	'Group', "Desert",
-	'Id', "Camel_T4",
-	'object_class', "CamelBase",
-	'SpeciesGroup', "hoofed",
-	'RoamRadius', 15000,
-	'RoamIntervalMin', 40000,
-	'RoamIntervalMax', 120000,
-	'composite_part_target', "CamelT4",
-	'composite_part_groups', {
-		"Camel",
-	},
-	'PainMask', "PainMask",
-	'EventProgressValue', 320,
-	'CombatGroup', "Camels",
-	'CombatHostile', true,
-	'HitNegationChance', {
-		HitNegationChance_blunt = 5,
-		HitNegationChance_energy = 60,
-		HitNegationChance_gas = 5,
-		HitNegationChance_pacify = 60,
-		HitNegationChance_piercing = 40,
-		blunt = 5,
-		energy = 60,
-		gas = 5,
-		pacify = 60,
-		piercing = 40,
-	},
-	'HitNegationChance_blunt', 5,
-	'HitNegationChance_piercing', 40,
-	'HitNegationChance_energy', 60,
-	'HitNegationChance_gas', 5,
-	'HitNegationChance_pacify', 60,
-	'EnrageChance', 3,
-	'AttackMemory', 45000,
-	'CombatGiveUpNoHit', 30000,
-	'CombatFleeAccuracy', 0,
-	'ButcherDuration', 20000,
-	'max_skinned_decals_low', -2,
-	'FieldResearchTech', "FieldCamelT3",
-	'ObservationDistanceMin', 15000,
-	'ObservationDistanceMax', 20000,
-	'Icon', "UI/Icons/Resources/res_camel",
-	'DisplayName', T(465727968103, --[[ModItemUnitAnimalCompositeDef Camel_T4 DisplayName]] "Llamel Soldier"),
-	'DisplayNamePl', T(703972505780, --[[ModItemUnitAnimalCompositeDef Camel_T4 DisplayNamePl]] "Llamel Soldiers"),
-	'DisplayNameUnknown', T(959780937654, --[[ModItemUnitAnimalCompositeDef Camel_T4 DisplayNameUnknown]] "Unknown Dromadda Evolution"),
-	'DisplayNameUnknownPL', T(438449897644, --[[ModItemUnitAnimalCompositeDef Camel_T4 DisplayNameUnknownPL]] "Unknown Dromadda Evolutions"),
-	'Description', T(134587557425, --[[ModItemUnitAnimalCompositeDef Camel_T4 Description]] "Aggressive spitting dromedary, with it's saliva able to destroy any obstacle."),
-	'BaseMaxHealth', 600000,
-	'FoodResources', {
-		"FoodAnimalHerbivore",
-		"Slop",
-	},
-	'DailyEatingAmount', 4000,
-	'Diet', "Herbivore",
-	'EatingDuration', 4000,
-	'FoodSourceClasses', {
-		"ResourcePile",
-		"Plant",
-		"AnimalFeeder",
-	},
-	'ButcherResources', {
-		PlaceObj('ButcherResAmount', {
-			'resource', "RawMeat",
-			'min_amount', 30000,
-			'max_amount', 50000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "LeatherRaw",
-			'min_amount', 20000,
-			'max_amount', 40000,
-		}),
-	},
-	'SelectionRadius', 1500,
-	'ChanceToBeMale', 40,
-	'BodySize', "large",
-	'ProduceResources', {
-		PlaceObj('ResAmount', {
-			'resource', "FuelManure",
-			'amount', 20000,
-		}),
-	},
-	'ProduceResInterval', 1920000,
-	'AnimalPerks', {
-		"ManureProducer",
-		"DraftableAnimal",
-	},
-	'pfclass_tamed', 10,
-	'pfclass_tamed_lead', 13,
-	'attack_weapon', "Camel_Spit_T2",
-	'attack_weapon_alt', "CamelWeapon",
-	'EatStartAnim', "eat_Start",
-	'EatIdleAnim', {
-		"eat_Idle",
-	},
-	'EatEndAnim', "eat_End",
-	'anim_idle', {
-		"idle",
-		"idle_Active",
-	},
-	'anim_idle_playful', {
-		"idle_Playfull",
-		"idle_Playfull2",
-	},
-	'SleepStartAnim', "sleep_Start",
-	'SleepIdleAnim', "sleep_Idle",
-	'SleepEndAnim', "sleep_End",
-	'Tameable', true,
-	'TamingFood', "CactusFruit",
-	'TamingFoodAmount', 20000,
-	'TamingMinimumSkill', 3,
-	'TamingChance', 70,
-	'TamingAggressiveChance', 10,
-	'TamingDistance', 10000,
-	'TamedLifetimeMin', 92160000,
-	'TamedLifetimeMax', 138240000,
-	'CombatSkillInitial', range(5, 6),
-	'BondingChance', 10,
-	'ReproductionType', "two sexes",
-	'DailyPregnancyChance', 65,
-	'PregnancyDuration', 2000000,
-	'GrowDuration', 2000000,
-	'NewbornClass', "Camel_T5",
-	'MinGrownScale', 70,
-	'MaxGrownScale', 85,
-	'FieldVisibilityCold', 75000,
-	'FieldVisibilityWarm', 25000,
-	'PlantsToEatMin', 40,
-	'PlantsToEatMax', 60,
-	'HerdMergeClass', "Camel",
-	'UnitPerkFrenzy', true,
-	'FrenzyEffects', {
-		"Frenzy_Conscious_3",
-	},
-}),
-PlaceObj('ModItemUnitAnimalCompositeDef', {
-	'Group', "Desert",
-	'Id', "Camel_T5",
-	'object_class', "CamelBase",
-	'SpeciesGroup', "hoofed",
-	'RoamRadius', 15000,
-	'RoamIntervalMin', 40000,
-	'RoamIntervalMax', 120000,
-	'composite_part_target', "CamelT5",
-	'composite_part_groups', {
-		"Camel",
-	},
-	'PainMask', "PainMask",
-	'EventProgressValue', 900,
-	'CombatGroup', "Camels",
-	'CombatHostile', true,
-	'HitNegationChance', {
-		HitNegationChance_blunt = 10,
-		HitNegationChance_energy = 80,
-		HitNegationChance_gas = 10,
-		HitNegationChance_pacify = 80,
-		HitNegationChance_piercing = 50,
-		blunt = 10,
-		energy = 80,
-		gas = 10,
-		pacify = 80,
-		piercing = 50,
-	},
-	'HitNegationChance_blunt', 10,
-	'HitNegationChance_piercing', 50,
-	'HitNegationChance_energy', 80,
-	'HitNegationChance_gas', 10,
-	'HitNegationChance_pacify', 80,
-	'EnrageChance', 3,
-	'AttackMemory', 45000,
-	'CombatGiveUpNoHit', 30000,
-	'CombatFleeAccuracy', 0,
-	'ButcherDuration', 20000,
-	'max_skinned_decals_low', -2,
-	'FieldResearchTech', "FieldCamelT5",
-	'ObservationDistanceMin', 15000,
-	'ObservationDistanceMax', 20000,
-	'Icon', "UI/Icons/Resources/res_camel",
-	'DisplayName', T(893069937506, --[[ModItemUnitAnimalCompositeDef Camel_T5 DisplayName]] "Royal Llamel"),
-	'DisplayNamePl', T(208203639834, --[[ModItemUnitAnimalCompositeDef Camel_T5 DisplayNamePl]] "Royal Llamels"),
-	'DisplayNameUnknown', T(820153423221, --[[ModItemUnitAnimalCompositeDef Camel_T5 DisplayNameUnknown]] "Unknown Dromadda Evolution"),
-	'DisplayNameUnknownPL', T(405126334598, --[[ModItemUnitAnimalCompositeDef Camel_T5 DisplayNameUnknownPL]] "Unknown Dromadda Evolutions"),
-	'Description', T(134372948946, --[[ModItemUnitAnimalCompositeDef Camel_T5 Description]] "Aggressive spitting dromedary, with it's saliva able to destroy any obstacle"),
-	'BaseMaxHealth', 1200000,
-	'FoodResources', {
-		"FoodAnimalHerbivore",
-		"Slop",
-	},
-	'DailyEatingAmount', 5000,
-	'Diet', "Herbivore",
-	'EatingDuration', 4000,
-	'FoodSourceClasses', {
-		"ResourcePile",
-		"Plant",
-		"AnimalFeeder",
-	},
-	'ButcherResources', {
-		PlaceObj('ButcherResAmount', {
-			'resource', "RawMeat",
-			'min_amount', 30000,
-			'max_amount', 50000,
-		}),
-		PlaceObj('ButcherResAmount', {
-			'resource', "LeatherRaw",
-			'min_amount', 20000,
-			'max_amount', 40000,
-		}),
-	},
-	'SelectionRadius', 1500,
-	'ChanceToBeMale', 40,
-	'BodySize', "large",
-	'ProduceResources', {
-		PlaceObj('ResAmount', {
-			'resource', "FuelManure",
-			'amount', 20000,
-		}),
-	},
-	'ProduceResInterval', 1920000,
-	'AnimalPerks', {
-		"ManureProducer",
-		"DraftableAnimal",
-	},
-	'pfclass_tamed', 10,
-	'pfclass_tamed_lead', 13,
-	'attack_weapon', "Camel_Spit_T2",
-	'attack_weapon_alt', "CamelWeapon",
-	'EatStartAnim', "eat_Start",
-	'EatIdleAnim', {
-		"eat_Idle",
-	},
-	'EatEndAnim', "eat_End",
-	'anim_idle', {
-		"idle",
-		"idle_Active",
-	},
-	'anim_idle_playful', {
-		"idle_Playfull",
-		"idle_Playfull2",
-	},
-	'SleepStartAnim', "sleep_Start",
-	'SleepIdleAnim', "sleep_Idle",
-	'SleepEndAnim', "sleep_End",
-	'Tameable', true,
-	'TamingFood', "CactusFruit",
-	'TamingFoodAmount', 20000,
-	'TamingMinimumSkill', 3,
-	'TamingChance', 70,
-	'TamingAggressiveChance', 10,
-	'TamingDistance', 10000,
-	'TamedLifetimeMin', 92160000,
-	'TamedLifetimeMax', 138240000,
-	'CombatSkillInitial', range(5, 6),
-	'BondingChance', 10,
-	'ReproductionType', "two sexes",
-	'DailyPregnancyChance', 50,
-	'PregnancyDuration', 1800000,
-	'GrowDuration', 1800000,
-	'MinGrownScale', 70,
-	'MaxGrownScale', 85,
-	'FieldVisibilityCold', 75000,
-	'FieldVisibilityWarm', 25000,
-	'PlantsToEatMin', 40,
-	'PlantsToEatMax', 60,
-	'HerdMergeClass', "Camel",
-	'UnitPerkFrenzy', true,
-	'FrenzyEffects', {
-		"Frenzy_Conscious_4",
-	},
-}),
-PlaceObj('ModItemWeaponResource', {
-	AnimTestEntity = "Shrieker_01",
-	AttackAngleTolerance = 420,
-	AttackCooldown = 1500,
-	AttackRange = 14000,
-	AttackType = "ranged",
-	CritChance = 5,
-	CritChanceMaxSkill = 10,
-	CritHitEffect = {
-		PlaceObj('HealthConditionOption', {
-			effect = "Dragonfly_AcidBurn",
-		}),
-	},
-	DamageToBuildings = 15000,
-	DamageTypes = {
-		piercing = true,
-	},
-	HitChance = 40,
-	HitChanceMaxSkill = 60,
-	HitEffect = {
-		PlaceObj('HealthConditionOption', {
-			effect = "Dragonfly_AcidSpit",
-		}),
-	},
-	MinAttackRange = 5000,
-	ProjectileEntity = "Shrieker_Projectile",
-	ProjectileGravity = true,
-	ProjectileSpeed = 20000,
-	ProjectileSpeedRand = 10000,
-	SortKey = 99990,
-	carry_amount = 0,
-	display_name = T(306641461850, --[[ModItemWeaponResource Camel_Spit display_name]] "Shrieker Ranged"),
-	group = "Weapons_Animal",
-	id = "Camel_Spit",
-	progress = 0,
-	stack_size = 0,
-	transportable = false,
-	visible = false,
-}),
-PlaceObj('ModItemWeaponResource', {
-	AnimTestEntity = "Shrieker_01",
-	AttackAngleTolerance = 420,
-	AttackCooldown = 1500,
-	AttackRange = 14000,
-	AttackType = "ranged",
-	CritChance = 5,
-	CritChanceMaxSkill = 10,
-	CritHitEffect = {
-		PlaceObj('HealthConditionOption', {
-			effect = "Dragonfly_AcidBurn",
-		}),
-	},
-	DamageToBuildings = 30000,
-	DamageTypes = {
-		piercing = true,
-	},
-	HitChance = 40,
-	HitChanceMaxSkill = 60,
-	HitEffect = {
-		PlaceObj('HealthConditionOption', {
-			effect = "Dragonfly_AcidSpit",
-		}),
-	},
-	MinAttackRange = 5000,
-	ProjectileEntity = "Shrieker_Projectile",
-	ProjectileGravity = true,
-	ProjectileSpeed = 20000,
-	ProjectileSpeedRand = 10000,
-	SortKey = 99990,
-	carry_amount = 0,
-	display_name = T(327462678622, --[[ModItemWeaponResource Camel_Spit_T2 display_name]] "Shrieker Ranged"),
-	group = "Weapons_Animal",
-	id = "Camel_Spit_T2",
-	progress = 0,
-	stack_size = 0,
-	transportable = false,
-	visible = false,
-}),
-PlaceObj('ModItemCompositeBodyPreset', {
-	'Group', "Camel",
-	'Id', "CamelT2",
-	'Target', "CamelT2",
-	'Parts', set( "Body" ),
-	'Entity', "GiantCamel",
-	'Scale', range(70, 80),
-	'Colors', {
-		PlaceObj('CompositeBodyPresetColor', {
-			'EditableColor1', RGBA(255, 71, 0, 255),
-			'EditableColor2', RGBA(0, 186, 255, 255),
-			'EditableColor3', RGBA(0, 38, 62, 255),
-		}),
-		PlaceObj('CompositeBodyPresetColor', {
-			'EditableColor1', RGBA(255, 71, 0, 255),
-			'EditableColor2', RGBA(0, 90, 124, 255),
-			'EditableColor3', RGBA(0, 38, 62, 255),
-		}),
-		PlaceObj('CompositeBodyPresetColor', {
-			'EditableColor1', RGBA(250, 88, 32, 255),
-			'EditableColor2', RGBA(0, 89, 146, 255),
-			'EditableColor3', RGBA(0, 38, 62, 255),
-		}),
-	},
-}),
-PlaceObj('ModItemCompositeBodyPreset', {
-	'Group', "Camel",
-	'Id', "CamelT3",
-	'Target', "CamelT3",
-	'Parts', set( "Body" ),
-	'Entity', "GiantCamel",
-	'Scale', range(70, 80),
-	'Colors', {
-		PlaceObj('CompositeBodyPresetColor', {
-			'EditableColor1', RGBA(132, 82, 65, 255),
-			'EditableColor2', RGBA(0, 186, 255, 255),
-			'EditableColor3', RGBA(0, 38, 62, 255),
-		}),
-	},
-}),
-PlaceObj('ModItemCompositeBodyPreset', {
-	'Group', "Camel",
-	'Id', "CamelT4",
-	'Target', "CamelT4",
-	'Parts', set( "Body" ),
-	'Entity', "GiantCamel",
-	'Scale', range(70, 80),
-	'Colors', {
-		PlaceObj('CompositeBodyPresetColor', {
-			'EditableColor1', RGBA(142, 129, 31, 255),
-			'EditableColor2', RGBA(0, 186, 255, 255),
-			'EditableColor3', RGBA(0, 38, 62, 255),
-		}),
-	},
-}),
-PlaceObj('ModItemCompositeBodyPreset', {
-	'Group', "Camel",
-	'Id', "CamelT5",
-	'Target', "CamelT5",
-	'Parts', set( "Body" ),
-	'Entity', "GiantCamel",
-	'Scale', range(70, 80),
-	'Colors', {
-		PlaceObj('CompositeBodyPresetColor', {
-			'EditableColor1', RGBA(255, 227, 0, 255),
-			'EditableColor2', RGBA(154, 0, 250, 255),
-			'EditableColor3', RGBA(42, 0, 33, 255),
-		}),
-	},
-}),
-PlaceObj('ModItemTech', {
-	Activity = "FieldResearch",
-	Description = T(975185146158, --[[ModItemTech FieldCamelT3 Description]] "The Dromadda have now evolved and grabbed the ability to spit from Earth Camels.\nAmazingly their spit has the same consistency and acidity of the Hummingfly.\n\nThis combined with a general increase in intelligence means we can train and deploy these for defense!\n\nDeals <colro TextNegative>Energy</color> damage."),
-	DisplayName = T(924189431384, --[[ModItemTech FieldCamelT3 DisplayName]] "Humped animal"),
-	DisplayNamePl = T(859058952645, --[[ModItemTech FieldCamelT3 DisplayNamePl]] "Humped animals"),
-	FieldResearchCategory = "Fauna",
-	FieldResearchTemplateExpression = function (self) return Camel end,
-	Icon = "UI/Messages/Research/res_Camel",
-	LockPrerequisites = {
-		PlaceObj('CheckRegion', {
-			Region = set( "Desertum" ),
-		}),
-	},
-	ResearchPoints = 6000,
-	group = "Field",
-	id = "FieldCamelT3",
-	money_value = 50000000,
-	tradable = false,
-}),
-PlaceObj('ModItemTech', {
-	Activity = "FieldResearch",
-	Description = T(995220278296, --[[ModItemTech FieldCamelT5 Description]] 'The royal purple and burly frame has caused the colony to start calling this species a "<em>Royal Llamels</em>".\nNow possessing high <color TextNegative>Energy</color> and <color TechSubtitleBlue>Piercing</color> resistances, this species can be used to trade fire with anything that assails us!\n\nDeals <colro TextNegative>Energy</color> damage.'),
-	DisplayName = T(346114070115, --[[ModItemTech FieldCamelT5 DisplayName]] "Humped animal"),
-	DisplayNamePl = T(321019568058, --[[ModItemTech FieldCamelT5 DisplayNamePl]] "Humped animals"),
-	FieldResearchCategory = "Fauna",
-	FieldResearchTemplateExpression = function (self) return Camel end,
-	Icon = "UI/Messages/Research/res_Camel",
-	LockPrerequisites = {
-		PlaceObj('CheckRegion', {
-			Region = set( "Desertum" ),
-		}),
-	},
-	ResearchPoints = 6000,
-	group = "Field",
-	id = "FieldCamelT5",
-	money_value = 50000000,
-	tradable = false,
-}),
-PlaceObj('ModItemStoryBit', {
-	Category = "AttackSpawns",
-	Effects = {
-		PlaceObj('ActivateSpawnDef', {
-			CreateInstance = true,
-			FillInstance = function (self, instance)
-				local spawnClassBest = nil
-				local addedClassList = nil
-				local minion = "Camel"
-				spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
-				instance.SpawnClass = spawnClassBest
-				instance.AdditionalClassList = {}
-				print(spawnClassBest)
-				print(addedClassList)
-				for i=1,#addedClassList do
-					instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
+		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Id', "Ulfen",
+			'object_class', "UlfenBase",
+			'SpeciesGroup', "hoofed",
+			'RoamRadius', 15000,
+			'RoamIntervalMin', 40000,
+			'RoamIntervalMax', 120000,
+			'PainMask', "PainMask",
+			'EventProgressValue', 30,
+			'CombatGroup', "Ulfens",
+			'EnrageChance', 3,
+			'AttackMemory', 45000,
+			'CombatGiveUpNoHit', 30000,
+			'CombatFleeAccuracy', 0,
+			'aim_spot', "Aim",
+			'ButcherDuration', 20000,
+			'max_skinned_decals_low', -1,
+			'FieldResearchTech', "FieldUlfen",
+			'ObservationDistanceMin', 15000,
+			'ObservationDistanceMax', 20000,
+			'Icon', "UI/Icons/Resources/res_ulfen",
+			'DisplayName', T(756384334076, --[[ModItemUnitAnimalCompositeDef Ulfen DisplayName]] "Ulfen"),
+			'DisplayNamePl', T(905161765277, --[[ModItemUnitAnimalCompositeDef Ulfen DisplayNamePl]] "Ulfens"),
+			'Description', T(109888884422, --[[ModItemUnitAnimalCompositeDef Ulfen Description]] "Usually passive. Small chance to retaliate when attacked."),
+			'FoodResources', {
+				"FoodAnimalHerbivore",
+				"Slop",
+			},
+			'DailyEatingAmount', 10000,
+			'Diet', "Herbivore",
+			'EatingDuration', 4000,
+			'FoodSourceClasses', {
+				"ResourcePile",
+				"Plant",
+				"AnimalFeeder",
+			},
+			'ButcherResources', {
+				PlaceObj('ButcherResAmount', {
+					'resource', "RawMeat",
+					'min_amount', 40000,
+					'max_amount', 60000,
+				}),
+				PlaceObj('ButcherResAmount', {
+					'resource', "LeatherRaw",
+					'min_amount', 20000,
+					'max_amount', 40000,
+				}),
+			},
+			'SelectionRadius', 2000,
+			'ChanceToBeMale', 40,
+			'BodySize', "large",
+			'ProduceResources', {
+				PlaceObj('ResAmount', {
+					'resource', "FuelManure",
+					'amount', 20000,
+				}),
+			},
+			'ProduceResInterval', 1920000,
+			'CmdProduceResources', function (animal)
+				if not animal:IsTamed() then
+					if animal:Random(100, "no produce chance") > 40 then
+						return animal:UpdateProductionTime()
+					end
 				end
+				return animal:DoProduceResources()
 			end,
-			ProgressMul = 150,
-			SpawnDefId = "OrbitalRadio_Camel",
-			param_bindings = false,
+			'AnimalPerks', {
+				"ManureProducer",
+			},
+			'collision_radius_mod', 1250,
+			'pfclass_tamed', 10,
+			'pfclass_tamed_lead', 13,
+			'EatStartAnim', "eat_Start",
+			'EatIdleAnim', {
+				"eat_Idle",
+			},
+			'EatEndAnim', "eat_End",
+			'anim_idle_nervous', {
+				"idle_Nervous",
+			},
+			'anim_idle_playful', {
+				"idle_Playfull",
+				"idle_Playfull2",
+			},
+			'SleepStartAnim', "sleep_Start",
+			'SleepIdleAnim', "sleep_Idle",
+			'SleepEndAnim', "sleep_End",
+			'SleepInterruptedAnim', "sleep_Interrupted",
+			'SleepStartAnim2', "sleep_Start2",
+			'SleepIdleAnim2', "sleep_Idle2",
+			'SleepEndAnim2', "sleep_End2",
+			'SleepInterruptedAnim2', "sleep_Interrupted2",
+			'Tameable', true,
+			'Petable', true,
+			'TamingFood', "Berry",
+			'TamingFoodAmount', 10000,
+			'TamingMinimumSkill', 3,
+			'TamingChance', 70,
+			'TamingAggressiveChance', 10,
+			'TamingDistance', 10000,
+			'TamedLifetimeMin', 92160000,
+			'TamedLifetimeMax', 138240000,
+			'BondingChance', 10,
+			'ReproductionType', "two sexes",
+			'DailyPregnancyChance', 60,
+			'PregnancyDuration', 3840000,
+			'GrowDuration', 3840000,
+			'NewbornClass', "Ulfen_T2",
+			'MinGrownScale', 70,
+			'MaxGrownScale', 90,
+			'FieldVisibilityCold', 30000,
+			'FieldVisibilityWarm', 10000,
+			'MoveSpeedCold', 1000,
+			'PlantsToEatMin', 40,
+			'PlantsToEatMax', 60,
 		}),
-	},
-	Enabled = true,
-	HasNotification = false,
-	HasPopup = false,
-	InheritsObject = false,
-	OneTime = false,
-	Prerequisites = {
-		PlaceObj('CheckGameState', {
-			GameState = "Night",
-			Negate = true,
-			param_bindings = false,
+		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Group', "Jungle",
+			'Id', "Shogu",
+			'object_class', "ShoguBase",
+			'SpeciesGroup', "hoofed",
+			'RoamRadius', 15000,
+			'RoamIntervalMin', 40000,
+			'RoamIntervalMax', 120000,
+			'composite_part_groups', {
+				"Shogu",
+			},
+			'PainMask', "PainMask",
+			'EventProgressValue', 30,
+			'CombatGroup', "Shogu",
+			'EnrageChance', 25,
+			'AttackMemory', 45000,
+			'CombatGiveUpNoHit', 30000,
+			'CombatFleeAccuracy', 0,
+			'ButcherDuration', 20000,
+			'max_skinned_decals_low', -1,
+			'FieldResearchTech', "FieldShogu",
+			'ObservationDistanceMin', 15000,
+			'ObservationDistanceMax', 20000,
+			'Icon', "UI/Icons/Resources/res_shogu",
+			'DisplayName', T(911613609666, --[[ModItemUnitAnimalCompositeDef Shogu DisplayName]] "Shogu"),
+			'DisplayNamePl', T(495064956878, --[[ModItemUnitAnimalCompositeDef Shogu DisplayNamePl]] "Shogus"),
+			'Description', T(711949076470, --[[ModItemUnitAnimalCompositeDef Shogu Description]] "Usually passive. Chance to retaliate when attacked."),
+			'BaseMaxHealth', 50000,
+			'FoodResources', {
+				"FoodAnimalHerbivore",
+				"FoodAnimalCarnivore",
+				"Slop",
+			},
+			'DailyEatingAmount', 1000,
+			'Diet', "Omnivore",
+			'EatingDuration', 4000,
+			'FoodSourceClasses', {
+				"ResourcePile",
+				"UnitCorpse",
+				"AnimalFeeder",
+				"Plant",
+			},
+			'ButcherResources', {
+				PlaceObj('ButcherResAmount', {
+					'resource', "RawMeat",
+					'min_amount', 30000,
+					'max_amount', 50000,
+				}),
+				PlaceObj('ButcherResAmount', {
+					'resource', "LeatherRaw",
+					'min_amount', 10000,
+					'max_amount', 30000,
+				}),
+			},
+			'BodySize', "medium",
+			'ProduceResources', {
+				PlaceObj('ResAmount', {
+					'resource', "Potato",
+					'amount', 20000,
+				}),
+			},
+			'ProduceResInterval', 1920000,
+			'CmdProduceResources', function (animal)
+				if not animal:IsTamed() then return animal:UpdateProductionTime() end
+				return animal:DoProduceResources()
+			end,
+			'AnimalPerks', {
+				"ChewRootsDigger",
+				"DraftableAnimal",
+			},
+			'radius', 400,
+			'pfclass_tamed', 7,
+			'pfclass_tamed_lead', 12,
+			'EnrageChanceOtherAnimals', 75,
+			'EatStartAnim', "eat_Start",
+			'EatIdleAnim', {
+				"eat_Idle",
+			},
+			'EatEndAnim', "eat_End",
+			'anim_idle', {
+				"idle",
+				"idle_Active1",
+				"idle_Active2",
+			},
+			'anim_idle_nervous', {
+				"idle_Nervous",
+			},
+			'SleepStartAnim', "sleep_Start",
+			'SleepIdleAnim', "sleep_Idle",
+			'SleepEndAnim', "sleep_End",
+			'SleepStartAnim2', "sleep_Start2",
+			'SleepIdleAnim2', "sleep_Idle2",
+			'SleepEndAnim2', "sleep_End2",
+			'Tameable', true,
+			'TamingFood', "Palmfruits",
+			'TamingFoodAmount', 20000,
+			'TamingMinimumSkill', 5,
+			'TamingChance', 50,
+			'TamingAggressiveChance', 50,
+			'TamingDistance', 10000,
+			'TamedLifetimeMin', 92160000,
+			'TamedLifetimeMax', 138240000,
+			'CombatSkillInitial', range(2, 4),
+			'BondingChance', 5,
+			'ReproductionType', "two sexes",
+			'DailyPregnancyChance', 70,
+			'PregnancyDuration', 4800000,
+			'GrowDuration', 4800000,
+			'NewbornClass', "Shogu_T2",
+			'FieldVisibilityCold', 0,
+			'FieldVisibilityWarm', 0,
+			'MoveSpeedCold', 1000,
+			'PlantsToEatMin', 0,
+			'PlantsToEatMax', 0,
+			'GrazingChance', 3,
+			'HerdMergeClass', "Shogu",
 		}),
-	},
-	SelectObject = false,
-	group = "AttackControllers_Spawners",
-	id = "OrbitalRadio_CamelAttack",
-	qa_info = PlaceObj('PresetQAInfo', {
-		data = {
-			{
-				action = "Modified",
-				time = 1618304612,
-				user = "Lina",
+		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Group', "Jungle",
+			'Id', "Shogu_T2",
+			'object_class', "ShoguBase",
+			'SpeciesGroup', "hoofed",
+			'RoamRadius', 15000,
+			'RoamIntervalMin', 40000,
+			'RoamIntervalMax', 120000,
+			'composite_part_target', "ShoguT2",
+			'composite_part_groups', {
+				"Shogu",
 			},
-			{
-				action = "Modified",
-				time = 1618567764,
-				user = "Lina",
+			'PainMask', "PainMask",
+			'EventProgressValue', 70,
+			'CombatGroup', "Shogu",
+			'CombatHostile', true,
+			'HitNegationChance', {
+				HitNegationChance_gas = 15,
+				HitNegationChance_pacify = 20,
+				HitNegationChance_piercing = 10,
+				gas = 15,
+				pacify = 20,
+				piercing = 10,
 			},
-			{
-				action = "Modified",
-				time = 1619113707,
-				user = "Lina",
+			'HitNegationChance_piercing', 10,
+			'HitNegationChance_gas', 15,
+			'HitNegationChance_pacify', 20,
+			'EnrageChance', 25,
+			'AttackMemory', 45000,
+			'CombatGiveUpNoHit', 30000,
+			'CombatFleeAccuracy', 0,
+			'ButcherDuration', 20000,
+			'max_skinned_decals_low', -1,
+			'FieldResearchTech', "FieldShogu",
+			'ObservationDistanceMin', 15000,
+			'ObservationDistanceMax', 20000,
+			'Icon', "UI/Icons/Resources/res_shogu",
+			'DisplayName', T(887545666757, --[[ModItemUnitAnimalCompositeDef Shogu_T2 DisplayName]] "Infected Shogu"),
+			'DisplayNamePl', T(990957586290, --[[ModItemUnitAnimalCompositeDef Shogu_T2 DisplayNamePl]] "Infected Shogus"),
+			'Description', T(115355775673, --[[ModItemUnitAnimalCompositeDef Shogu_T2 Description]] "Evolution of the Shogu that is prone to disease and ill health."),
+			'BaseMaxHealth', 50000,
+			'FoodResources', {
+				"FoodAnimalHerbivore",
+				"FoodAnimalCarnivore",
+				"Slop",
 			},
-			{
-				action = "Modified",
-				time = 1620805810,
-				user = "Lina",
+			'DailyEatingAmount', 2000,
+			'Diet', "Omnivore",
+			'EatingDuration', 4000,
+			'FoodSourceClasses', {
+				"ResourcePile",
+				"UnitCorpse",
+				"AnimalFeeder",
+				"Plant",
 			},
-			{
-				action = "Modified",
-				time = 1620900159,
-				user = "Lina",
+			'ButcherResources', {
+				PlaceObj('ButcherResAmount', {
+					'resource', "RawMeat",
+					'min_amount', 30000,
+					'max_amount', 50000,
+				}),
+				PlaceObj('ButcherResAmount', {
+					'resource', "LeatherRaw",
+					'min_amount', 10000,
+					'max_amount', 30000,
+				}),
 			},
-			{
-				action = "Modified",
-				time = 1623415500,
-				user = "Lina",
+			'BodySize', "medium",
+			'ProduceResources', {
+				PlaceObj('ResAmount', {
+					'resource', "Potato",
+					'amount', 20000,
+				}),
 			},
-			{
-				action = "Modified",
-				time = 1623762127,
-				user = "Lina",
+			'ProduceResInterval', 1920000,
+			'CmdProduceResources', function (animal)
+				if not animal:IsTamed() then return animal:UpdateProductionTime() end
+				return animal:DoProduceResources()
+			end,
+			'AnimalPerks', {
+				"ChewRootsDigger",
+				"DraftableAnimal",
 			},
-			{
-				action = "Modified",
-				time = 1623927826,
-				user = "Lina",
+			'radius', 400,
+			'pfclass_tamed', 7,
+			'pfclass_tamed_lead', 12,
+			'EnrageChanceOtherAnimals', 75,
+			'EatStartAnim', "eat_Start",
+			'EatIdleAnim', {
+				"eat_Idle",
 			},
-			{
-				action = "Modified",
-				time = 1633597437,
-				user = "Lina",
+			'EatEndAnim', "eat_End",
+			'anim_idle', {
+				"idle",
+				"idle_Active1",
+				"idle_Active2",
 			},
-			{
-				action = "Modified",
-				time = 1637742806,
-				user = "Lina",
+			'anim_idle_nervous', {
+				"idle_Nervous",
 			},
-			{
-				action = "Modified",
-				time = 1645458623,
-				user = "Bobby",
+			'SleepStartAnim', "sleep_Start",
+			'SleepIdleAnim', "sleep_Idle",
+			'SleepEndAnim', "sleep_End",
+			'SleepStartAnim2', "sleep_Start2",
+			'SleepIdleAnim2', "sleep_Idle2",
+			'SleepEndAnim2', "sleep_End2",
+			'Tameable', true,
+			'TamingFood', "Palmfruits",
+			'TamingFoodAmount', 20000,
+			'TamingMinimumSkill', 5,
+			'TamingChance', 50,
+			'TamingAggressiveChance', 50,
+			'TamingDistance', 10000,
+			'TamedLifetimeMin', 92160000,
+			'TamedLifetimeMax', 138240000,
+			'CombatSkillInitial', range(5, 6),
+			'BondingChance', 5,
+			'ReproductionType', "two sexes",
+			'DailyPregnancyChance', 55,
+			'PregnancyDuration', 4800000,
+			'GrowDuration', 4800000,
+			'NewbornClass', "Shogu_T3",
+			'FieldVisibilityCold', 0,
+			'FieldVisibilityWarm', 0,
+			'MoveSpeedCold', 1000,
+			'PlantsToEatMin', 0,
+			'PlantsToEatMax', 0,
+			'GrazingChance', 3,
+			'HerdMergeClass', "Shogu",
+			'UnitPerkFrenzy', true,
+			'AffectRadius', 5000,
+			'AffectClass', "UnitAnimal",
+			'FrenzyEffects', {
+				"Frenzy_Conscious_1",
+				"Shogu_Fly_Swarm",
 			},
-			{
-				action = "Modified",
-				time = 1653898921,
-				user = "Ivan",
+		}),
+		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Group', "Jungle",
+			'Id', "Shogu_T3",
+			'object_class', "ShoguBase",
+			'SpeciesGroup', "hoofed",
+			'RoamRadius', 15000,
+			'RoamIntervalMin', 40000,
+			'RoamIntervalMax', 120000,
+			'composite_part_target', "ShoguT3",
+			'composite_part_groups', {
+				"Shogu",
 			},
-			{
-				action = "Modified",
-				time = 1667999330,
-				user = "Bobby",
+			'PainMask', "PainMask",
+			'damage_reduction', {
+				energy = -15,
 			},
-		},
-		param_bindings = false,
+			'EventProgressValue', 150,
+			'CombatGroup', "Shogu",
+			'CombatHostile', true,
+			'HitNegationChance', {
+				HitNegationChance_energy = -15,
+				HitNegationChance_gas = 30,
+				HitNegationChance_pacify = 40,
+				HitNegationChance_piercing = 20,
+				energy = -15,
+				gas = 30,
+				pacify = 40,
+				piercing = 20,
+			},
+			'HitNegationChance_piercing', 20,
+			'HitNegationChance_energy', -15,
+			'HitNegationChance_gas', 30,
+			'HitNegationChance_pacify', 40,
+			'EnrageChance', 25,
+			'AttackMemory', 45000,
+			'CombatGiveUpNoHit', 30000,
+			'CombatFleeAccuracy', 0,
+			'ButcherDuration', 20000,
+			'max_skinned_decals_low', -1,
+			'FieldResearchTech', "FieldShoguT3",
+			'ObservationDistanceMin', 15000,
+			'ObservationDistanceMax', 20000,
+			'Icon', "UI/Icons/Resources/res_shogu",
+			'DisplayName', T(504320282932, --[[ModItemUnitAnimalCompositeDef Shogu_T3 DisplayName]] "Poxu"),
+			'DisplayNamePl', T(958903764635, --[[ModItemUnitAnimalCompositeDef Shogu_T3 DisplayNamePl]] "Poxus"),
+			'Description', T(484543651722, --[[ModItemUnitAnimalCompositeDef Shogu_T3 Description]] "Evolution has decreed that this creature suffer from all manner of ailments. And it's tusks can easily spread it's gifts."),
+			'BaseMaxHealth', 50000,
+			'FoodResources', {
+				"FoodAnimalHerbivore",
+				"FoodAnimalCarnivore",
+				"Slop",
+			},
+			'DailyEatingAmount', 3000,
+			'Diet', "Omnivore",
+			'EatingDuration', 4000,
+			'FoodSourceClasses', {
+				"ResourcePile",
+				"UnitCorpse",
+				"AnimalFeeder",
+				"Plant",
+			},
+			'ButcherResources', {
+				PlaceObj('ButcherResAmount', {
+					'resource', "RawMeat",
+					'min_amount', 30000,
+					'max_amount', 50000,
+				}),
+				PlaceObj('ButcherResAmount', {
+					'resource', "LeatherRaw",
+					'min_amount', 10000,
+					'max_amount', 30000,
+				}),
+			},
+			'BodySize', "medium",
+			'ProduceResources', {
+				PlaceObj('ResAmount', {
+					'resource', "Potato",
+					'amount', 20000,
+				}),
+			},
+			'ProduceResInterval', 1920000,
+			'CmdProduceResources', function (animal)
+				if not animal:IsTamed() then return animal:UpdateProductionTime() end
+				return animal:DoProduceResources()
+			end,
+			'AnimalPerks', {
+				"ChewRootsDigger",
+				"DraftableAnimal",
+				"AP_StatDamage",
+			},
+			'radius', 400,
+			'pfclass_tamed', 7,
+			'pfclass_tamed_lead', 12,
+			'EnrageChanceOtherAnimals', 75,
+			'attack_weapon', "Shogu_poison",
+			'EatStartAnim', "eat_Start",
+			'EatIdleAnim', {
+				"eat_Idle",
+			},
+			'EatEndAnim', "eat_End",
+			'anim_idle', {
+				"idle",
+				"idle_Active1",
+				"idle_Active2",
+			},
+			'anim_idle_nervous', {
+				"idle_Nervous",
+			},
+			'SleepStartAnim', "sleep_Start",
+			'SleepIdleAnim', "sleep_Idle",
+			'SleepEndAnim', "sleep_End",
+			'SleepStartAnim2', "sleep_Start2",
+			'SleepIdleAnim2', "sleep_Idle2",
+			'SleepEndAnim2', "sleep_End2",
+			'Tameable', true,
+			'TamingFood', "Palmfruits",
+			'TamingFoodAmount', 20000,
+			'TamingMinimumSkill', 5,
+			'TamingChance', 50,
+			'TamingAggressiveChance', 50,
+			'TamingDistance', 10000,
+			'TamedLifetimeMin', 92160000,
+			'TamedLifetimeMax', 138240000,
+			'CombatSkillInitial', range(5, 6),
+			'BondingChance', 5,
+			'ReproductionType', "two sexes",
+			'DailyPregnancyChance', 65,
+			'PregnancyDuration', 2880000,
+			'GrowDuration', 2880000,
+			'NewbornClass', "Shogu_T4",
+			'FieldVisibilityCold', 0,
+			'FieldVisibilityWarm', 0,
+			'MoveSpeedCold', 1000,
+			'PlantsToEatMin', 0,
+			'PlantsToEatMax', 0,
+			'GrazingChance', 3,
+			'HerdMergeClass', "Shogu",
+			'UnitPerkFrenzy', true,
+			'FrenzyEffects', {
+				"Frenzy_Conscious_2",
+				"Shogu_Fly_Swarm",
+			},
+		}),
+		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Group', "Jungle",
+			'Id', "Shogu_T4",
+			'object_class', "ShoguBase",
+			'SpeciesGroup', "hoofed",
+			'RoamRadius', 15000,
+			'RoamIntervalMin', 40000,
+			'RoamIntervalMax', 120000,
+			'composite_part_target', "ShoguT4",
+			'composite_part_groups', {
+				"Shogu",
+			},
+			'PainMask', "PainMask",
+			'damage_reduction', {
+				energy = -30,
+			},
+			'EventProgressValue', 320,
+			'CombatGroup', "Shogu",
+			'CombatHostile', true,
+			'HitNegationChance', {
+				HitNegationChance_energy = -30,
+				HitNegationChance_gas = 55,
+				HitNegationChance_pacify = 60,
+				HitNegationChance_piercing = 40,
+				energy = -30,
+				gas = 55,
+				pacify = 60,
+				piercing = 40,
+			},
+			'HitNegationChance_piercing', 40,
+			'HitNegationChance_energy', -30,
+			'HitNegationChance_gas', 55,
+			'HitNegationChance_pacify', 60,
+			'EnrageChance', 25,
+			'AttackMemory', 45000,
+			'CombatGiveUpNoHit', 30000,
+			'CombatFleeAccuracy', 0,
+			'ButcherDuration', 20000,
+			'max_skinned_decals_low', -1,
+			'FieldResearchTech', "FieldShoguT3",
+			'ObservationDistanceMin', 15000,
+			'ObservationDistanceMax', 20000,
+			'Icon', "UI/Icons/Resources/res_shogu",
+			'DisplayName', T(238232468743, --[[ModItemUnitAnimalCompositeDef Shogu_T4 DisplayName]] "Poxugor"),
+			'DisplayNamePl', T(946414543372, --[[ModItemUnitAnimalCompositeDef Shogu_T4 DisplayNamePl]] "Poxugors"),
+			'Description', T(702253245244, --[[ModItemUnitAnimalCompositeDef Shogu_T4 Description]] "A diseased creature seemingly only allowed to exist to spread it's poxes. Aggressively searches for food."),
+			'BaseMaxHealth', 50000,
+			'FoodResources', {
+				"FoodAnimalHerbivore",
+				"FoodAnimalCarnivore",
+				"Slop",
+			},
+			'DailyEatingAmount', 4000,
+			'Diet', "Omnivore",
+			'EatingDuration', 4000,
+			'FoodSourceClasses', {
+				"ResourcePile",
+				"UnitCorpse",
+				"AnimalFeeder",
+				"Plant",
+			},
+			'ButcherResources', {
+				PlaceObj('ButcherResAmount', {
+					'resource', "Slop",
+					'min_amount', 30000,
+					'max_amount', 50000,
+				}),
+				PlaceObj('ButcherResAmount', {
+					'resource', "LeatherRaw",
+					'min_amount', 10000,
+					'max_amount', 30000,
+				}),
+			},
+			'BodySize', "medium",
+			'ProduceResources', {
+				PlaceObj('ResAmount', {
+					'resource', "Potato",
+					'amount', 20000,
+				}),
+			},
+			'ProduceResInterval', 1920000,
+			'CmdProduceResources', function (animal)
+				if not animal:IsTamed() then return animal:UpdateProductionTime() end
+				return animal:DoProduceResources()
+			end,
+			'AnimalPerks', {
+				"ChewRootsDigger",
+				"DraftableAnimal",
+				"AP_StatDamage",
+			},
+			'radius', 400,
+			'pfclass_tamed', 7,
+			'pfclass_tamed_lead', 12,
+			'EnrageChanceOtherAnimals', 75,
+			'attack_weapon', "Shogu_poison",
+			'EatStartAnim', "eat_Start",
+			'EatIdleAnim', {
+				"eat_Idle",
+			},
+			'EatEndAnim', "eat_End",
+			'anim_idle', {
+				"idle",
+				"idle_Active1",
+				"idle_Active2",
+			},
+			'anim_idle_nervous', {
+				"idle_Nervous",
+			},
+			'SleepStartAnim', "sleep_Start",
+			'SleepIdleAnim', "sleep_Idle",
+			'SleepEndAnim', "sleep_End",
+			'SleepStartAnim2', "sleep_Start2",
+			'SleepIdleAnim2', "sleep_Idle2",
+			'SleepEndAnim2', "sleep_End2",
+			'Tameable', true,
+			'TamingFood', "Palmfruits",
+			'TamingFoodAmount', 20000,
+			'TamingMinimumSkill', 5,
+			'TamingChance', 50,
+			'TamingAggressiveChance', 50,
+			'TamingDistance', 10000,
+			'TamedLifetimeMin', 92160000,
+			'TamedLifetimeMax', 138240000,
+			'CombatSkillInitial', range(5, 6),
+			'BondingChance', 5,
+			'ReproductionType', "two sexes",
+			'DailyPregnancyChance', 75,
+			'PregnancyDuration', 2000000,
+			'GrowDuration', 2000000,
+			'NewbornClass', "Shogu_T5",
+			'FieldVisibilityCold', 0,
+			'FieldVisibilityWarm', 0,
+			'MoveSpeedCold', 1000,
+			'PlantsToEatMin', 0,
+			'PlantsToEatMax', 0,
+			'GrazingChance', 3,
+			'HerdMergeClass', "Shogu",
+			'UnitPerkFrenzy', true,
+			'FrenzyEffects', {
+				"Shogu_Fly_Swarm",
+				"Frenzy_Conscious_3",
+			},
+		}),
+		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Group', "Jungle",
+			'Id', "Shogu_T5",
+			'object_class', "ShoguBase",
+			'SpeciesGroup', "hoofed",
+			'RoamRadius', 15000,
+			'RoamIntervalMin', 40000,
+			'RoamIntervalMax', 120000,
+			'composite_part_target', "ShoguT5",
+			'composite_part_groups', {
+				"Shogu",
+			},
+			'PainMask', "PainMask",
+			'damage_reduction', {
+				energy = -45,
+			},
+			'EventProgressValue', 700,
+			'CombatGroup', "Shogu",
+			'CombatHostile', true,
+			'HitNegationChance', {
+				HitNegationChance_energy = -45,
+				HitNegationChance_gas = 70,
+				HitNegationChance_pacify = 80,
+				HitNegationChance_piercing = 50,
+				energy = -45,
+				gas = 70,
+				pacify = 80,
+				piercing = 50,
+			},
+			'HitNegationChance_piercing', 50,
+			'HitNegationChance_energy', -45,
+			'HitNegationChance_gas', 70,
+			'HitNegationChance_pacify', 80,
+			'EnrageChance', 25,
+			'AttackMemory', 45000,
+			'CombatGiveUpNoHit', 30000,
+			'CombatFleeAccuracy', 0,
+			'ButcherDuration', 20000,
+			'max_skinned_decals_low', -1,
+			'FieldResearchTech', "FieldShoguT5",
+			'ObservationDistanceMin', 15000,
+			'ObservationDistanceMax', 20000,
+			'Icon', "UI/Icons/Resources/res_shogu",
+			'DisplayName', T(286973149884, --[[ModItemUnitAnimalCompositeDef Shogu_T5 DisplayName]] "Poxumagus"),
+			'DisplayNamePl', T(659216291714, --[[ModItemUnitAnimalCompositeDef Shogu_T5 DisplayNamePl]] "Poxumagus"),
+			'Description', T(392714846508, --[[ModItemUnitAnimalCompositeDef Shogu_T5 Description]] "Filled so full of parasites, it's essentially a walking corpse. Aggressively jerks around for food."),
+			'BaseMaxHealth', 50000,
+			'FoodResources', {
+				"FoodAnimalHerbivore",
+				"FoodAnimalCarnivore",
+				"Slop",
+			},
+			'DailyEatingAmount', 5000,
+			'Diet', "Omnivore",
+			'EatingDuration', 4000,
+			'FoodSourceClasses', {
+				"ResourcePile",
+				"UnitCorpse",
+				"AnimalFeeder",
+				"Plant",
+			},
+			'ButcherResources', {
+				PlaceObj('ButcherResAmount', {
+					'resource', "Slop",
+					'min_amount', 30000,
+					'max_amount', 50000,
+				}),
+				PlaceObj('ButcherResAmount', {
+					'resource', "LeatherRaw",
+					'min_amount', 10000,
+					'max_amount', 30000,
+				}),
+			},
+			'BodySize', "medium",
+			'ProduceResources', {
+				PlaceObj('ResAmount', {
+					'resource', "Potato",
+					'amount', 20000,
+				}),
+			},
+			'ProduceResInterval', 1920000,
+			'CmdProduceResources', function (animal)
+				if not animal:IsTamed() then return animal:UpdateProductionTime() end
+				return animal:DoProduceResources()
+			end,
+			'AnimalPerks', {
+				"ChewRootsDigger",
+				"DraftableAnimal",
+				"AP_StatDamage",
+			},
+			'radius', 400,
+			'pfclass_tamed', 7,
+			'pfclass_tamed_lead', 12,
+			'EnrageChanceOtherAnimals', 75,
+			'attack_weapon', "Shogu_poison",
+			'EatStartAnim', "eat_Start",
+			'EatIdleAnim', {
+				"eat_Idle",
+			},
+			'EatEndAnim', "eat_End",
+			'anim_idle', {
+				"idle",
+				"idle_Active1",
+				"idle_Active2",
+			},
+			'anim_idle_nervous', {
+				"idle_Nervous",
+			},
+			'SleepStartAnim', "sleep_Start",
+			'SleepIdleAnim', "sleep_Idle",
+			'SleepEndAnim', "sleep_End",
+			'SleepStartAnim2', "sleep_Start2",
+			'SleepIdleAnim2', "sleep_Idle2",
+			'SleepEndAnim2', "sleep_End2",
+			'Tameable', true,
+			'TamingFood', "Palmfruits",
+			'TamingFoodAmount', 20000,
+			'TamingMinimumSkill', 5,
+			'TamingChance', 50,
+			'TamingAggressiveChance', 50,
+			'TamingDistance', 10000,
+			'TamedLifetimeMin', 92160000,
+			'TamedLifetimeMax', 138240000,
+			'CombatSkillInitial', range(5, 6),
+			'BondingChance', 5,
+			'ReproductionType', "two sexes",
+			'DailyPregnancyChance', 60,
+			'PregnancyDuration', 1800000,
+			'GrowDuration', 1800000,
+			'FieldVisibilityCold', 0,
+			'FieldVisibilityWarm', 0,
+			'MoveSpeedCold', 1000,
+			'PlantsToEatMin', 0,
+			'PlantsToEatMax', 0,
+			'GrazingChance', 3,
+			'HerdMergeClass', "Shogu",
+			'UnitPerkFrenzy', true,
+			'UnitReanimate', true,
+			'AffectRadius', 5000,
+			'AffectClass', "UnitAnimal",
+			'Disabled', function (self)
+				return self:IsDead() or self:IsUnconscious()
+			end,
+			'AffectFilter', function (self, target)
+				return (target.class == "Ulfen_T5" or target.class == "Ulfen_T4")
+					and not target:IsDead()
+					and not target:IsUnconscious()
+			end,
+			'FrenzyEffects', {
+				"Frenzy_Conscious_4",
+				"Shogu_Fly_Swarm",
+			},
+			'ReanimateChance', 50,
+			'ReanimateHealthMin', 50,
+			'ReanimateDelayMax', 15000,
+		}),
+		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Group', "Desert",
+			'Id', "Camel",
+			'object_class', "CamelBase",
+			'SpeciesGroup', "hoofed",
+			'RoamRadius', 15000,
+			'RoamIntervalMin', 40000,
+			'RoamIntervalMax', 120000,
+			'composite_part_groups', {
+				"Camel",
+			},
+			'PainMask', "PainMask",
+			'EventProgressValue', 30,
+			'CombatGroup', "Camels",
+			'EnrageChance', 3,
+			'AttackMemory', 45000,
+			'CombatGiveUpNoHit', 30000,
+			'CombatFleeAccuracy', 0,
+			'ButcherDuration', 20000,
+			'max_skinned_decals_low', -2,
+			'FieldResearchTech', "FieldCamel",
+			'ObservationDistanceMin', 15000,
+			'ObservationDistanceMax', 20000,
+			'Icon', "UI/Icons/Resources/res_camel",
+			'DisplayName', T(653588382027, --[[ModItemUnitAnimalCompositeDef Camel DisplayName]] "Dromadda"),
+			'DisplayNamePl', T(611903095501, --[[ModItemUnitAnimalCompositeDef Camel DisplayNamePl]] "Dromaddas"),
+			'Description', T(193272964752, --[[ModItemUnitAnimalCompositeDef Camel Description]] "Usually passive. Small chance to retaliate when attacked."),
+			'BaseMaxHealth', 80000,
+			'FoodResources', {
+				"FoodAnimalHerbivore",
+				"Slop",
+			},
+			'DailyEatingAmount', 1000,
+			'Diet', "Herbivore",
+			'EatingDuration', 4000,
+			'FoodSourceClasses', {
+				"ResourcePile",
+				"Plant",
+				"AnimalFeeder",
+			},
+			'ButcherResources', {
+				PlaceObj('ButcherResAmount', {
+					'resource', "RawMeat",
+					'min_amount', 30000,
+					'max_amount', 50000,
+				}),
+				PlaceObj('ButcherResAmount', {
+					'resource', "LeatherRaw",
+					'min_amount', 20000,
+					'max_amount', 40000,
+				}),
+			},
+			'SelectionRadius', 1500,
+			'ChanceToBeMale', 40,
+			'BodySize', "large",
+			'ProduceResources', {
+				PlaceObj('ResAmount', {
+					'resource', "FuelManure",
+					'amount', 20000,
+				}),
+			},
+			'ProduceResInterval', 1920000,
+			'AnimalPerks', {
+				"ManureProducer",
+			},
+			'pfclass_tamed', 10,
+			'pfclass_tamed_lead', 13,
+			'EatStartAnim', "eat_Start",
+			'EatIdleAnim', {
+				"eat_Idle",
+			},
+			'EatEndAnim', "eat_End",
+			'anim_idle', {
+				"idle",
+				"idle_Active",
+			},
+			'anim_idle_playful', {
+				"idle_Playfull",
+				"idle_Playfull2",
+			},
+			'SleepStartAnim', "sleep_Start",
+			'SleepIdleAnim', "sleep_Idle",
+			'SleepEndAnim', "sleep_End",
+			'Tameable', true,
+			'TamingFood', "CactusFruit",
+			'TamingFoodAmount', 20000,
+			'TamingMinimumSkill', 3,
+			'TamingChance', 70,
+			'TamingAggressiveChance', 10,
+			'TamingDistance', 10000,
+			'TamedLifetimeMin', 92160000,
+			'TamedLifetimeMax', 138240000,
+			'BondingChance', 10,
+			'ReproductionType', "two sexes",
+			'DailyPregnancyChance', 70,
+			'PregnancyDuration', 4800000,
+			'GrowDuration', 4800000,
+			'NewbornClass', "Camel_T2",
+			'MinGrownScale', 70,
+			'MaxGrownScale', 85,
+			'FieldVisibilityCold', 75000,
+			'FieldVisibilityWarm', 25000,
+			'PlantsToEatMin', 40,
+			'PlantsToEatMax', 60,
+			'HerdMergeClass', "Camel",
+		}),
+		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Group', "Desert",
+			'Id', "Camel_T2",
+			'object_class', "CamelBase",
+			'SpeciesGroup', "hoofed",
+			'RoamRadius', 15000,
+			'RoamIntervalMin', 40000,
+			'RoamIntervalMax', 120000,
+			'composite_part_target', "CamelT2",
+			'composite_part_groups', {
+				"Camel",
+			},
+			'PainMask', "PainMask",
+			'EventProgressValue', 70,
+			'CombatGroup', "Camels",
+			'EnrageChance', 3,
+			'AttackMemory', 45000,
+			'CombatGiveUpNoHit', 30000,
+			'CombatFleeAccuracy', 0,
+			'ButcherDuration', 20000,
+			'max_skinned_decals_low', -2,
+			'FieldResearchTech', "FieldCamel",
+			'ObservationDistanceMin', 15000,
+			'ObservationDistanceMax', 20000,
+			'Icon', "UI/Icons/Resources/res_camel",
+			'DisplayName', T(860337454211, --[[ModItemUnitAnimalCompositeDef Camel_T2 DisplayName]] "Llamel"),
+			'DisplayNamePl', T(683878998499, --[[ModItemUnitAnimalCompositeDef Camel_T2 DisplayNamePl]] "Llamels"),
+			'DisplayNameUnknown', T(123371203784, --[[ModItemUnitAnimalCompositeDef Camel_T2 DisplayNameUnknown]] "Unknown Dromadda Evolution"),
+			'DisplayNameUnknownPL', T(226359582646, --[[ModItemUnitAnimalCompositeDef Camel_T2 DisplayNameUnknownPL]] "Unknown Dromadda Evolutions"),
+			'Description', T(710987730029, --[[ModItemUnitAnimalCompositeDef Camel_T2 Description]] "Dromadary with the ability to shoot spit from long distances away."),
+			'BaseMaxHealth', 150000,
+			'FoodResources', {
+				"FoodAnimalHerbivore",
+				"Slop",
+			},
+			'DailyEatingAmount', 2000,
+			'Diet', "Herbivore",
+			'EatingDuration', 4000,
+			'FoodSourceClasses', {
+				"ResourcePile",
+				"Plant",
+				"AnimalFeeder",
+			},
+			'ButcherResources', {
+				PlaceObj('ButcherResAmount', {
+					'resource', "RawMeat",
+					'min_amount', 30000,
+					'max_amount', 50000,
+				}),
+				PlaceObj('ButcherResAmount', {
+					'resource', "LeatherRaw",
+					'min_amount', 20000,
+					'max_amount', 40000,
+				}),
+			},
+			'SelectionRadius', 1500,
+			'ChanceToBeMale', 40,
+			'BodySize', "large",
+			'ProduceResources', {
+				PlaceObj('ResAmount', {
+					'resource', "FuelManure",
+					'amount', 20000,
+				}),
+			},
+			'ProduceResInterval', 1920000,
+			'AnimalPerks', {
+				"ManureProducer",
+				"DraftableAnimal",
+			},
+			'pfclass_tamed', 10,
+			'pfclass_tamed_lead', 13,
+			'attack_weapon', "Camel_Spit",
+			'attack_weapon_alt', "CamelWeapon",
+			'EatStartAnim', "eat_Start",
+			'EatIdleAnim', {
+				"eat_Idle",
+			},
+			'EatEndAnim', "eat_End",
+			'anim_idle', {
+				"idle",
+				"idle_Active",
+			},
+			'anim_idle_playful', {
+				"idle_Playfull",
+				"idle_Playfull2",
+			},
+			'SleepStartAnim', "sleep_Start",
+			'SleepIdleAnim', "sleep_Idle",
+			'SleepEndAnim', "sleep_End",
+			'Tameable', true,
+			'TamingFood', "CactusFruit",
+			'TamingFoodAmount', 20000,
+			'TamingMinimumSkill', 3,
+			'TamingChance', 70,
+			'TamingAggressiveChance', 10,
+			'TamingDistance', 10000,
+			'TamedLifetimeMin', 92160000,
+			'TamedLifetimeMax', 138240000,
+			'CombatSkillInitial', range(5, 6),
+			'BondingChance', 10,
+			'ReproductionType', "two sexes",
+			'DailyPregnancyChance', 55,
+			'PregnancyDuration', 4800000,
+			'GrowDuration', 4800000,
+			'NewbornClass', "Camel_T3",
+			'MinGrownScale', 70,
+			'MaxGrownScale', 85,
+			'FieldVisibilityCold', 75000,
+			'FieldVisibilityWarm', 25000,
+			'PlantsToEatMin', 40,
+			'PlantsToEatMax', 60,
+			'HerdMergeClass', "Camel",
+			'UnitPerkFrenzy', true,
+			'FrenzyEffects', {
+				"Frenzy_Conscious_1",
+			},
+		}),
+		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Group', "Desert",
+			'Id', "Camel_T3",
+			'object_class', "CamelBase",
+			'SpeciesGroup', "hoofed",
+			'RoamRadius', 15000,
+			'RoamIntervalMin', 40000,
+			'RoamIntervalMax', 120000,
+			'composite_part_target', "CamelT3",
+			'composite_part_groups', {
+				"Camel",
+			},
+			'PainMask', "PainMask",
+			'EventProgressValue', 150,
+			'CombatGroup', "Camels",
+			'CombatHostile', true,
+			'HitNegationChance', {
+				HitNegationChance_energy = 20,
+				HitNegationChance_pacify = 40,
+				HitNegationChance_piercing = 10,
+				energy = 20,
+				pacify = 40,
+				piercing = 10,
+			},
+			'HitNegationChance_piercing', 10,
+			'HitNegationChance_energy', 20,
+			'HitNegationChance_pacify', 40,
+			'EnrageChance', 3,
+			'AttackMemory', 45000,
+			'CombatGiveUpNoHit', 30000,
+			'CombatFleeAccuracy', 0,
+			'ButcherDuration', 20000,
+			'max_skinned_decals_low', -2,
+			'FieldResearchTech', "FieldCamelT3",
+			'ObservationDistanceMin', 15000,
+			'ObservationDistanceMax', 20000,
+			'Icon', "UI/Icons/Resources/res_camel",
+			'DisplayName', T(946154925318, --[[ModItemUnitAnimalCompositeDef Camel_T3 DisplayName]] "Llamel Brute"),
+			'DisplayNamePl', T(478971232664, --[[ModItemUnitAnimalCompositeDef Camel_T3 DisplayNamePl]] "Llamel Brutes"),
+			'DisplayNameUnknown', T(755225927923, --[[ModItemUnitAnimalCompositeDef Camel_T3 DisplayNameUnknown]] "Unknown Dromadda Evolution"),
+			'DisplayNameUnknownPL', T(141098364520, --[[ModItemUnitAnimalCompositeDef Camel_T3 DisplayNameUnknownPL]] "Unknown Dromadda Evolutions"),
+			'Description', T(768013042972, --[[ModItemUnitAnimalCompositeDef Camel_T3 Description]] "Aggressive spitting dromedary"),
+			'BaseMaxHealth', 300000,
+			'FoodResources', {
+				"FoodAnimalHerbivore",
+				"Slop",
+			},
+			'DailyEatingAmount', 3000,
+			'Diet', "Herbivore",
+			'EatingDuration', 4000,
+			'FoodSourceClasses', {
+				"ResourcePile",
+				"Plant",
+				"AnimalFeeder",
+			},
+			'ButcherResources', {
+				PlaceObj('ButcherResAmount', {
+					'resource', "RawMeat",
+					'min_amount', 30000,
+					'max_amount', 50000,
+				}),
+				PlaceObj('ButcherResAmount', {
+					'resource', "LeatherRaw",
+					'min_amount', 20000,
+					'max_amount', 40000,
+				}),
+			},
+			'SelectionRadius', 1500,
+			'ChanceToBeMale', 40,
+			'BodySize', "large",
+			'ProduceResources', {
+				PlaceObj('ResAmount', {
+					'resource', "FuelManure",
+					'amount', 20000,
+				}),
+			},
+			'ProduceResInterval', 1920000,
+			'AnimalPerks', {
+				"ManureProducer",
+				"DraftableAnimal",
+			},
+			'pfclass_tamed', 10,
+			'pfclass_tamed_lead', 13,
+			'attack_weapon', "Camel_Spit_T2",
+			'attack_weapon_alt', "CamelWeapon",
+			'EatStartAnim', "eat_Start",
+			'EatIdleAnim', {
+				"eat_Idle",
+			},
+			'EatEndAnim', "eat_End",
+			'anim_idle', {
+				"idle",
+				"idle_Active",
+			},
+			'anim_idle_playful', {
+				"idle_Playfull",
+				"idle_Playfull2",
+			},
+			'SleepStartAnim', "sleep_Start",
+			'SleepIdleAnim', "sleep_Idle",
+			'SleepEndAnim', "sleep_End",
+			'Tameable', true,
+			'TamingFood', "CactusFruit",
+			'TamingFoodAmount', 20000,
+			'TamingMinimumSkill', 3,
+			'TamingChance', 70,
+			'TamingAggressiveChance', 10,
+			'TamingDistance', 10000,
+			'TamedLifetimeMin', 92160000,
+			'TamedLifetimeMax', 138240000,
+			'CombatSkillInitial', range(5, 6),
+			'BondingChance', 10,
+			'ReproductionType', "two sexes",
+			'DailyPregnancyChance', 65,
+			'PregnancyDuration', 2880000,
+			'GrowDuration', 2880000,
+			'NewbornClass', "Camel_T4",
+			'MinGrownScale', 70,
+			'MaxGrownScale', 85,
+			'FieldVisibilityCold', 75000,
+			'FieldVisibilityWarm', 25000,
+			'PlantsToEatMin', 40,
+			'PlantsToEatMax', 60,
+			'HerdMergeClass', "Camel",
+			'UnitPerkFrenzy', true,
+			'FrenzyEffects', {
+				"Frenzy_Conscious_2",
+			},
+		}),
+		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Group', "Desert",
+			'Id', "Camel_T4",
+			'object_class', "CamelBase",
+			'SpeciesGroup', "hoofed",
+			'RoamRadius', 15000,
+			'RoamIntervalMin', 40000,
+			'RoamIntervalMax', 120000,
+			'composite_part_target', "CamelT4",
+			'composite_part_groups', {
+				"Camel",
+			},
+			'PainMask', "PainMask",
+			'EventProgressValue', 320,
+			'CombatGroup', "Camels",
+			'CombatHostile', true,
+			'HitNegationChance', {
+				HitNegationChance_blunt = 5,
+				HitNegationChance_energy = 60,
+				HitNegationChance_gas = 5,
+				HitNegationChance_pacify = 60,
+				HitNegationChance_piercing = 40,
+				blunt = 5,
+				energy = 60,
+				gas = 5,
+				pacify = 60,
+				piercing = 40,
+			},
+			'HitNegationChance_blunt', 5,
+			'HitNegationChance_piercing', 40,
+			'HitNegationChance_energy', 60,
+			'HitNegationChance_gas', 5,
+			'HitNegationChance_pacify', 60,
+			'EnrageChance', 3,
+			'AttackMemory', 45000,
+			'CombatGiveUpNoHit', 30000,
+			'CombatFleeAccuracy', 0,
+			'ButcherDuration', 20000,
+			'max_skinned_decals_low', -2,
+			'FieldResearchTech', "FieldCamelT3",
+			'ObservationDistanceMin', 15000,
+			'ObservationDistanceMax', 20000,
+			'Icon', "UI/Icons/Resources/res_camel",
+			'DisplayName', T(465727968103, --[[ModItemUnitAnimalCompositeDef Camel_T4 DisplayName]] "Llamel Soldier"),
+			'DisplayNamePl', T(703972505780, --[[ModItemUnitAnimalCompositeDef Camel_T4 DisplayNamePl]] "Llamel Soldiers"),
+			'DisplayNameUnknown', T(959780937654, --[[ModItemUnitAnimalCompositeDef Camel_T4 DisplayNameUnknown]] "Unknown Dromadda Evolution"),
+			'DisplayNameUnknownPL', T(438449897644, --[[ModItemUnitAnimalCompositeDef Camel_T4 DisplayNameUnknownPL]] "Unknown Dromadda Evolutions"),
+			'Description', T(134587557425, --[[ModItemUnitAnimalCompositeDef Camel_T4 Description]] "Aggressive spitting dromedary, with it's saliva able to destroy any obstacle."),
+			'BaseMaxHealth', 600000,
+			'FoodResources', {
+				"FoodAnimalHerbivore",
+				"Slop",
+			},
+			'DailyEatingAmount', 4000,
+			'Diet', "Herbivore",
+			'EatingDuration', 4000,
+			'FoodSourceClasses', {
+				"ResourcePile",
+				"Plant",
+				"AnimalFeeder",
+			},
+			'ButcherResources', {
+				PlaceObj('ButcherResAmount', {
+					'resource', "RawMeat",
+					'min_amount', 30000,
+					'max_amount', 50000,
+				}),
+				PlaceObj('ButcherResAmount', {
+					'resource', "LeatherRaw",
+					'min_amount', 20000,
+					'max_amount', 40000,
+				}),
+			},
+			'SelectionRadius', 1500,
+			'ChanceToBeMale', 40,
+			'BodySize', "large",
+			'ProduceResources', {
+				PlaceObj('ResAmount', {
+					'resource', "FuelManure",
+					'amount', 20000,
+				}),
+			},
+			'ProduceResInterval', 1920000,
+			'AnimalPerks', {
+				"ManureProducer",
+				"DraftableAnimal",
+			},
+			'pfclass_tamed', 10,
+			'pfclass_tamed_lead', 13,
+			'attack_weapon', "Camel_Spit_T2",
+			'attack_weapon_alt', "CamelWeapon",
+			'EatStartAnim', "eat_Start",
+			'EatIdleAnim', {
+				"eat_Idle",
+			},
+			'EatEndAnim', "eat_End",
+			'anim_idle', {
+				"idle",
+				"idle_Active",
+			},
+			'anim_idle_playful', {
+				"idle_Playfull",
+				"idle_Playfull2",
+			},
+			'SleepStartAnim', "sleep_Start",
+			'SleepIdleAnim', "sleep_Idle",
+			'SleepEndAnim', "sleep_End",
+			'Tameable', true,
+			'TamingFood', "CactusFruit",
+			'TamingFoodAmount', 20000,
+			'TamingMinimumSkill', 3,
+			'TamingChance', 70,
+			'TamingAggressiveChance', 10,
+			'TamingDistance', 10000,
+			'TamedLifetimeMin', 92160000,
+			'TamedLifetimeMax', 138240000,
+			'CombatSkillInitial', range(5, 6),
+			'BondingChance', 10,
+			'ReproductionType', "two sexes",
+			'DailyPregnancyChance', 75,
+			'PregnancyDuration', 2000000,
+			'GrowDuration', 2000000,
+			'NewbornClass', "Camel_T5",
+			'MinGrownScale', 70,
+			'MaxGrownScale', 85,
+			'FieldVisibilityCold', 75000,
+			'FieldVisibilityWarm', 25000,
+			'PlantsToEatMin', 40,
+			'PlantsToEatMax', 60,
+			'HerdMergeClass', "Camel",
+			'UnitPerkFrenzy', true,
+			'FrenzyEffects', {
+				"Frenzy_Conscious_3",
+			},
+		}),
+		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Group', "Desert",
+			'Id', "Camel_T5",
+			'object_class', "CamelBase",
+			'SpeciesGroup', "hoofed",
+			'RoamRadius', 15000,
+			'RoamIntervalMin', 40000,
+			'RoamIntervalMax', 120000,
+			'composite_part_target', "CamelT5",
+			'composite_part_groups', {
+				"Camel",
+			},
+			'PainMask', "PainMask",
+			'EventProgressValue', 900,
+			'CombatGroup', "Camels",
+			'CombatHostile', true,
+			'HitNegationChance', {
+				HitNegationChance_blunt = 10,
+				HitNegationChance_energy = 80,
+				HitNegationChance_gas = 10,
+				HitNegationChance_pacify = 80,
+				HitNegationChance_piercing = 50,
+				blunt = 10,
+				energy = 80,
+				gas = 10,
+				pacify = 80,
+				piercing = 50,
+			},
+			'HitNegationChance_blunt', 10,
+			'HitNegationChance_piercing', 50,
+			'HitNegationChance_energy', 80,
+			'HitNegationChance_gas', 10,
+			'HitNegationChance_pacify', 80,
+			'EnrageChance', 3,
+			'AttackMemory', 45000,
+			'CombatGiveUpNoHit', 30000,
+			'CombatFleeAccuracy', 0,
+			'ButcherDuration', 20000,
+			'max_skinned_decals_low', -2,
+			'FieldResearchTech', "FieldCamelT5",
+			'ObservationDistanceMin', 15000,
+			'ObservationDistanceMax', 20000,
+			'Icon', "UI/Icons/Resources/res_camel",
+			'DisplayName', T(893069937506, --[[ModItemUnitAnimalCompositeDef Camel_T5 DisplayName]] "Royal Llamel"),
+			'DisplayNamePl', T(208203639834, --[[ModItemUnitAnimalCompositeDef Camel_T5 DisplayNamePl]] "Royal Llamels"),
+			'DisplayNameUnknown', T(820153423221, --[[ModItemUnitAnimalCompositeDef Camel_T5 DisplayNameUnknown]] "Unknown Dromadda Evolution"),
+			'DisplayNameUnknownPL', T(405126334598, --[[ModItemUnitAnimalCompositeDef Camel_T5 DisplayNameUnknownPL]] "Unknown Dromadda Evolutions"),
+			'Description', T(134372948946, --[[ModItemUnitAnimalCompositeDef Camel_T5 Description]] "Aggressive spitting dromedary, with it's saliva able to destroy any obstacle"),
+			'BaseMaxHealth', 1200000,
+			'FoodResources', {
+				"FoodAnimalHerbivore",
+				"Slop",
+			},
+			'DailyEatingAmount', 5000,
+			'Diet', "Herbivore",
+			'EatingDuration', 4000,
+			'FoodSourceClasses', {
+				"ResourcePile",
+				"Plant",
+				"AnimalFeeder",
+			},
+			'ButcherResources', {
+				PlaceObj('ButcherResAmount', {
+					'resource', "RawMeat",
+					'min_amount', 30000,
+					'max_amount', 50000,
+				}),
+				PlaceObj('ButcherResAmount', {
+					'resource', "LeatherRaw",
+					'min_amount', 20000,
+					'max_amount', 40000,
+				}),
+			},
+			'SelectionRadius', 1500,
+			'ChanceToBeMale', 40,
+			'BodySize', "large",
+			'ProduceResources', {
+				PlaceObj('ResAmount', {
+					'resource', "FuelManure",
+					'amount', 20000,
+				}),
+			},
+			'ProduceResInterval', 1920000,
+			'AnimalPerks', {
+				"ManureProducer",
+				"DraftableAnimal",
+			},
+			'pfclass_tamed', 10,
+			'pfclass_tamed_lead', 13,
+			'attack_weapon', "Camel_Spit_T2",
+			'attack_weapon_alt', "CamelWeapon",
+			'EatStartAnim', "eat_Start",
+			'EatIdleAnim', {
+				"eat_Idle",
+			},
+			'EatEndAnim', "eat_End",
+			'anim_idle', {
+				"idle",
+				"idle_Active",
+			},
+			'anim_idle_playful', {
+				"idle_Playfull",
+				"idle_Playfull2",
+			},
+			'SleepStartAnim', "sleep_Start",
+			'SleepIdleAnim', "sleep_Idle",
+			'SleepEndAnim', "sleep_End",
+			'Tameable', true,
+			'TamingFood', "CactusFruit",
+			'TamingFoodAmount', 20000,
+			'TamingMinimumSkill', 3,
+			'TamingChance', 70,
+			'TamingAggressiveChance', 10,
+			'TamingDistance', 10000,
+			'TamedLifetimeMin', 92160000,
+			'TamedLifetimeMax', 138240000,
+			'CombatSkillInitial', range(5, 6),
+			'BondingChance', 10,
+			'ReproductionType', "two sexes",
+			'DailyPregnancyChance', 60,
+			'PregnancyDuration', 1800000,
+			'GrowDuration', 1800000,
+			'MinGrownScale', 70,
+			'MaxGrownScale', 85,
+			'FieldVisibilityCold', 75000,
+			'FieldVisibilityWarm', 25000,
+			'PlantsToEatMin', 40,
+			'PlantsToEatMax', 60,
+			'HerdMergeClass', "Camel",
+			'UnitPerkFrenzy', true,
+			'FrenzyEffects', {
+				"Frenzy_Conscious_4",
+			},
+		}),
+		}),
 	}),
-}),
-PlaceObj('ModItemStoryBit', {
-	Category = "AttackSpawns",
-	Effects = {
-		PlaceObj('ActivateSpawnDef', {
-			CreateInstance = true,
-			FillInstance = function (self, instance)
-				local spawnClassBest = nil
-				local addedClassList = nil
-				local minion = "Gujo"
-				spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
-				instance.SpawnClass = spawnClassBest
-				instance.AdditionalClassList = {}
-				print(spawnClassBest)
-				print(addedClassList)
-				for i=1,#addedClassList do
-					instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
-				end
-			end,
-			ProgressMul = 150,
-			SpawnDefId = "OrbitalRadio_Gujo",
-			param_bindings = false,
-		}),
-	},
-	Enabled = true,
-	HasNotification = false,
-	HasPopup = false,
-	InheritsObject = false,
-	OneTime = false,
-	Prerequisites = {
-		PlaceObj('CheckGameState', {
-			GameState = "Night",
-			param_bindings = false,
-		}),
-	},
-	SelectObject = false,
-	group = "AttackControllers_Spawners",
-	id = "OrbitalRadio_GujoAttack",
-	qa_info = PlaceObj('PresetQAInfo', {
-		data = {
-			{
-				action = "Modified",
-				time = 1618304612,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1618567764,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1619113707,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1620805810,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1620900159,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1623415500,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1623761779,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1623927826,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1653898921,
-				user = "Ivan",
-			},
-		},
-		param_bindings = false,
-	}),
-}),
-PlaceObj('ModItemStoryBit', {
-	Category = "AttackSpawns",
-	Effects = {
-		PlaceObj('ActivateSpawnDef', {
-			CreateInstance = true,
-			FillInstance = function (self, instance)
-				local spawnClassBest = nil
-				local addedClassList = nil
-				local minion = "Noth"
-				spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
-				instance.SpawnClass = spawnClassBest
-				instance.AdditionalClassList = {}
-				print(spawnClassBest)
-				print(addedClassList)
-				for i=1,#addedClassList do
-					instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
-				end
-			end,
-			SpawnDefId = "OrbitalRadio_Noth",
-			param_bindings = false,
-		}),
-	},
-	Enabled = true,
-	HasNotification = false,
-	HasPopup = false,
-	InheritsObject = false,
-	OneTime = false,
-	Prerequisites = {
-		PlaceObj('CheckGameState', {
-			GameState = "Night",
-			Negate = true,
-			param_bindings = false,
-		}),
-	},
-	SelectObject = false,
-	group = "AttackControllers_Spawners",
-	id = "OrbitalRadio_NothAttack",
-	qa_info = PlaceObj('PresetQAInfo', {
-		data = {
-			{
-				action = "Modified",
-				time = 1618304612,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1618567764,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1619113707,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1620805810,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1620900159,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1623415500,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1623762127,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1623927826,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1633597744,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1637742806,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1645531620,
-				user = "Bobby",
-			},
-			{
-				action = "Modified",
-				time = 1653898921,
-				user = "Ivan",
-			},
-			{
-				action = "Modified",
-				time = 1683625240,
-				user = "Bobby",
-			},
-		},
-		param_bindings = false,
-	}),
-}),
-PlaceObj('ModItemStoryBit', {
-	Category = "AttackSpawns",
-	Effects = {
-		PlaceObj('ActivateSpawnDef', {
-			CreateInstance = true,
-			FillInstance = function (self, instance)
-				local spawnClassBest = nil
-				local addedClassList = nil
-				local minion = "Skarabei_Manhunting"
-				spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
-				instance.SpawnClass = spawnClassBest
-				instance.AdditionalClassList = {}
-				print(spawnClassBest)
-				print(addedClassList)
-				for i=1,#addedClassList do
-					instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
-				end
-			end,
-			ProgressMul = 150,
-			SpawnDefId = "OrbitalRadio_Scarab",
-			param_bindings = false,
-		}),
-	},
-	Enabled = true,
-	HasNotification = false,
-	HasPopup = false,
-	InheritsObject = false,
-	OneTime = false,
-	Prerequisites = {
-		PlaceObj('CheckExpression', {
-			Expression = function (self, obj) return UnlockedInsectMinions["Skarabei"] end,
-			param_bindings = false,
-		}),
-	},
-	group = "AttackControllers_Spawners",
-	id = "OrbitalRadio_ScarabAttack",
-	max_reply_id = 2,
-	qa_info = PlaceObj('PresetQAInfo', {
-		data = {
-			{
-				action = "Modified",
-				time = 1614238878,
-				user = "Ivan",
-			},
-			{
-				action = "Modified",
-				time = 1614683508,
-				user = "Ivan",
-			},
-			{
-				action = "Modified",
-				time = 1616596369,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1618229657,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1618567754,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1619113707,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1620805810,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1620900159,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1623762127,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1623927826,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1653898921,
-				user = "Ivan",
-			},
-		},
-		param_bindings = false,
-	}),
-}),
-PlaceObj('ModItemStoryBit', {
-	Category = "AttackSpawns",
-	Effects = {
-		PlaceObj('ActivateSpawnDef', {
-			CreateInstance = true,
-			FillInstance = function (self, instance)
-				local spawnClassBest = nil
-				local addedClassList = nil
-				local minion = "Scissorhands"
-				spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
-				instance.SpawnClass = spawnClassBest
-				instance.AdditionalClassList = {}
-				print(spawnClassBest)
-				print(addedClassList)
-				for i=1,#addedClassList do
-					instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
-				end
-			end,
-			ProgressMul = 150,
-			SpawnDefId = "OrbitalRadio_Scissorhands",
-			param_bindings = false,
-		}),
-	},
-	Enabled = true,
-	HasNotification = false,
-	HasPopup = false,
-	InheritsObject = false,
-	OneTime = false,
-	Prerequisites = {
-		PlaceObj('CheckExpression', {
-			Expression = function (self, obj) return UnlockedInsectMinions["Scissorhands"] end,
-			param_bindings = false,
-		}),
-	},
-	group = "AttackControllers_Spawners",
-	id = "OrbitalRadio_ScissorhandsAttack",
-	max_reply_id = 2,
-	qa_info = PlaceObj('PresetQAInfo', {
-		data = {
-			{
-				action = "Modified",
-				time = 1614238878,
-				user = "Ivan",
-			},
-			{
-				action = "Modified",
-				time = 1614683508,
-				user = "Ivan",
-			},
-			{
-				action = "Modified",
-				time = 1616596369,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1618229657,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1618567754,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1619113707,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1620805810,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1620900159,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1623762127,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1623927826,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1633597302,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1653898921,
-				user = "Ivan",
-			},
-		},
-		param_bindings = false,
-	}),
-}),
-PlaceObj('ModItemStoryBit', {
-	Category = "AttackSpawns",
-	Effects = {
-		PlaceObj('ActivateSpawnDef', {
-			CreateInstance = true,
-			FillInstance = function (self, instance)
-				local spawnClassBest = nil
-				local addedClassList = nil
-				local minion = "Shogu"
-				spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
-				instance.SpawnClass = spawnClassBest
-				instance.AdditionalClassList = {}
-				print(spawnClassBest)
-				print(addedClassList)
-				for i=1,#addedClassList do
-					instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
-				end
-			end,
-			ProgressMul = 150,
-			SpawnDefId = "OrbitalRadio_Shogu",
-			param_bindings = false,
-		}),
-	},
-	Enabled = true,
-	HasNotification = false,
-	HasPopup = false,
-	InheritsObject = false,
-	OneTime = false,
-	Prerequisites = {
-		PlaceObj('CheckGameState', {
-			GameState = "Night",
-			Negate = true,
-			param_bindings = false,
-		}),
-	},
-	SelectObject = false,
-	group = "AttackControllers_Spawners",
-	id = "OrbitalRadio_ShoguAttack",
-	qa_info = PlaceObj('PresetQAInfo', {
-		data = {
-			{
-				action = "Modified",
-				time = 1618304612,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1618567764,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1619113707,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1620805810,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1620900159,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1623415500,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1623762127,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1623927826,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1633597744,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1637742806,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1645531620,
-				user = "Bobby",
-			},
-			{
-				action = "Modified",
-				time = 1653898921,
-				user = "Ivan",
-			},
-			{
-				action = "Modified",
-				time = 1683625240,
-				user = "Bobby",
-			},
-		},
-		param_bindings = false,
-	}),
-}),
-PlaceObj('ModItemStoryBit', {
-	Category = "AttackSpawns",
-	Effects = {
-		PlaceObj('ActivateSpawnDef', {
-			CreateInstance = true,
-			FillInstance = function (self, instance)
-				local spawnClassBest = nil
-				local addedClassList = nil
-				local minion = "Shrieker_Manhunting_Mother"
-				spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
-				instance.SpawnClass = spawnClassBest
-				instance.AdditionalClassList = {}
-				print(spawnClassBest)
-				print(addedClassList)
-				for i=1,#addedClassList do
-					instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
-				end
-			end,
-			ProgressMul = 150,
-			SpawnDefId = "OrbitalRadio_Shrieker",
-			param_bindings = false,
-		}),
-	},
-	Enabled = true,
-	HasNotification = false,
-	HasPopup = false,
-	InheritsObject = false,
-	OneTime = false,
-	Prerequisites = {
-		PlaceObj('CheckExpression', {
-			Expression = function (self, obj) return UnlockedInsectMinions["Shrieker"] end,
-			param_bindings = false,
-		}),
-	},
-	group = "AttackControllers_Spawners",
-	id = "OrbitalRadio_ShriekerAttack",
-	max_reply_id = 2,
-	qa_info = PlaceObj('PresetQAInfo', {
-		data = {
-			{
-				action = "Modified",
-				time = 1614238878,
-				user = "Ivan",
-			},
-			{
-				action = "Modified",
-				time = 1614683508,
-				user = "Ivan",
-			},
-			{
-				action = "Modified",
-				time = 1616596369,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1618229657,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1618567754,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1619113707,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1620805810,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1620900159,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1623762127,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1623927826,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1653898921,
-				user = "Ivan",
-			},
-		},
-		param_bindings = false,
-	}),
-}),
-PlaceObj('ModItemStoryBit', {
-	Category = "AttackSpawns",
-	Effects = {
-		PlaceObj('ActivateSpawnDef', {
-			CreateInstance = true,
-			FillInstance = function (self, instance)
-				local spawnClassBest = nil
-				local addedClassList = nil
-				local minion = "Tecatli"
-				spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
-				instance.SpawnClass = spawnClassBest
-				instance.AdditionalClassList = {}
-				print(spawnClassBest)
-				print(addedClassList)
-				for i=1,#addedClassList do
-					instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
-				end
-			end,
-			ProgressMul = 150,
-			SpawnDefId = "OrbitalRadio_Tecatli",
-			param_bindings = false,
-		}),
-	},
-	Enabled = true,
-	HasNotification = false,
-	HasPopup = false,
-	InheritsObject = false,
-	OneTime = false,
-	Prerequisites = {
-		PlaceObj('CheckGameState', {
-			GameState = "Night",
-			param_bindings = false,
-		}),
-	},
-	SelectObject = false,
-	group = "AttackControllers_Spawners",
-	id = "OrbitalRadio_TecatliAttack",
-	qa_info = PlaceObj('PresetQAInfo', {
-		data = {
-			{
-				action = "Modified",
-				time = 1618304612,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1618567764,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1619113707,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1620805810,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1620900159,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1623415500,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1623761779,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1623927826,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1633597973,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1645456959,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1645458623,
-				user = "Bobby",
-			},
-			{
-				action = "Modified",
-				time = 1653898921,
-				user = "Ivan",
-			},
-			{
-				action = "Modified",
-				time = 1667999330,
-				user = "Bobby",
-			},
-		},
-		param_bindings = false,
-	}),
-}),
-PlaceObj('ModItemStoryBit', {
-	Category = "AttackSpawns",
-	Effects = {
-		PlaceObj('ActivateSpawnDef', {
-			CreateInstance = true,
-			FillInstance = function (self, instance)
-				local spawnClassBest = nil
-				local addedClassList = nil
-				local minion = "Ulfen"
-				spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
-				instance.SpawnClass = spawnClassBest
-				instance.AdditionalClassList = {}
-				print(spawnClassBest)
-				print(addedClassList)
-				for i=1,#addedClassList do
-					instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
-				end
-			end,
-			ProgressMul = 150,
-			SpawnDefId = "OrbitalRadio_Ulfen",
-			param_bindings = false,
-		}),
-	},
-	Enabled = true,
-	HasNotification = false,
-	HasPopup = false,
-	InheritsObject = false,
-	OneTime = false,
-	Prerequisites = {
-		PlaceObj('CheckGameState', {
-			GameState = "Night",
-			Negate = true,
-			param_bindings = false,
-		}),
-	},
-	SelectObject = false,
-	group = "AttackControllers_Spawners",
-	id = "OrbitalRadio_UlfenAttack",
-	qa_info = PlaceObj('PresetQAInfo', {
-		data = {
-			{
-				action = "Modified",
-				time = 1618304612,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1618567764,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1619113707,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1620805810,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1620900159,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1623415500,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1623762127,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1623927826,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1637742806,
-				user = "Lina",
-			},
-			{
-				action = "Modified",
-				time = 1653898921,
-				user = "Ivan",
-			},
-		},
-		param_bindings = false,
-	}),
-}),
 }

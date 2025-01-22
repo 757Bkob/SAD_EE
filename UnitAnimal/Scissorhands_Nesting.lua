@@ -105,6 +105,7 @@ DefineClass.Scissorhands_Nesting = {
 	BondingChance = 5,
 	ReproductionType = "two sexes",
 	ReproductionGroup = "Scissorhands",
+	DailyPregnancyChance = 55,
 	NewbornClass = "Scissorhands_Brute",
 	MinGrownScale = 100,
 	MaxGrownScale = 110,
