@@ -4,6 +4,7 @@ DefineClass.Plague_Sniper_Shrieker = {
 	__generated_by_class = "ModItemUnitAnimalCompositeDef",
 
 
+	comment = "T4",
 	object_class = "Shrieker_Manhunting",
 	EventProgressValue = 1100,
 	SpawnDefWeight = 30,

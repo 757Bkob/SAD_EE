@@ -27,7 +27,7 @@ DefineClass.Demo_3 = {
 	DisplayNameShort = T(562208439146, --[[ModItemRobotCompositeDef Demo_3 DisplayNameShort]] "DE3"),
 	DisplayNamePl = T(541755977736, --[[ModItemRobotCompositeDef Demo_3 DisplayNamePl]] "Drone Series E"),
 	Description = T(971100673913, --[[ModItemRobotCompositeDef Demo_3 Description]] "The chemists have never stopped trying to improve upon the corrosive capabilities; and have improved the fuel formula. It is now much denser, but can properly disentigrates all major building materials. The increased weight has been offset by substantial improvements to the hydraulics for no net movement loss. Has <color TechSubtitleBlue>10% Piercing Damage</color> <em>Reduction</em>, <color TextButton>20% Blunt Damage</color><color TextEmphasis> Reduction</color>, <color TextNegative>15% Energy Damage</color><color TextEmphasis> Reduction</color>, <color TextPositive>35% Gas Damage</color><color TextEmphasis> Reduction</color>"),
-	SalvageLootTable = "LightHostileRobots_3",
+	SalvageLootTable = "ILU_Robot_Human_T3",
 	Skills = {
 		Combat = 7,
 	},

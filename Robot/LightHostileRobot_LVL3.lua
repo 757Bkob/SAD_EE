@@ -34,7 +34,7 @@ DefineClass.LightHostileRobot_LVL3 = {
 	DisplayNameShort = T(717669841682, --[[ModItemRobotCompositeDef LightHostileRobot_LVL3 DisplayNameShort]] "DA3"),
 	DisplayNamePl = T(326566177705, --[[ModItemRobotCompositeDef LightHostileRobot_LVL3 DisplayNamePl]] "Drone A series"),
 	Description = T(422993075353, --[[ModItemRobotCompositeDef LightHostileRobot_LVL3 Description]] "Now comes armed with a pulse rifle. While more expensive than carbon crossbows to procur, this increases the combat power of the robot without adding to the manufactoring costs. Has <color TechSubtitleBlue>0% Piercing Deflection</color>, <color TextButton>10% Blunt Deflection</color>, <color TextNegative>10% Energy Deflection</color>, <color TextPositive>30% Gas Deflection</color>"),
-	SalvageLootTable = "LightHostileRobots_3",
+	SalvageLootTable = "ILU_Robot_Human_T3",
 	Skills = {
 		Combat = 4,
 	},

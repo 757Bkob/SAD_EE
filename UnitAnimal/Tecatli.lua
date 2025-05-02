@@ -4,6 +4,7 @@ DefineClass.Tecatli = {
 	__generated_by_class = "ModItemUnitAnimalCompositeDef",
 
 
+	comment = "T1",
 	object_class = "TecatliBase",
 	SpeciesGroup = "hoofed",
 	RoamIntervalMin = 2000,

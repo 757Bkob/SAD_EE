@@ -27,7 +27,7 @@ DefineClass.Demo_2 = {
 	DisplayNameShort = T(489278802929, --[[ModItemRobotCompositeDef Demo_2 DisplayNameShort]] "DE2"),
 	DisplayNamePl = T(754647319790, --[[ModItemRobotCompositeDef Demo_2 DisplayNamePl]] "Drone Series E"),
 	Description = T(647923552284, --[[ModItemRobotCompositeDef Demo_2 Description]] "The novelty has worn off, and the Consortium has had to increase the combat capabilities of this model line. This upgraded frame should now reasonably survive a head on assault, and be a wall breaker for other troops. Has <color TechSubtitleBlue>5% Piercing Damage</color> <em>Reduction</em>, <color TextButton>15% Blunt Damage</color><color TextEmphasis> Reduction</color>, <color TextNegative>10% Energy Damage</color><color TextEmphasis> Reduction</color>, <color TextPositive>30% Gas Damage</color><color TextEmphasis> Reduction</color>"),
-	SalvageLootTable = "LightHostileRobots_3",
+	SalvageLootTable = "ILU_Robot_Human_T2",
 	Skills = {
 		Combat = 6,
 	},

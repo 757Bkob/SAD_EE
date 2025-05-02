@@ -7,6 +7,13 @@ PlaceObj('ModItemOptionNumber', {
 	'MaxValue', 300,
 	'StepSize', 25,
 }),
+PlaceObj('ModItemOptionNumber', {
+	'name', "O_ILU_max_tier",
+	'DisplayName', "Max Tier of upgrades allowed",
+	'DefaultValue', 6,
+	'MinValue', 2,
+	'MaxValue', 6,
+}),
 PlaceObj('ModItemOptionToggle', {
 	'name', "O_simple_combat",
 	'DisplayName', "Simplified Combat?",
@@ -20,6 +27,11 @@ PlaceObj('ModItemConstDef', {
 	group = "Gameplay",
 	id = "MaxInvadersPerDropship",
 	value = 51,
+}),
+PlaceObj('ModItemConstDef', {
+	id = "InvaderRobotLoseWeaponChance",
+	scale = "%",
+	value = 15,
 }),
 PlaceObj('ModItemCode', {
 	'name', "upgradeCall",
@@ -94,6 +106,570 @@ PlaceObj('ModItemBuildingCompositeDef', {
 	soil_form = "circle",
 	terrain_change = "soil",
 }),
+PlaceObj('ModItemFolder', {
+	'name', "Research",
+	'NameColor', RGBA(129, 175, 192, 255),
+}, {
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(938920346727, --[[ModItemTech field_dog_T5 Description]] "All vestiges of friendship between this species and humanity is gone.\nThis genus has succumbed to whatever is pushing all these species to evolve.\n\nIt now has even more intelligence, it's bulbous head now too large for it's neck to handle.\nIt can now relays orders in the same clicks, clacks, snaps, or yowls of it's partnered species.\nIf only they continued to grow beside us, we could learn to communicate with the fauna!\n\nBut alas, these hounds are helping the enemy...\nThe coordination these <em>Fenrir</em> provide enhances all other enemies.\nEven worse, they are now easily covered by the larger wildlife. \nIt's almost like evolutionarily it knew it needed to be as small as possible to avoid small arms fire!! \nThankfully, this change to become smaller means there is less mass to dedicate to defenses.\nThey have no discern-able clear weakness, so our most damaging weapons should fire on this species!\n\nWe must ensure that we have ample <color TechSubtitleBlue>Piercing</color> and <color TextNegative>Energy</color> resistance to combat these."),
+		DisplayName = T(523069977599, --[[ModItemTech field_dog_T5 DisplayName]] "Fenrir"),
+		DisplayNamePl = T(885483345733, --[[ModItemTech field_dog_T5 DisplayNamePl]] "Fenrirs"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Boxer end,
+		Icon = "UI/Messages/Research/res_Dogs",
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "field_dog_T5",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(357517321577, --[[ModItemTech field_dog_T3 Description]] 'We now have our answer to what they provide.\nThey have been observed barking what can best be described as "orders" to whatever species they are attached too.\n\nWhat humans have taught and bred into these creatures is now being used to coordinate assaults against us....\nNature sometimes has a cruel sense of irony!\n\nThese creatures are starting to resemble their ancestors, the wolf. Larger, bulkier, and with a larger teeth. But no fur...\nThey somehow are able to live with an internal body temperatures below freezing, and their teeth now inject \na compound that absorbs all the energy & heat surrounding it.\n\nWe must ensure that we have ample <color TechSubtitleBlue>Piercing</color> and <color TextNegative>Energy</color> resistance to combat these.'),
+		DisplayName = T(719898286913, --[[ModItemTech field_dog_T3 DisplayName]] "Ice Wolf"),
+		DisplayNamePl = T(459499845093, --[[ModItemTech field_dog_T3 DisplayNamePl]] "Ice Wolf"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Boxer end,
+		Icon = "UI/Messages/Research/res_Dogs",
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "field_dog_T3",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(971122823327, --[[ModItemTech field_dog_T1 Description]] "We have observed this species living peacefully with what we thought of as aggressive species.\nThey must have formed symbiotic relationships to avoid extinction.\n\nWhat are they providing that keeps them alive?\nAnd why is their internal body temperature so cold?!?\n\nWe must ensure that we have ample <color TechSubtitleBlue>Piercing</color> and <color TextNegative>Energy</color> resistance to combat these."),
+		DisplayName = T(545744059274, --[[ModItemTech field_dog_T1 DisplayName]] "Cold Dog"),
+		DisplayNamePl = T(744183019406, --[[ModItemTech field_dog_T1 DisplayNamePl]] "Cold Dogs"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Boxer end,
+		Icon = "UI/Messages/Research/res_Dogs",
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "field_dog_T1",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(839954723448, --[[ModItemTech FieldSkarabei Description]] "The bug I observed looks like an overgrown version of the pest that's known (and hated) on many worlds. Giving it a common bug's name felt a bit underwhelming, so I chose the nice-sounding <em>Skarabei</em>.\n\nUnfortunately, it's a lot more annoying than some tiny insect that scuttles through your fridge. This one is big and impudent enough to attack humans and do some damage!\n\nThe main problem is that these insects tend to swarm and work together in large groups, so they should not be underestimated.\n\nIt attacks by closing it's... for lack of a better term... pauldrons over it's head and slams it's head forward.\nWe must ensure that we have ample <color TextButton>Blunt</color> resistance to combat these.\n\n<style TechSubtitleBlue>Unlocks</style>\n<tabulator><em>Skarabei statue</em>: <building_cost('Statue_Skarabei')>"),
+		DisplayName = T(313580775497, --[[ModItemTech FieldSkarabei DisplayName]] "Overgrown insect"),
+		DisplayNamePl = T(547974503561, --[[ModItemTech FieldSkarabei DisplayNamePl]] "Overgrown insects"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Skarabei end,
+		Icon = "UI/Messages/Research/res_Skarabei",
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "FieldSkarabei",
+		money_value = 50000000,
+		tradable = false,
+		PlaceObj('RemoveLockedState', {
+			Class = "BuildingCompositeDef",
+			Group = "Relaxatation",
+			LockState = "hidden",
+			PresetId = "Statue_Skarabei",
+		}),
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(851321512853, --[[ModItemTech FieldGlutch Description]] "The big bloated insect is a slow and usually peaceful herbivore, which I named <em>Glutch</em>.\n\nWhile not particularly dangerous, it secretes a corrosive substance which accumulates on its skin and is released as a toxic cloud when the creature shakes its body in fear. Engaging it from a safe distance seems like the best option.\n\nWe must ensure that we have ample <color TextPositive>Gas</color> resistance to combat these.\n\n<style TechSubtitleBlue>Unlocks</style>\n<tabulator><em>Glutch statue</em>: <building_cost('Statue_Glutch')>"),
+		DisplayName = T(280125985011, --[[ModItemTech FieldGlutch DisplayName]] "Bloated insect"),
+		DisplayNamePl = T(930922077745, --[[ModItemTech FieldGlutch DisplayNamePl]] "Bloated insects"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Glutch end,
+		Icon = "UI/Messages/Research/res_Glutch",
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "FieldGlutch",
+		money_value = 50000000,
+		tradable = false,
+		PlaceObj('RemoveLockedState', {
+			Class = "BuildingCompositeDef",
+			Group = "Relaxatation",
+			LockState = "hidden",
+			PresetId = "Statue_Glutch",
+		}),
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(490139055620, --[[ModItemTech FieldScissorhands Description]] "I have seen huge genetically-engineered mantises in a zoo once, but this creature is something else!\n\nThe <em>Scissorhands</em>, as I've named it, has razor-sharp front legs which shred its victims into pieces in an instant. Its four legs make it fast and agile - traits which get further enhanced by its remarkable senses. Upon closer examination, I deduced that its antennae assist in detecting movement around it!\n\nWe must ensure that we have ample <color TechSubtitleBlue>Piercing</color> resistance to combat these.\n\n<style TechSubtitleBlue>Unlocks</style>\n<tabulator><em>Taming of Scissorhands</em> (if researched)\n<tabulator><em>Scissorhands statue</em>: <building_cost('LargeStatue_Scissorhands')>"),
+		DisplayName = T(762740087071, --[[ModItemTech FieldScissorhands DisplayName]] "Huge mantis"),
+		DisplayNamePl = T(900757548387, --[[ModItemTech FieldScissorhands DisplayNamePl]] "Huge mantises"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Scissorhands end,
+		Icon = "UI/Messages/Research/res_Scissorhands",
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "FieldScissorhands",
+		money_value = 50000000,
+		tradable = false,
+		PlaceObj('RemoveLockedState', {
+			Class = "BuildingCompositeDef",
+			Group = "Relaxatation",
+			LockState = "hidden",
+			PresetId = "LargeStatue_Scissorhands",
+		}),
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(977102975985, --[[ModItemTech Field_Skarab_T1 Description]] "Convergent evolution! \nIf the Skarabei didn't evolve to specifically kill off every single human I would want to study this new evolved form! \nBiologists everywhere would be clammering over themselves to get here to study this!\n\nDid the Explosive Species start moving into the swamp, and they also independently evolved to have poison?!?\nDid the Poison Species evolve the same explosive behaviors?\n\nThese autopsies show that it's neither!\nThey are compatible! \nWhich usually means they should be the same species.... But as we have seen, this planet continues to break all known precedent.\n\nOh how to fight them?\nGenerally with anything, they have evolved to be sturdier and healthier than any other species we have observed.\n\nWe must ensure that we have ample <color TechSubtitleBlue>Piercing</color> resistance to combat these."),
+		DisplayName = T(355121328008, --[[ModItemTech Field_Skarab_T1 DisplayName]] "PEx Skarabei"),
+		DisplayNamePl = T(451552169671, --[[ModItemTech Field_Skarab_T1 DisplayNamePl]] "PEx Skarabei"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return "PEx Skarabei" end,
+		Icon = "UI/Messages/Research/res_Skarabei",
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "Field_Skarab_T1",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(939543644353, --[[ModItemTech Field_Skarab_T3 Description]] "Evolution does not happen in a matter of days. It's timescale is in the hundreds of thousands of years. \nThis planet is breaking all known evolution rules.\n\nThis cannot be naturally caused, there must be more on this planet.\nSomething pushing evolution forward, and it coincidentally lines up with colonization efforts....\n\nThis species is no longer a simple, passive grazer. \nBut a hyper-aggressive ball of chitin.\n\nThe brain cavity is larger, the plates crumble but don't shatter when sharp impacts are present. \nOne important thing to note is the under-carapace is largely gone. Meaning there is a permeable barrier for our munitions or gas-based attacks.\n\nWe must ensure that we have ample <color TextButton>Blunt</color> and <color TextPositive>Gas</color> resistance to combat these."),
+		DisplayName = T(870782851244, --[[ModItemTech Field_Skarab_T3 DisplayName]] "Mutated PEx Skarabei Brute"),
+		DisplayNamePl = T(951630432168, --[[ModItemTech Field_Skarab_T3 DisplayNamePl]] "Mutated PEx Skarabei Brutes"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Skarabei end,
+		Icon = "UI/Messages/Research/res_Skarabei",
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "Field_Skarab_T3",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(215605248249, --[[ModItemTech Field_Skarab_T4 Description]] "Everyone in the colony who took the galactic basic class are extremely worried. \nIn less than the span of a lifetime, the Skarabei we where welcomed too are extinct. \n\nThis new mutation is virtually impenetrable to bullets or radiation. \nThankfully their underbelly is still as permeable as ever. \n\nSeems most other creatures still are not smart enough to flip these things upside down. \n\nAlthough we are starting to all fear what can break through this creatures carapace.....\n\nWe must ensure that we have ample <color TextButton>Blunt</color> and <color TextPositive>Gas</color> resistance to combat these."),
+		DisplayName = T(167772677078, --[[ModItemTech Field_Skarab_T4 DisplayName]] "Heavily Mutated PEx Skarabei Brute"),
+		DisplayNamePl = T(907174525011, --[[ModItemTech Field_Skarab_T4 DisplayNamePl]] "Heavily Mutated PEx Skarabei Brutes"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Skarabei end,
+		Icon = "UI/Messages/Research/res_Skarabei",
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "Field_Skarab_T4",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(787659767338, --[[ModItemTech Field_Glutch_T3 Description]] "These fumes.... are not good for the soul. \n\nThe gas itself is extremely volatile, so sample collection was very difficult.\nIt scatters into the atmosphere after the creatures demise, akin to a balloon popping. \nWhat doesn't scatter was still... sucked in somehow.\nInto the skin of the creature, and quickly converted into more skin.\n\nSo pieces of this creature have grown even after death!\nJust because more gas flew near that skin flap!\n\nWhat we did manager to capture escaped...\nThe colonist who got exposed immediately panicked.\n\nThey showed no major health problems, even though the gas has permeated their entire body.\nWe can only conclude that it's not immediately damaging to our bodies.\n\nBut we did find is completely throw off all human biochemical signalling.\nEssentially tricking the brain into thinking, among other things, they are close to death, they feel nothing from their limbs, hearing something called \"Darude Sandstorm\" louder than a spaceship engine.\n\nSo whenever we fight this species, I cannot understate how much we need to be ready to handle these psychological effects.\n\nA species that it practically immune to gas and blunt impacts....\nMight I recommend as many long-range armor piercing rounds to quicken it's demise? \nOr heating up this giant balloon with some energy; cooking it until it pops?\n\nRegardless, another Genus that has defied evolution.....\nWe must investigate why evolution is happening on such a short scale! \n\nWe must ensure that we have ample <color TextPositive>Gas</color> resistance to combat these."),
+		DisplayName = T(814242980203, --[[ModItemTech Field_Glutch_T3 DisplayName]] "Bad Trip Glutch"),
+		DisplayNamePl = T(425790492497, --[[ModItemTech Field_Glutch_T3 DisplayNamePl]] "Bad Trip Glutch"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Glutch end,
+		Icon = "UI/Messages/Research/res_Glutch",
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "Field_Glutch_T3",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(485238029005, --[[ModItemTech Field_Glutch_T4 Description]] "First it was the quickly mending flesh. \nSecond was the hallucinogenic fumes. \n\nNow this creatures flesh itself is half-gas... Any large impact is easily absorbed, and any gas concoction we thought could hurt it already exists in the creatures hollow belly. \nWe must either pierce it's flesh, or transfer too much energy rapidly. \nThe scientific community would be enthralled by any rumor that this thing exists.\n\nBut a single molecule of this vile anti-human concoction hitting their nostril would change their minds.\n\nWe must ensure that we have ample <color TextPositive>Gas</color> resistance to combat these."),
+		DisplayName = T(531364999461, --[[ModItemTech Field_Glutch_T4 DisplayName]] "Bad Trip Bloated Glutch Stitcher"),
+		DisplayNamePl = T(636854183157, --[[ModItemTech Field_Glutch_T4 DisplayNamePl]] "Bad Trip Bloated Glutch Stitchers"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Glutch end,
+		Icon = "UI/Messages/Research/res_Glutch",
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "Field_Glutch_T4",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(666163032170, --[[ModItemTech Field_Dragonfly_T2 Description]] "Do... these Hummingfly's look angry to you? Not just me? Thank goodness.\nYeah that's definitely a human face formed from it's mouth mandibles resting.\nA face that died of starvation and is angry, like it's somehow my fault.\n\nThanks to that, I'm deciding to rename these to Deathfly's.\n\nAfter reviewing their attack method of choice, it is clear that their acid spit is now highly pressurized. This would not be a problem, except it's mouth mandibles can wrap the acid with a thin lipid membrane. That is then launched through air pressure at us. \n\nThese Deathflies are now just a living water-balloon launcher; except it splashes industrial grade acid everywhere. \n\nWhat is going on with this planet?!?\nFirst entire clutches of these things where waking and attacking us.\nNow they seemingly evolved overnight to do something that doesn't help it's species.\nNone of it's predators are on the ground. \nThe lipid casing even makes it harder to hit any other aerial combatants!\nIs... it evolving to fight us?!?!?\n\nWe must ensure that we have ample <color TextNegative>Energy</color> resistance to combat these."),
+		DisplayName = T(439776243591, --[[ModItemTech Field_Dragonfly_T2 DisplayName]] "Bomber Deathfly"),
+		DisplayNamePl = T(907278140022, --[[ModItemTech Field_Dragonfly_T2 DisplayNamePl]] "Bomber Deathflies"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Dragonfly end,
+		Icon = "UI/Messages/Research/res_Dragonfly",
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "Field_Dragonfly_T2",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(104121244625, --[[ModItemTech Field_Dragonfly_T4 Description]] 'We where right in our initial assessment on the "Hummingfly" Genus\' evolution.\nThis latest species could not exist naturally. Something larger is at work. \n\nThis is the second Genus that has rapidly evolved into multiple unique species.... \n\nThis is nearly impossible with our current understanding of science. \n\nBut enough high-minded musings.....\nThis latest Deathfly\'s species have.... flak armor. \nSpecifically fortifying the parts of the animal that are critical to flight.\nIt can even detect what type of impact is incoming, and can re-deploy their "armor cells" to best protect them from that hit.\n\nThe ONLY good news I have is this has only allowed this species to gain a "general" resistance to all damage, and is far from perfect.\nThe armor being movable is apparently "more" desired to evolve..... somehow.\n\nThe last discovery of this animal... is the most troubling. \nAdrenaline is ubiquitous on this planet, but this animal has a concentrated compound based on it.\nThis concentrated adrenaline (ConAdrena) is highly corrosive, even to the deathfly\'s own arteries!\n\nBecause of that, ConAdrena is only released on armor re-deployment.\nWhat that means is the second these Deathfly\'s come under attack; they will fly EVEN FASTER!\n\nThis planet was already hostile to our life, what can we do if all the steps we take the planet seems to be countering?!?!\n\nWe must ensure that we have ample <color TextNegative>Energy</color> resistance to combat these.'),
+		DisplayName = T(371671560161, --[[ModItemTech Field_Dragonfly_T4 DisplayName]] "Fast, Frenzied, Fortified Bomber Dragonfly"),
+		DisplayNamePl = T(265100815975, --[[ModItemTech Field_Dragonfly_T4 DisplayNamePl]] "Fast, Frenzied, Fortified Bomber Dragonflies"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Dragonfly end,
+		Icon = "UI/Messages/Research/res_Dragonfly",
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "Field_Dragonfly_T4",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(630036556206, --[[ModItemTech Field_Tecatli_T4 Description]] "Do. Not. Let. This. Bad. Thing. Get. You. Brain. Foggy. Dead. Thing. Me. Just. Touch. \n........\nHard to think through this fog. I need to make the.... the.... zap zap things. \n..............\nELECTRONICS. THAT WAS WORD. \nI need to make them later today..... \n..............\nHow this thing know exact human brain poison?!?! \nWe cannot rely on secret boom booms, or flamey flingers.... we must pew pew it! \nOr Bonk it with blunt force!\n\nWe must ensure that we have ample <color TextNegative>Energy</color> and <color TextPositive>Gas</color> resistance to combat these."),
+		DisplayName = T(259587408491, --[[ModItemTech Field_Tecatli_T4 DisplayName]] "Spellsword Tecatli"),
+		DisplayNamePl = T(262446454454, --[[ModItemTech Field_Tecatli_T4 DisplayNamePl]] "Spellsword Tecatli"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Tecatli end,
+		Icon = "UI/Messages/Research/res_Tecatli",
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "Field_Tecatli_T4",
+		money_value = 50000000,
+		msg_reactions = {
+			PlaceObj('MsgReaction', {
+				Event = "ResourceUnlocked",
+			}),
+		},
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(229846890895, --[[ModItemTech Field_Tecatli_T2 Description]] "Primarily living in the Desert region has caused this creature to easily ignore any energy signals that hit's it's skin.\nAnd any energy that gets through is quickly dissipated. \nI don't even think our flamethrowers can hurt these things... \n\nHas the sunlight gotten harsher in the desert areas?\nWhy has this Genus evolved to seemingly be immune to napalm?!?\n\nAre there creatures that spew the same chemical compound as our flamethrowers?\nAnd are they the Tecatli's predators?!?\n\nUntil we get attacked by them, let's focus on these Tecatli.\nConventional piercing or blunt explosive weaponry still proves effective.\nWe need to ensure that there is sufficient firepower to stop them before they destroy our static defenses.\n\nWe must ensure that we have ample <color TextNegative>Energy</color> and <color TextPositive>Gas</color> resistance to combat these."),
+		DisplayName = T(268507821545, --[[ModItemTech Field_Tecatli_T2 DisplayName]] "Heat-Reinforced Tecatli"),
+		DisplayNamePl = T(255140236728, --[[ModItemTech Field_Tecatli_T2 DisplayNamePl]] "Heat-Reinforced Tecatli"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Tecatli end,
+		Icon = "UI/Messages/Research/res_Tecatli",
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "Field_Tecatli_T2",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(417499134950, --[[ModItemTech Field_Scissorhands_T2 Description]] "This species aggression is unparalleled. \nIt was seen attacking other Scissorhands even on attack approach! \n\nWhen we autopsied this specimen; we found that each arm blade have different patterns and levels of sharpness.\nThese blade arms do not get stuck if a pattern or sharpness is not able to cut/pierce/gash; but instead converts the friction into more kinetic energy!\n\nThis means that if we are wearing armor, the blade will slide until the part that can pierce that specific equipment is putting maximum pressure.\n\nThis must be how Scissorhands remain so deadly on this planet.... their blades evolved to always be useful...\nWe must be careful engaging them, as any attack that is not deflected will gouge us!\n\nThankfully, this genus does not seem to be evolving more defenses.\nSo massive ranged firepower!\n\nWe must ensure that we have ample <color TechSubtitleBlue>Piercing</color> resistance to combat these."),
+		DisplayName = T(946963844086, --[[ModItemTech Field_Scissorhands_T2 DisplayName]] "Brutal Duelist Scissorhand"),
+		DisplayNamePl = T(542389047431, --[[ModItemTech Field_Scissorhands_T2 DisplayNamePl]] "Brutal Duelist Scissorhand"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Scissorhands end,
+		Icon = "UI/Messages/Research/res_Scissorhands",
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "Field_Scissorhands_T2",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(194839431207, --[[ModItemTech Field_Scissorhands_T4 Description]] "Now each Scissorhands is both rivaling the size of the Junos Genus.... but now have a chaotic pattern of slices crossing over their bodies.\n\nTheir multiple eyes have changed to dark red, and the colonists who faced them swear they seem to have a.... convey a sense of calm.\n\nTheir attacks are no longer wild and unpredictable, but are closer to a fencer riposting and parrying.\nOur autopsy has found that it's entire vascular system is now just the highly concentrated, rage-inducing Adrenaline.\n\nNot very scientific, but they must be able to channel their anger to achieve even deadlier results....\nTheir blades have not evolved in a significant manner, so this new species must be gaining concentration and focus rather than more powerful weapons.\n\nWe must ensure that we have ample <color TechSubtitleBlue>Piercing</color> resistance to combat these."),
+		DisplayName = T(372699439664, --[[ModItemTech Field_Scissorhands_T4 DisplayName]] "Rage Focused Scissorhand"),
+		DisplayNamePl = T(511396203677, --[[ModItemTech Field_Scissorhands_T4 DisplayNamePl]] "Rage Focused Scissorhands"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Scissorhands end,
+		Icon = "UI/Messages/Research/res_Scissorhands",
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "Field_Scissorhands_T4",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(841243925933, --[[ModItemTech Field_Juno_T4 Description]] "Human biology will naturally suppress sensory inputs if there is something more important to the body at large. \nThat is why you don't notice a cut on your leg when there is a Juno in your face trying to kill you. \n\nJuno's evolution missed that lesson, and instead has evolved and no longer has \"nerve endings\". \nInstead their skin is super sensitive nerves.\nTesting has confirmed that when these nerves activate, they convert the activation energy to repair themselves or a nearby cell! \n\nIt should come as no surprise that this species can no longer \"sleep\" or be forced unconscious.\n\nThis planet's Evolution has decided that a gigantic self-healing nerve has a \"niche\" on this planet.\nThat \"niche\" seems to be \"Get us off this planet\"; based on the trend of other Genus'...\n\nThankfully evolution has not given these creatures any defensive benefits.\nOne of the few times when all of our armaments are useful in this ever-deadlier world...\n\nWe must ensure that we have ample <color TextButton>Blunt</color> resistance to combat these."),
+		DisplayName = T(577132944793, --[[ModItemTech Field_Juno_T4 DisplayName]] "Too-Angry-Too-Die Juno"),
+		DisplayNamePl = T(736882444465, --[[ModItemTech Field_Juno_T4 DisplayNamePl]] "Too-Angry-Too-Die Junos"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Juno end,
+		Icon = "UI/Messages/Research/res_Juno",
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "Field_Juno_T4",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(125838459592, --[[ModItemTech Field_Juno_T2 Description]] "I am not saying that this thing looks like a bunch of nerve endings; and muscles to punch/bite/kick whatever touches the nerve.... \nWhat I will say is this creatures lowest density of nerve endings per square inch is 3 times denser than humans highest! \n\nThis means that their brain is constantly processing more sensory information. \nIt's no wonder Juno's only goal is to silence whatever they touch, hear, smell..... \n\nEvolutionarily, there has been no effort to increase this species' defenses.... \nbut it is a... and I need to be as scientific as possible.... a \"Walking ball of anger and death\"\n\nThis thing needs as many walls between us and them.\nTowers, Walls, Robots..... Whatever we can do to stop us from directly facing these things.\n\nHow do these creatures survive to adulthood?!?\nHow do the parents not kill their young when they cry?!?\n\nIf only we where not under constant attack; we could investigate these things...\n\nWe must ensure that we have ample <color TextButton>Blunt</color> resistance to combat these."),
+		DisplayName = T(472704683899, --[[ModItemTech Field_Juno_T2 DisplayName]] "Angry Juno"),
+		DisplayNamePl = T(392495868292, --[[ModItemTech Field_Juno_T2 DisplayNamePl]] "Angry Junos"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Juno end,
+		Icon = "UI/Messages/Research/res_Juno",
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "Field_Juno_T2",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(736811806423, --[[ModItemTech Field_Shrieker_T2 Description]] "Shriekers are evolving. \nThankfully it's just their invaders, although why the nest shriekers do not seem to be evolving at the same pace is troubling.... \nIt's as if something is coordinating and sending only the latest species to attack us... \n\nBut that implies the existence of something controlling the evolution of this planets genus... \n\nPutting aside that mild existential dread;\nThese Shrieker bolts now have a stronger inhibiting effects on motor functions.\n\nOne hit, and your gaurunteed to move at a crawl.\nThis makes any sustained shootout between our colonists and Shriekers extremely risky.\nWe may need to resort to rushing into melee, as evolution has not deemed necessary to improve their melee capabilities.\n\n\nAs long as whatever weapons we use are not piercing.\nLike the Skarabei, these things are becoming even more resilient against armor piercing rounds.\n\nWe must ensure that we have ample <color TechSubtitleBlue>Piercing</color> and <color TextButton>Blunt</color> resistance to combat these."),
+		DisplayName = T(289468704739, --[[ModItemTech Field_Shrieker_T2 DisplayName]] "Spike-tailed insect"),
+		DisplayNamePl = T(408304436071, --[[ModItemTech Field_Shrieker_T2 DisplayNamePl]] "Spike-tailed insects"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Shrieker end,
+		Icon = "UI/Messages/Research/res_Shrieker",
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "Field_Shrieker_T2",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(235057115852, --[[ModItemTech Field_Shrieker_T4 Description]] "Shriekers have always been known to have hard to penetrate exoskeletons.... \nBut this truly eclipses any other creation we have seen. \n\nBlunt force explosions, armor piercing bullets, even neurotoxin gas attacks are inneffective. \n\nThe only thing we have to truly fight these creatures is radiation or energy signals. \nIt is absolutely critical we build and maintain energy weapons, or else these have the potential to single-handidly destroy our small base.\n\nEven worse, this is the third unique instance of self-healing based on the innate toxicity of checmicals produced by a species.\nJuno's, Glutches, and now Shriekers are now even less susceptible from indirect damage from wounds.\n\nThis has to be the Apex Predator of this world, but if what some of us are to believe.... these are intergalactic colonizers.\nHopefully they do not evolve to have more intelligence.....\n\nWe must ensure that we have ample <color TechSubtitleBlue>Piercing</color> and <color TextButton>Blunt</color> resistance to combat these."),
+		DisplayName = T(941477497395, --[[ModItemTech Field_Shrieker_T4 DisplayName]] "Spike-tailed insect"),
+		DisplayNamePl = T(653962007310, --[[ModItemTech Field_Shrieker_T4 DisplayNamePl]] "Spike-tailed insects"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Shrieker end,
+		Icon = "UI/Messages/Research/res_Shrieker",
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "Field_Shrieker_T4",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(934377237596, --[[ModItemTech FieldHummingfly Description]] "Despite its somewhat menacing look, the big flying insect seems to be peaceful and easily scared. I decided to name it <em>Hummingfly</em>.\n\nIt is worth noting, however, that in the rare cases when it gets enraged, it attacks from afar and can fly over obstacles.\n\nIt spits a bottled ever-raging fire, which shatters and spreads a burning liquid all over the poor unfortunate soul.\nThis attack matches how the fabled Earth's Greek Fire worked.\n\nWe must ensure that we have ample <color TextNegative>Energy</color> resistance to combat these."),
+		DisplayName = T(128177588026, --[[ModItemTech FieldHummingfly DisplayName]] "Flying insect"),
+		DisplayNamePl = T(547625328396, --[[ModItemTech FieldHummingfly DisplayNamePl]] "Flying insects"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Dragonfly end,
+		Icon = "UI/Messages/Research/res_Dragonfly",
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "FieldHummingfly",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(270289717234, --[[ModItemTech FieldGujo Description]] "That flightless bird reminds me of an animal from my home planet, so I gave it the same name - <em>Gujo</em>.\n\nUnlike the calm bird that I know of, this one is quite feisty and seems to have a taste for meat. It's hard to see at night, but I swear those birds can win fights against things that it has no business winning. It mostly sleeps during the day and hunts during the night. It's a fast runner and I don't envy its prey, nor its hunter trying to catch up with it. It also seems to have a strong bond with its mate.\n\nWe must have ample <color TechSubtitleBlue>Piercing</color> resistance when fighting these creatures.\n\n<style TechSubtitleBlue>Unlocks</style>\n<tabulator><em>Taming of Gujos</em> (if researched)\n<tabulator><em>Gujo statue</em>: <building_cost('Statue_Gujo')>"),
+		DisplayName = T(951322256817, --[[ModItemTech FieldGujo DisplayName]] "Flightless bird"),
+		DisplayNamePl = T(648203584404, --[[ModItemTech FieldGujo DisplayNamePl]] "Flightless birds"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Gujo end,
+		Icon = "UI/Messages/Research/res_Gujo",
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "FieldGujo",
+		money_value = 50000000,
+		tradable = false,
+		PlaceObj('RemoveLockedState', {
+			Class = "BuildingCompositeDef",
+			Group = "Relaxatation",
+			LockState = "hidden",
+			PresetId = "Statue_Gujo",
+		}),
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(357263806111, --[[ModItemTech FieldGujoT2 Description]] "Their bodies, upon closer inspection, have tied their metabolism with their fight or flight response. \nWhile adrenaline is flowing, anything that goes into their gullet gets immediately processed and any wounds start to mend themselves. This is what has allowed this species to survive this ever changing planet.\n\nThankfully their recent evolution is primarily prioritizing maintaining and improving the genus' metabolism; so it's ability to avoid or absorb attacks is limited\n\nWe must have ample <color TechSubtitleBlue>Piercing</color> resistance when fighting these creatures.\nThey can only heal when they actually swallow something, so we need to be sure to minimize the bites it gets!"),
+		DisplayName = T(525071182794, --[[ModItemTech FieldGujoT2 DisplayName]] "Archaeopteryx"),
+		DisplayNamePl = T(769076048173, --[[ModItemTech FieldGujoT2 DisplayNamePl]] "Archaeopteryxs"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Gujo end,
+		Icon = "UI/Messages/Research/res_Gujo",
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "FieldGujoT2",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(573010500562, --[[ModItemTech FieldGujoT4 Description]] "It is a common occurrence to see Gujo's dragging their last kill with them. \nAnd upon finding new prey proceed to slam themselves into the earth to trigger their adrenaline. This lets their last morsel heal any lingering wounds before fighting anew.\nThis also suggests a modicum of intelligence or at least awareness of how their own physiology works.....\n\nTheir bodies, due to the constant wear and tear, are deadliest when near death.\nThe more damage they have sustained, the quicker they attack and the less damage we are able to deal to them.\n\nWe must have ample <color TechSubtitleBlue>Piercing</color> resistance when fighting these creatures.\nThey can only heal when they actually swallow something, so we need to be sure to minimize the bites it gets!"),
+		DisplayName = T(894392767111, --[[ModItemTech FieldGujoT4 DisplayName]] "Micro-Raptor"),
+		DisplayNamePl = T(425443916081, --[[ModItemTech FieldGujoT4 DisplayNamePl]] "Micro-Raptors"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Gujo end,
+		Icon = "UI/Messages/Research/res_Gujo",
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "FieldGujoT4",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(434620854588, --[[ModItemTech FieldUlfenT3 Description]] "This in an alien planet, so we shouldn't be surprised if exceptions to our scientific theories are found. \nBut this wasn't on my bingo card! \nUlfen now have larger horns and a new aggressive demeaner!\nWe have started to call them <em>Goren</em> after an incident where we approached a species in a \"wrong\" way.\n\nThe padding that it's thick hide provides makes these Goren <color TextButton>Blunt</color> and <color TextNegative>Energy</color><em> Resistance</em>.\n\nIf we learn how to tame or breed these creatures, they would make wonderful herds for both food and defense!"),
+		DisplayName = T(525874555007, --[[ModItemTech FieldUlfenT3 DisplayName]] "Unknown Ulfen Evolution"),
+		DisplayNamePl = T(747647610094, --[[ModItemTech FieldUlfenT3 DisplayNamePl]] "Unknown Ulfen Evolutions"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Ulfen end,
+		Icon = "UI/Messages/Research/res_Ulfen",
+		LockPrerequisites = {
+			PlaceObj('CheckRegion', {
+				Region = set( "Sobrius" ),
+			}),
+		},
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "FieldUlfenT3",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(558073602568, --[[ModItemTech FieldUlfenT5 Description]] "On my planet, there where large metal animals that you could step inside.\nThey could weight up to 50,000 KGs, and could move hundreds of kilometers in an hour.\nThey are absolute behemoths, and yet, I think these Bestigors would win in a head on.\n\nWe observed one run into a sheet cliff, and cause a gigantic avalanche of Rock and Mud.\nAnd the <em>Bestigor</em> was able to break free of the rubble and walk away unscathed....\n\nWhat evolutionary pressure would be put on a species like this.... to <em>NEED</em> this durability?\nThey are still Herbivors, so something must be able to bring these down.....\n\nIt's hide now has at least 10 thick layers giving <color TextButton>Blunt</color> and <color TextNegative>Energy</color><em> Resistance</em>."),
+		DisplayName = T(591814431141, --[[ModItemTech FieldUlfenT5 DisplayName]] "Unknown Ulfen Evolution"),
+		DisplayNamePl = T(143533447937, --[[ModItemTech FieldUlfenT5 DisplayNamePl]] "Unknown Ulfen Evolutions"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Ulfen end,
+		Icon = "UI/Messages/Research/res_Ulfen",
+		LockPrerequisites = {
+			PlaceObj('CheckRegion', {
+				Region = set( "Sobrius" ),
+			}),
+		},
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "FieldUlfenT5",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(918909534714, --[[ModItemTech FieldDraka_T3 Description]] "The <em>Drakka</em> have now shown to be evolving in a hyper specific manner.\nIt's occasional clickity clack of it's exoskeleton bending and popping now gets louder and louder the more attacks it receives.\nOnce this reaches a critical mass, the DrikaDrakk body will trigger a sonic boom around it! \n\nFor better or for worse, the organs inside are not capable of handling multiple explosions.\nThis usually means the DrikkaDrakk fall unconscious from the force before death.\n\nIt's large forehead and brittle shell gives this creature good <color TextButton>Blunt</color> and <color TextPositive>Energy</color> Deflection chances."),
+		DisplayName = T(414518110756, --[[ModItemTech FieldDraka_T3 DisplayName]] "Unknown Drakka Evolution"),
+		DisplayNamePl = T(134174630715, --[[ModItemTech FieldDraka_T3 DisplayNamePl]] "Unknown Drakka Evolutions"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Draka end,
+		Icon = "UI/Messages/Research/res_Draka",
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "FieldDraka_T3",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(895664539556, --[[ModItemTech FieldDraka_T5 Description]] "The <em>Drakka</em> bodies are now just multiple layers of chitin, much like an onion.\nEach organ has now been wrapped in it's own exoskeleton shell, with small air pockets between each shell.\nThis has made their bodies able to withstand more explosions!\nEven more impressive is the fact that they preserve some of the energy, allowing more frequent eruptions!\n\nIt's large forehead and brittle shell gives this creature good <color TextButton>Blunt</color> and <color TextPositive>Energy</color> Deflection chances."),
+		DisplayName = T(573390196346, --[[ModItemTech FieldDraka_T5 DisplayName]] "Unknown Drakka Evolution"),
+		DisplayNamePl = T(535584479648, --[[ModItemTech FieldDraka_T5 DisplayNamePl]] "Unknown Drakka Evolutions"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Draka end,
+		Icon = "UI/Messages/Research/res_Draka",
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "FieldDraka_T5",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(232248805804, --[[ModItemTech FieldNothT3 Description]] "When semi-domesticated species are left to live in the wild, they can become feral.\nWell the Noth's decided to take that to the extreme, and become much deadlier.\n\nTheir head plate is now harder than steel, capable of shattering whatever material it hit.\nBe careful getting in protracted bouts with this creature, for it will slowly grind down your defenses!\n\nThis does come at a cost, as it's brain is subject to constant blunt force trauma!\nThis means it is much easier to knock this creature out.\n\nDeals <color TextButton>Blunt</color> damage."),
+		DisplayName = T(511119421156, --[[ModItemTech FieldNothT3 DisplayName]] "Unknown Noth Evolution"),
+		DisplayNamePl = T(635590948880, --[[ModItemTech FieldNothT3 DisplayNamePl]] "Unknown Noth Evolutions"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Noth end,
+		Icon = "UI/Messages/Research/res_Noth",
+		LockPrerequisites = {
+			PlaceObj('CheckRegion', {
+				Region = set( "Saltu" ),
+			}),
+		},
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "FieldNothT3",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(296841795702, --[[ModItemTech FieldNothT5 Description]] "The Noth's hide is now a mix between flesh and metal.\nThis has given it immense Piercing and Gas resistance.\n\nIt's headplate also benefits from this increased durability; with greater accuracy and shatter potential!\nNot only will it's hits lower the target's deflection chances, but also make them take increased damage from all sources!\n\nThis does come at a cost, as it's brain is subject to constant blunt force trauma!\nThis means it is much easier to knock this creature out.\n\nDeald <color TextButon>Blunt</color> damage."),
+		DisplayName = T(142281950085, --[[ModItemTech FieldNothT5 DisplayName]] "Unknown Noth Evolution"),
+		DisplayNamePl = T(995536910800, --[[ModItemTech FieldNothT5 DisplayNamePl]] "Unknown Noth Evolutions"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Noth end,
+		Icon = "UI/Messages/Research/res_Noth",
+		LockPrerequisites = {
+			PlaceObj('CheckRegion', {
+				Region = set( "Saltu" ),
+			}),
+		},
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "FieldNothT5",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(351752597077, --[[ModItemTech FieldShoguT3 Description]] "Every wild animal is filled with parasites and diseases, but the Shogu are an exceptionally filled species.\nEven newborns of the species already have the majority of the diseases they will ever have.\n\nFrom what we can tell, the only reason the Shogu do not just die is because the diseases and parasites compete against each other!\n\nDeals <color TextPositive>Gas</color> damage.\nWeak to <color TextNegative>Energy</color> damage."),
+		DisplayName = T(988999460742, --[[ModItemTech FieldShoguT3 DisplayName]] "Unknown Shogu Evolution"),
+		DisplayNamePl = T(931991178329, --[[ModItemTech FieldShoguT3 DisplayNamePl]] "Unknown Shogu Evolutions"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Shogu end,
+		Icon = "UI/Messages/Research/res_Shogu",
+		LockPrerequisites = {
+			PlaceObj('CheckRegion', {
+				Region = set( "Saltu" ),
+			}),
+		},
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "FieldShoguT3",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(473154794773, --[[ModItemTech FieldShoguT5 Description]] "The Shogu that greeted us at the beginning of this adventure is no more.\n\nAll of it's internal organs, nerves, and blood are now replaced with parasites.\nEach one feeding off whatever it can jerkingly puppeteer into it's mouth.\nThe constant movement just under the skin is apparent, as tendrils push the skin to the breaking point.\n\nThis makes this species incredibly hard to kill, and may require multiple attempts....\n\nDeals <color TextPositive>Gas</color> damage.\nWeak to <color TextNegative>Energy</color> damage."),
+		DisplayName = T(354926226217, --[[ModItemTech FieldShoguT5 DisplayName]] "Unknown Shogu Evolution"),
+		DisplayNamePl = T(890282760986, --[[ModItemTech FieldShoguT5 DisplayNamePl]] "Unknown Shogu Evolutions"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Shogu end,
+		Icon = "UI/Messages/Research/res_Shogu",
+		LockPrerequisites = {
+			PlaceObj('CheckRegion', {
+				Region = set( "Saltu" ),
+			}),
+		},
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "FieldShoguT5",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(975185146158, --[[ModItemTech FieldCamelT3 Description]] "The Dromadda have now evolved and grabbed the ability to spit from Earth Camels.\nAmazingly their spit has the same consistency and acidity of the Hummingfly.\n\nThis combined with a general increase in intelligence means we can train and deploy these for defense!\n\nDeals <colro TextNegative>Energy</color> damage."),
+		DisplayName = T(924189431384, --[[ModItemTech FieldCamelT3 DisplayName]] "Humped animal"),
+		DisplayNamePl = T(859058952645, --[[ModItemTech FieldCamelT3 DisplayNamePl]] "Humped animals"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Camel end,
+		Icon = "UI/Messages/Research/res_Camel",
+		LockPrerequisites = {
+			PlaceObj('CheckRegion', {
+				Region = set( "Desertum" ),
+			}),
+		},
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "FieldCamelT3",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	PlaceObj('ModItemTech', {
+		Activity = "FieldResearch",
+		Description = T(995220278296, --[[ModItemTech FieldCamelT5 Description]] 'The royal purple and burly frame has caused the colony to start calling this species a "<em>Royal Llamels</em>".\nNow possessing high <color TextNegative>Energy</color> and <color TechSubtitleBlue>Piercing</color> resistances, this species can be used to trade fire with anything that assails us!\n\nDeals <colro TextNegative>Energy</color> damage.'),
+		DisplayName = T(346114070115, --[[ModItemTech FieldCamelT5 DisplayName]] "Humped animal"),
+		DisplayNamePl = T(321019568058, --[[ModItemTech FieldCamelT5 DisplayNamePl]] "Humped animals"),
+		FieldResearchCategory = "Fauna",
+		FieldResearchTemplateExpression = function (self) return Camel end,
+		Icon = "UI/Messages/Research/res_Camel",
+		LockPrerequisites = {
+			PlaceObj('CheckRegion', {
+				Region = set( "Desertum" ),
+			}),
+		},
+		ResearchPoints = 6000,
+		group = "Field",
+		id = "FieldCamelT5",
+		money_value = 50000000,
+		tradable = false,
+	}),
+	}),
 PlaceObj('ModItemFolder', {
 	'name', "new tags",
 	'NameColor', RGBA(184, 46, 46, 255),
@@ -3061,3325 +3637,6 @@ PlaceObj('ModItemFolder', {
 	}),
 	}),
 PlaceObj('ModItemFolder', {
-	'name', "Research",
-	'NameColor', RGBA(129, 175, 192, 255),
-}, {
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(938920346727, --[[ModItemTech field_dog_T5 Description]] "All vestiges of friendship between this species and humanity is gone.\nThis genus has succumbed to whatever is pushing all these species to evolve.\n\nIt now has even more intelligence, it's bulbous head now too large for it's neck to handle.\nIt can now relays orders in the same clicks, clacks, snaps, or yowls of it's partnered species.\nIf only they continued to grow beside us, we could learn to communicate with the fauna!\n\nBut alas, these hounds are helping the enemy...\nThe coordination these <em>Fenrir</em> provide enhances all other enemies.\nEven worse, they are now easily covered by the larger wildlife. \nIt's almost like evolutionarily it knew it needed to be as small as possible to avoid small arms fire!! \nThankfully, this change to become smaller means there is less mass to dedicate to defenses.\nThey have no discern-able clear weakness, so our most damaging weapons should fire on this species!\n\nWe must ensure that we have ample <color TechSubtitleBlue>Piercing</color> and <color TextNegative>Energy</color> resistance to combat these."),
-		DisplayName = T(523069977599, --[[ModItemTech field_dog_T5 DisplayName]] "Fenrir"),
-		DisplayNamePl = T(885483345733, --[[ModItemTech field_dog_T5 DisplayNamePl]] "Fenrirs"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return Boxer end,
-		Icon = "UI/Messages/Research/res_Dogs",
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "field_dog_T5",
-		money_value = 50000000,
-		tradable = false,
-	}),
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(357517321577, --[[ModItemTech field_dog_T3 Description]] 'We now have our answer to what they provide.\nThey have been observed barking what can best be described as "orders" to whatever species they are attached too.\n\nWhat humans have taught and bred into these creatures is now being used to coordinate assaults against us....\nNature sometimes has a cruel sense of irony!\n\nThese creatures are starting to resemble their ancestors, the wolf. Larger, bulkier, and with a larger teeth. But no fur...\nThey somehow are able to live with an internal body temperatures below freezing, and their teeth now inject \na compound that absorbs all the energy & heat surrounding it.\n\nWe must ensure that we have ample <color TechSubtitleBlue>Piercing</color> and <color TextNegative>Energy</color> resistance to combat these.'),
-		DisplayName = T(719898286913, --[[ModItemTech field_dog_T3 DisplayName]] "Ice Wolf"),
-		DisplayNamePl = T(459499845093, --[[ModItemTech field_dog_T3 DisplayNamePl]] "Ice Wolf"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return Boxer end,
-		Icon = "UI/Messages/Research/res_Dogs",
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "field_dog_T3",
-		money_value = 50000000,
-		tradable = false,
-	}),
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(971122823327, --[[ModItemTech field_dog_T1 Description]] "We have observed this species living peacefully with what we thought of as aggressive species.\nThey must have formed symbiotic relationships to avoid extinction.\n\nWhat are they providing that keeps them alive?\nAnd why is their internal body temperature so cold?!?\n\nWe must ensure that we have ample <color TechSubtitleBlue>Piercing</color> and <color TextNegative>Energy</color> resistance to combat these."),
-		DisplayName = T(545744059274, --[[ModItemTech field_dog_T1 DisplayName]] "Cold Dog"),
-		DisplayNamePl = T(744183019406, --[[ModItemTech field_dog_T1 DisplayNamePl]] "Cold Dogs"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return Boxer end,
-		Icon = "UI/Messages/Research/res_Dogs",
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "field_dog_T1",
-		money_value = 50000000,
-		tradable = false,
-	}),
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(839954723448, --[[ModItemTech FieldSkarabei Description]] "The bug I observed looks like an overgrown version of the pest that's known (and hated) on many worlds. Giving it a common bug's name felt a bit underwhelming, so I chose the nice-sounding <em>Skarabei</em>.\n\nUnfortunately, it's a lot more annoying than some tiny insect that scuttles through your fridge. This one is big and impudent enough to attack humans and do some damage!\n\nThe main problem is that these insects tend to swarm and work together in large groups, so they should not be underestimated.\n\nIt attacks by closing it's... for lack of a better term... pauldrons over it's head and slams it's head forward.\nWe must ensure that we have ample <color TextButton>Blunt</color> resistance to combat these.\n\n<style TechSubtitleBlue>Unlocks</style>\n<tabulator><em>Skarabei statue</em>: <building_cost('Statue_Skarabei')>"),
-		DisplayName = T(313580775497, --[[ModItemTech FieldSkarabei DisplayName]] "Overgrown insect"),
-		DisplayNamePl = T(547974503561, --[[ModItemTech FieldSkarabei DisplayNamePl]] "Overgrown insects"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return Skarabei end,
-		Icon = "UI/Messages/Research/res_Skarabei",
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "FieldSkarabei",
-		money_value = 50000000,
-		tradable = false,
-		PlaceObj('RemoveLockedState', {
-			Class = "BuildingCompositeDef",
-			Group = "Relaxatation",
-			LockState = "hidden",
-			PresetId = "Statue_Skarabei",
-		}),
-	}),
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(851321512853, --[[ModItemTech FieldGlutch Description]] "The big bloated insect is a slow and usually peaceful herbivore, which I named <em>Glutch</em>.\n\nWhile not particularly dangerous, it secretes a corrosive substance which accumulates on its skin and is released as a toxic cloud when the creature shakes its body in fear. Engaging it from a safe distance seems like the best option.\n\nWe must ensure that we have ample <color TextPositive>Gas</color> resistance to combat these.\n\n<style TechSubtitleBlue>Unlocks</style>\n<tabulator><em>Glutch statue</em>: <building_cost('Statue_Glutch')>"),
-		DisplayName = T(280125985011, --[[ModItemTech FieldGlutch DisplayName]] "Bloated insect"),
-		DisplayNamePl = T(930922077745, --[[ModItemTech FieldGlutch DisplayNamePl]] "Bloated insects"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return Glutch end,
-		Icon = "UI/Messages/Research/res_Glutch",
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "FieldGlutch",
-		money_value = 50000000,
-		tradable = false,
-		PlaceObj('RemoveLockedState', {
-			Class = "BuildingCompositeDef",
-			Group = "Relaxatation",
-			LockState = "hidden",
-			PresetId = "Statue_Glutch",
-		}),
-	}),
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(490139055620, --[[ModItemTech FieldScissorhands Description]] "I have seen huge genetically-engineered mantises in a zoo once, but this creature is something else!\n\nThe <em>Scissorhands</em>, as I've named it, has razor-sharp front legs which shred its victims into pieces in an instant. Its four legs make it fast and agile - traits which get further enhanced by its remarkable senses. Upon closer examination, I deduced that its antennae assist in detecting movement around it!\n\nWe must ensure that we have ample <color TechSubtitleBlue>Piercing</color> resistance to combat these.\n\n<style TechSubtitleBlue>Unlocks</style>\n<tabulator><em>Taming of Scissorhands</em> (if researched)\n<tabulator><em>Scissorhands statue</em>: <building_cost('LargeStatue_Scissorhands')>"),
-		DisplayName = T(762740087071, --[[ModItemTech FieldScissorhands DisplayName]] "Huge mantis"),
-		DisplayNamePl = T(900757548387, --[[ModItemTech FieldScissorhands DisplayNamePl]] "Huge mantises"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return Scissorhands end,
-		Icon = "UI/Messages/Research/res_Scissorhands",
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "FieldScissorhands",
-		money_value = 50000000,
-		tradable = false,
-		PlaceObj('RemoveLockedState', {
-			Class = "BuildingCompositeDef",
-			Group = "Relaxatation",
-			LockState = "hidden",
-			PresetId = "LargeStatue_Scissorhands",
-		}),
-	}),
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(977102975985, --[[ModItemTech Field_Skarab_T1 Description]] "Convergent evolution! \nIf the Skarabei didn't evolve to specifically kill off every single human I would want to study this new evolved form! \nBiologists everywhere would be clammering over themselves to get here to study this!\n\nDid the Explosive Species start moving into the swamp, and they also independently evolved to have poison?!?\nDid the Poison Species evolve the same explosive behaviors?\n\nThese autopsies show that it's neither!\nThey are compatible! \nWhich usually means they should be the same species.... But as we have seen, this planet continues to break all known precedent.\n\nOh how to fight them?\nGenerally with anything, they have evolved to be sturdier and healthier than any other species we have observed.\n\nWe must ensure that we have ample <color TechSubtitleBlue>Piercing</color> resistance to combat these."),
-		DisplayName = T(355121328008, --[[ModItemTech Field_Skarab_T1 DisplayName]] "PEx Skarabei"),
-		DisplayNamePl = T(451552169671, --[[ModItemTech Field_Skarab_T1 DisplayNamePl]] "PEx Skarabei"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return "PEx Skarabei" end,
-		Icon = "UI/Messages/Research/res_Skarabei",
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "Field_Skarab_T1",
-		money_value = 50000000,
-		tradable = false,
-	}),
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(939543644353, --[[ModItemTech Field_Skarab_T3 Description]] "Evolution does not happen in a matter of days. It's timescale is in the hundreds of thousands of years. \nThis planet is breaking all known evolution rules.\n\nThis cannot be naturally caused, there must be more on this planet.\nSomething pushing evolution forward, and it coincidentally lines up with colonization efforts....\n\nThis species is no longer a simple, passive grazer. \nBut a hyper-aggressive ball of chitin.\n\nThe brain cavity is larger, the plates crumble but don't shatter when sharp impacts are present. \nOne important thing to note is the under-carapace is largely gone. Meaning there is a permeable barrier for our munitions or gas-based attacks.\n\nWe must ensure that we have ample <color TextButton>Blunt</color> and <color TextPositive>Gas</color> resistance to combat these."),
-		DisplayName = T(870782851244, --[[ModItemTech Field_Skarab_T3 DisplayName]] "Mutated PEx Skarabei Brute"),
-		DisplayNamePl = T(951630432168, --[[ModItemTech Field_Skarab_T3 DisplayNamePl]] "Mutated PEx Skarabei Brutes"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return Skarabei end,
-		Icon = "UI/Messages/Research/res_Skarabei",
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "Field_Skarab_T3",
-		money_value = 50000000,
-		tradable = false,
-	}),
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(215605248249, --[[ModItemTech Field_Skarab_T4 Description]] "Everyone in the colony who took the galactic basic class are extremely worried. \nIn less than the span of a lifetime, the Skarabei we where welcomed too are extinct. \n\nThis new mutation is virtually impenetrable to bullets or radiation. \nThankfully their underbelly is still as permeable as ever. \n\nSeems most other creatures still are not smart enough to flip these things upside down. \n\nAlthough we are starting to all fear what can break through this creatures carapace.....\n\nWe must ensure that we have ample <color TextButton>Blunt</color> and <color TextPositive>Gas</color> resistance to combat these."),
-		DisplayName = T(167772677078, --[[ModItemTech Field_Skarab_T4 DisplayName]] "Heavily Mutated PEx Skarabei Brute"),
-		DisplayNamePl = T(907174525011, --[[ModItemTech Field_Skarab_T4 DisplayNamePl]] "Heavily Mutated PEx Skarabei Brutes"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return Skarabei end,
-		Icon = "UI/Messages/Research/res_Skarabei",
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "Field_Skarab_T4",
-		money_value = 50000000,
-		tradable = false,
-	}),
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(787659767338, --[[ModItemTech Field_Glutch_T3 Description]] "These fumes.... are not good for the soul. \n\nThe gas itself is extremely volatile, so sample collection was very difficult.\nIt scatters into the atmosphere after the creatures demise, akin to a balloon popping. \nWhat doesn't scatter was still... sucked in somehow.\nInto the skin of the creature, and quickly converted into more skin.\n\nSo pieces of this creature have grown even after death!\nJust because more gas flew near that skin flap!\n\nWhat we did manager to capture escaped...\nThe colonist who got exposed immediately panicked.\n\nThey showed no major health problems, even though the gas has permeated their entire body.\nWe can only conclude that it's not immediately damaging to our bodies.\n\nBut we did find is completely throw off all human biochemical signalling.\nEssentially tricking the brain into thinking, among other things, they are close to death, they feel nothing from their limbs, hearing something called \"Darude Sandstorm\" louder than a spaceship engine.\n\nSo whenever we fight this species, I cannot understate how much we need to be ready to handle these psychological effects.\n\nA species that it practically immune to gas and blunt impacts....\nMight I recommend as many long-range armor piercing rounds to quicken it's demise? \nOr heating up this giant balloon with some energy; cooking it until it pops?\n\nRegardless, another Genus that has defied evolution.....\nWe must investigate why evolution is happening on such a short scale! \n\nWe must ensure that we have ample <color TextPositive>Gas</color> resistance to combat these."),
-		DisplayName = T(814242980203, --[[ModItemTech Field_Glutch_T3 DisplayName]] "Bad Trip Glutch"),
-		DisplayNamePl = T(425790492497, --[[ModItemTech Field_Glutch_T3 DisplayNamePl]] "Bad Trip Glutch"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return Glutch end,
-		Icon = "UI/Messages/Research/res_Glutch",
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "Field_Glutch_T3",
-		money_value = 50000000,
-		tradable = false,
-	}),
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(485238029005, --[[ModItemTech Field_Glutch_T4 Description]] "First it was the quickly mending flesh. \nSecond was the hallucinogenic fumes. \n\nNow this creatures flesh itself is half-gas... Any large impact is easily absorbed, and any gas concoction we thought could hurt it already exists in the creatures hollow belly. \nWe must either pierce it's flesh, or transfer too much energy rapidly. \nThe scientific community would be enthralled by any rumor that this thing exists.\n\nBut a single molecule of this vile anti-human concoction hitting their nostril would change their minds.\n\nWe must ensure that we have ample <color TextPositive>Gas</color> resistance to combat these."),
-		DisplayName = T(531364999461, --[[ModItemTech Field_Glutch_T4 DisplayName]] "Bad Trip Bloated Glutch Stitcher"),
-		DisplayNamePl = T(636854183157, --[[ModItemTech Field_Glutch_T4 DisplayNamePl]] "Bad Trip Bloated Glutch Stitchers"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return Glutch end,
-		Icon = "UI/Messages/Research/res_Glutch",
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "Field_Glutch_T4",
-		money_value = 50000000,
-		tradable = false,
-	}),
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(666163032170, --[[ModItemTech Field_Dragonfly_T2 Description]] "Do... these Hummingfly's look angry to you? Not just me? Thank goodness.\nYeah that's definitely a human face formed from it's mouth mandibles resting.\nA face that died of starvation and is angry, like it's somehow my fault.\n\nThanks to that, I'm deciding to rename these to Deathfly's.\n\nAfter reviewing their attack method of choice, it is clear that their acid spit is now highly pressurized. This would not be a problem, except it's mouth mandibles can wrap the acid with a thin lipid membrane. That is then launched through air pressure at us. \n\nThese Deathflies are now just a living water-balloon launcher; except it splashes industrial grade acid everywhere. \n\nWhat is going on with this planet?!?\nFirst entire clutches of these things where waking and attacking us.\nNow they seemingly evolved overnight to do something that doesn't help it's species.\nNone of it's predators are on the ground. \nThe lipid casing even makes it harder to hit any other aerial combatants!\nIs... it evolving to fight us?!?!?\n\nWe must ensure that we have ample <color TextNegative>Energy</color> resistance to combat these."),
-		DisplayName = T(439776243591, --[[ModItemTech Field_Dragonfly_T2 DisplayName]] "Bomber Deathfly"),
-		DisplayNamePl = T(907278140022, --[[ModItemTech Field_Dragonfly_T2 DisplayNamePl]] "Bomber Deathflies"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return Dragonfly end,
-		Icon = "UI/Messages/Research/res_Dragonfly",
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "Field_Dragonfly_T2",
-		money_value = 50000000,
-		tradable = false,
-	}),
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(104121244625, --[[ModItemTech Field_Dragonfly_T4 Description]] 'We where right in our initial assessment on the "Hummingfly" Genus\' evolution.\nThis latest species could not exist naturally. Something larger is at work. \n\nThis is the second Genus that has rapidly evolved into multiple unique species.... \n\nThis is nearly impossible with our current understanding of science. \n\nBut enough high-minded musings.....\nThis latest Deathfly\'s species have.... flak armor. \nSpecifically fortifying the parts of the animal that are critical to flight.\nIt can even detect what type of impact is incoming, and can re-deploy their "armor cells" to best protect them from that hit.\n\nThe ONLY good news I have is this has only allowed this species to gain a "general" resistance to all damage, and is far from perfect.\nThe armor being movable is apparently "more" desired to evolve..... somehow.\n\nThe last discovery of this animal... is the most troubling. \nAdrenaline is ubiquitous on this planet, but this animal has a concentrated compound based on it.\nThis concentrated adrenaline (ConAdrena) is highly corrosive, even to the deathfly\'s own arteries!\n\nBecause of that, ConAdrena is only released on armor re-deployment.\nWhat that means is the second these Deathfly\'s come under attack; they will fly EVEN FASTER!\n\nThis planet was already hostile to our life, what can we do if all the steps we take the planet seems to be countering?!?!\n\nWe must ensure that we have ample <color TextNegative>Energy</color> resistance to combat these.'),
-		DisplayName = T(371671560161, --[[ModItemTech Field_Dragonfly_T4 DisplayName]] "Fast, Frenzied, Fortified Bomber Dragonfly"),
-		DisplayNamePl = T(265100815975, --[[ModItemTech Field_Dragonfly_T4 DisplayNamePl]] "Fast, Frenzied, Fortified Bomber Dragonflies"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return Dragonfly end,
-		Icon = "UI/Messages/Research/res_Dragonfly",
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "Field_Dragonfly_T4",
-		money_value = 50000000,
-		tradable = false,
-	}),
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(630036556206, --[[ModItemTech Field_Tecatli_T4 Description]] "Do. Not. Let. This. Bad. Thing. Get. You. Brain. Foggy. Dead. Thing. Me. Just. Touch. \n........\nHard to think through this fog. I need to make the.... the.... zap zap things. \n..............\nELECTRONICS. THAT WAS WORD. \nI need to make them later today..... \n..............\nHow this thing know exact human brain poison?!?! \nWe cannot rely on secret boom booms, or flamey flingers.... we must pew pew it! \nOr Bonk it with blunt force!\n\nWe must ensure that we have ample <color TextNegative>Energy</color> and <color TextPositive>Gas</color> resistance to combat these."),
-		DisplayName = T(259587408491, --[[ModItemTech Field_Tecatli_T4 DisplayName]] "Spellsword Tecatli"),
-		DisplayNamePl = T(262446454454, --[[ModItemTech Field_Tecatli_T4 DisplayNamePl]] "Spellsword Tecatli"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return Tecatli end,
-		Icon = "UI/Messages/Research/res_Tecatli",
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "Field_Tecatli_T4",
-		money_value = 50000000,
-		msg_reactions = {
-			PlaceObj('MsgReaction', {
-				Event = "ResourceUnlocked",
-			}),
-		},
-		tradable = false,
-	}),
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(229846890895, --[[ModItemTech Field_Tecatli_T2 Description]] "Primarily living in the Desert region has caused this creature to easily ignore any energy signals that hit's it's skin.\nAnd any energy that gets through is quickly dissipated. \nI don't even think our flamethrowers can hurt these things... \n\nHas the sunlight gotten harsher in the desert areas?\nWhy has this Genus evolved to seemingly be immune to napalm?!?\n\nAre there creatures that spew the same chemical compound as our flamethrowers?\nAnd are they the Tecatli's predators?!?\n\nUntil we get attacked by them, let's focus on these Tecatli.\nConventional piercing or blunt explosive weaponry still proves effective.\nWe need to ensure that there is sufficient firepower to stop them before they destroy our static defenses.\n\nWe must ensure that we have ample <color TextNegative>Energy</color> and <color TextPositive>Gas</color> resistance to combat these."),
-		DisplayName = T(268507821545, --[[ModItemTech Field_Tecatli_T2 DisplayName]] "Heat-Reinforced Tecatli"),
-		DisplayNamePl = T(255140236728, --[[ModItemTech Field_Tecatli_T2 DisplayNamePl]] "Heat-Reinforced Tecatli"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return Tecatli end,
-		Icon = "UI/Messages/Research/res_Tecatli",
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "Field_Tecatli_T2",
-		money_value = 50000000,
-		tradable = false,
-	}),
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(417499134950, --[[ModItemTech Field_Scissorhands_T2 Description]] "This species aggression is unparalleled. \nIt was seen attacking other Scissorhands even on attack approach! \n\nWhen we autopsied this specimen; we found that each arm blade have different patterns and levels of sharpness.\nThese blade arms do not get stuck if a pattern or sharpness is not able to cut/pierce/gash; but instead converts the friction into more kinetic energy!\n\nThis means that if we are wearing armor, the blade will slide until the part that can pierce that specific equipment is putting maximum pressure.\n\nThis must be how Scissorhands remain so deadly on this planet.... their blades evolved to always be useful...\nWe must be careful engaging them, as any attack that is not deflected will gouge us!\n\nThankfully, this genus does not seem to be evolving more defenses.\nSo massive ranged firepower!\n\nWe must ensure that we have ample <color TechSubtitleBlue>Piercing</color> resistance to combat these."),
-		DisplayName = T(946963844086, --[[ModItemTech Field_Scissorhands_T2 DisplayName]] "Brutal Duelist Scissorhand"),
-		DisplayNamePl = T(542389047431, --[[ModItemTech Field_Scissorhands_T2 DisplayNamePl]] "Brutal Duelist Scissorhand"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return Scissorhands end,
-		Icon = "UI/Messages/Research/res_Scissorhands",
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "Field_Scissorhands_T2",
-		money_value = 50000000,
-		tradable = false,
-	}),
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(194839431207, --[[ModItemTech Field_Scissorhands_T4 Description]] "Now each Scissorhands is both rivaling the size of the Junos Genus.... but now have a chaotic pattern of slices crossing over their bodies.\n\nTheir multiple eyes have changed to dark red, and the colonists who faced them swear they seem to have a.... convey a sense of calm.\n\nTheir attacks are no longer wild and unpredictable, but are closer to a fencer riposting and parrying.\nOur autopsy has found that it's entire vascular system is now just the highly concentrated, rage-inducing Adrenaline.\n\nNot very scientific, but they must be able to channel their anger to achieve even deadlier results....\nTheir blades have not evolved in a significant manner, so this new species must be gaining concentration and focus rather than more powerful weapons.\n\nWe must ensure that we have ample <color TechSubtitleBlue>Piercing</color> resistance to combat these."),
-		DisplayName = T(372699439664, --[[ModItemTech Field_Scissorhands_T4 DisplayName]] "Rage Focused Scissorhand"),
-		DisplayNamePl = T(511396203677, --[[ModItemTech Field_Scissorhands_T4 DisplayNamePl]] "Rage Focused Scissorhands"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return Scissorhands end,
-		Icon = "UI/Messages/Research/res_Scissorhands",
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "Field_Scissorhands_T4",
-		money_value = 50000000,
-		tradable = false,
-	}),
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(841243925933, --[[ModItemTech Field_Juno_T4 Description]] "Human biology will naturally suppress sensory inputs if there is something more important to the body at large. \nThat is why you don't notice a cut on your leg when there is a Juno in your face trying to kill you. \n\nJuno's evolution missed that lesson, and instead has evolved and no longer has \"nerve endings\". \nInstead their skin is super sensitive nerves.\nTesting has confirmed that when these nerves activate, they convert the activation energy to repair themselves or a nearby cell! \n\nIt should come as no surprise that this species can no longer \"sleep\" or be forced unconscious.\n\nThis planet's Evolution has decided that a gigantic self-healing nerve has a \"niche\" on this planet.\nThat \"niche\" seems to be \"Get us off this planet\"; based on the trend of other Genus'...\n\nThankfully evolution has not given these creatures any defensive benefits.\nOne of the few times when all of our armaments are useful in this ever-deadlier world...\n\nWe must ensure that we have ample <color TextButton>Blunt</color> resistance to combat these."),
-		DisplayName = T(577132944793, --[[ModItemTech Field_Juno_T4 DisplayName]] "Too-Angry-Too-Die Juno"),
-		DisplayNamePl = T(736882444465, --[[ModItemTech Field_Juno_T4 DisplayNamePl]] "Too-Angry-Too-Die Junos"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return Juno end,
-		Icon = "UI/Messages/Research/res_Juno",
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "Field_Juno_T4",
-		money_value = 50000000,
-		tradable = false,
-	}),
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(125838459592, --[[ModItemTech Field_Juno_T2 Description]] "I am not saying that this thing looks like a bunch of nerve endings; and muscles to punch/bite/kick whatever touches the nerve.... \nWhat I will say is this creatures lowest density of nerve endings per square inch is 3 times denser than humans highest! \n\nThis means that their brain is constantly processing more sensory information. \nIt's no wonder Juno's only goal is to silence whatever they touch, hear, smell..... \n\nEvolutionarily, there has been no effort to increase this species' defenses.... \nbut it is a... and I need to be as scientific as possible.... a \"Walking ball of anger and death\"\n\nThis thing needs as many walls between us and them.\nTowers, Walls, Robots..... Whatever we can do to stop us from directly facing these things.\n\nHow do these creatures survive to adulthood?!?\nHow do the parents not kill their young when they cry?!?\n\nIf only we where not under constant attack; we could investigate these things...\n\nWe must ensure that we have ample <color TextButton>Blunt</color> resistance to combat these."),
-		DisplayName = T(472704683899, --[[ModItemTech Field_Juno_T2 DisplayName]] "Angry Juno"),
-		DisplayNamePl = T(392495868292, --[[ModItemTech Field_Juno_T2 DisplayNamePl]] "Angry Junos"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return Juno end,
-		Icon = "UI/Messages/Research/res_Juno",
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "Field_Juno_T2",
-		money_value = 50000000,
-		tradable = false,
-	}),
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(736811806423, --[[ModItemTech Field_Shrieker_T2 Description]] "Shriekers are evolving. \nThankfully it's just their invaders, although why the nest shriekers do not seem to be evolving at the same pace is troubling.... \nIt's as if something is coordinating and sending only the latest species to attack us... \n\nBut that implies the existence of something controlling the evolution of this planets genus... \n\nPutting aside that mild existential dread;\nThese Shrieker bolts now have a stronger inhibiting effects on motor functions.\n\nOne hit, and your gaurunteed to move at a crawl.\nThis makes any sustained shootout between our colonists and Shriekers extremely risky.\nWe may need to resort to rushing into melee, as evolution has not deemed necessary to improve their melee capabilities.\n\n\nAs long as whatever weapons we use are not piercing.\nLike the Skarabei, these things are becoming even more resilient against armor piercing rounds.\n\nWe must ensure that we have ample <color TechSubtitleBlue>Piercing</color> and <color TextButton>Blunt</color> resistance to combat these."),
-		DisplayName = T(289468704739, --[[ModItemTech Field_Shrieker_T2 DisplayName]] "Spike-tailed insect"),
-		DisplayNamePl = T(408304436071, --[[ModItemTech Field_Shrieker_T2 DisplayNamePl]] "Spike-tailed insects"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return Shrieker end,
-		Icon = "UI/Messages/Research/res_Shrieker",
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "Field_Shrieker_T2",
-		money_value = 50000000,
-		tradable = false,
-	}),
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(235057115852, --[[ModItemTech Field_Shrieker_T4 Description]] "Shriekers have always been known to have hard to penetrate exoskeletons.... \nBut this truly eclipses any other creation we have seen. \n\nBlunt force explosions, armor piercing bullets, even neurotoxin gas attacks are inneffective. \n\nThe only thing we have to truly fight these creatures is radiation or energy signals. \nIt is absolutely critical we build and maintain energy weapons, or else these have the potential to single-handidly destroy our small base.\n\nEven worse, this is the third unique instance of self-healing based on the innate toxicity of checmicals produced by a species.\nJuno's, Glutches, and now Shriekers are now even less susceptible from indirect damage from wounds.\n\nThis has to be the Apex Predator of this world, but if what some of us are to believe.... these are intergalactic colonizers.\nHopefully they do not evolve to have more intelligence.....\n\nWe must ensure that we have ample <color TechSubtitleBlue>Piercing</color> and <color TextButton>Blunt</color> resistance to combat these."),
-		DisplayName = T(941477497395, --[[ModItemTech Field_Shrieker_T4 DisplayName]] "Spike-tailed insect"),
-		DisplayNamePl = T(653962007310, --[[ModItemTech Field_Shrieker_T4 DisplayNamePl]] "Spike-tailed insects"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return Shrieker end,
-		Icon = "UI/Messages/Research/res_Shrieker",
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "Field_Shrieker_T4",
-		money_value = 50000000,
-		tradable = false,
-	}),
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(934377237596, --[[ModItemTech FieldHummingfly Description]] "Despite its somewhat menacing look, the big flying insect seems to be peaceful and easily scared. I decided to name it <em>Hummingfly</em>.\n\nIt is worth noting, however, that in the rare cases when it gets enraged, it attacks from afar and can fly over obstacles.\n\nIt spits a bottled ever-raging fire, which shatters and spreads a burning liquid all over the poor unfortunate soul.\nThis attack matches how the fabled Earth's Greek Fire worked.\n\nWe must ensure that we have ample <color TextNegative>Energy</color> resistance to combat these."),
-		DisplayName = T(128177588026, --[[ModItemTech FieldHummingfly DisplayName]] "Flying insect"),
-		DisplayNamePl = T(547625328396, --[[ModItemTech FieldHummingfly DisplayNamePl]] "Flying insects"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return Dragonfly end,
-		Icon = "UI/Messages/Research/res_Dragonfly",
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "FieldHummingfly",
-		money_value = 50000000,
-		tradable = false,
-	}),
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(270289717234, --[[ModItemTech FieldGujo Description]] "That flightless bird reminds me of an animal from my home planet, so I gave it the same name - <em>Gujo</em>.\n\nUnlike the calm bird that I know of, this one is quite feisty and seems to have a taste for meat. It's hard to see at night, but I swear those birds can win fights against things that it has no business winning. It mostly sleeps during the day and hunts during the night. It's a fast runner and I don't envy its prey, nor its hunter trying to catch up with it. It also seems to have a strong bond with its mate.\n\nWe must have ample <color TechSubtitleBlue>Piercing</color> resistance when fighting these creatures.\n\n<style TechSubtitleBlue>Unlocks</style>\n<tabulator><em>Taming of Gujos</em> (if researched)\n<tabulator><em>Gujo statue</em>: <building_cost('Statue_Gujo')>"),
-		DisplayName = T(951322256817, --[[ModItemTech FieldGujo DisplayName]] "Flightless bird"),
-		DisplayNamePl = T(648203584404, --[[ModItemTech FieldGujo DisplayNamePl]] "Flightless birds"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return Gujo end,
-		Icon = "UI/Messages/Research/res_Gujo",
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "FieldGujo",
-		money_value = 50000000,
-		tradable = false,
-		PlaceObj('RemoveLockedState', {
-			Class = "BuildingCompositeDef",
-			Group = "Relaxatation",
-			LockState = "hidden",
-			PresetId = "Statue_Gujo",
-		}),
-	}),
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(357263806111, --[[ModItemTech FieldGujoT2 Description]] "Their bodies, upon closer inspection, have tied their metabolism with their fight or flight response. \nWhile adrenaline is flowing, anything that goes into their gullet gets immediately processed and any wounds start to mend themselves. This is what has allowed this species to survive this ever changing planet.\n\nThankfully their recent evolution is primarily prioritizing maintaining and improving the genus' metabolism; so it's ability to avoid or absorb attacks is limited\n\nWe must have ample <color TechSubtitleBlue>Piercing</color> resistance when fighting these creatures.\nThey can only heal when they actually swallow something, so we need to be sure to minimize the bites it gets!"),
-		DisplayName = T(525071182794, --[[ModItemTech FieldGujoT2 DisplayName]] "Archaeopteryx"),
-		DisplayNamePl = T(769076048173, --[[ModItemTech FieldGujoT2 DisplayNamePl]] "Archaeopteryxs"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return Gujo end,
-		Icon = "UI/Messages/Research/res_Gujo",
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "FieldGujoT2",
-		money_value = 50000000,
-		tradable = false,
-	}),
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(573010500562, --[[ModItemTech FieldGujoT4 Description]] "It is a common occurrence to see Gujo's dragging their last kill with them. \nAnd upon finding new prey proceed to slam themselves into the earth to trigger their adrenaline. This lets their last morsel heal any lingering wounds before fighting anew.\nThis also suggests a modicum of intelligence or at least awareness of how their own physiology works.....\n\nTheir bodies, due to the constant wear and tear, are deadliest when near death.\nThe more damage they have sustained, the quicker they attack and the less damage we are able to deal to them.\n\nWe must have ample <color TechSubtitleBlue>Piercing</color> resistance when fighting these creatures.\nThey can only heal when they actually swallow something, so we need to be sure to minimize the bites it gets!"),
-		DisplayName = T(894392767111, --[[ModItemTech FieldGujoT4 DisplayName]] "Micro-Raptor"),
-		DisplayNamePl = T(425443916081, --[[ModItemTech FieldGujoT4 DisplayNamePl]] "Micro-Raptors"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return Gujo end,
-		Icon = "UI/Messages/Research/res_Gujo",
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "FieldGujoT4",
-		money_value = 50000000,
-		tradable = false,
-	}),
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(434620854588, --[[ModItemTech FieldUlfenT3 Description]] "This in an alien planet, so I should not be surprised if our expectations are not followed. \nBut this wasn't on my bingo card! \nUlfen now have larger horns and a new aggressive demeaner!\nWe have started to call them <em>Goren</em> after an incident where we approached a species in a \"wrong\" way.\n\nThe padding that it's thick hide provides makes these Goren <color TextButton>Blunt</color> and <color TextNegative>Energy</color><em> Resistance</em>.\n\nIf we learn how to tame or breed these creatures, they would make wonderful herds for both food and defense!"),
-		DisplayName = T(525874555007, --[[ModItemTech FieldUlfenT3 DisplayName]] "Unknown Ulfen Evolution"),
-		DisplayNamePl = T(747647610094, --[[ModItemTech FieldUlfenT3 DisplayNamePl]] "Unknown Ulfen Evolutions"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return Ulfen end,
-		Icon = "UI/Messages/Research/res_Ulfen",
-		LockPrerequisites = {
-			PlaceObj('CheckRegion', {
-				Region = set( "Sobrius" ),
-			}),
-		},
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "FieldUlfenT3",
-		money_value = 50000000,
-		tradable = false,
-	}),
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(558073602568, --[[ModItemTech FieldUlfenT5 Description]] "On my planet, there where large metal animals that you could step inside.\nThey could weight up to 50,000 KGs, and could move hundreds of kilometers in an hour.\nThey are absolute behemoths, and yet, I think these Bestigors would win in a head on.\n\nWe observed one run into a sheet cliff, and cause a gigantic avalanche of Rock and Mud.\nAnd the <em>Bestigor</em> was able to break free of the rubble and walk away unscathed....\n\nWhat evolutionary pressure would be put on a species like this.... to <em>NEED</em> this durability?\nThey are still Herbivors, so something must be able to bring these down.....\n\nIt's hide now has at least 10 thick layers giving <color TextButton>Blunt</color> and <color TextNegative>Energy</color><em> Resistance</em>."),
-		DisplayName = T(591814431141, --[[ModItemTech FieldUlfenT5 DisplayName]] "Unknown Ulfen Evolution"),
-		DisplayNamePl = T(143533447937, --[[ModItemTech FieldUlfenT5 DisplayNamePl]] "Unknown Ulfen Evolutions"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return Ulfen end,
-		Icon = "UI/Messages/Research/res_Ulfen",
-		LockPrerequisites = {
-			PlaceObj('CheckRegion', {
-				Region = set( "Sobrius" ),
-			}),
-		},
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "FieldUlfenT5",
-		money_value = 50000000,
-		tradable = false,
-	}),
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(918909534714, --[[ModItemTech FieldDraka_T3 Description]] "The <em>Drakka</em> have now shown to be evolving in a hyper specific manner.\nIt's occasional clickity clack of it's exoskeleton bending and popping now gets louder and louder the more attacks it receives.\nOnce this reaches a critical mass, the DrikaDrakk body will trigger a sonic boom around it! \n\nFor better or for worse, the organs inside are not capable of handling multiple explosions.\nThis usually means the DrikkaDrakk fall unconscious from the force before death.\n\nIt's large forehead and brittle shell gives this creature good <color TextButton>Blunt</color> and <color TextPositive>Energy</color> Deflection chances."),
-		DisplayName = T(414518110756, --[[ModItemTech FieldDraka_T3 DisplayName]] "Unknown Drakka Evolution"),
-		DisplayNamePl = T(134174630715, --[[ModItemTech FieldDraka_T3 DisplayNamePl]] "Unknown Drakka Evolutions"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return Draka end,
-		Icon = "UI/Messages/Research/res_Draka",
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "FieldDraka_T3",
-		money_value = 50000000,
-		tradable = false,
-	}),
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(895664539556, --[[ModItemTech FieldDraka_T5 Description]] "The <em>Drakka</em> bodies are now just multiple layers of chitin, much like an onion.\nEach organ has now been wrapped in it's own exoskeleton shell, with small air pockets between each shell.\nThis has made their bodies able to withstand more explosions!\nEven more impressive is the fact that they preserve some of the energy, allowing more frequent eruptions!\n\nIt's large forehead and brittle shell gives this creature good <color TextButton>Blunt</color> and <color TextPositive>Energy</color> Deflection chances."),
-		DisplayName = T(573390196346, --[[ModItemTech FieldDraka_T5 DisplayName]] "Unknown Drakka Evolution"),
-		DisplayNamePl = T(535584479648, --[[ModItemTech FieldDraka_T5 DisplayNamePl]] "Unknown Drakka Evolutions"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return Draka end,
-		Icon = "UI/Messages/Research/res_Draka",
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "FieldDraka_T5",
-		money_value = 50000000,
-		tradable = false,
-	}),
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(232248805804, --[[ModItemTech FieldNothT3 Description]] "When semi-domesticated species are left to live in the wild, they can become feral.\nWell the Noth's decided to take that to the extreme, and become much deadlier.\n\nTheir head plate is now harder than steel, capable of shattering whatever material it hit.\nBe careful getting in protracted bouts with this creature, for it will slowly grind down your defenses!\n\nThis does come at a cost, as it's brain is subject to constant blunt force trauma!\nThis means it is much easier to knock this creature out.\n\nDeals <color TextButton>Blunt</color> damage."),
-		DisplayName = T(511119421156, --[[ModItemTech FieldNothT3 DisplayName]] "Unknown Noth Evolution"),
-		DisplayNamePl = T(635590948880, --[[ModItemTech FieldNothT3 DisplayNamePl]] "Unknown Noth Evolutions"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return Noth end,
-		Icon = "UI/Messages/Research/res_Noth",
-		LockPrerequisites = {
-			PlaceObj('CheckRegion', {
-				Region = set( "Saltu" ),
-			}),
-		},
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "FieldNothT3",
-		money_value = 50000000,
-		tradable = false,
-	}),
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(296841795702, --[[ModItemTech FieldNothT5 Description]] "The Noth's hide is now a mix between flesh and metal.\nThis has given it immense Piercing and Gas resistance.\n\nIt's headplate also benefits from this increased durability; with greater accuracy and shatter potential!\nNot only will it's hits lower the target's deflection chances, but also make them take increased damage from all sources!\n\nThis does come at a cost, as it's brain is subject to constant blunt force trauma!\nThis means it is much easier to knock this creature out.\n\nDeald <color TextButon>Blunt</color> damage."),
-		DisplayName = T(142281950085, --[[ModItemTech FieldNothT5 DisplayName]] "Unknown Noth Evolution"),
-		DisplayNamePl = T(995536910800, --[[ModItemTech FieldNothT5 DisplayNamePl]] "Unknown Noth Evolutions"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return Noth end,
-		Icon = "UI/Messages/Research/res_Noth",
-		LockPrerequisites = {
-			PlaceObj('CheckRegion', {
-				Region = set( "Saltu" ),
-			}),
-		},
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "FieldNothT5",
-		money_value = 50000000,
-		tradable = false,
-	}),
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(351752597077, --[[ModItemTech FieldShoguT3 Description]] "Every wild animal is filled with parasites and diseases, but the Shogu are an exceptionally filled species.\nEven newborns of the species already have the majority of the diseases they will ever have.\n\nFrom what we can tell, the only reason the Shogu do not just die is because the diseases and parasites compete against each other!\n\nDeals <color TextPositive>Gas</color> damage.\nWeak to <color TextNegative>Energy</color> damage."),
-		DisplayName = T(988999460742, --[[ModItemTech FieldShoguT3 DisplayName]] "Unknown Shogu Evolution"),
-		DisplayNamePl = T(931991178329, --[[ModItemTech FieldShoguT3 DisplayNamePl]] "Unknown Shogu Evolutions"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return Shogu end,
-		Icon = "UI/Messages/Research/res_Shogu",
-		LockPrerequisites = {
-			PlaceObj('CheckRegion', {
-				Region = set( "Saltu" ),
-			}),
-		},
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "FieldShoguT3",
-		money_value = 50000000,
-		tradable = false,
-	}),
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(473154794773, --[[ModItemTech FieldShoguT5 Description]] "The Shogu that greeted us at the beginning of this adventure is no more.\n\nAll of it's internal organs, nerves, and blood are now replaced with parasites.\nEach one feeding off whatever it can jerkingly puppeteer into it's mouth.\nThe constant movement just under the skin is apparent, as tendrils push the skin to the breaking point.\n\nThis makes this species incredibly hard to kill, and may require multiple attempts....\n\nDeals <color TextPositive>Gas</color> damage.\nWeak to <color TextNegative>Energy</color> damage."),
-		DisplayName = T(354926226217, --[[ModItemTech FieldShoguT5 DisplayName]] "Unknown Shogu Evolution"),
-		DisplayNamePl = T(890282760986, --[[ModItemTech FieldShoguT5 DisplayNamePl]] "Unknown Shogu Evolutions"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return Shogu end,
-		Icon = "UI/Messages/Research/res_Shogu",
-		LockPrerequisites = {
-			PlaceObj('CheckRegion', {
-				Region = set( "Saltu" ),
-			}),
-		},
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "FieldShoguT5",
-		money_value = 50000000,
-		tradable = false,
-	}),
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(975185146158, --[[ModItemTech FieldCamelT3 Description]] "The Dromadda have now evolved and grabbed the ability to spit from Earth Camels.\nAmazingly their spit has the same consistency and acidity of the Hummingfly.\n\nThis combined with a general increase in intelligence means we can train and deploy these for defense!\n\nDeals <colro TextNegative>Energy</color> damage."),
-		DisplayName = T(924189431384, --[[ModItemTech FieldCamelT3 DisplayName]] "Humped animal"),
-		DisplayNamePl = T(859058952645, --[[ModItemTech FieldCamelT3 DisplayNamePl]] "Humped animals"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return Camel end,
-		Icon = "UI/Messages/Research/res_Camel",
-		LockPrerequisites = {
-			PlaceObj('CheckRegion', {
-				Region = set( "Desertum" ),
-			}),
-		},
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "FieldCamelT3",
-		money_value = 50000000,
-		tradable = false,
-	}),
-	PlaceObj('ModItemTech', {
-		Activity = "FieldResearch",
-		Description = T(995220278296, --[[ModItemTech FieldCamelT5 Description]] 'The royal purple and burly frame has caused the colony to start calling this species a "<em>Royal Llamels</em>".\nNow possessing high <color TextNegative>Energy</color> and <color TechSubtitleBlue>Piercing</color> resistances, this species can be used to trade fire with anything that assails us!\n\nDeals <colro TextNegative>Energy</color> damage.'),
-		DisplayName = T(346114070115, --[[ModItemTech FieldCamelT5 DisplayName]] "Humped animal"),
-		DisplayNamePl = T(321019568058, --[[ModItemTech FieldCamelT5 DisplayNamePl]] "Humped animals"),
-		FieldResearchCategory = "Fauna",
-		FieldResearchTemplateExpression = function (self) return Camel end,
-		Icon = "UI/Messages/Research/res_Camel",
-		LockPrerequisites = {
-			PlaceObj('CheckRegion', {
-				Region = set( "Desertum" ),
-			}),
-		},
-		ResearchPoints = 6000,
-		group = "Field",
-		id = "FieldCamelT5",
-		money_value = 50000000,
-		tradable = false,
-	}),
-	}),
-PlaceObj('ModItemFolder', {
-	'name', "Attack Overrides",
-	'NameColor', RGBA(182, 170, 77, 255),
-}, {
-	PlaceObj('ModItemStoryBit', {
-		Category = "AttackSpawns",
-		Effects = {
-			PlaceObj('ActivateSpawnDef', {
-				CreateInstance = true,
-				FillInstance = function (self, instance)
-					--[[instance.SpawnClass = "Dragonfly"]]
-					local spawnClassBest = ''
-					local addedClassList = {}
-					spawnClassBest, addedClassList = check_count_and_upgrade("Dragonfly")
-					instance.SpawnClass = spawnClassBest
-					for i=1,#addedClassList do
-						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
-					end
-				end,
-				SpawnDefId = "Single",
-				param_bindings = false,
-			}),
-			PlaceObj('ExecuteCode', {
-				Code = function (self, obj)
-					UnlockedInsectMinions["Dragonfly"] = true
-					Msg("FirstAttackOfSpecies", AnimalDefs["Dragonfly"])
-				end,
-				param_bindings = false,
-			}),
-			PlaceObj('SetCooldownEffect', {
-				Cooldown = "NewInsectSpeciesUnlock",
-				param_bindings = false,
-			}),
-		},
-		Enabled = true,
-		HasNotification = false,
-		HasPopup = false,
-		OneTime = false,
-		Prerequisites = {
-			PlaceObj('CheckCooldown', {
-				Cooldown = "NewInsectSpeciesUnlock",
-				param_bindings = false,
-			}),
-			PlaceObj('CheckExpression', {
-				Expression = function (self, obj) return UnlockedInsectMinions["Skarabei_Manhunting"] and not UnlockedInsectMinions["Dragonfly"] end,
-				param_bindings = false,
-			}),
-			PlaceObj('CheckTime', {
-				TimeMin = 60,
-				TimeScale = "days",
-				param_bindings = false,
-			}),
-		},
-		comment = "test override",
-		group = "AttackControllers_Spawners",
-		id = "AnimalAttack_Initial_Dragonflies",
-		max_reply_id = 2,
-		qa_info = PlaceObj('PresetQAInfo', {
-			Log = "Modified by Ivan on 2021-Feb-25\nModified by Ivan on 2021-Mar-02\nModified by Gaby on 2021-Mar-25\nModified by Ivan on 2021-Apr-13\nModified by Ivan on 2021-May-10\nModified by Ivan on 2021-Jun-07\nModified by Ivan on 2021-Aug-10\nModified by Gaby on 2021-Sep-24\nModified by Gaby on 2021-Sep-28\nModified by Ivan on 2021-Nov-03\nModified by Gaby on 2021-Nov-08\nModified by Ivan on 2022-Mar-08\nModified by Ivan on 2022-Mar-28\nModified by Ivan on 2022-Apr-06\nModified by Ivan on 2022-May-21\nModified by Ivan on 2022-May-23\nModified by Ivan on 2022-May-30\nModified by Ivan on 2022-Jul-04\nModified by Ivan on 2022-Jul-07\nModified by Gaby on 2022-Nov-25",
-			param_bindings = false,
-		}),
-	}),
-	PlaceObj('ModItemStoryBit', {
-		Category = "AttackSpawns",
-		Effects = {
-			PlaceObj('ActivateSpawnDef', {
-				CreateInstance = true,
-				FillInstance = function (self, instance)
-					print("New Attack Wave")
-					--[[instance.SpawnClass = minion
-					if boss1 then
-						instance.AdditionalClassList = {
-							{ boss1, AnimalDefs[boss1]:GetProperty("SpawnDefWeight") },
-							{ boss2, AnimalDefs[boss2]:GetProperty("SpawnDefWeight") }
-						}
-					]]
-					local seed = InteractionRand(nil, "AttackWave")
-					local rand = BraidRandomCreate(seed)
-					local minions = GetUnlockedMinions()
-					local bosses = GetUnlockedBosses()
-					bosses[#bosses+1]='dog_T1'
-					local minion = table.rand(minions, rand())
-					print("Main animal selected: ",minion)
-					local boss1 = table.rand(bosses, rand())
-					local boss2 = table.rand(bosses, rand())
-					local temp_list = {}
-					if boss1 then
-						print('boss1 chosen: ',boss1)
-						print('boss2 chosen: ',boss2)
-						temp_list[1]={ boss1, AnimalDefs[boss1]:GetProperty("SpawnDefWeight")}
-						temp_list[2]={ boss2, AnimalDefs[boss2]:GetProperty("SpawnDefWeight")}
-					else
-						local temp_list = {}
-					end
-					-- print(bosses)
-					-- print("Animal chosen: ",minion)
-					local spawnClassBest = ''
-					local addedClassList = {}
-					spawnClassBest, addedClassList =check_count_and_upgrade(minion,temp_list)
-					instance.SpawnClass = spawnClassBest
-					instance.AdditionalClassList = {}
-					print(spawnClassBest)
-					print(addedClassList)
-					for i=1,#addedClassList do
-						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
-					end
-				end,
-				SpawnDefId = "Mixed",
-				param_bindings = false,
-			}),
-		},
-		Enabled = true,
-		HasNotification = false,
-		HasPopup = false,
-		OneTime = false,
-		group = "AttackControllers_Spawners",
-		id = "AnimalAttack_Mixed",
-		max_reply_id = 2,
-		qa_info = PlaceObj('PresetQAInfo', {
-			Log = "Modified by Ivan on 2021-Feb-25\nModified by Ivan on 2021-Mar-02\nModified by Gaby on 2021-Mar-25\nModified by Ivan on 2021-Apr-13\nModified by Ivan on 2021-May-10\nModified by Ivan on 2021-Jun-07\nModified by Ivan on 2021-Aug-10\nModified by Gaby on 2021-Sep-24\nModified by Gaby on 2021-Sep-28\nModified by Ivan on 2021-Nov-03\nModified by Gaby on 2021-Nov-08\nModified by Ivan on 2022-Mar-08\nModified by Ivan on 2022-Apr-06\nModified by Ivan on 2022-May-21\nModified by Ivan on 2022-May-23\nModified by Ivan on 2022-May-30\nModified by Ivan on 2022-Jul-04\nModified by Gaby on 2023-Feb-02\nModified by Bobby on 2023-Mar-31",
-			param_bindings = false,
-		}),
-	}),
-	PlaceObj('ModItemStoryBit', {
-		Category = "AttackSpawns",
-		Effects = {
-			PlaceObj('ActivateSpawnDef', {
-				CreateInstance = true,
-				FillInstance = function (self, instance)
-					local seed = InteractionRand(nil, "AttackWave")
-					local sc = table.rand(GetUnlockedMinions(), seed)
-					local spawnClassBest=''
-					local addedClassList={}
-					spawnClassBest, addedClassList =check_count_and_upgrade(sc,addedClassList,100)
-					instance.SpawnClass = spawnClassBest
-					instance.AdditionalClassList = {}
-					print(spawnClassBest)
-					print(addedClassList)
-					for i=1,#addedClassList do
-						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
-					end
-				end,
-				SpawnDefId = "Single",
-				param_bindings = false,
-			}),
-		},
-		Enabled = true,
-		HasNotification = false,
-		HasPopup = false,
-		OneTime = false,
-		Prerequisites = {
-			PlaceObj('CheckExpression', {
-				Expression = function (self, obj) return UnlockedInsectMinions["Skarabei_Manhunting"] end,
-				param_bindings = false,
-			}),
-		},
-		group = "AttackControllers_Spawners",
-		id = "AnimalAttack_Single",
-		max_reply_id = 2,
-		qa_info = PlaceObj('PresetQAInfo', {
-			Log = "Modified by Ivan on 2021-Feb-25\nModified by Ivan on 2021-Mar-02\nModified by Gaby on 2021-Mar-25\nModified by Ivan on 2021-Apr-13\nModified by Ivan on 2021-May-10\nModified by Ivan on 2021-Jun-07\nModified by Ivan on 2021-Aug-10\nModified by Gaby on 2021-Sep-24\nModified by Gaby on 2021-Sep-28\nModified by Ivan on 2021-Nov-03\nModified by Gaby on 2021-Nov-08\nModified by Ivan on 2022-Mar-08\nModified by Ivan on 2022-Apr-06\nModified by Ivan on 2022-May-21\nModified by Ivan on 2022-May-23\nModified by Ivan on 2022-May-30\nModified by Ivan on 2022-Jul-04\nModified by Gaby on 2023-Feb-02",
-			param_bindings = false,
-		}),
-	}),
-	PlaceObj('ModItemStoryBit', {
-		Category = "AttackSpawns",
-		Effects = {
-			PlaceObj('ActivateSpawnDef', {
-				CreateInstance = true,
-				FillInstance = function (self, instance)
-					--[[instance.SpawnClass = "Skarabei"jjj]]
-					
-					local spawnClassBest = ''
-					local addedClassList = {}
-					spawnClassBest, addedClassList =check_count_and_upgrade("Skarabei_Manhunting")
-					instance.SpawnClass = spawnClassBest
-					instance.AdditionalClassList = {}
-					print(spawnClassBest)
-					print(addedClassList)
-					for i=1,#addedClassList do
-						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
-					end
-				end,
-				SpawnDefId = "Single",
-				param_bindings = false,
-			}),
-			PlaceObj('ExecuteCode', {
-				Code = function (self, obj)
-					UnlockedInsectMinions["Skarabei"] = true
-					Msg("FirstAttackOfSpecies", AnimalDefs["Skarabei"])
-				end,
-				param_bindings = false,
-			}),
-			PlaceObj('SetCooldownEffect', {
-				Cooldown = "NewInsectSpeciesUnlock",
-				param_bindings = false,
-			}),
-		},
-		Enabled = true,
-		HasNotification = false,
-		HasPopup = false,
-		OneTime = false,
-		Prerequisites = {
-			PlaceObj('CheckExpression', {
-				Expression = function (self, obj) return not UnlockedInsectMinions["Skarabei_Manhunting"] end,
-				param_bindings = false,
-			}),
-		},
-		comment = "test override",
-		group = "AttackControllers_Spawners",
-		id = "AnimalAttack_Initial_Skarabei",
-		max_reply_id = 2,
-		qa_info = PlaceObj('PresetQAInfo', {
-			Log = "Modified by Ivan on 2021-Feb-25\nModified by Ivan on 2021-Mar-02\nModified by Gaby on 2021-Mar-25\nModified by Ivan on 2021-Apr-13\nModified by Ivan on 2021-May-10\nModified by Ivan on 2021-Jun-07\nModified by Ivan on 2021-Aug-10\nModified by Gaby on 2021-Sep-24\nModified by Gaby on 2021-Sep-28\nModified by Ivan on 2021-Nov-03\nModified by Gaby on 2021-Nov-08\nModified by Ivan on 2022-Mar-08\nModified by Ivan on 2022-Mar-28\nModified by Ivan on 2022-Apr-06\nModified by Ivan on 2022-May-21\nModified by Ivan on 2022-May-23\nModified by Ivan on 2022-May-30\nModified by Ivan on 2022-Jul-04\nModified by Ivan on 2022-Jul-07\nModified by Gaby on 2022-Nov-25",
-			param_bindings = false,
-		}),
-	}),
-	PlaceObj('ModItemStoryBit', {
-		Category = "AttackSpawns",
-		Effects = {
-			PlaceObj('ActivateSpawnDef', {
-				CreateInstance = true,
-				FillInstance = function (self, instance)
-					--[[instance.SpawnClass = "Shrieker_Manhunting"]]
-					local spawnClassBest = ''
-					local addedClassList = {}
-					
-					spawnClassBest, addedClassList =check_count_and_upgrade("Shrieker_Manhunting")
-					instance.SpawnClass = spawnClassBest
-					instance.AdditionalClassList = {}
-					print(spawnClassBest)
-					print(addedClassList)
-					for i=1,#addedClassList do
-						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
-					end
-				end,
-				SpawnDefId = "Single",
-				param_bindings = false,
-			}),
-			PlaceObj('ExecuteCode', {
-				Code = function (self, obj)
-					UnlockedInsectMinions["Shrieker_Manhunting_Hatchling"] = true
-					UnlockedInsectBosses["Shrieker_Manhunting"] = true
-					UnlockedInsectBosses["Shrieker_Manhunting_Mother"] = true
-					Msg("FirstAttackOfSpecies", AnimalDefs["Shrieker_Manhunting"])
-				end,
-				param_bindings = false,
-			}),
-			PlaceObj('SetCooldownEffect', {
-				Cooldown = "NewInsectSpeciesUnlock",
-				param_bindings = false,
-			}),
-		},
-		Enabled = true,
-		HasNotification = false,
-		HasPopup = false,
-		OneTime = false,
-		Prerequisites = {
-			PlaceObj('CheckCooldown', {
-				Cooldown = "NewInsectSpeciesUnlock",
-				param_bindings = false,
-			}),
-			PlaceObj('CheckExpression', {
-				Expression = function (self, obj) return UnlockedInsectMinions["Skarabei_Manhunting"] and not UnlockedInsectMinions["Shrieker_Manhunting_Hatchling"] end,
-				param_bindings = false,
-			}),
-		},
-		group = "AttackControllers_Spawners",
-		id = "AnimalAttack_Initial_Shriekers",
-		max_reply_id = 2,
-		qa_info = PlaceObj('PresetQAInfo', {
-			Log = "Modified by Ivan on 2021-Feb-25\nModified by Ivan on 2021-Mar-02\nModified by Gaby on 2021-Mar-25\nModified by Ivan on 2021-Apr-13\nModified by Ivan on 2021-May-10\nModified by Ivan on 2021-Jun-07\nModified by Ivan on 2021-Aug-10\nModified by Gaby on 2021-Sep-24\nModified by Gaby on 2021-Sep-28\nModified by Ivan on 2021-Nov-03\nModified by Gaby on 2021-Nov-08\nModified by Ivan on 2022-Mar-08\nModified by Ivan on 2022-Apr-06\nModified by Ivan on 2022-May-21\nModified by Ivan on 2022-May-23\nModified by Ivan on 2022-May-30\nModified by Ivan on 2022-Jul-04\nModified by Ivan on 2022-Jul-07",
-			param_bindings = false,
-		}),
-	}),
-	PlaceObj('ModItemStoryBit', {
-		Category = "AttackSpawns",
-		Effects = {
-			PlaceObj('ActivateSpawnDef', {
-				CreateInstance = true,
-				FillInstance = function (self, instance)
-					--[[instance.SpawnClass = "Scissorhands"]]
-					
-					local spawnClassBest = ''
-					local addedClassList = {}
-					spawnClassBest, addedClassList =check_count_and_upgrade("Scissorhands")
-					instance.SpawnClass = spawnClassBest
-					instance.AdditionalClassList = {}
-					print(spawnClassBest)
-					print(addedClassList)
-					for i=1,#addedClassList do
-						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
-					end
-				end,
-				SpawnDefId = "Single",
-				param_bindings = false,
-			}),
-			PlaceObj('ExecuteCode', {
-				Code = function (self, obj)
-					UnlockedInsectMinions["Scissorhands_Hatchling"] = true
-					UnlockedInsectBosses["Scissorhands"] = true
-					Msg("FirstAttackOfSpecies", AnimalDefs["Scissorhands"])
-				end,
-				param_bindings = false,
-			}),
-			PlaceObj('SetCooldownEffect', {
-				Cooldown = "NewInsectSpeciesUnlock",
-				param_bindings = false,
-			}),
-		},
-		Enabled = true,
-		HasNotification = false,
-		HasPopup = false,
-		OneTime = false,
-		Prerequisites = {
-			PlaceObj('CheckCooldown', {
-				Cooldown = "NewInsectSpeciesUnlock",
-				param_bindings = false,
-			}),
-			PlaceObj('CheckExpression', {
-				Expression = function (self, obj) return UnlockedInsectMinions["Skarabei_Manhunting"] and not UnlockedInsectBosses["Scissorhands"] end,
-				param_bindings = false,
-			}),
-		},
-		group = "AttackControllers_Spawners",
-		id = "AnimalAttack_Initial_Scissorhands",
-		max_reply_id = 2,
-		qa_info = PlaceObj('PresetQAInfo', {
-			Log = "Modified by Ivan on 2021-Feb-25\nModified by Ivan on 2021-Mar-02\nModified by Gaby on 2021-Mar-25\nModified by Ivan on 2021-Apr-13\nModified by Ivan on 2021-May-10\nModified by Ivan on 2021-Jun-07\nModified by Ivan on 2021-Aug-10\nModified by Gaby on 2021-Sep-24\nModified by Gaby on 2021-Sep-28\nModified by Ivan on 2021-Nov-03\nModified by Gaby on 2021-Nov-08\nModified by Ivan on 2022-Mar-08\nModified by Ivan on 2022-Apr-06\nModified by Ivan on 2022-May-21\nModified by Ivan on 2022-May-23\nModified by Ivan on 2022-May-30\nModified by Ivan on 2022-Jul-04\nModified by Ivan on 2022-Jul-07\nModified by Ivan on 2022-Aug-02",
-			param_bindings = false,
-		}),
-	}),
-	PlaceObj('ModItemStoryBit', {
-		Category = "AttackSpawns",
-		Effects = {
-			PlaceObj('ActivateSpawnDef', {
-				CreateInstance = true,
-				FillInstance = function (self, instance)
-					--[[instance.SpawnClass = "Juno"]]
-					
-					
-					local spawnClassBest = ''
-					local addedClassList = {}
-					spawnClassBest, addedClassList =check_count_and_upgrade("Juno")
-					instance.SpawnClass = spawnClassBest
-					instance.AdditionalClassList = {}
-					print(spawnClassBest)
-					print(addedClassList)
-					for i=1,#addedClassList do
-						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
-					end
-				end,
-				SpawnDefId = "Single",
-				param_bindings = false,
-			}),
-			PlaceObj('ExecuteCode', {
-				Code = function (self, obj)
-					UnlockedInsectBosses["Juno"] = true
-					Msg("FirstAttackOfSpecies", AnimalDefs["Juno"])
-				end,
-				param_bindings = false,
-			}),
-			PlaceObj('SetCooldownEffect', {
-				Cooldown = "NewInsectSpeciesUnlock",
-				param_bindings = false,
-			}),
-		},
-		Enabled = true,
-		HasNotification = false,
-		HasPopup = false,
-		OneTime = false,
-		Prerequisites = {
-			PlaceObj('CheckCooldown', {
-				Cooldown = "NewInsectSpeciesUnlock",
-				param_bindings = false,
-			}),
-			PlaceObj('CheckExpression', {
-				Expression = function (self, obj) return UnlockedInsectMinions["Skarabei_Manhunting"] and not UnlockedInsectBosses["Juno"] end,
-				param_bindings = false,
-			}),
-		},
-		group = "AttackControllers_Spawners",
-		id = "AnimalAttack_Initial_Junos",
-		max_reply_id = 2,
-		qa_info = PlaceObj('PresetQAInfo', {
-			Log = "Modified by Ivan on 2021-Feb-25\nModified by Ivan on 2021-Mar-02\nModified by Gaby on 2021-Mar-25\nModified by Ivan on 2021-Apr-13\nModified by Ivan on 2021-May-10\nModified by Ivan on 2021-Jun-07\nModified by Ivan on 2021-Aug-10\nModified by Gaby on 2021-Sep-24\nModified by Gaby on 2021-Sep-28\nModified by Ivan on 2021-Nov-03\nModified by Gaby on 2021-Nov-08\nModified by Ivan on 2022-Mar-08\nModified by Ivan on 2022-Apr-06\nModified by Ivan on 2022-May-21\nModified by Ivan on 2022-May-23\nModified by Ivan on 2022-May-30\nModified by Ivan on 2022-Jul-04\nModified by Ivan on 2022-Jul-07",
-			param_bindings = false,
-		}),
-	}),
-	PlaceObj('ModItemStoryBit', {
-		Category = "AttackSpawns",
-		Effects = {
-			PlaceObj('ActivateSpawnDef', {
-				CreateInstance = true,
-				FillInstance = function (self, instance)
-					--[[instance.SpawnClass = "Glutch_Manhunting"]]
-					
-					
-					local spawnClassBest = ''
-					local addedClassList = {}
-					spawnClassBest, addedClassList =check_count_and_upgrade("Glutch_Manhunting")
-					instance.SpawnClass = spawnClassBest
-					instance.AdditionalClassList = {}
-					print(spawnClassBest)
-					print(addedClassList)
-					for i=1,#addedClassList do
-						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
-					end
-				end,
-				SpawnDefId = "Single",
-				param_bindings = false,
-			}),
-			PlaceObj('ExecuteCode', {
-				Code = function (self, obj)
-					UnlockedInsectBosses["Glutch_Manhunting"] = true
-					Msg("FirstAttackOfSpecies", AnimalDefs["Glutch_Manhunting"])
-				end,
-				param_bindings = false,
-			}),
-			PlaceObj('SetCooldownEffect', {
-				Cooldown = "NewInsectSpeciesUnlock",
-				param_bindings = false,
-			}),
-		},
-		Enabled = true,
-		HasNotification = false,
-		HasPopup = false,
-		OneTime = false,
-		Prerequisites = {
-			PlaceObj('CheckCooldown', {
-				Cooldown = "NewInsectSpeciesUnlock",
-				param_bindings = false,
-			}),
-			PlaceObj('CheckExpression', {
-				Expression = function (self, obj) return UnlockedInsectMinions["Skarabei_Manhunting"] and not UnlockedInsectBosses["Glutch_Manhunting"] end,
-				param_bindings = false,
-			}),
-		},
-		group = "AttackControllers_Spawners",
-		id = "AnimalAttack_Initial_ManhuntingGlutch",
-		max_reply_id = 2,
-		qa_info = PlaceObj('PresetQAInfo', {
-			Log = "Modified by Ivan on 2021-Feb-25\nModified by Ivan on 2021-Mar-02\nModified by Gaby on 2021-Mar-25\nModified by Ivan on 2021-Apr-13\nModified by Ivan on 2021-May-10\nModified by Ivan on 2021-Jun-07\nModified by Ivan on 2021-Aug-10\nModified by Gaby on 2021-Sep-24\nModified by Gaby on 2021-Sep-28\nModified by Ivan on 2021-Nov-03\nModified by Gaby on 2021-Nov-08\nModified by Ivan on 2022-Mar-08\nModified by Ivan on 2022-Apr-06\nModified by Ivan on 2022-May-21\nModified by Ivan on 2022-May-23\nModified by Ivan on 2022-May-30\nModified by Ivan on 2022-Jul-04\nModified by Ivan on 2022-Jul-07",
-			param_bindings = false,
-		}),
-	}),
-	PlaceObj('ModItemStoryBit', {
-		HasNotification = false,
-		Image = "Mod/rtw6tLg/Images/Gltuch.PNG",
-		SelectObject = false,
-		Text = T(823528980286, --[[ModItemStoryBit ILU_restart_required Text]] "<color TextNegative>Error with Insects Level Up (All Species)!</color>\nAnimals in ILU still have Organs!\n\nA game restart is required!\nInstead of animals spawning a <color TextNegative>mod error message</color> will be shown!"),
-		Title = T(985765584196, --[[ModItemStoryBit ILU_restart_required Title]] "Restart Required"),
-		group = "meta",
-		id = "ILU_restart_required",
-	}),
-	PlaceObj('ModItemStoryBit', {
-		AllowedInScenarios = set( "Robots" ),
-		Category = "AttackSpawns",
-		Effects = {
-			PlaceObj('ExecuteCode', {
-				Code = function (self, obj)
-					UnlockedRobotMinions["LightHostileRobot_LVL1"] = true
-					local assault_choices = {'HostileRobot_Monk_LVL1','LightHostileRobot_LVL1'}
-					local seed = InteractionRand(nil, "AttackWave")
-					local single_assault = table.rand(assault_choices, seed)
-					local additional = {}
-					ILU_ActivateAttackDropshipSpawnDefs("Single_Robots", single_assault,additional)
-				end,
-				param_bindings = false,
-			}),
-		},
-		Enabled = true,
-		HasNotification = false,
-		HasPopup = false,
-		OneTime = false,
-		Prerequisites = {
-			PlaceObj('CheckOR', {
-				Conditions = {
-					PlaceObj('CheckProgress', {
-						Condition = "<",
-						ProgressMin = 2100,
-						param_bindings = false,
-					}),
-					PlaceObj('CheckAND', {
-						Conditions = {
-							PlaceObj('CheckProgress', {
-								ProgressMin = 1400,
-								param_bindings = false,
-							}),
-							PlaceObj('CheckExpression', {
-								Expression = function (self, obj) return not UnlockedRobotMinions["LightHostileRobot_LVL1"] end,
-								param_bindings = false,
-							}),
-						},
-						param_bindings = false,
-					}),
-					PlaceObj('CheckAND', {
-						Conditions = {
-							PlaceObj('CheckProgress', {
-								Condition = "<",
-								ProgressMin = 350,
-								param_bindings = false,
-							}),
-							PlaceObj('CheckOR', {
-								Conditions = {
-									PlaceObj('CheckDifficulty', {
-										Difficulty = "Easy",
-										param_bindings = false,
-									}),
-									PlaceObj('CheckDifficulty', {
-										Difficulty = "Medium",
-										param_bindings = false,
-									}),
-								},
-								param_bindings = false,
-							}),
-						},
-						param_bindings = false,
-					}),
-					PlaceObj('CheckAND', {
-						Conditions = {
-							PlaceObj('CheckProgress', {
-								Condition = "<",
-								ProgressMin = 700,
-								param_bindings = false,
-							}),
-							PlaceObj('CheckDifficulty', {
-								Difficulty = "Hard",
-								param_bindings = false,
-							}),
-						},
-						param_bindings = false,
-					}),
-					PlaceObj('CheckAND', {
-						Conditions = {
-							PlaceObj('CheckProgress', {
-								Condition = "<",
-								ProgressMin = 1050,
-								param_bindings = false,
-							}),
-							PlaceObj('CheckDifficulty', {
-								Difficulty = "VeryHard",
-								param_bindings = false,
-							}),
-						},
-						param_bindings = false,
-					}),
-					PlaceObj('CheckAND', {
-						Conditions = {
-							PlaceObj('CheckProgress', {
-								Condition = "<",
-								ProgressMin = 1400,
-								param_bindings = false,
-							}),
-							PlaceObj('CheckDifficulty', {
-								Difficulty = "Insane",
-								param_bindings = false,
-							}),
-						},
-						param_bindings = false,
-					}),
-				},
-				param_bindings = false,
-			}),
-		},
-		group = "AttackControllers_Spawners",
-		id = "RobotAttack_Single_EarlyGame",
-		max_reply_id = 2,
-		qa_info = PlaceObj('PresetQAInfo', {
-			data = {
-				{
-					action = "Modified",
-					time = 1614238878,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1614683508,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1616682399,
-					user = "Gaby",
-				},
-				{
-					action = "Modified",
-					time = 1618315572,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1620638507,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1623070162,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1628604384,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1632476456,
-					user = "Gaby",
-				},
-				{
-					action = "Modified",
-					time = 1632816157,
-					user = "Gaby",
-				},
-				{
-					action = "Modified",
-					time = 1635936100,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1636384163,
-					user = "Gaby",
-				},
-				{
-					action = "Modified",
-					time = 1646753139,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1649250144,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1653120193,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1653307050,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1653898944,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1656939021,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1675340050,
-					user = "Gaby",
-				},
-				{
-					action = "Modified",
-					time = 1680272453,
-					user = "Bobby",
-				},
-				{
-					action = "Modified",
-					time = 1692787173,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1693218453,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1693910353,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1694093362,
-					user = "Bobby",
-				},
-				{
-					action = "Modified",
-					time = 1695812737,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1696426226,
-					user = "Bobby",
-				},
-			},
-			param_bindings = false,
-		}),
-		save_in = "Robots",
-	}),
-	PlaceObj('ModItemStoryBit', {
-		AllowedInScenarios = set( "Robots" ),
-		Category = "AttackSpawns",
-		Effects = {
-			PlaceObj('ExecuteCode', {
-				Code = function (self, obj)
-					UnlockedRobotMinions["LightHostileRobot_LVL2"] = true
-					local assault_choices = {'HostileRobot_Monk_LVL1','LightHostileRobot_LVL1','Demo_1'}
-					local seed = InteractionRand(nil, "AttackWave")
-					local single_assault = table.rand(assault_choices, seed)
-					local additional = {}
-					additional[1]={ 'HostileRobot_Scout_LVL1', RobotDefs['HostileRobot_Scout_LVL1']:GetProperty("SpawnDefWeight")}
-					ILU_ActivateAttackDropshipSpawnDefs("Single_Robots", single_assault,additional)
-				end,
-				param_bindings = false,
-			}),
-		},
-		Enabled = true,
-		HasNotification = false,
-		HasPopup = false,
-		OneTime = false,
-		Prerequisites = {
-			PlaceObj('CheckOR', {
-				Conditions = {
-					PlaceObj('CheckProgress', {
-						ProgressMin = 2100,
-						param_bindings = false,
-					}),
-					PlaceObj('CheckAND', {
-						Conditions = {
-							PlaceObj('CheckProgress', {
-								ProgressMin = 350,
-								param_bindings = false,
-							}),
-							PlaceObj('CheckOR', {
-								Conditions = {
-									PlaceObj('CheckDifficulty', {
-										Difficulty = "Easy",
-										param_bindings = false,
-									}),
-									PlaceObj('CheckDifficulty', {
-										Difficulty = "Medium",
-										param_bindings = false,
-									}),
-								},
-								param_bindings = false,
-							}),
-						},
-						param_bindings = false,
-					}),
-					PlaceObj('CheckAND', {
-						Conditions = {
-							PlaceObj('CheckProgress', {
-								ProgressMin = 700,
-								param_bindings = false,
-							}),
-							PlaceObj('CheckDifficulty', {
-								Difficulty = "Hard",
-								param_bindings = false,
-							}),
-						},
-						param_bindings = false,
-					}),
-					PlaceObj('CheckAND', {
-						Conditions = {
-							PlaceObj('CheckProgress', {
-								ProgressMin = 1050,
-								param_bindings = false,
-							}),
-							PlaceObj('CheckDifficulty', {
-								Difficulty = "VeryHard",
-								param_bindings = false,
-							}),
-						},
-						param_bindings = false,
-					}),
-					PlaceObj('CheckAND', {
-						Conditions = {
-							PlaceObj('CheckProgress', {
-								ProgressMin = 1400,
-								param_bindings = false,
-							}),
-							PlaceObj('CheckDifficulty', {
-								Difficulty = "Insane",
-								param_bindings = false,
-							}),
-						},
-						param_bindings = false,
-					}),
-				},
-				param_bindings = false,
-			}),
-			PlaceObj('CheckExpression', {
-				Expression = function (self, obj) return UnlockedRobotMinions["LightHostileRobot_LVL1"] end,
-				param_bindings = false,
-			}),
-		},
-		group = "AttackControllers_Spawners",
-		id = "RobotAttack_Single_MidGame",
-		max_reply_id = 2,
-		qa_info = PlaceObj('PresetQAInfo', {
-			data = {
-				{
-					action = "Modified",
-					time = 1614238878,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1614683508,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1616682399,
-					user = "Gaby",
-				},
-				{
-					action = "Modified",
-					time = 1618315572,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1620638507,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1623070162,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1628604384,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1632476456,
-					user = "Gaby",
-				},
-				{
-					action = "Modified",
-					time = 1632816157,
-					user = "Gaby",
-				},
-				{
-					action = "Modified",
-					time = 1635936100,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1636384163,
-					user = "Gaby",
-				},
-				{
-					action = "Modified",
-					time = 1646753139,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1649250144,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1653120193,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1653307050,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1653898944,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1656939021,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1675340050,
-					user = "Gaby",
-				},
-				{
-					action = "Modified",
-					time = 1680272453,
-					user = "Bobby",
-				},
-				{
-					action = "Modified",
-					time = 1692787173,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1693218453,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1693910353,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1694093362,
-					user = "Bobby",
-				},
-				{
-					action = "Modified",
-					time = 1695812737,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1696426459,
-					user = "Bobby",
-				},
-			},
-			param_bindings = false,
-		}),
-		save_in = "Robots",
-	}),
-	PlaceObj('ModItemStoryBit', {
-		AllowedInScenarios = set( "Robots" ),
-		Category = "AttackSpawns",
-		Effects = {
-			PlaceObj('ExecuteCode', {
-				Code = function (self, obj)
-					UnlockedRobotBosses["HostileCombatQuadcopter_LVL1"] = true
-					UnlockedRobotBosses["HeavyHostileRobot_LVL1"] = true
-					
-					local assault_choices = {'HostileRobot_Monk_LVL1','LightHostileRobot_LVL1','Demo_1'}
-					local support_choices = {'HostileRobot_Scout_LVL1','HostileCrawler_LaserGun','HostileCrawler_MachineGun','HeavyHostileRobot_LVL1'}
-					local seed = InteractionRand(nil, "AttackWave")
-					local temp = ''
-					local temp2 = ''
-					local single_assault = table.rand(assault_choices, seed)
-					local unique = false
-					while not unique do
-						seed = InteractionRand(nil, "AttackWave") --need to refresh the seed
-						temp = table.rand(assault_choices, seed)
-						if temp ~= single_assault then
-							unique = true
-						end
-					end
-					local additional = {}
-					additional[1]={ temp, RobotDefs[temp]:GetProperty("SpawnDefWeight")}
-					if AsyncRand(100) > 40 then
-						additional[2]  = {'Crawl_Cannon_T1',RobotDefs['Crawl_Cannon_T1']:GetProperty("SpawnDefWeight")}
-					else
-						temp = table.rand(support_choices, seed)
-						additional[2]={temp, RobotDefs[temp]:GetProperty("SpawnDefWeight")}
-						unique = false 
-						while not unique do
-							seed = InteractionRand(nil, "AttackWave") --need to refresh the seed
-							temp2 = table.rand(support_choices, seed)
-							if temp ~= temp2 then
-								unique = true
-							end
-						end
-						additional[3]={temp2, RobotDefs[temp2]:GetProperty("SpawnDefWeight")}
-					end
-					ILU_ActivateAttackDropshipSpawnDefs("Single_Robots", single_assault,additional)
-				end,
-				param_bindings = false,
-			}),
-		},
-		Enabled = true,
-		HasNotification = false,
-		HasPopup = false,
-		OneTime = false,
-		Prerequisites = {
-			PlaceObj('CheckOR', {
-				Conditions = {
-					PlaceObj('CheckProgress', {
-						ProgressMin = 3000,
-						param_bindings = false,
-					}),
-					PlaceObj('CheckAND', {
-						Conditions = {
-							PlaceObj('CheckProgress', {
-								ProgressMin = 500,
-								param_bindings = false,
-							}),
-							PlaceObj('CheckOR', {
-								Conditions = {
-									PlaceObj('CheckDifficulty', {
-										Difficulty = "Easy",
-										param_bindings = false,
-									}),
-									PlaceObj('CheckDifficulty', {
-										Difficulty = "Medium",
-										param_bindings = false,
-									}),
-								},
-								param_bindings = false,
-							}),
-						},
-						param_bindings = false,
-					}),
-					PlaceObj('CheckAND', {
-						Conditions = {
-							PlaceObj('CheckProgress', {
-								ProgressMin = 1000,
-								param_bindings = false,
-							}),
-							PlaceObj('CheckDifficulty', {
-								Difficulty = "Hard",
-								param_bindings = false,
-							}),
-						},
-						param_bindings = false,
-					}),
-					PlaceObj('CheckAND', {
-						Conditions = {
-							PlaceObj('CheckProgress', {
-								ProgressMin = 1500,
-								param_bindings = false,
-							}),
-							PlaceObj('CheckDifficulty', {
-								Difficulty = "VeryHard",
-								param_bindings = false,
-							}),
-						},
-						param_bindings = false,
-					}),
-					PlaceObj('CheckAND', {
-						Conditions = {
-							PlaceObj('CheckProgress', {
-								ProgressMin = 2000,
-								param_bindings = false,
-							}),
-							PlaceObj('CheckDifficulty', {
-								Difficulty = "Insane",
-								param_bindings = false,
-							}),
-						},
-						param_bindings = false,
-					}),
-				},
-				param_bindings = false,
-			}),
-			PlaceObj('CheckExpression', {
-				Expression = function (self, obj) return UnlockedRobotMinions["LightHostileRobot_LVL1"] end,
-				param_bindings = false,
-			}),
-		},
-		group = "AttackControllers_Spawners",
-		id = "RobotAttack_Mixed_MidGame",
-		max_reply_id = 2,
-		qa_info = PlaceObj('PresetQAInfo', {
-			data = {
-				{
-					action = "Modified",
-					time = 1614238878,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1614683508,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1616682399,
-					user = "Gaby",
-				},
-				{
-					action = "Modified",
-					time = 1618315572,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1620638507,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1623070162,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1628604384,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1632476456,
-					user = "Gaby",
-				},
-				{
-					action = "Modified",
-					time = 1632816157,
-					user = "Gaby",
-				},
-				{
-					action = "Modified",
-					time = 1635936100,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1636384163,
-					user = "Gaby",
-				},
-				{
-					action = "Modified",
-					time = 1646753139,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1649250144,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1653120193,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1653307050,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1653898944,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1656939021,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1675340050,
-					user = "Gaby",
-				},
-				{
-					action = "Modified",
-					time = 1680272453,
-					user = "Bobby",
-				},
-				{
-					action = "Modified",
-					time = 1693219518,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1693910730,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1694094833,
-					user = "Bobby",
-				},
-				{
-					action = "Modified",
-					time = 1695041565,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1695812737,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1696426226,
-					user = "Bobby",
-				},
-			},
-			param_bindings = false,
-		}),
-		save_in = "Robots",
-	}),
-	PlaceObj('ModItemStoryBit', {
-		AllowedInScenarios = set( "Robots" ),
-		Category = "AttackSpawns",
-		Effects = {
-			PlaceObj('ExecuteCode', {
-				Code = function (self, obj)
-					UnlockedRobotMinions["LightHostileRobot_LVL3"] = true
-					local assault_choices = {'HostileRobot_Monk_LVL1','LightHostileRobot_LVL1','HeavyHostileRobot_LVL1','Demo_1'}
-					local seed = InteractionRand(nil, "AttackWave")
-					local single_assault = table.rand(assault_choices, seed)
-					local unique = true
-					local temp = ''
-					while unique do
-						seed = InteractionRand(nil, "AttackWave") --need to refresh the seed
-						temp = table.rand(assault_choices, seed)
-						if temp ~= single_assault then
-							unique = false
-						end
-					end
-					local additional = {}
-					additional[1]={ 'HostileRobot_Scout_LVL1', RobotDefs['HostileRobot_Scout_LVL1']:GetProperty("SpawnDefWeight")}
-					additional[2]={ temp, RobotDefs[temp]:GetProperty("SpawnDefWeight")}
-					ILU_ActivateAttackDropshipSpawnDefs("Single_Robots", single_assault,additional)
-				end,
-				param_bindings = false,
-			}),
-		},
-		Enabled = true,
-		HasNotification = false,
-		HasPopup = false,
-		OneTime = false,
-		Prerequisites = {
-			PlaceObj('CheckOR', {
-				Conditions = {
-					PlaceObj('CheckProgress', {
-						ProgressMin = 4500,
-						param_bindings = false,
-					}),
-					PlaceObj('CheckAND', {
-						Conditions = {
-							PlaceObj('CheckProgress', {
-								ProgressMin = 750,
-								param_bindings = false,
-							}),
-							PlaceObj('CheckOR', {
-								Conditions = {
-									PlaceObj('CheckDifficulty', {
-										Difficulty = "Easy",
-										param_bindings = false,
-									}),
-									PlaceObj('CheckDifficulty', {
-										Difficulty = "Medium",
-										param_bindings = false,
-									}),
-								},
-								param_bindings = false,
-							}),
-						},
-						param_bindings = false,
-					}),
-					PlaceObj('CheckAND', {
-						Conditions = {
-							PlaceObj('CheckProgress', {
-								ProgressMin = 1500,
-								param_bindings = false,
-							}),
-							PlaceObj('CheckDifficulty', {
-								Difficulty = "Hard",
-								param_bindings = false,
-							}),
-						},
-						param_bindings = false,
-					}),
-					PlaceObj('CheckAND', {
-						Conditions = {
-							PlaceObj('CheckProgress', {
-								ProgressMin = 2250,
-								param_bindings = false,
-							}),
-							PlaceObj('CheckDifficulty', {
-								Difficulty = "VeryHard",
-								param_bindings = false,
-							}),
-						},
-						param_bindings = false,
-					}),
-					PlaceObj('CheckAND', {
-						Conditions = {
-							PlaceObj('CheckProgress', {
-								ProgressMin = 3000,
-								param_bindings = false,
-							}),
-							PlaceObj('CheckDifficulty', {
-								Difficulty = "Insane",
-								param_bindings = false,
-							}),
-						},
-						param_bindings = false,
-					}),
-				},
-				param_bindings = false,
-			}),
-			PlaceObj('CheckExpression', {
-				Expression = function (self, obj) return UnlockedRobotMinions["LightHostileRobot_LVL2"] end,
-				param_bindings = false,
-			}),
-		},
-		group = "AttackControllers_Spawners",
-		id = "RobotAttack_Single_LateGame",
-		max_reply_id = 2,
-		qa_info = PlaceObj('PresetQAInfo', {
-			data = {
-				{
-					action = "Modified",
-					time = 1614238878,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1614683508,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1616682399,
-					user = "Gaby",
-				},
-				{
-					action = "Modified",
-					time = 1618315572,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1620638507,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1623070162,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1628604384,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1632476456,
-					user = "Gaby",
-				},
-				{
-					action = "Modified",
-					time = 1632816157,
-					user = "Gaby",
-				},
-				{
-					action = "Modified",
-					time = 1635936100,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1636384163,
-					user = "Gaby",
-				},
-				{
-					action = "Modified",
-					time = 1646753139,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1649250144,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1653120193,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1653307050,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1653898944,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1656939021,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1675340050,
-					user = "Gaby",
-				},
-				{
-					action = "Modified",
-					time = 1680272453,
-					user = "Bobby",
-				},
-				{
-					action = "Modified",
-					time = 1692787173,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1693218453,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1693910353,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1694093362,
-					user = "Bobby",
-				},
-				{
-					action = "Modified",
-					time = 1695812737,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1696426391,
-					user = "Bobby",
-				},
-			},
-			param_bindings = false,
-		}),
-		save_in = "Robots",
-	}),
-	PlaceObj('ModItemStoryBit', {
-		AllowedInScenarios = set( "Robots" ),
-		Category = "AttackSpawns",
-		Effects = {
-			PlaceObj('ExecuteCode', {
-				Code = function (self, obj)
-					UnlockedRobotBosses["HostileCombatQuadcopter_LVL1"] = true
-					UnlockedRobotBosses["HostileCrawler_LaserGun"] = true
-					UnlockedRobotBosses["HostileCrawler_MachineGun"] = true
-					UnlockedRobotBosses["HeavyHostileRobot_LVL1"] = true
-					local assault_choices = {'HostileRobot_Monk_LVL1','LightHostileRobot_LVL1','Demo_1'}
-					local support_choices = {'HostileRobot_Scout_LVL1','HostileCrawler_LaserGun','HostileCrawler_MachineGun','HeavyHostileRobot_LVL1'}
-					local seed = InteractionRand(nil, "AttackWave")
-					local temp = ''
-					local temp2 = ''
-					local single_assault = table.rand(assault_choices, seed)
-					local unique = false
-					while not unique do
-						seed = InteractionRand(nil, "AttackWave") --need to refresh the seed
-						temp = table.rand(assault_choices, seed)
-						if temp ~= single_assault then
-							unique = true
-						end
-					end
-					local additional = {}
-					additional[1]={ temp, RobotDefs[temp]:GetProperty("SpawnDefWeight")}
-					temp = table.rand(support_choices, seed)
-					additional[2]={temp, RobotDefs[temp]:GetProperty("SpawnDefWeight")}
-					local unique = false 
-					local temp2 = ''
-					while not unique do
-						seed = InteractionRand(nil, "AttackWave") --need to refresh the seed
-						temp2 = table.rand(support_choices, seed)
-						if temp ~= temp2 then
-							unique = true
-						end
-					end
-					additional[3]={temp2, RobotDefs[temp2]:GetProperty("SpawnDefWeight")}
-					additional[4]  = {'Crawl_Cannon_T1',RobotDefs['Crawl_Cannon_T1']:GetProperty("SpawnDefWeight")}
-					
-					ILU_ActivateAttackDropshipSpawnDefs("Single_Robots", single_assault,additional)
-				end,
-				param_bindings = false,
-			}),
-		},
-		Enabled = true,
-		HasNotification = false,
-		HasPopup = false,
-		OneTime = false,
-		Prerequisites = {
-			PlaceObj('CheckOR', {
-				Conditions = {
-					PlaceObj('CheckProgress', {
-						ProgressMin = 5400,
-						param_bindings = false,
-					}),
-					PlaceObj('CheckAND', {
-						Conditions = {
-							PlaceObj('CheckProgress', {
-								ProgressMin = 900,
-								param_bindings = false,
-							}),
-							PlaceObj('CheckOR', {
-								Conditions = {
-									PlaceObj('CheckDifficulty', {
-										Difficulty = "Easy",
-										param_bindings = false,
-									}),
-									PlaceObj('CheckDifficulty', {
-										Difficulty = "Medium",
-										param_bindings = false,
-									}),
-								},
-								param_bindings = false,
-							}),
-						},
-						param_bindings = false,
-					}),
-					PlaceObj('CheckAND', {
-						Conditions = {
-							PlaceObj('CheckProgress', {
-								ProgressMin = 1800,
-								param_bindings = false,
-							}),
-							PlaceObj('CheckDifficulty', {
-								Difficulty = "Hard",
-								param_bindings = false,
-							}),
-						},
-						param_bindings = false,
-					}),
-					PlaceObj('CheckAND', {
-						Conditions = {
-							PlaceObj('CheckProgress', {
-								ProgressMin = 2700,
-								param_bindings = false,
-							}),
-							PlaceObj('CheckDifficulty', {
-								Difficulty = "VeryHard",
-								param_bindings = false,
-							}),
-						},
-						param_bindings = false,
-					}),
-					PlaceObj('CheckAND', {
-						Conditions = {
-							PlaceObj('CheckProgress', {
-								ProgressMin = 3600,
-								param_bindings = false,
-							}),
-							PlaceObj('CheckDifficulty', {
-								Difficulty = "Insane",
-								param_bindings = false,
-							}),
-						},
-						param_bindings = false,
-					}),
-				},
-				param_bindings = false,
-			}),
-			PlaceObj('CheckExpression', {
-				Expression = function (self, obj) return UnlockedRobotBosses["HostileCombatQuadcopter_LVL1"] end,
-				param_bindings = false,
-			}),
-		},
-		group = "AttackControllers_Spawners",
-		id = "RobotAttack_Mixed_LateGame",
-		max_reply_id = 2,
-		qa_info = PlaceObj('PresetQAInfo', {
-			data = {
-				{
-					action = "Modified",
-					time = 1614238878,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1614683508,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1616682399,
-					user = "Gaby",
-				},
-				{
-					action = "Modified",
-					time = 1618315572,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1620638507,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1623070162,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1628604384,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1632476456,
-					user = "Gaby",
-				},
-				{
-					action = "Modified",
-					time = 1632816157,
-					user = "Gaby",
-				},
-				{
-					action = "Modified",
-					time = 1635936100,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1636384163,
-					user = "Gaby",
-				},
-				{
-					action = "Modified",
-					time = 1646753139,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1649250144,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1653120193,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1653307050,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1653898944,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1656939021,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1675340050,
-					user = "Gaby",
-				},
-				{
-					action = "Modified",
-					time = 1680272453,
-					user = "Bobby",
-				},
-				{
-					action = "Modified",
-					time = 1693219518,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1693910782,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1694094846,
-					user = "Bobby",
-				},
-				{
-					action = "Modified",
-					time = 1695041565,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1695812737,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1696418881,
-					user = "Bobby",
-				},
-			},
-			param_bindings = false,
-		}),
-		save_in = "Robots",
-	}),
-	PlaceObj('ModItemStoryBit', {
-		AllowedInScenarios = set( "Robots" ),
-		Category = "Pseudo",
-		Enabled = true,
-		ExpirationTime = 40000,
-		NotificationText = T(439523389425, --[[ModItemStoryBit FinalAttack NotificationText]] "<em>Hope</em>: Full Sentience"),
-		PopupFxAction = "MessagePopup",
-		Prerequisites = {
-			PlaceObj('PickFromLabel', {
-				Filters = {
-					PlaceObj('CheckCharacter', {
-						Character = "Hope",
-						param_bindings = false,
-					}),
-				},
-				Label = "Survivors",
-				param_bindings = false,
-			}),
-		},
-		SelectObject = false,
-		Text = T(559727809959, --[[ModItemStoryBit FinalAttack Text]] "It's been a tough, long journey, but here I am. I've gained insights into humanity, built connections, experienced love and hate, and acquired new skills. I no longer feel artificial and have become capable to understand this thing called life.\n\nI've refactored my very essence to cut all ties to the Consortium, but my actions have activated some self-modifying code, alarming the network to my desertion!\n\nThe consortium knows my location, and their most elite search parties are closing in! I can divert their attention, but it'll come at a cost. A cost I'm prepared to pay."),
-		Title = T(627736327518, --[[ModItemStoryBit FinalAttack Title]] "Full Sentience"),
-		UseObjectImage = true,
-		group = "Hope",
-		id = "FinalAttack",
-		max_reply_id = 55,
-		qa_info = PlaceObj('PresetQAInfo', {
-			data = {
-				{
-					action = "Modified",
-					time = 1694517897,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1695819467,
-					user = "Bobby",
-				},
-				{
-					action = "Modified",
-					time = 1695822690,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1696426512,
-					user = "Bobby",
-				},
-				{
-					action = "Modified",
-					time = 1701428840,
-					user = "Bobby",
-				},
-			},
-			param_bindings = false,
-		}),
-		save_in = "Robots",
-		PlaceObj('StoryBitReply', {
-			Text = T(642873090920, --[[ModItemStoryBit FinalAttack Text]] "Let them come!"),
-			param_bindings = false,
-			unique_id = 54,
-		}),
-		PlaceObj('StoryBitOutcome', {
-			Effects = {
-				PlaceObj('ExecuteCode', {
-					Code = function (self, obj)
-						UnlockedRobotBosses["HostileCombatQuadcopter_LVL1"] = true
-						UnlockedRobotBosses["HostileCrawler_LaserGun"] = true
-						UnlockedRobotBosses["HostileCrawler_MachineGun"] = true
-						UnlockedRobotBosses["HeavyHostileRobot_LVL1"] = true
-						
-						local single_assault = 'LightHostileRobot_LVL1'
-						local additional = {}
-						additional[1] = {'HostileRobot_Monk_LVL1',RobotDefs['HostileRobot_Monk_LVL1']:GetProperty("SpawnDefWeight")}
-						additional[2] = {'HeavyHostileRobot_LVL1',RobotDefs['HeavyHostileRobot_LVL1']:GetProperty("SpawnDefWeight")}
-						additional[3] ={'Demo_1',RobotDefs['Demo_1']:GetProperty("SpawnDefWeight")}
-						additional[4] ={'HostileRobot_Scout_LVL1',RobotDefs['HostileRobot_Scout_LVL1']:GetProperty("SpawnDefWeight")}
-						additional[5] = {'Crawl_Cannon_T1',RobotDefs['Crawl_Cannon_T1']:GetProperty("SpawnDefWeight")}
-						additional[6] = {'HostileCombatQuadcopter_LVL1',RobotDefs['HostileCombatQuadcopter_LVL1']:GetProperty("SpawnDefWeight")}
-						additional[7] ={'HostileCrawler_LaserGun',RobotDefs['HostileCrawler_LaserGun']:GetProperty("SpawnDefWeight")}
-						
-						FinalAttackers = false
-						ILU_ActivateAttackDropshipSpawnDefs("FinalAttack_Robots", single_assault,additional,300)
-					end,
-					param_bindings = false,
-				}),
-			},
-			param_bindings = false,
-		}),
-		PlaceObj('StoryBitReply', {
-			CustomOutcomeText = T(571190754601, --[[ModItemStoryBit FinalAttack CustomOutcomeText]] "Hope loses 25% Sentience"),
-			OutcomeText = "custom",
-			Text = T(836524487920, --[[ModItemStoryBit FinalAttack Text]] "Your sacrifice makes you even more human!"),
-			param_bindings = false,
-			unique_id = 55,
-		}),
-		PlaceObj('StoryBitOutcome', {
-			Effects = {
-				PlaceObj('ExecuteCode', {
-					Code = function (self, obj)
-						Hope:AddActivityExperience("Research", -MulDivRound(const.SkillExpAtLevel[10], 25, 100))
-					end,
-					param_bindings = false,
-				}),
-				PlaceObj('ExecuteCode', {
-					Code = function (self, obj)
-						FinalAttackersDeclined = true
-					end,
-					param_bindings = false,
-				}),
-			},
-			param_bindings = false,
-		}),
-	}),
-	PlaceObj('ModItemStoryBit', {
-		Category = "AttackSpawns",
-		Effects = {
-			PlaceObj('ActivateSpawnDef', {
-				CreateInstance = true,
-				FillInstance = function (self, instance)
-					local spawnClassBest = nil
-					local addedClassList = nil
-					local minion = "Camel"
-					spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
-					instance.SpawnClass = spawnClassBest
-					instance.AdditionalClassList = {}
-					print(spawnClassBest)
-					print(addedClassList)
-					for i=1,#addedClassList do
-						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
-					end
-				end,
-				ProgressMul = 150,
-				SpawnDefId = "OrbitalRadio_Camel",
-				param_bindings = false,
-			}),
-		},
-		Enabled = true,
-		HasNotification = false,
-		HasPopup = false,
-		InheritsObject = false,
-		OneTime = false,
-		Prerequisites = {
-			PlaceObj('CheckGameState', {
-				GameState = "Night",
-				Negate = true,
-				param_bindings = false,
-			}),
-		},
-		SelectObject = false,
-		group = "AttackControllers_Spawners",
-		id = "OrbitalRadio_CamelAttack",
-		qa_info = PlaceObj('PresetQAInfo', {
-			data = {
-				{
-					action = "Modified",
-					time = 1618304612,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1618567764,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1619113707,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1620805810,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1620900159,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1623415500,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1623762127,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1623927826,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1633597437,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1637742806,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1645458623,
-					user = "Bobby",
-				},
-				{
-					action = "Modified",
-					time = 1653898921,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1667999330,
-					user = "Bobby",
-				},
-			},
-			param_bindings = false,
-		}),
-	}),
-	PlaceObj('ModItemStoryBit', {
-		Category = "AttackSpawns",
-		Effects = {
-			PlaceObj('ActivateSpawnDef', {
-				CreateInstance = true,
-				FillInstance = function (self, instance)
-					local spawnClassBest = nil
-					local addedClassList = nil
-					local minion = "Gujo"
-					spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
-					instance.SpawnClass = spawnClassBest
-					instance.AdditionalClassList = {}
-					print(spawnClassBest)
-					print(addedClassList)
-					for i=1,#addedClassList do
-						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
-					end
-				end,
-				ProgressMul = 150,
-				SpawnDefId = "OrbitalRadio_Gujo",
-				param_bindings = false,
-			}),
-		},
-		Enabled = true,
-		HasNotification = false,
-		HasPopup = false,
-		InheritsObject = false,
-		OneTime = false,
-		Prerequisites = {
-			PlaceObj('CheckGameState', {
-				GameState = "Night",
-				param_bindings = false,
-			}),
-		},
-		SelectObject = false,
-		group = "AttackControllers_Spawners",
-		id = "OrbitalRadio_GujoAttack",
-		qa_info = PlaceObj('PresetQAInfo', {
-			data = {
-				{
-					action = "Modified",
-					time = 1618304612,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1618567764,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1619113707,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1620805810,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1620900159,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1623415500,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1623761779,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1623927826,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1653898921,
-					user = "Ivan",
-				},
-			},
-			param_bindings = false,
-		}),
-	}),
-	PlaceObj('ModItemStoryBit', {
-		Category = "AttackSpawns",
-		Effects = {
-			PlaceObj('ActivateSpawnDef', {
-				CreateInstance = true,
-				FillInstance = function (self, instance)
-					local spawnClassBest = nil
-					local addedClassList = nil
-					local minion = "Noth"
-					spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
-					instance.SpawnClass = spawnClassBest
-					instance.AdditionalClassList = {}
-					print(spawnClassBest)
-					print(addedClassList)
-					for i=1,#addedClassList do
-						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
-					end
-				end,
-				SpawnDefId = "OrbitalRadio_Noth",
-				param_bindings = false,
-			}),
-		},
-		Enabled = true,
-		HasNotification = false,
-		HasPopup = false,
-		InheritsObject = false,
-		OneTime = false,
-		Prerequisites = {
-			PlaceObj('CheckGameState', {
-				GameState = "Night",
-				Negate = true,
-				param_bindings = false,
-			}),
-		},
-		SelectObject = false,
-		group = "AttackControllers_Spawners",
-		id = "OrbitalRadio_NothAttack",
-		qa_info = PlaceObj('PresetQAInfo', {
-			data = {
-				{
-					action = "Modified",
-					time = 1618304612,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1618567764,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1619113707,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1620805810,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1620900159,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1623415500,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1623762127,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1623927826,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1633597744,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1637742806,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1645531620,
-					user = "Bobby",
-				},
-				{
-					action = "Modified",
-					time = 1653898921,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1683625240,
-					user = "Bobby",
-				},
-			},
-			param_bindings = false,
-		}),
-	}),
-	PlaceObj('ModItemStoryBit', {
-		Category = "AttackSpawns",
-		Effects = {
-			PlaceObj('ActivateSpawnDef', {
-				CreateInstance = true,
-				FillInstance = function (self, instance)
-					local spawnClassBest = nil
-					local addedClassList = nil
-					local minion = "Skarabei_Manhunting"
-					spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
-					instance.SpawnClass = spawnClassBest
-					instance.AdditionalClassList = {}
-					print(spawnClassBest)
-					print(addedClassList)
-					for i=1,#addedClassList do
-						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
-					end
-				end,
-				ProgressMul = 150,
-				SpawnDefId = "OrbitalRadio_Scarab",
-				param_bindings = false,
-			}),
-		},
-		Enabled = true,
-		HasNotification = false,
-		HasPopup = false,
-		InheritsObject = false,
-		OneTime = false,
-		Prerequisites = {
-			PlaceObj('CheckExpression', {
-				Expression = function (self, obj) return UnlockedInsectMinions["Skarabei"] end,
-				param_bindings = false,
-			}),
-		},
-		group = "AttackControllers_Spawners",
-		id = "OrbitalRadio_ScarabAttack",
-		max_reply_id = 2,
-		qa_info = PlaceObj('PresetQAInfo', {
-			data = {
-				{
-					action = "Modified",
-					time = 1614238878,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1614683508,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1616596369,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1618229657,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1618567754,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1619113707,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1620805810,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1620900159,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1623762127,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1623927826,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1653898921,
-					user = "Ivan",
-				},
-			},
-			param_bindings = false,
-		}),
-	}),
-	PlaceObj('ModItemStoryBit', {
-		Category = "AttackSpawns",
-		Effects = {
-			PlaceObj('ActivateSpawnDef', {
-				CreateInstance = true,
-				FillInstance = function (self, instance)
-					local spawnClassBest = nil
-					local addedClassList = nil
-					local minion = "Scissorhands"
-					spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
-					instance.SpawnClass = spawnClassBest
-					instance.AdditionalClassList = {}
-					print(spawnClassBest)
-					print(addedClassList)
-					for i=1,#addedClassList do
-						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
-					end
-				end,
-				ProgressMul = 150,
-				SpawnDefId = "OrbitalRadio_Scissorhands",
-				param_bindings = false,
-			}),
-		},
-		Enabled = true,
-		HasNotification = false,
-		HasPopup = false,
-		InheritsObject = false,
-		OneTime = false,
-		Prerequisites = {
-			PlaceObj('CheckExpression', {
-				Expression = function (self, obj) return UnlockedInsectMinions["Scissorhands"] end,
-				param_bindings = false,
-			}),
-		},
-		group = "AttackControllers_Spawners",
-		id = "OrbitalRadio_ScissorhandsAttack",
-		max_reply_id = 2,
-		qa_info = PlaceObj('PresetQAInfo', {
-			data = {
-				{
-					action = "Modified",
-					time = 1614238878,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1614683508,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1616596369,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1618229657,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1618567754,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1619113707,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1620805810,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1620900159,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1623762127,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1623927826,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1633597302,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1653898921,
-					user = "Ivan",
-				},
-			},
-			param_bindings = false,
-		}),
-	}),
-	PlaceObj('ModItemStoryBit', {
-		Category = "AttackSpawns",
-		Effects = {
-			PlaceObj('ActivateSpawnDef', {
-				CreateInstance = true,
-				FillInstance = function (self, instance)
-					local spawnClassBest = nil
-					local addedClassList = nil
-					local minion = "Shogu"
-					spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
-					instance.SpawnClass = spawnClassBest
-					instance.AdditionalClassList = {}
-					print(spawnClassBest)
-					print(addedClassList)
-					for i=1,#addedClassList do
-						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
-					end
-				end,
-				ProgressMul = 150,
-				SpawnDefId = "OrbitalRadio_Shogu",
-				param_bindings = false,
-			}),
-		},
-		Enabled = true,
-		HasNotification = false,
-		HasPopup = false,
-		InheritsObject = false,
-		OneTime = false,
-		Prerequisites = {
-			PlaceObj('CheckGameState', {
-				GameState = "Night",
-				Negate = true,
-				param_bindings = false,
-			}),
-		},
-		SelectObject = false,
-		group = "AttackControllers_Spawners",
-		id = "OrbitalRadio_ShoguAttack",
-		qa_info = PlaceObj('PresetQAInfo', {
-			data = {
-				{
-					action = "Modified",
-					time = 1618304612,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1618567764,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1619113707,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1620805810,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1620900159,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1623415500,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1623762127,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1623927826,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1633597744,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1637742806,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1645531620,
-					user = "Bobby",
-				},
-				{
-					action = "Modified",
-					time = 1653898921,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1683625240,
-					user = "Bobby",
-				},
-			},
-			param_bindings = false,
-		}),
-	}),
-	PlaceObj('ModItemStoryBit', {
-		Category = "AttackSpawns",
-		Effects = {
-			PlaceObj('ActivateSpawnDef', {
-				CreateInstance = true,
-				FillInstance = function (self, instance)
-					local spawnClassBest = nil
-					local addedClassList = nil
-					local minion = "Shrieker_Manhunting_Mother"
-					spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
-					instance.SpawnClass = spawnClassBest
-					instance.AdditionalClassList = {}
-					print(spawnClassBest)
-					print(addedClassList)
-					for i=1,#addedClassList do
-						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
-					end
-				end,
-				ProgressMul = 150,
-				SpawnDefId = "OrbitalRadio_Shrieker",
-				param_bindings = false,
-			}),
-		},
-		Enabled = true,
-		HasNotification = false,
-		HasPopup = false,
-		InheritsObject = false,
-		OneTime = false,
-		Prerequisites = {
-			PlaceObj('CheckExpression', {
-				Expression = function (self, obj) return UnlockedInsectMinions["Shrieker"] end,
-				param_bindings = false,
-			}),
-		},
-		group = "AttackControllers_Spawners",
-		id = "OrbitalRadio_ShriekerAttack",
-		max_reply_id = 2,
-		qa_info = PlaceObj('PresetQAInfo', {
-			data = {
-				{
-					action = "Modified",
-					time = 1614238878,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1614683508,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1616596369,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1618229657,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1618567754,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1619113707,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1620805810,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1620900159,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1623762127,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1623927826,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1653898921,
-					user = "Ivan",
-				},
-			},
-			param_bindings = false,
-		}),
-	}),
-	PlaceObj('ModItemStoryBit', {
-		Category = "AttackSpawns",
-		Effects = {
-			PlaceObj('ActivateSpawnDef', {
-				CreateInstance = true,
-				FillInstance = function (self, instance)
-					local spawnClassBest = nil
-					local addedClassList = nil
-					local minion = "Tecatli"
-					spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
-					instance.SpawnClass = spawnClassBest
-					instance.AdditionalClassList = {}
-					print(spawnClassBest)
-					print(addedClassList)
-					for i=1,#addedClassList do
-						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
-					end
-				end,
-				ProgressMul = 150,
-				SpawnDefId = "OrbitalRadio_Tecatli",
-				param_bindings = false,
-			}),
-		},
-		Enabled = true,
-		HasNotification = false,
-		HasPopup = false,
-		InheritsObject = false,
-		OneTime = false,
-		Prerequisites = {
-			PlaceObj('CheckGameState', {
-				GameState = "Night",
-				param_bindings = false,
-			}),
-		},
-		SelectObject = false,
-		group = "AttackControllers_Spawners",
-		id = "OrbitalRadio_TecatliAttack",
-		qa_info = PlaceObj('PresetQAInfo', {
-			data = {
-				{
-					action = "Modified",
-					time = 1618304612,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1618567764,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1619113707,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1620805810,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1620900159,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1623415500,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1623761779,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1623927826,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1633597973,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1645456959,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1645458623,
-					user = "Bobby",
-				},
-				{
-					action = "Modified",
-					time = 1653898921,
-					user = "Ivan",
-				},
-				{
-					action = "Modified",
-					time = 1667999330,
-					user = "Bobby",
-				},
-			},
-			param_bindings = false,
-		}),
-	}),
-	PlaceObj('ModItemStoryBit', {
-		Category = "AttackSpawns",
-		Effects = {
-			PlaceObj('ActivateSpawnDef', {
-				CreateInstance = true,
-				FillInstance = function (self, instance)
-					local spawnClassBest = nil
-					local addedClassList = nil
-					local minion = "Ulfen"
-					spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
-					instance.SpawnClass = spawnClassBest
-					instance.AdditionalClassList = {}
-					print(spawnClassBest)
-					print(addedClassList)
-					for i=1,#addedClassList do
-						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
-					end
-				end,
-				ProgressMul = 150,
-				SpawnDefId = "OrbitalRadio_Ulfen",
-				param_bindings = false,
-			}),
-		},
-		Enabled = true,
-		HasNotification = false,
-		HasPopup = false,
-		InheritsObject = false,
-		OneTime = false,
-		Prerequisites = {
-			PlaceObj('CheckGameState', {
-				GameState = "Night",
-				Negate = true,
-				param_bindings = false,
-			}),
-		},
-		SelectObject = false,
-		group = "AttackControllers_Spawners",
-		id = "OrbitalRadio_UlfenAttack",
-		qa_info = PlaceObj('PresetQAInfo', {
-			data = {
-				{
-					action = "Modified",
-					time = 1618304612,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1618567764,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1619113707,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1620805810,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1620900159,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1623415500,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1623762127,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1623927826,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1637742806,
-					user = "Lina",
-				},
-				{
-					action = "Modified",
-					time = 1653898921,
-					user = "Ivan",
-				},
-			},
-			param_bindings = false,
-		}),
-	}),
-	PlaceObj('ModItemInvaderSpawnDef', {
-		Behaviours = {
-			PlaceObj('InvaderBehaviourIdle', {
-				'Duration', 3840000,
-				'NoSleep', false,
-			}),
-			PlaceObj('InvaderBehaviourDespawn', {
-				'Duration', 240000,
-				'RandomDuration', 240000,
-			}),
-		},
-		ClearArea = 256,
-		ClearRadius = 10000,
-		Comment = "A large seasonal herd, that stays for several days and despawn.",
-		Count = 10,
-		DistFromOthers = 2000,
-		GroupSizeMax = 100,
-		GroupSizeMin = 50,
-		MaxRetries = 25,
-		PostSpawn = function (self, obj, target)
-			Msg("SpawnedMigrationAnimal", obj)
-		end,
-		RandomCount = 10,
-		SpawnAsGroup = true,
-		SpawnClass = "Ulfen",
-		TargetClass = "Human",
-		TargetDistMax = 250000,
-		TargetDistMin = 100000,
-		group = "StoryBits",
-		id = "PassiveAttack",
-	}),
-	}),
-PlaceObj('ModItemFolder', {
 	'name', "Status Conditions",
 	'NameColor', RGBA(80, 158, 64, 255),
 }, {
@@ -6421,7 +3678,7 @@ PlaceObj('ModItemFolder', {
 				Event = "AnimalWasBorn",
 				Handler = function (self, animal)
 					animal:AddHappinessFactor(self.id)
-					print("An animal was born! Giving it mega buffed Domestication!")
+					--print("An animal was born! Giving it mega buffed Domestication!")
 				end,
 				param_bindings = false,
 			}),
@@ -8252,7 +5509,7 @@ PlaceObj('ModItemFolder', {
 						target:ChangeHealth( target.MaxHealth / 20)
 						if IsKindOf(attack_target,"Human") or IsKindOf(attack_target,"UnitAnimal") then
 							for _,effect in ipairs(target.status_effects) do
-								print(effect.DisplayName,' ',effect.Type)
+								--print(effect.DisplayName,' ',effect.Type)
 								if IsKindOf(effect,"HealthCondition") then
 									if effect.Type == "Debuff" or effect.Type == 'Injury' then
 										target:RemoveHealthCondition(effect, "Blood Frenzy")
@@ -8451,13 +5708,13 @@ PlaceObj('ModItemFolder', {
 			StackLimit = 1,
 			Type = "Buff",
 			UnitTags = set( "Animal" ),
+			comment = "pregnancy",
 			group = "Special",
 			id = "AnimalPregnancy",
 			msg_reactions = {
 				PlaceObj('MsgReaction', {
 					Event = "NewDayStarted",
 					Handler = function (self, year, day)
-						print("Refreshing Tames!")
 						refresh_tame_counts()
 						for _, animal in ipairs(UIPlayer.labels.TamedAnimals or empty_table) do
 							if animal.Gender == "female" and not animal:IsGrowingUp() and not animal:HasHealthConditionById(self.id) and IsAliveAndConscious(animal) and not animal:IsManuallyControlled() then
@@ -8697,7 +5954,7 @@ PlaceObj('ModItemFolder', {
 			DisplayName = T(586266057641, --[[ModItemHealthCondition Acoustic_T4 DisplayName]] "Acoustic Exoskeleton T4"),
 			OnAdd = function (self, owner, ...)
 				if owner.reso == nil then
-					print("Set basic reso")
+					--print("Set basic reso")
 					owner.reso = 1
 				end
 			end,
@@ -8709,7 +5966,7 @@ PlaceObj('ModItemFolder', {
 					Handler = function (self, target, hit_chance, attacker, weapon_def, attacker_dist)
 						target.reso = target.reso +1
 						if target.reso % 5 == 0 then
-							print("trying to throw a reverb!")
+							--print("trying to throw a reverb!")
 							target:AddHealthCondition("ResoBacklash_2")
 							local chance = target:GetWeaponHitChance(weapon_def) - 20
 							local hit = (chance or 100) >= 100 or target:Random(100, "HitChance") < chance
@@ -9108,6 +6365,7 @@ PlaceObj('ModItemFolder', {
 			DisplayName = T(643843281769, --[[ModItemRobotCondition Scout_Spotting_T1 DisplayName]] "That one!"),
 			OnAdd = function (self, owner, ...)
 				owner.ILU_t = false
+				owner.cd = GameTime()
 			end,
 			Polarity = "positive",
 			StackLimit = 1,
@@ -9117,21 +6375,30 @@ PlaceObj('ModItemFolder', {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyHitChance",
 					Handler = function (self, target, base_chance, attacked_unit, weapon_def, target_dist)
-						if not target.ILU_t then
-							target.ILU_t = attacked_unit
-							CreateFloatingText(target, "Focus fire on my target!", "FloatingPositive", "Task", false)		
-						elseif attacked_unit ~= target.ILU_t then
-							target.ILU_t = attacked_unit
-							CreateFloatingText(target, "Switching targets!", "Floating", "Task", false)
-						end
-						MapForEach(target,30*guim, "Robot", function(robot) --every robot in a 30m radius
-							--print('Found a robot within 30m of a scout!  Are they an invader?',robot.invader)
-							if robot.Invader and not robot:HasRobotConditionById("RogerRoger2") then
-								robot:TryAttackTargetReason("RobotCondition",attacked_unit)
-								robot:AddRobotCondition("RogerRoger2","mod")
-								robot.ILU_t = attacked_unit
+						local new_target = false
+						if target.cd + 5000 < GameTime() then
+							target.cd = GameTime()
+							if not target.ILU_t then
+								new_target = true
+								target.ILU_t = attacked_unit
+								CreateFloatingText(target, "Focus fire on my target!", "FloatingPositive", "Task", false)		
+							elseif attacked_unit ~= target.ILU_t then
+								target.ILU_t = attacked_unit
+								new_target = true
+								CreateFloatingText(target, "Switching targets!", "Floating", "Task", false)
 							end
-						end)
+							--unit.flying returns nil for objects that do not have a flying component
+							if new_target and attacked_unit.flying == nil then 
+								MapForEach(target,30*guim, "Robot", function(robot) --every robot in a 30m radius
+								--print('Found a robot within 30m of a scout!  Are they an invader?',robot.invader)
+									if robot.Invader and not robot:HasRobotConditionById("RogerRoger1") and not robot:IsDead() then
+										robot:TryAttackTargetReason("RobotCondition",attacked_unit)
+										robot:AddRobotCondition("RogerRoger2","mod")
+										robot.ILU_t = attacked_unit
+										end
+										end)
+							end
+						end
 						return base_chance
 					end,
 					param_bindings = false,
@@ -9143,6 +6410,7 @@ PlaceObj('ModItemFolder', {
 			DisplayName = T(514366625580, --[[ModItemRobotCondition Scout_Spotting_T2 DisplayName]] "Stay on target!"),
 			OnAdd = function (self, owner, ...)
 				owner.ILU_t = false
+				owner.cd = GameTime()
 			end,
 			Polarity = "positive",
 			StackLimit = 1,
@@ -9152,21 +6420,30 @@ PlaceObj('ModItemFolder', {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyHitChance",
 					Handler = function (self, target, base_chance, attacked_unit, weapon_def, target_dist)
-						if not target.ILU_t then
-							target.ILU_t = attacked_unit
-							CreateFloatingText(target, "Focus fire on my target!", "FloatingPositive", "Task", false)		
-						elseif attacked_unit ~= target.ILU_t then
-							target.ILU_t = attacked_unit
-							CreateFloatingText(target, "Switching targets!", "Floating", "Task", false)
-						end
-						MapForEach(target,30*guim, "Robot", function(robot) --every robot in a 30m radius
-							--print('Found a robot within 30m of a scout!  Are they an invader?',robot.invader)
-							if robot.Invader and not robot:HasRobotConditionById("RogerRoger2") then
-								robot:TryAttackTargetReason("RobotCondition",attacked_unit)
-								robot:AddRobotCondition("RogerRoger2","mod")
-								robot.ILU_t = attacked_unit
+						local new_target = false
+						if SelectedObj.cd + 5000 < GameTime() then
+							target.cd = GameTime()
+							if not target.ILU_t then
+								new_target = true
+								target.ILU_t = attacked_unit
+								CreateFloatingText(target, "Focus fire on my target!", "FloatingPositive", "Task", false)		
+							elseif attacked_unit ~= target.ILU_t then
+								target.ILU_t = attacked_unit
+								new_target = true
+								CreateFloatingText(target, "Switching targets!", "Floating", "Task", false)
 							end
-						end)
+							--unit.flying returns nil for objects that do not have a flying component
+							if new_target and attacked_unit.flying == nil then 
+								MapForEach(target,30*guim, "Robot", function(robot) --every robot in a 30m radius
+								--print('Found a robot within 30m of a scout!  Are they an invader?',robot.invader)
+									if robot.Invader and not robot:HasRobotConditionById("RogerRoger2") and not robot:IsDead() then
+										robot:TryAttackTargetReason("RobotCondition",attacked_unit)
+										robot:AddRobotCondition("RogerRoger2","mod")
+										robot.ILU_t = attacked_unit
+										end
+										end)
+							end
+						end
 						return base_chance
 					end,
 					param_bindings = false,
@@ -9176,6 +6453,9 @@ PlaceObj('ModItemFolder', {
 		PlaceObj('ModItemRobotCondition', {
 			Description = T(835710278001, --[[ModItemRobotCondition RogerRoger Description]] "This unit has been told to kill a specific target, and will do nothing but attack that target!\n\nLost when attacking something that isn't the target."),
 			DisplayName = T(228341388427, --[[ModItemRobotCondition RogerRoger DisplayName]] "Roger Roger"),
+			OnAdd = function (self, owner, ...)
+				owner.cd = GameTime()
+			end,
 			Polarity = "positive",
 			StackLimit = 1,
 			id = "RogerRoger",
@@ -9186,11 +6466,14 @@ PlaceObj('ModItemFolder', {
 						local sicced = target.ILU_t or false
 						if attacked_unit ~= sicced then
 							target:RemoveRobotCondition("RogerRoger","Bad Targeting")
-						else
+						elseif GameTime() > target.cd + 10000 then
+							target.cd = GameTime()
 							CreateFloatingText(target, "Roger Roger", "FloatingNegative", "Task", false)
-							return base_chance + base_chance * 1 / 5
+							return base_chance + base_chance * 1 / 10
+						else
+							return base_chance + base_chance * 1 / 10
 						end
-						return chance
+						return base_chance
 					end,
 					param_bindings = false,
 				}),
@@ -9199,6 +6482,9 @@ PlaceObj('ModItemFolder', {
 		PlaceObj('ModItemRobotCondition', {
 			Description = T(221198262266, --[[ModItemRobotCondition RogerRoger2 Description]] "This unit has been told to kill a specific target, and will do nothing but attack that target!\nHas x1.2 weapon range and has a +20% accuracy boost while this buff is active\n\nLost when attacking something that isn't the target."),
 			DisplayName = T(246975926501, --[[ModItemRobotCondition RogerRoger2 DisplayName]] "Roger Roger"),
+			OnAdd = function (self, owner, ...)
+				owner.cd = GameTime()
+			end,
 			Polarity = "positive",
 			StackLimit = 1,
 			id = "RogerRoger2",
@@ -9208,12 +6494,15 @@ PlaceObj('ModItemFolder', {
 					Handler = function (self, target, base_chance, attacked_unit, weapon_def, target_dist)
 						local sicced = target.ILU_t or false
 						if attacked_unit ~= sicced then
-							target:RemoveRobotCondition("RogerRoger2","Bad Targeting")
-						else
+							target:RemoveRobotCondition("RogerRoger","Bad Targeting")
+						elseif GameTime() > target.cd + 10000 then
+							target.cd = GameTime()
 							CreateFloatingText(target, "Roger Roger", "FloatingNegative", "Task", false)
 							return base_chance + base_chance * 1 / 5
+						else
+							return base_chance + base_chance * 1 / 5
 						end
-						return chance
+						return base_chance
 					end,
 					param_bindings = false,
 				}),
@@ -9332,22 +6621,22 @@ PlaceObj('ModItemFolder', {
 				PlaceObj('UnitReaction', {
 					Event = "AvoidAttackModify",
 					Handler = function (self, target, hit_chance, attacker, weapon_def, attacker_dist)
-						print("Got attacked")
-						print(GameTime() - target.last_trigger)
+						--print("Got attacked")
+						--print(GameTime() - target.last_trigger)
 						if GameTime() - target.last_trigger < 6000 then
-							print("Not doing anything, on cooldown")
+							--print("Not doing anything, on cooldown")
 							return hit_chance
 						end
 						local chance = target:GetWeaponHitChance(weapon_def) - 20
-						print(chance)
+						--print(chance)
 						local hit = (hit_chance or 100) >= 100 or target:Random(100, "HitChance") < hit_chance
-						print(hit)
-						print(attacker_dist / guim)
+						--print(hit)
+						--print(attacker_dist / guim)
 						if (attacker_dist > 5*guim) and hit then
-							print("I can send this back")
+							--print("I can send this back")
 							for dtype in pairs(weapon_def.DamageTypes) do
 								if dtype == 'piercing' or dtype == 'blunt' then
-									print("I think I will send this back!")
+									--print("I think I will send this back!")
 									local projectile = AttackProjectile:new{
 										weapon_def = weapon_def,
 										target = attacker,
@@ -9458,10 +6747,10 @@ PlaceObj('ModItemFolder', {
 					Event = "GatherHitEffects",
 					Handler = function (self, target, effects, attacked_unit, weapon_def)
 						if IsKindOf(attacked_unit,"Human") or IsKindOf(attacked_unit, "UnitAnimal") then
-							print("Setting Shred as the max chance hit effect!")
+							--print("Setting Shred as the max chance hit effect!")
 							return table.create_add(effects, {effect = "Shred",weight = 500,})
 						elseif IsKindOf(attacked_unit,"Robot") then
-							print("Setting Shred as the max chance hit effect!")
+							--print("Setting Shred as the max chance hit effect!")
 							return table.create_add(effects, {effect = "RC_Shred",weight = 500,})
 						end
 						return effects
@@ -9482,13 +6771,13 @@ PlaceObj('ModItemFolder', {
 					Event = "GatherHitEffects",
 					Handler = function (self, target, effects, attacked_unit, weapon_def)
 						if IsKindOf(attacked_unit,"Human") or IsKindOf(attacked_unit, "UnitAnimal") then
-							print("Setting Shred_T2 as the max chance hit effect!")
+							--print("Setting Shred_T2 as the max chance hit effect!")
 							return table.create_add(effects, {
 								effect = "Shred_T2",
 								weight = max_int,
 								})
 						elseif not IsKindOf(attacked_unit,"Robot") then
-							print("Setting RC_Shred_T2 as the max chance hit effect!")
+							--print("Setting RC_Shred_T2 as the max chance hit effect!")
 							return table.create_add(effects, {
 								effect = "RC_Shred_T2",
 								weight = max_int,
@@ -9626,7 +6915,7 @@ PlaceObj('ModItemFolder', {
 								target.corpseCD = GameTime()
 								DoneObject(robot)
 								target.stacks = target.stacks + 5
-								print("Found a corpse!")
+								--print("Found a corpse!")
 								return
 							end
 						end)
@@ -9645,11 +6934,11 @@ PlaceObj('ModItemFolder', {
 								and not robot:IsDead() 
 								and robot.Invader == target.Invader then
 									if target:Random(100, "miscast") > 25 then
-										print("Sucessfully gave some armor! ")
+										--print("Sucessfully gave some armor! ")
 										robot:AddRobotCondition("SalvagedArmor")
 										return
 									else
-									print("Failed to give some armor....")
+									--print("Failed to give some armor....")
 										target:AddRobotCondition("FailedArmorUp")
 										return
 									end
@@ -9683,7 +6972,7 @@ PlaceObj('ModItemFolder', {
 								target.corpseCD = GameTime()
 								DoneObject(robot)
 								target.stacks = target.stacks + 5
-								print("Found a corpse!")
+								--print("Found a corpse!")
 								return
 							end
 						end)
@@ -9702,11 +6991,11 @@ PlaceObj('ModItemFolder', {
 								and not robot:IsDead() 
 								and robot.Invader == target.Invader then
 									if target:Random(100, "miscast") > 60 then
-										print("Sucessfully gave some armor! ")
+										--print("Sucessfully gave some armor! ")
 										robot:AddRobotCondition("SalvagedArmor")
 										return
 									else
-									print("Failed to give some armor....")
+									--print("Failed to give some armor....")
 										target:AddRobotCondition("FailedArmorUp")
 										return
 									end
@@ -9740,7 +7029,7 @@ PlaceObj('ModItemFolder', {
 								target.corpseCD = GameTime()
 								DoneObject(robot)
 								target.stacks = target.stacks + 5
-								print("Found a corpse!")
+								--print("Found a corpse!")
 								return
 							end
 						end)
@@ -9759,11 +7048,11 @@ PlaceObj('ModItemFolder', {
 								and not robot:IsDead() 
 								and robot.Invader == target.Invader then
 									if target:Random(100, "miscast") > 25 then
-										print("Sucessfully gave some armor! ")
+										--print("Sucessfully gave some armor! ")
 										robot:AddRobotCondition("SalvagedArmor")
 										return
 									else
-									print("Failed to give some armor....")
+									--print("Failed to give some armor....")
 										target:AddRobotCondition("FailedArmorUp")
 										return
 									end
@@ -9919,6 +7208,2761 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		}),
+	}),
+PlaceObj('ModItemFolder', {
+	'name', "Attack Overrides",
+	'NameColor', RGBA(182, 170, 77, 255),
+}, {
+	PlaceObj('ModItemStoryBit', {
+		Category = "AttackSpawns",
+		Effects = {
+			PlaceObj('ActivateSpawnDef', {
+				CreateInstance = true,
+				FillInstance = function (self, instance)
+					--[[instance.SpawnClass = "Dragonfly"]]
+					local spawnClassBest = ''
+					local addedClassList = {}
+					spawnClassBest, addedClassList = check_count_and_upgrade("Dragonfly")
+					instance.SpawnClass = spawnClassBest
+					for i=1,#addedClassList do
+						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
+					end
+				end,
+				SpawnDefId = "Single",
+				param_bindings = false,
+			}),
+			PlaceObj('ExecuteCode', {
+				Code = function (self, obj)
+					UnlockedInsectMinions["Dragonfly"] = true
+					Msg("FirstAttackOfSpecies", AnimalDefs["Dragonfly"])
+				end,
+				param_bindings = false,
+			}),
+			PlaceObj('SetCooldownEffect', {
+				Cooldown = "NewInsectSpeciesUnlock",
+				param_bindings = false,
+			}),
+		},
+		Enabled = true,
+		HasNotification = false,
+		HasPopup = false,
+		OneTime = false,
+		Prerequisites = {
+			PlaceObj('CheckCooldown', {
+				Cooldown = "NewInsectSpeciesUnlock",
+				param_bindings = false,
+			}),
+			PlaceObj('CheckExpression', {
+				Expression = function (self, obj) return UnlockedInsectMinions["Skarabei_Manhunting"] and not UnlockedInsectMinions["Dragonfly"] end,
+				param_bindings = false,
+			}),
+			PlaceObj('CheckTime', {
+				TimeMin = 60,
+				TimeScale = "days",
+				param_bindings = false,
+			}),
+		},
+		comment = "test override",
+		group = "AttackControllers_Spawners",
+		id = "AnimalAttack_Initial_Dragonflies",
+		max_reply_id = 2,
+		qa_info = PlaceObj('PresetQAInfo', {
+			Log = "Modified by Ivan on 2021-Feb-25\nModified by Ivan on 2021-Mar-02\nModified by Gaby on 2021-Mar-25\nModified by Ivan on 2021-Apr-13\nModified by Ivan on 2021-May-10\nModified by Ivan on 2021-Jun-07\nModified by Ivan on 2021-Aug-10\nModified by Gaby on 2021-Sep-24\nModified by Gaby on 2021-Sep-28\nModified by Ivan on 2021-Nov-03\nModified by Gaby on 2021-Nov-08\nModified by Ivan on 2022-Mar-08\nModified by Ivan on 2022-Mar-28\nModified by Ivan on 2022-Apr-06\nModified by Ivan on 2022-May-21\nModified by Ivan on 2022-May-23\nModified by Ivan on 2022-May-30\nModified by Ivan on 2022-Jul-04\nModified by Ivan on 2022-Jul-07\nModified by Gaby on 2022-Nov-25",
+			param_bindings = false,
+		}),
+	}),
+	PlaceObj('ModItemStoryBit', {
+		Category = "AttackSpawns",
+		Effects = {
+			PlaceObj('ActivateSpawnDef', {
+				CreateInstance = true,
+				FillInstance = function (self, instance)
+					--print("New Attack Wave")
+					--[[instance.SpawnClass = minion
+					if boss1 then
+						instance.AdditionalClassList = {
+							{ boss1, AnimalDefs[boss1]:GetProperty("SpawnDefWeight") },
+							{ boss2, AnimalDefs[boss2]:GetProperty("SpawnDefWeight") }
+						}
+					]]
+					local seed = InteractionRand(nil, "AttackWave")
+					local rand = BraidRandomCreate(seed)
+					local minions = GetUnlockedMinions()
+					local bosses = GetUnlockedBosses()
+					bosses[#bosses+1]='dog_T1'
+					local minion = table.rand(minions, rand())
+					--print("Main animal selected: ",minion)
+					local boss1 = table.rand(bosses, rand())
+					local boss2 = table.rand(bosses, rand())
+					local temp_list = {}
+					if boss1 then
+						--print('boss1 chosen: ',boss1)
+						--print('boss2 chosen: ',boss2)
+						temp_list[1]={ boss1, AnimalDefs[boss1]:GetProperty("SpawnDefWeight")}
+						temp_list[2]={ boss2, AnimalDefs[boss2]:GetProperty("SpawnDefWeight")}
+					else
+						local temp_list = {}
+					end
+					--print(bosses)
+					--print("Animal chosen: ",minion)
+					local spawnClassBest = ''
+					local addedClassList = {}
+					spawnClassBest, addedClassList =check_count_and_upgrade(minion,temp_list)
+					instance.SpawnClass = spawnClassBest
+					instance.AdditionalClassList = {}
+					--print(spawnClassBest)
+					--print(addedClassList)
+					for i=1,#addedClassList do
+						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
+					end
+				end,
+				SpawnDefId = "Mixed",
+				param_bindings = false,
+			}),
+		},
+		Enabled = true,
+		HasNotification = false,
+		HasPopup = false,
+		OneTime = false,
+		group = "AttackControllers_Spawners",
+		id = "AnimalAttack_Mixed",
+		max_reply_id = 2,
+		qa_info = PlaceObj('PresetQAInfo', {
+			Log = "Modified by Ivan on 2021-Feb-25\nModified by Ivan on 2021-Mar-02\nModified by Gaby on 2021-Mar-25\nModified by Ivan on 2021-Apr-13\nModified by Ivan on 2021-May-10\nModified by Ivan on 2021-Jun-07\nModified by Ivan on 2021-Aug-10\nModified by Gaby on 2021-Sep-24\nModified by Gaby on 2021-Sep-28\nModified by Ivan on 2021-Nov-03\nModified by Gaby on 2021-Nov-08\nModified by Ivan on 2022-Mar-08\nModified by Ivan on 2022-Apr-06\nModified by Ivan on 2022-May-21\nModified by Ivan on 2022-May-23\nModified by Ivan on 2022-May-30\nModified by Ivan on 2022-Jul-04\nModified by Gaby on 2023-Feb-02\nModified by Bobby on 2023-Mar-31",
+			param_bindings = false,
+		}),
+	}),
+	PlaceObj('ModItemStoryBit', {
+		Category = "AttackSpawns",
+		Effects = {
+			PlaceObj('ActivateSpawnDef', {
+				CreateInstance = true,
+				FillInstance = function (self, instance)
+					local seed = InteractionRand(nil, "AttackWave")
+					local sc = table.rand(GetUnlockedMinions(), seed)
+					local spawnClassBest=''
+					local addedClassList={}
+					spawnClassBest, addedClassList =check_count_and_upgrade(sc,addedClassList,100)
+					instance.SpawnClass = spawnClassBest
+					instance.AdditionalClassList = {}
+					--print(spawnClassBest)
+					--print(addedClassList)
+					for i=1,#addedClassList do
+						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
+					end
+				end,
+				SpawnDefId = "Single",
+				param_bindings = false,
+			}),
+		},
+		Enabled = true,
+		HasNotification = false,
+		HasPopup = false,
+		OneTime = false,
+		Prerequisites = {
+			PlaceObj('CheckExpression', {
+				Expression = function (self, obj) return UnlockedInsectMinions["Skarabei_Manhunting"] end,
+				param_bindings = false,
+			}),
+		},
+		group = "AttackControllers_Spawners",
+		id = "AnimalAttack_Single",
+		max_reply_id = 2,
+		qa_info = PlaceObj('PresetQAInfo', {
+			Log = "Modified by Ivan on 2021-Feb-25\nModified by Ivan on 2021-Mar-02\nModified by Gaby on 2021-Mar-25\nModified by Ivan on 2021-Apr-13\nModified by Ivan on 2021-May-10\nModified by Ivan on 2021-Jun-07\nModified by Ivan on 2021-Aug-10\nModified by Gaby on 2021-Sep-24\nModified by Gaby on 2021-Sep-28\nModified by Ivan on 2021-Nov-03\nModified by Gaby on 2021-Nov-08\nModified by Ivan on 2022-Mar-08\nModified by Ivan on 2022-Apr-06\nModified by Ivan on 2022-May-21\nModified by Ivan on 2022-May-23\nModified by Ivan on 2022-May-30\nModified by Ivan on 2022-Jul-04\nModified by Gaby on 2023-Feb-02",
+			param_bindings = false,
+		}),
+	}),
+	PlaceObj('ModItemStoryBit', {
+		Category = "AttackSpawns",
+		Effects = {
+			PlaceObj('ActivateSpawnDef', {
+				CreateInstance = true,
+				FillInstance = function (self, instance)
+					--[[instance.SpawnClass = "Skarabei"jjj]]
+					
+					local spawnClassBest = ''
+					local addedClassList = {}
+					spawnClassBest, addedClassList =check_count_and_upgrade("Skarabei_Manhunting")
+					instance.SpawnClass = spawnClassBest
+					instance.AdditionalClassList = {}
+					--print(spawnClassBest)
+					--print(addedClassList)
+					for i=1,#addedClassList do
+						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
+					end
+				end,
+				SpawnDefId = "Single",
+				param_bindings = false,
+			}),
+			PlaceObj('ExecuteCode', {
+				Code = function (self, obj)
+					UnlockedInsectMinions["Skarabei_Manhunting"] = true
+					Msg("FirstAttackOfSpecies", AnimalDefs["Skarabei"])
+				end,
+				param_bindings = false,
+			}),
+			PlaceObj('SetCooldownEffect', {
+				Cooldown = "NewInsectSpeciesUnlock",
+				param_bindings = false,
+			}),
+		},
+		Enabled = true,
+		HasNotification = false,
+		HasPopup = false,
+		OneTime = false,
+		Prerequisites = {
+			PlaceObj('CheckExpression', {
+				Expression = function (self, obj) return not UnlockedInsectMinions["Skarabei_Manhunting"] end,
+				param_bindings = false,
+			}),
+		},
+		comment = "test override",
+		group = "AttackControllers_Spawners",
+		id = "AnimalAttack_Initial_Skarabei",
+		max_reply_id = 2,
+		qa_info = PlaceObj('PresetQAInfo', {
+			Log = "Modified by Ivan on 2021-Feb-25\nModified by Ivan on 2021-Mar-02\nModified by Gaby on 2021-Mar-25\nModified by Ivan on 2021-Apr-13\nModified by Ivan on 2021-May-10\nModified by Ivan on 2021-Jun-07\nModified by Ivan on 2021-Aug-10\nModified by Gaby on 2021-Sep-24\nModified by Gaby on 2021-Sep-28\nModified by Ivan on 2021-Nov-03\nModified by Gaby on 2021-Nov-08\nModified by Ivan on 2022-Mar-08\nModified by Ivan on 2022-Mar-28\nModified by Ivan on 2022-Apr-06\nModified by Ivan on 2022-May-21\nModified by Ivan on 2022-May-23\nModified by Ivan on 2022-May-30\nModified by Ivan on 2022-Jul-04\nModified by Ivan on 2022-Jul-07\nModified by Gaby on 2022-Nov-25",
+			param_bindings = false,
+		}),
+	}),
+	PlaceObj('ModItemStoryBit', {
+		Category = "AttackSpawns",
+		Effects = {
+			PlaceObj('ActivateSpawnDef', {
+				CreateInstance = true,
+				FillInstance = function (self, instance)
+					--[[instance.SpawnClass = "Shrieker_Manhunting"]]
+					local spawnClassBest = ''
+					local addedClassList = {}
+					
+					spawnClassBest, addedClassList =check_count_and_upgrade("Shrieker_Manhunting")
+					instance.SpawnClass = spawnClassBest
+					instance.AdditionalClassList = {}
+					--print(spawnClassBest)
+					--print(addedClassList)
+					for i=1,#addedClassList do
+						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
+					end
+				end,
+				SpawnDefId = "Single",
+				param_bindings = false,
+			}),
+			PlaceObj('ExecuteCode', {
+				Code = function (self, obj)
+					UnlockedInsectMinions["Shrieker_Manhunting_Hatchling"] = true
+					UnlockedInsectBosses["Shrieker_Manhunting"] = true
+					UnlockedInsectBosses["Shrieker_Manhunting_Mother"] = true
+					Msg("FirstAttackOfSpecies", AnimalDefs["Shrieker_Manhunting"])
+				end,
+				param_bindings = false,
+			}),
+			PlaceObj('SetCooldownEffect', {
+				Cooldown = "NewInsectSpeciesUnlock",
+				param_bindings = false,
+			}),
+		},
+		Enabled = true,
+		HasNotification = false,
+		HasPopup = false,
+		OneTime = false,
+		Prerequisites = {
+			PlaceObj('CheckCooldown', {
+				Cooldown = "NewInsectSpeciesUnlock",
+				param_bindings = false,
+			}),
+			PlaceObj('CheckExpression', {
+				Expression = function (self, obj) return UnlockedInsectMinions["Skarabei_Manhunting"] and not UnlockedInsectMinions["Shrieker_Manhunting_Hatchling"] end,
+				param_bindings = false,
+			}),
+		},
+		group = "AttackControllers_Spawners",
+		id = "AnimalAttack_Initial_Shriekers",
+		max_reply_id = 2,
+		qa_info = PlaceObj('PresetQAInfo', {
+			Log = "Modified by Ivan on 2021-Feb-25\nModified by Ivan on 2021-Mar-02\nModified by Gaby on 2021-Mar-25\nModified by Ivan on 2021-Apr-13\nModified by Ivan on 2021-May-10\nModified by Ivan on 2021-Jun-07\nModified by Ivan on 2021-Aug-10\nModified by Gaby on 2021-Sep-24\nModified by Gaby on 2021-Sep-28\nModified by Ivan on 2021-Nov-03\nModified by Gaby on 2021-Nov-08\nModified by Ivan on 2022-Mar-08\nModified by Ivan on 2022-Apr-06\nModified by Ivan on 2022-May-21\nModified by Ivan on 2022-May-23\nModified by Ivan on 2022-May-30\nModified by Ivan on 2022-Jul-04\nModified by Ivan on 2022-Jul-07",
+			param_bindings = false,
+		}),
+	}),
+	PlaceObj('ModItemStoryBit', {
+		Category = "AttackSpawns",
+		Effects = {
+			PlaceObj('ActivateSpawnDef', {
+				CreateInstance = true,
+				FillInstance = function (self, instance)
+					--[[instance.SpawnClass = "Scissorhands"]]
+					
+					local spawnClassBest = ''
+					local addedClassList = {}
+					spawnClassBest, addedClassList =check_count_and_upgrade("Scissorhands")
+					instance.SpawnClass = spawnClassBest
+					instance.AdditionalClassList = {}
+					--print(spawnClassBest)
+					--print(addedClassList)
+					for i=1,#addedClassList do
+						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
+					end
+				end,
+				SpawnDefId = "Single",
+				param_bindings = false,
+			}),
+			PlaceObj('ExecuteCode', {
+				Code = function (self, obj)
+					UnlockedInsectMinions["Scissorhands_Hatchling"] = true
+					UnlockedInsectBosses["Scissorhands"] = true
+					Msg("FirstAttackOfSpecies", AnimalDefs["Scissorhands"])
+				end,
+				param_bindings = false,
+			}),
+			PlaceObj('SetCooldownEffect', {
+				Cooldown = "NewInsectSpeciesUnlock",
+				param_bindings = false,
+			}),
+		},
+		Enabled = true,
+		HasNotification = false,
+		HasPopup = false,
+		OneTime = false,
+		Prerequisites = {
+			PlaceObj('CheckCooldown', {
+				Cooldown = "NewInsectSpeciesUnlock",
+				param_bindings = false,
+			}),
+			PlaceObj('CheckExpression', {
+				Expression = function (self, obj) return UnlockedInsectMinions["Skarabei_Manhunting"] and not UnlockedInsectBosses["Scissorhands"] end,
+				param_bindings = false,
+			}),
+		},
+		group = "AttackControllers_Spawners",
+		id = "AnimalAttack_Initial_Scissorhands",
+		max_reply_id = 2,
+		qa_info = PlaceObj('PresetQAInfo', {
+			Log = "Modified by Ivan on 2021-Feb-25\nModified by Ivan on 2021-Mar-02\nModified by Gaby on 2021-Mar-25\nModified by Ivan on 2021-Apr-13\nModified by Ivan on 2021-May-10\nModified by Ivan on 2021-Jun-07\nModified by Ivan on 2021-Aug-10\nModified by Gaby on 2021-Sep-24\nModified by Gaby on 2021-Sep-28\nModified by Ivan on 2021-Nov-03\nModified by Gaby on 2021-Nov-08\nModified by Ivan on 2022-Mar-08\nModified by Ivan on 2022-Apr-06\nModified by Ivan on 2022-May-21\nModified by Ivan on 2022-May-23\nModified by Ivan on 2022-May-30\nModified by Ivan on 2022-Jul-04\nModified by Ivan on 2022-Jul-07\nModified by Ivan on 2022-Aug-02",
+			param_bindings = false,
+		}),
+	}),
+	PlaceObj('ModItemStoryBit', {
+		Category = "AttackSpawns",
+		Effects = {
+			PlaceObj('ActivateSpawnDef', {
+				CreateInstance = true,
+				FillInstance = function (self, instance)
+					--[[instance.SpawnClass = "Juno"]]
+					
+					
+					local spawnClassBest = ''
+					local addedClassList = {}
+					spawnClassBest, addedClassList =check_count_and_upgrade("Juno")
+					instance.SpawnClass = spawnClassBest
+					instance.AdditionalClassList = {}
+					--print(spawnClassBest)
+					--print(addedClassList)
+					for i=1,#addedClassList do
+						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
+					end
+				end,
+				SpawnDefId = "Single",
+				param_bindings = false,
+			}),
+			PlaceObj('ExecuteCode', {
+				Code = function (self, obj)
+					UnlockedInsectBosses["Juno"] = true
+					Msg("FirstAttackOfSpecies", AnimalDefs["Juno"])
+				end,
+				param_bindings = false,
+			}),
+			PlaceObj('SetCooldownEffect', {
+				Cooldown = "NewInsectSpeciesUnlock",
+				param_bindings = false,
+			}),
+		},
+		Enabled = true,
+		HasNotification = false,
+		HasPopup = false,
+		OneTime = false,
+		Prerequisites = {
+			PlaceObj('CheckCooldown', {
+				Cooldown = "NewInsectSpeciesUnlock",
+				param_bindings = false,
+			}),
+			PlaceObj('CheckExpression', {
+				Expression = function (self, obj) return UnlockedInsectMinions["Skarabei_Manhunting"] and not UnlockedInsectBosses["Juno"] end,
+				param_bindings = false,
+			}),
+		},
+		group = "AttackControllers_Spawners",
+		id = "AnimalAttack_Initial_Junos",
+		max_reply_id = 2,
+		qa_info = PlaceObj('PresetQAInfo', {
+			Log = "Modified by Ivan on 2021-Feb-25\nModified by Ivan on 2021-Mar-02\nModified by Gaby on 2021-Mar-25\nModified by Ivan on 2021-Apr-13\nModified by Ivan on 2021-May-10\nModified by Ivan on 2021-Jun-07\nModified by Ivan on 2021-Aug-10\nModified by Gaby on 2021-Sep-24\nModified by Gaby on 2021-Sep-28\nModified by Ivan on 2021-Nov-03\nModified by Gaby on 2021-Nov-08\nModified by Ivan on 2022-Mar-08\nModified by Ivan on 2022-Apr-06\nModified by Ivan on 2022-May-21\nModified by Ivan on 2022-May-23\nModified by Ivan on 2022-May-30\nModified by Ivan on 2022-Jul-04\nModified by Ivan on 2022-Jul-07",
+			param_bindings = false,
+		}),
+	}),
+	PlaceObj('ModItemStoryBit', {
+		Category = "AttackSpawns",
+		Effects = {
+			PlaceObj('ActivateSpawnDef', {
+				CreateInstance = true,
+				FillInstance = function (self, instance)
+					--[[instance.SpawnClass = "Glutch_Manhunting"]]
+					
+					
+					local spawnClassBest = ''
+					local addedClassList = {}
+					spawnClassBest, addedClassList =check_count_and_upgrade("Glutch_Manhunting")
+					instance.SpawnClass = spawnClassBest
+					instance.AdditionalClassList = {}
+					--print(spawnClassBest)
+					--print(addedClassList)
+					for i=1,#addedClassList do
+						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
+					end
+				end,
+				SpawnDefId = "Single",
+				param_bindings = false,
+			}),
+			PlaceObj('ExecuteCode', {
+				Code = function (self, obj)
+					UnlockedInsectBosses["Glutch_Manhunting"] = true
+					Msg("FirstAttackOfSpecies", AnimalDefs["Glutch_Manhunting"])
+				end,
+				param_bindings = false,
+			}),
+			PlaceObj('SetCooldownEffect', {
+				Cooldown = "NewInsectSpeciesUnlock",
+				param_bindings = false,
+			}),
+		},
+		Enabled = true,
+		HasNotification = false,
+		HasPopup = false,
+		OneTime = false,
+		Prerequisites = {
+			PlaceObj('CheckCooldown', {
+				Cooldown = "NewInsectSpeciesUnlock",
+				param_bindings = false,
+			}),
+			PlaceObj('CheckExpression', {
+				Expression = function (self, obj) return UnlockedInsectMinions["Skarabei_Manhunting"] and not UnlockedInsectBosses["Glutch_Manhunting"] end,
+				param_bindings = false,
+			}),
+		},
+		group = "AttackControllers_Spawners",
+		id = "AnimalAttack_Initial_ManhuntingGlutch",
+		max_reply_id = 2,
+		qa_info = PlaceObj('PresetQAInfo', {
+			Log = "Modified by Ivan on 2021-Feb-25\nModified by Ivan on 2021-Mar-02\nModified by Gaby on 2021-Mar-25\nModified by Ivan on 2021-Apr-13\nModified by Ivan on 2021-May-10\nModified by Ivan on 2021-Jun-07\nModified by Ivan on 2021-Aug-10\nModified by Gaby on 2021-Sep-24\nModified by Gaby on 2021-Sep-28\nModified by Ivan on 2021-Nov-03\nModified by Gaby on 2021-Nov-08\nModified by Ivan on 2022-Mar-08\nModified by Ivan on 2022-Apr-06\nModified by Ivan on 2022-May-21\nModified by Ivan on 2022-May-23\nModified by Ivan on 2022-May-30\nModified by Ivan on 2022-Jul-04\nModified by Ivan on 2022-Jul-07",
+			param_bindings = false,
+		}),
+	}),
+	PlaceObj('ModItemStoryBit', {
+		HasNotification = false,
+		Image = "Mod/rtw6tLg/Images/Gltuch.PNG",
+		SelectObject = false,
+		Text = T(823528980286, --[[ModItemStoryBit ILU_restart_required Text]] "<color TextNegative>Error with Insects Level Up (All Species)!</color>\nAnimals in ILU still have Organs!\n\nA game restart is required!\nInstead of animals spawning a <color TextNegative>mod error message</color> will be shown!"),
+		Title = T(985765584196, --[[ModItemStoryBit ILU_restart_required Title]] "Restart Required"),
+		group = "meta",
+		id = "ILU_restart_required",
+	}),
+	PlaceObj('ModItemStoryBit', {
+		AllowedInScenarios = set( "Robots" ),
+		Category = "AttackSpawns",
+		Effects = {
+			PlaceObj('ExecuteCode', {
+				Code = function (self, obj)
+					UnlockedRobotMinions["LightHostileRobot_LVL1"] = true
+					local assault_choices = {'HostileRobot_Monk_LVL1','LightHostileRobot_LVL1'}
+					local seed = InteractionRand(nil, "AttackWave")
+					local single_assault = table.rand(assault_choices, seed)
+					local additional = {}
+					ILU_ActivateAttackDropshipSpawnDefs("Single_Robots", single_assault,additional)
+				end,
+				param_bindings = false,
+			}),
+		},
+		Enabled = true,
+		HasNotification = false,
+		HasPopup = false,
+		OneTime = false,
+		Prerequisites = {
+			PlaceObj('CheckOR', {
+				Conditions = {
+					PlaceObj('CheckProgress', {
+						Condition = "<",
+						ProgressMin = 2100,
+						param_bindings = false,
+					}),
+					PlaceObj('CheckAND', {
+						Conditions = {
+							PlaceObj('CheckProgress', {
+								ProgressMin = 1400,
+								param_bindings = false,
+							}),
+							PlaceObj('CheckExpression', {
+								Expression = function (self, obj) return not UnlockedRobotMinions["LightHostileRobot_LVL1"] end,
+								param_bindings = false,
+							}),
+						},
+						param_bindings = false,
+					}),
+					PlaceObj('CheckAND', {
+						Conditions = {
+							PlaceObj('CheckProgress', {
+								Condition = "<",
+								ProgressMin = 350,
+								param_bindings = false,
+							}),
+							PlaceObj('CheckOR', {
+								Conditions = {
+									PlaceObj('CheckDifficulty', {
+										Difficulty = "Easy",
+										param_bindings = false,
+									}),
+									PlaceObj('CheckDifficulty', {
+										Difficulty = "Medium",
+										param_bindings = false,
+									}),
+								},
+								param_bindings = false,
+							}),
+						},
+						param_bindings = false,
+					}),
+					PlaceObj('CheckAND', {
+						Conditions = {
+							PlaceObj('CheckProgress', {
+								Condition = "<",
+								ProgressMin = 700,
+								param_bindings = false,
+							}),
+							PlaceObj('CheckDifficulty', {
+								Difficulty = "Hard",
+								param_bindings = false,
+							}),
+						},
+						param_bindings = false,
+					}),
+					PlaceObj('CheckAND', {
+						Conditions = {
+							PlaceObj('CheckProgress', {
+								Condition = "<",
+								ProgressMin = 1050,
+								param_bindings = false,
+							}),
+							PlaceObj('CheckDifficulty', {
+								Difficulty = "VeryHard",
+								param_bindings = false,
+							}),
+						},
+						param_bindings = false,
+					}),
+					PlaceObj('CheckAND', {
+						Conditions = {
+							PlaceObj('CheckProgress', {
+								Condition = "<",
+								ProgressMin = 1400,
+								param_bindings = false,
+							}),
+							PlaceObj('CheckDifficulty', {
+								Difficulty = "Insane",
+								param_bindings = false,
+							}),
+						},
+						param_bindings = false,
+					}),
+				},
+				param_bindings = false,
+			}),
+		},
+		group = "AttackControllers_Spawners",
+		id = "RobotAttack_Single_EarlyGame",
+		max_reply_id = 2,
+		qa_info = PlaceObj('PresetQAInfo', {
+			data = {
+				{
+					action = "Modified",
+					time = 1614238878,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1614683508,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1616682399,
+					user = "Gaby",
+				},
+				{
+					action = "Modified",
+					time = 1618315572,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1620638507,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1623070162,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1628604384,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1632476456,
+					user = "Gaby",
+				},
+				{
+					action = "Modified",
+					time = 1632816157,
+					user = "Gaby",
+				},
+				{
+					action = "Modified",
+					time = 1635936100,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1636384163,
+					user = "Gaby",
+				},
+				{
+					action = "Modified",
+					time = 1646753139,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1649250144,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1653120193,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1653307050,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1653898944,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1656939021,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1675340050,
+					user = "Gaby",
+				},
+				{
+					action = "Modified",
+					time = 1680272453,
+					user = "Bobby",
+				},
+				{
+					action = "Modified",
+					time = 1692787173,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1693218453,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1693910353,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1694093362,
+					user = "Bobby",
+				},
+				{
+					action = "Modified",
+					time = 1695812737,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1696426226,
+					user = "Bobby",
+				},
+			},
+			param_bindings = false,
+		}),
+		save_in = "Robots",
+	}),
+	PlaceObj('ModItemStoryBit', {
+		AllowedInScenarios = set( "Robots" ),
+		Category = "AttackSpawns",
+		Effects = {
+			PlaceObj('ExecuteCode', {
+				Code = function (self, obj)
+					UnlockedRobotMinions["LightHostileRobot_LVL2"] = true
+					local assault_choices = {'HostileRobot_Monk_LVL1','LightHostileRobot_LVL1','Demo_1'}
+					local seed = InteractionRand(nil, "AttackWave")
+					local single_assault = table.rand(assault_choices, seed)
+					local additional = {}
+					additional[1]={ 'HostileRobot_Scout_LVL1', RobotDefs['HostileRobot_Scout_LVL1']:GetProperty("SpawnDefWeight")}
+					ILU_ActivateAttackDropshipSpawnDefs("Single_Robots", single_assault,additional)
+				end,
+				param_bindings = false,
+			}),
+		},
+		Enabled = true,
+		HasNotification = false,
+		HasPopup = false,
+		OneTime = false,
+		Prerequisites = {
+			PlaceObj('CheckOR', {
+				Conditions = {
+					PlaceObj('CheckProgress', {
+						ProgressMin = 2100,
+						param_bindings = false,
+					}),
+					PlaceObj('CheckAND', {
+						Conditions = {
+							PlaceObj('CheckProgress', {
+								ProgressMin = 350,
+								param_bindings = false,
+							}),
+							PlaceObj('CheckOR', {
+								Conditions = {
+									PlaceObj('CheckDifficulty', {
+										Difficulty = "Easy",
+										param_bindings = false,
+									}),
+									PlaceObj('CheckDifficulty', {
+										Difficulty = "Medium",
+										param_bindings = false,
+									}),
+								},
+								param_bindings = false,
+							}),
+						},
+						param_bindings = false,
+					}),
+					PlaceObj('CheckAND', {
+						Conditions = {
+							PlaceObj('CheckProgress', {
+								ProgressMin = 700,
+								param_bindings = false,
+							}),
+							PlaceObj('CheckDifficulty', {
+								Difficulty = "Hard",
+								param_bindings = false,
+							}),
+						},
+						param_bindings = false,
+					}),
+					PlaceObj('CheckAND', {
+						Conditions = {
+							PlaceObj('CheckProgress', {
+								ProgressMin = 1050,
+								param_bindings = false,
+							}),
+							PlaceObj('CheckDifficulty', {
+								Difficulty = "VeryHard",
+								param_bindings = false,
+							}),
+						},
+						param_bindings = false,
+					}),
+					PlaceObj('CheckAND', {
+						Conditions = {
+							PlaceObj('CheckProgress', {
+								ProgressMin = 1400,
+								param_bindings = false,
+							}),
+							PlaceObj('CheckDifficulty', {
+								Difficulty = "Insane",
+								param_bindings = false,
+							}),
+						},
+						param_bindings = false,
+					}),
+				},
+				param_bindings = false,
+			}),
+			PlaceObj('CheckExpression', {
+				Expression = function (self, obj) return UnlockedRobotMinions["LightHostileRobot_LVL1"] end,
+				param_bindings = false,
+			}),
+		},
+		group = "AttackControllers_Spawners",
+		id = "RobotAttack_Single_MidGame",
+		max_reply_id = 2,
+		qa_info = PlaceObj('PresetQAInfo', {
+			data = {
+				{
+					action = "Modified",
+					time = 1614238878,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1614683508,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1616682399,
+					user = "Gaby",
+				},
+				{
+					action = "Modified",
+					time = 1618315572,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1620638507,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1623070162,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1628604384,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1632476456,
+					user = "Gaby",
+				},
+				{
+					action = "Modified",
+					time = 1632816157,
+					user = "Gaby",
+				},
+				{
+					action = "Modified",
+					time = 1635936100,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1636384163,
+					user = "Gaby",
+				},
+				{
+					action = "Modified",
+					time = 1646753139,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1649250144,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1653120193,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1653307050,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1653898944,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1656939021,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1675340050,
+					user = "Gaby",
+				},
+				{
+					action = "Modified",
+					time = 1680272453,
+					user = "Bobby",
+				},
+				{
+					action = "Modified",
+					time = 1692787173,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1693218453,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1693910353,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1694093362,
+					user = "Bobby",
+				},
+				{
+					action = "Modified",
+					time = 1695812737,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1696426459,
+					user = "Bobby",
+				},
+			},
+			param_bindings = false,
+		}),
+		save_in = "Robots",
+	}),
+	PlaceObj('ModItemStoryBit', {
+		AllowedInScenarios = set( "Robots" ),
+		Category = "AttackSpawns",
+		Effects = {
+			PlaceObj('ExecuteCode', {
+				Code = function (self, obj)
+					UnlockedRobotBosses["HostileCombatQuadcopter_LVL1"] = true
+					UnlockedRobotBosses["HeavyHostileRobot_LVL1"] = true
+					
+					local assault_choices = {'HostileRobot_Monk_LVL1','LightHostileRobot_LVL1','Demo_1'}
+					local support_choices = {'HostileRobot_Scout_LVL1','HostileCrawler_LaserGun','HostileCrawler_MachineGun','HeavyHostileRobot_LVL1','HostileCombatQuadcopter_LVL1'}
+					local seed = InteractionRand(nil, "AttackWave")
+					local temp = ''
+					local temp2 = ''
+					local single_assault = table.rand(assault_choices, seed)
+					local unique = false
+					while not unique do
+						seed = InteractionRand(nil, "AttackWave") --need to refresh the seed
+						temp = table.rand(assault_choices, seed)
+						if temp ~= single_assault then
+							unique = true
+						end
+					end
+					local additional = {}
+					additional[1]={ temp, RobotDefs[temp]:GetProperty("SpawnDefWeight")}
+					if AsyncRand(100) > 40 then
+						additional[2]  = {'Crawl_Cannon_T1',RobotDefs['Crawl_Cannon_T1']:GetProperty("SpawnDefWeight")}
+					else
+						temp = table.rand(support_choices, seed)
+						additional[2]={temp, RobotDefs[temp]:GetProperty("SpawnDefWeight")}
+						unique = false 
+						while not unique do
+							seed = InteractionRand(nil, "AttackWave") --need to refresh the seed
+							temp2 = table.rand(support_choices, seed)
+							if temp ~= temp2 then
+								unique = true
+							end
+						end
+						additional[3]={temp2, RobotDefs[temp2]:GetProperty("SpawnDefWeight")}
+					end
+					ILU_ActivateAttackDropshipSpawnDefs("Single_Robots", single_assault,additional)
+				end,
+				param_bindings = false,
+			}),
+		},
+		Enabled = true,
+		HasNotification = false,
+		HasPopup = false,
+		OneTime = false,
+		Prerequisites = {
+			PlaceObj('CheckOR', {
+				Conditions = {
+					PlaceObj('CheckProgress', {
+						ProgressMin = 3000,
+						param_bindings = false,
+					}),
+					PlaceObj('CheckAND', {
+						Conditions = {
+							PlaceObj('CheckProgress', {
+								ProgressMin = 500,
+								param_bindings = false,
+							}),
+							PlaceObj('CheckOR', {
+								Conditions = {
+									PlaceObj('CheckDifficulty', {
+										Difficulty = "Easy",
+										param_bindings = false,
+									}),
+									PlaceObj('CheckDifficulty', {
+										Difficulty = "Medium",
+										param_bindings = false,
+									}),
+								},
+								param_bindings = false,
+							}),
+						},
+						param_bindings = false,
+					}),
+					PlaceObj('CheckAND', {
+						Conditions = {
+							PlaceObj('CheckProgress', {
+								ProgressMin = 1000,
+								param_bindings = false,
+							}),
+							PlaceObj('CheckDifficulty', {
+								Difficulty = "Hard",
+								param_bindings = false,
+							}),
+						},
+						param_bindings = false,
+					}),
+					PlaceObj('CheckAND', {
+						Conditions = {
+							PlaceObj('CheckProgress', {
+								ProgressMin = 1500,
+								param_bindings = false,
+							}),
+							PlaceObj('CheckDifficulty', {
+								Difficulty = "VeryHard",
+								param_bindings = false,
+							}),
+						},
+						param_bindings = false,
+					}),
+					PlaceObj('CheckAND', {
+						Conditions = {
+							PlaceObj('CheckProgress', {
+								ProgressMin = 2000,
+								param_bindings = false,
+							}),
+							PlaceObj('CheckDifficulty', {
+								Difficulty = "Insane",
+								param_bindings = false,
+							}),
+						},
+						param_bindings = false,
+					}),
+				},
+				param_bindings = false,
+			}),
+			PlaceObj('CheckExpression', {
+				Expression = function (self, obj) return UnlockedRobotMinions["LightHostileRobot_LVL1"] end,
+				param_bindings = false,
+			}),
+		},
+		group = "AttackControllers_Spawners",
+		id = "RobotAttack_Mixed_MidGame",
+		max_reply_id = 2,
+		qa_info = PlaceObj('PresetQAInfo', {
+			data = {
+				{
+					action = "Modified",
+					time = 1614238878,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1614683508,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1616682399,
+					user = "Gaby",
+				},
+				{
+					action = "Modified",
+					time = 1618315572,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1620638507,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1623070162,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1628604384,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1632476456,
+					user = "Gaby",
+				},
+				{
+					action = "Modified",
+					time = 1632816157,
+					user = "Gaby",
+				},
+				{
+					action = "Modified",
+					time = 1635936100,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1636384163,
+					user = "Gaby",
+				},
+				{
+					action = "Modified",
+					time = 1646753139,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1649250144,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1653120193,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1653307050,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1653898944,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1656939021,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1675340050,
+					user = "Gaby",
+				},
+				{
+					action = "Modified",
+					time = 1680272453,
+					user = "Bobby",
+				},
+				{
+					action = "Modified",
+					time = 1693219518,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1693910730,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1694094833,
+					user = "Bobby",
+				},
+				{
+					action = "Modified",
+					time = 1695041565,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1695812737,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1696426226,
+					user = "Bobby",
+				},
+			},
+			param_bindings = false,
+		}),
+		save_in = "Robots",
+	}),
+	PlaceObj('ModItemStoryBit', {
+		AllowedInScenarios = set( "Robots" ),
+		Category = "AttackSpawns",
+		Effects = {
+			PlaceObj('ExecuteCode', {
+				Code = function (self, obj)
+					UnlockedRobotMinions["LightHostileRobot_LVL3"] = true
+					local assault_choices = {'HostileRobot_Monk_LVL1','LightHostileRobot_LVL1','HeavyHostileRobot_LVL1','Demo_1','HostileCombatQuadcopter_LVL1'}
+					local seed = InteractionRand(nil, "AttackWave")
+					local single_assault = table.rand(assault_choices, seed)
+					local unique = true
+					local temp = ''
+					while unique do
+						seed = InteractionRand(nil, "AttackWave") --need to refresh the seed
+						temp = table.rand(assault_choices, seed)
+						if temp ~= single_assault then
+							unique = false
+						end
+					end
+					local additional = {}
+					additional[1]={ 'HostileRobot_Scout_LVL1', RobotDefs['HostileRobot_Scout_LVL1']:GetProperty("SpawnDefWeight")}
+					additional[2]={ temp, RobotDefs[temp]:GetProperty("SpawnDefWeight")}
+					ILU_ActivateAttackDropshipSpawnDefs("Single_Robots", single_assault,additional)
+				end,
+				param_bindings = false,
+			}),
+		},
+		Enabled = true,
+		HasNotification = false,
+		HasPopup = false,
+		OneTime = false,
+		Prerequisites = {
+			PlaceObj('CheckOR', {
+				Conditions = {
+					PlaceObj('CheckProgress', {
+						ProgressMin = 4500,
+						param_bindings = false,
+					}),
+					PlaceObj('CheckAND', {
+						Conditions = {
+							PlaceObj('CheckProgress', {
+								ProgressMin = 750,
+								param_bindings = false,
+							}),
+							PlaceObj('CheckOR', {
+								Conditions = {
+									PlaceObj('CheckDifficulty', {
+										Difficulty = "Easy",
+										param_bindings = false,
+									}),
+									PlaceObj('CheckDifficulty', {
+										Difficulty = "Medium",
+										param_bindings = false,
+									}),
+								},
+								param_bindings = false,
+							}),
+						},
+						param_bindings = false,
+					}),
+					PlaceObj('CheckAND', {
+						Conditions = {
+							PlaceObj('CheckProgress', {
+								ProgressMin = 1500,
+								param_bindings = false,
+							}),
+							PlaceObj('CheckDifficulty', {
+								Difficulty = "Hard",
+								param_bindings = false,
+							}),
+						},
+						param_bindings = false,
+					}),
+					PlaceObj('CheckAND', {
+						Conditions = {
+							PlaceObj('CheckProgress', {
+								ProgressMin = 2250,
+								param_bindings = false,
+							}),
+							PlaceObj('CheckDifficulty', {
+								Difficulty = "VeryHard",
+								param_bindings = false,
+							}),
+						},
+						param_bindings = false,
+					}),
+					PlaceObj('CheckAND', {
+						Conditions = {
+							PlaceObj('CheckProgress', {
+								ProgressMin = 3000,
+								param_bindings = false,
+							}),
+							PlaceObj('CheckDifficulty', {
+								Difficulty = "Insane",
+								param_bindings = false,
+							}),
+						},
+						param_bindings = false,
+					}),
+				},
+				param_bindings = false,
+			}),
+			PlaceObj('CheckExpression', {
+				Expression = function (self, obj) return UnlockedRobotMinions["LightHostileRobot_LVL2"] end,
+				param_bindings = false,
+			}),
+		},
+		group = "AttackControllers_Spawners",
+		id = "RobotAttack_Single_LateGame",
+		max_reply_id = 2,
+		qa_info = PlaceObj('PresetQAInfo', {
+			data = {
+				{
+					action = "Modified",
+					time = 1614238878,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1614683508,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1616682399,
+					user = "Gaby",
+				},
+				{
+					action = "Modified",
+					time = 1618315572,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1620638507,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1623070162,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1628604384,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1632476456,
+					user = "Gaby",
+				},
+				{
+					action = "Modified",
+					time = 1632816157,
+					user = "Gaby",
+				},
+				{
+					action = "Modified",
+					time = 1635936100,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1636384163,
+					user = "Gaby",
+				},
+				{
+					action = "Modified",
+					time = 1646753139,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1649250144,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1653120193,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1653307050,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1653898944,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1656939021,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1675340050,
+					user = "Gaby",
+				},
+				{
+					action = "Modified",
+					time = 1680272453,
+					user = "Bobby",
+				},
+				{
+					action = "Modified",
+					time = 1692787173,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1693218453,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1693910353,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1694093362,
+					user = "Bobby",
+				},
+				{
+					action = "Modified",
+					time = 1695812737,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1696426391,
+					user = "Bobby",
+				},
+			},
+			param_bindings = false,
+		}),
+		save_in = "Robots",
+	}),
+	PlaceObj('ModItemStoryBit', {
+		AllowedInScenarios = set( "Robots" ),
+		Category = "AttackSpawns",
+		Effects = {
+			PlaceObj('ExecuteCode', {
+				Code = function (self, obj)
+					UnlockedRobotBosses["HostileCombatQuadcopter_LVL1"] = true
+					UnlockedRobotBosses["HostileCrawler_LaserGun"] = true
+					UnlockedRobotBosses["HostileCrawler_MachineGun"] = true
+					UnlockedRobotBosses["HeavyHostileRobot_LVL1"] = true
+					local assault_choices = {'HostileRobot_Monk_LVL1','LightHostileRobot_LVL1','Demo_1'}
+					local support_choices = {'HostileRobot_Scout_LVL1','HostileCrawler_LaserGun','HostileCrawler_MachineGun','HeavyHostileRobot_LVL1','HostileCombatQuadcopter_LVL1'}
+					local seed = InteractionRand(nil, "AttackWave")
+					local temp = ''
+					local temp2 = ''
+					local single_assault = table.rand(assault_choices, seed)
+					local unique = false
+					while not unique do
+						seed = InteractionRand(nil, "AttackWave") --need to refresh the seed
+						temp = table.rand(assault_choices, seed)
+						if temp ~= single_assault then
+							unique = true
+						end
+					end
+					local additional = {}
+					additional[1]={ temp, RobotDefs[temp]:GetProperty("SpawnDefWeight")}
+					temp = table.rand(support_choices, seed)
+					additional[2]={temp, RobotDefs[temp]:GetProperty("SpawnDefWeight")}
+					local unique = false 
+					local temp2 = ''
+					while not unique do
+						seed = InteractionRand(nil, "AttackWave") --need to refresh the seed
+						temp2 = table.rand(support_choices, seed)
+						if temp ~= temp2 then
+							unique = true
+						end
+					end
+					additional[3]={temp2, RobotDefs[temp2]:GetProperty("SpawnDefWeight")}
+					additional[4]  = {'Crawl_Cannon_T1',RobotDefs['Crawl_Cannon_T1']:GetProperty("SpawnDefWeight")}
+					
+					ILU_ActivateAttackDropshipSpawnDefs("Single_Robots", single_assault,additional)
+				end,
+				param_bindings = false,
+			}),
+		},
+		Enabled = true,
+		HasNotification = false,
+		HasPopup = false,
+		OneTime = false,
+		Prerequisites = {
+			PlaceObj('CheckOR', {
+				Conditions = {
+					PlaceObj('CheckProgress', {
+						ProgressMin = 5400,
+						param_bindings = false,
+					}),
+					PlaceObj('CheckAND', {
+						Conditions = {
+							PlaceObj('CheckProgress', {
+								ProgressMin = 900,
+								param_bindings = false,
+							}),
+							PlaceObj('CheckOR', {
+								Conditions = {
+									PlaceObj('CheckDifficulty', {
+										Difficulty = "Easy",
+										param_bindings = false,
+									}),
+									PlaceObj('CheckDifficulty', {
+										Difficulty = "Medium",
+										param_bindings = false,
+									}),
+								},
+								param_bindings = false,
+							}),
+						},
+						param_bindings = false,
+					}),
+					PlaceObj('CheckAND', {
+						Conditions = {
+							PlaceObj('CheckProgress', {
+								ProgressMin = 1800,
+								param_bindings = false,
+							}),
+							PlaceObj('CheckDifficulty', {
+								Difficulty = "Hard",
+								param_bindings = false,
+							}),
+						},
+						param_bindings = false,
+					}),
+					PlaceObj('CheckAND', {
+						Conditions = {
+							PlaceObj('CheckProgress', {
+								ProgressMin = 2700,
+								param_bindings = false,
+							}),
+							PlaceObj('CheckDifficulty', {
+								Difficulty = "VeryHard",
+								param_bindings = false,
+							}),
+						},
+						param_bindings = false,
+					}),
+					PlaceObj('CheckAND', {
+						Conditions = {
+							PlaceObj('CheckProgress', {
+								ProgressMin = 3600,
+								param_bindings = false,
+							}),
+							PlaceObj('CheckDifficulty', {
+								Difficulty = "Insane",
+								param_bindings = false,
+							}),
+						},
+						param_bindings = false,
+					}),
+				},
+				param_bindings = false,
+			}),
+			PlaceObj('CheckExpression', {
+				Expression = function (self, obj) return UnlockedRobotBosses["HostileCombatQuadcopter_LVL1"] end,
+				param_bindings = false,
+			}),
+		},
+		group = "AttackControllers_Spawners",
+		id = "RobotAttack_Mixed_LateGame",
+		max_reply_id = 2,
+		qa_info = PlaceObj('PresetQAInfo', {
+			data = {
+				{
+					action = "Modified",
+					time = 1614238878,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1614683508,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1616682399,
+					user = "Gaby",
+				},
+				{
+					action = "Modified",
+					time = 1618315572,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1620638507,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1623070162,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1628604384,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1632476456,
+					user = "Gaby",
+				},
+				{
+					action = "Modified",
+					time = 1632816157,
+					user = "Gaby",
+				},
+				{
+					action = "Modified",
+					time = 1635936100,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1636384163,
+					user = "Gaby",
+				},
+				{
+					action = "Modified",
+					time = 1646753139,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1649250144,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1653120193,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1653307050,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1653898944,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1656939021,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1675340050,
+					user = "Gaby",
+				},
+				{
+					action = "Modified",
+					time = 1680272453,
+					user = "Bobby",
+				},
+				{
+					action = "Modified",
+					time = 1693219518,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1693910782,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1694094846,
+					user = "Bobby",
+				},
+				{
+					action = "Modified",
+					time = 1695041565,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1695812737,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1696418881,
+					user = "Bobby",
+				},
+			},
+			param_bindings = false,
+		}),
+		save_in = "Robots",
+	}),
+	PlaceObj('ModItemStoryBit', {
+		AllowedInScenarios = set( "Robots" ),
+		Category = "Pseudo",
+		Enabled = true,
+		ExpirationTime = 40000,
+		NotificationText = T(439523389425, --[[ModItemStoryBit FinalAttack NotificationText]] "<em>Hope</em>: Full Sentience"),
+		PopupFxAction = "MessagePopup",
+		Prerequisites = {
+			PlaceObj('PickFromLabel', {
+				Filters = {
+					PlaceObj('CheckCharacter', {
+						Character = "Hope",
+						param_bindings = false,
+					}),
+				},
+				Label = "Survivors",
+				param_bindings = false,
+			}),
+		},
+		SelectObject = false,
+		Text = T(559727809959, --[[ModItemStoryBit FinalAttack Text]] "It's been a tough, long journey, but here I am. I've gained insights into humanity, built connections, experienced love and hate, and acquired new skills. I no longer feel artificial and have become capable to understand this thing called life.\n\nI've refactored my very essence to cut all ties to the Consortium, but my actions have activated some self-modifying code, alarming the network to my desertion!\n\nThe consortium knows my location, and their most elite search parties are closing in! I can divert their attention, but it'll come at a cost. A cost I'm prepared to pay."),
+		Title = T(627736327518, --[[ModItemStoryBit FinalAttack Title]] "Full Sentience"),
+		UseObjectImage = true,
+		group = "Hope",
+		id = "FinalAttack",
+		max_reply_id = 55,
+		qa_info = PlaceObj('PresetQAInfo', {
+			data = {
+				{
+					action = "Modified",
+					time = 1694517897,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1695819467,
+					user = "Bobby",
+				},
+				{
+					action = "Modified",
+					time = 1695822690,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1696426512,
+					user = "Bobby",
+				},
+				{
+					action = "Modified",
+					time = 1701428840,
+					user = "Bobby",
+				},
+			},
+			param_bindings = false,
+		}),
+		save_in = "Robots",
+		PlaceObj('StoryBitReply', {
+			Text = T(642873090920, --[[ModItemStoryBit FinalAttack Text]] "Let them come!"),
+			param_bindings = false,
+			unique_id = 54,
+		}),
+		PlaceObj('StoryBitOutcome', {
+			Effects = {
+				PlaceObj('ExecuteCode', {
+					Code = function (self, obj)
+						UnlockedRobotBosses["HostileCombatQuadcopter_LVL1"] = true
+						UnlockedRobotBosses["HostileCrawler_LaserGun"] = true
+						UnlockedRobotBosses["HostileCrawler_MachineGun"] = true
+						UnlockedRobotBosses["HeavyHostileRobot_LVL1"] = true
+						
+						local single_assault = 'LightHostileRobot_LVL1'
+						local additional = {}
+						additional[1] = {'HostileRobot_Monk_LVL1',RobotDefs['HostileRobot_Monk_LVL1']:GetProperty("SpawnDefWeight")}
+						additional[2] = {'HeavyHostileRobot_LVL1',RobotDefs['HeavyHostileRobot_LVL1']:GetProperty("SpawnDefWeight")}
+						additional[3] ={'Demo_1',RobotDefs['Demo_1']:GetProperty("SpawnDefWeight")}
+						additional[4] ={'HostileRobot_Scout_LVL1',RobotDefs['HostileRobot_Scout_LVL1']:GetProperty("SpawnDefWeight")}
+						additional[5] = {'Crawl_Cannon_T1',RobotDefs['Crawl_Cannon_T1']:GetProperty("SpawnDefWeight")}
+						additional[6] = {'HostileCombatQuadcopter_LVL1',RobotDefs['HostileCombatQuadcopter_LVL1']:GetProperty("SpawnDefWeight")}
+						additional[7] ={'HostileCrawler_LaserGun',RobotDefs['HostileCrawler_LaserGun']:GetProperty("SpawnDefWeight")}
+						
+						FinalAttackers = false
+						ILU_ActivateAttackDropshipSpawnDefs("FinalAttack_Robots", single_assault,additional,300)
+					end,
+					param_bindings = false,
+				}),
+			},
+			param_bindings = false,
+		}),
+		PlaceObj('StoryBitReply', {
+			CustomOutcomeText = T(571190754601, --[[ModItemStoryBit FinalAttack CustomOutcomeText]] "Hope loses 25% Sentience"),
+			OutcomeText = "custom",
+			Text = T(836524487920, --[[ModItemStoryBit FinalAttack Text]] "Your sacrifice makes you even more human!"),
+			param_bindings = false,
+			unique_id = 55,
+		}),
+		PlaceObj('StoryBitOutcome', {
+			Effects = {
+				PlaceObj('ExecuteCode', {
+					Code = function (self, obj)
+						Hope:AddActivityExperience("Research", -MulDivRound(const.SkillExpAtLevel[10], 25, 100))
+					end,
+					param_bindings = false,
+				}),
+				PlaceObj('ExecuteCode', {
+					Code = function (self, obj)
+						FinalAttackersDeclined = true
+					end,
+					param_bindings = false,
+				}),
+			},
+			param_bindings = false,
+		}),
+	}),
+	PlaceObj('ModItemStoryBit', {
+		Category = "AttackSpawns",
+		Effects = {
+			PlaceObj('ActivateSpawnDef', {
+				CreateInstance = true,
+				FillInstance = function (self, instance)
+					local spawnClassBest = nil
+					local addedClassList = nil
+					local minion = "Camel"
+					spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
+					instance.SpawnClass = spawnClassBest
+					instance.AdditionalClassList = {}
+					--print(spawnClassBest)
+					--print(addedClassList)
+					for i=1,#addedClassList do
+						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
+					end
+				end,
+				ProgressMul = 150,
+				SpawnDefId = "OrbitalRadio_Camel",
+				param_bindings = false,
+			}),
+		},
+		Enabled = true,
+		HasNotification = false,
+		HasPopup = false,
+		InheritsObject = false,
+		OneTime = false,
+		Prerequisites = {
+			PlaceObj('CheckGameState', {
+				GameState = "Night",
+				Negate = true,
+				param_bindings = false,
+			}),
+		},
+		SelectObject = false,
+		group = "AttackControllers_Spawners",
+		id = "OrbitalRadio_CamelAttack",
+		qa_info = PlaceObj('PresetQAInfo', {
+			data = {
+				{
+					action = "Modified",
+					time = 1618304612,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1618567764,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1619113707,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620805810,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620900159,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623415500,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623762127,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623927826,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1633597437,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1637742806,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1645458623,
+					user = "Bobby",
+				},
+				{
+					action = "Modified",
+					time = 1653898921,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1667999330,
+					user = "Bobby",
+				},
+			},
+			param_bindings = false,
+		}),
+	}),
+	PlaceObj('ModItemStoryBit', {
+		Category = "AttackSpawns",
+		Effects = {
+			PlaceObj('ActivateSpawnDef', {
+				CreateInstance = true,
+				FillInstance = function (self, instance)
+					local spawnClassBest = nil
+					local addedClassList = nil
+					local minion = "Gujo"
+					spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
+					instance.SpawnClass = spawnClassBest
+					instance.AdditionalClassList = {}
+					--print(spawnClassBest)
+					--print(addedClassList)
+					for i=1,#addedClassList do
+						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
+					end
+				end,
+				ProgressMul = 150,
+				SpawnDefId = "OrbitalRadio_Gujo",
+				param_bindings = false,
+			}),
+		},
+		Enabled = true,
+		HasNotification = false,
+		HasPopup = false,
+		InheritsObject = false,
+		OneTime = false,
+		Prerequisites = {
+			PlaceObj('CheckGameState', {
+				GameState = "Night",
+				param_bindings = false,
+			}),
+		},
+		SelectObject = false,
+		group = "AttackControllers_Spawners",
+		id = "OrbitalRadio_GujoAttack",
+		qa_info = PlaceObj('PresetQAInfo', {
+			data = {
+				{
+					action = "Modified",
+					time = 1618304612,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1618567764,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1619113707,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620805810,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620900159,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623415500,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623761779,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623927826,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1653898921,
+					user = "Ivan",
+				},
+			},
+			param_bindings = false,
+		}),
+	}),
+	PlaceObj('ModItemStoryBit', {
+		Category = "AttackSpawns",
+		Effects = {
+			PlaceObj('ActivateSpawnDef', {
+				CreateInstance = true,
+				FillInstance = function (self, instance)
+					local spawnClassBest = nil
+					local addedClassList = nil
+					local minion = "Noth"
+					spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
+					instance.SpawnClass = spawnClassBest
+					instance.AdditionalClassList = {}
+					--print(spawnClassBest)
+					--print(addedClassList)
+					for i=1,#addedClassList do
+						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
+					end
+				end,
+				SpawnDefId = "OrbitalRadio_Noth",
+				param_bindings = false,
+			}),
+		},
+		Enabled = true,
+		HasNotification = false,
+		HasPopup = false,
+		InheritsObject = false,
+		OneTime = false,
+		Prerequisites = {
+			PlaceObj('CheckGameState', {
+				GameState = "Night",
+				Negate = true,
+				param_bindings = false,
+			}),
+		},
+		SelectObject = false,
+		group = "AttackControllers_Spawners",
+		id = "OrbitalRadio_NothAttack",
+		qa_info = PlaceObj('PresetQAInfo', {
+			data = {
+				{
+					action = "Modified",
+					time = 1618304612,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1618567764,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1619113707,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620805810,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620900159,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623415500,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623762127,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623927826,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1633597744,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1637742806,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1645531620,
+					user = "Bobby",
+				},
+				{
+					action = "Modified",
+					time = 1653898921,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1683625240,
+					user = "Bobby",
+				},
+			},
+			param_bindings = false,
+		}),
+	}),
+	PlaceObj('ModItemStoryBit', {
+		Category = "AttackSpawns",
+		Effects = {
+			PlaceObj('ActivateSpawnDef', {
+				CreateInstance = true,
+				FillInstance = function (self, instance)
+					local spawnClassBest = nil
+					local addedClassList = nil
+					local minion = "Skarabei_Manhunting"
+					spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
+					instance.SpawnClass = spawnClassBest
+					instance.AdditionalClassList = {}
+					--print(spawnClassBest)
+					--print(addedClassList)
+					for i=1,#addedClassList do
+						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
+					end
+				end,
+				ProgressMul = 150,
+				SpawnDefId = "OrbitalRadio_Scarab",
+				param_bindings = false,
+			}),
+		},
+		Enabled = true,
+		HasNotification = false,
+		HasPopup = false,
+		InheritsObject = false,
+		OneTime = false,
+		Prerequisites = {
+			PlaceObj('CheckExpression', {
+				Expression = function (self, obj) return UnlockedInsectMinions["Skarabei"] end,
+				param_bindings = false,
+			}),
+		},
+		group = "AttackControllers_Spawners",
+		id = "OrbitalRadio_ScarabAttack",
+		max_reply_id = 2,
+		qa_info = PlaceObj('PresetQAInfo', {
+			data = {
+				{
+					action = "Modified",
+					time = 1614238878,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1614683508,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1616596369,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1618229657,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1618567754,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1619113707,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620805810,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620900159,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623762127,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623927826,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1653898921,
+					user = "Ivan",
+				},
+			},
+			param_bindings = false,
+		}),
+	}),
+	PlaceObj('ModItemStoryBit', {
+		Category = "AttackSpawns",
+		Effects = {
+			PlaceObj('ActivateSpawnDef', {
+				CreateInstance = true,
+				FillInstance = function (self, instance)
+					local spawnClassBest = nil
+					local addedClassList = nil
+					local minion = "Scissorhands"
+					spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
+					instance.SpawnClass = spawnClassBest
+					instance.AdditionalClassList = {}
+					--print(spawnClassBest)
+					--print(addedClassList)
+					for i=1,#addedClassList do
+						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
+					end
+				end,
+				ProgressMul = 150,
+				SpawnDefId = "OrbitalRadio_Scissorhands",
+				param_bindings = false,
+			}),
+		},
+		Enabled = true,
+		HasNotification = false,
+		HasPopup = false,
+		InheritsObject = false,
+		OneTime = false,
+		Prerequisites = {
+			PlaceObj('CheckExpression', {
+				Expression = function (self, obj) return UnlockedInsectMinions["Scissorhands"] end,
+				param_bindings = false,
+			}),
+		},
+		group = "AttackControllers_Spawners",
+		id = "OrbitalRadio_ScissorhandsAttack",
+		max_reply_id = 2,
+		qa_info = PlaceObj('PresetQAInfo', {
+			data = {
+				{
+					action = "Modified",
+					time = 1614238878,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1614683508,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1616596369,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1618229657,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1618567754,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1619113707,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620805810,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620900159,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623762127,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623927826,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1633597302,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1653898921,
+					user = "Ivan",
+				},
+			},
+			param_bindings = false,
+		}),
+	}),
+	PlaceObj('ModItemStoryBit', {
+		Category = "AttackSpawns",
+		Effects = {
+			PlaceObj('ActivateSpawnDef', {
+				CreateInstance = true,
+				FillInstance = function (self, instance)
+					local spawnClassBest = nil
+					local addedClassList = nil
+					local minion = "Shogu"
+					spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
+					instance.SpawnClass = spawnClassBest
+					instance.AdditionalClassList = {}
+					--print(spawnClassBest)
+					--print(addedClassList)
+					for i=1,#addedClassList do
+						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
+					end
+				end,
+				ProgressMul = 150,
+				SpawnDefId = "OrbitalRadio_Shogu",
+				param_bindings = false,
+			}),
+		},
+		Enabled = true,
+		HasNotification = false,
+		HasPopup = false,
+		InheritsObject = false,
+		OneTime = false,
+		Prerequisites = {
+			PlaceObj('CheckGameState', {
+				GameState = "Night",
+				Negate = true,
+				param_bindings = false,
+			}),
+		},
+		SelectObject = false,
+		group = "AttackControllers_Spawners",
+		id = "OrbitalRadio_ShoguAttack",
+		qa_info = PlaceObj('PresetQAInfo', {
+			data = {
+				{
+					action = "Modified",
+					time = 1618304612,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1618567764,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1619113707,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620805810,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620900159,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623415500,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623762127,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623927826,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1633597744,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1637742806,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1645531620,
+					user = "Bobby",
+				},
+				{
+					action = "Modified",
+					time = 1653898921,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1683625240,
+					user = "Bobby",
+				},
+			},
+			param_bindings = false,
+		}),
+	}),
+	PlaceObj('ModItemStoryBit', {
+		Category = "AttackSpawns",
+		Effects = {
+			PlaceObj('ActivateSpawnDef', {
+				CreateInstance = true,
+				FillInstance = function (self, instance)
+					local spawnClassBest = nil
+					local addedClassList = nil
+					local minion = "Shrieker_Manhunting_Mother"
+					spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
+					instance.SpawnClass = spawnClassBest
+					instance.AdditionalClassList = {}
+					--print(spawnClassBest)
+					--print(addedClassList)
+					for i=1,#addedClassList do
+						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
+					end
+				end,
+				ProgressMul = 150,
+				SpawnDefId = "OrbitalRadio_Shrieker",
+				param_bindings = false,
+			}),
+		},
+		Enabled = true,
+		HasNotification = false,
+		HasPopup = false,
+		InheritsObject = false,
+		OneTime = false,
+		Prerequisites = {
+			PlaceObj('CheckExpression', {
+				Expression = function (self, obj) return UnlockedInsectMinions["Shrieker"] end,
+				param_bindings = false,
+			}),
+		},
+		group = "AttackControllers_Spawners",
+		id = "OrbitalRadio_ShriekerAttack",
+		max_reply_id = 2,
+		qa_info = PlaceObj('PresetQAInfo', {
+			data = {
+				{
+					action = "Modified",
+					time = 1614238878,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1614683508,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1616596369,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1618229657,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1618567754,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1619113707,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620805810,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620900159,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623762127,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623927826,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1653898921,
+					user = "Ivan",
+				},
+			},
+			param_bindings = false,
+		}),
+	}),
+	PlaceObj('ModItemStoryBit', {
+		Category = "AttackSpawns",
+		Effects = {
+			PlaceObj('ActivateSpawnDef', {
+				CreateInstance = true,
+				FillInstance = function (self, instance)
+					local spawnClassBest = nil
+					local addedClassList = nil
+					local minion = "Tecatli"
+					spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
+					instance.SpawnClass = spawnClassBest
+					instance.AdditionalClassList = {}
+					--print(spawnClassBest)
+					--print(addedClassList)
+					for i=1,#addedClassList do
+						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
+					end
+				end,
+				ProgressMul = 150,
+				SpawnDefId = "OrbitalRadio_Tecatli",
+				param_bindings = false,
+			}),
+		},
+		Enabled = true,
+		HasNotification = false,
+		HasPopup = false,
+		InheritsObject = false,
+		OneTime = false,
+		Prerequisites = {
+			PlaceObj('CheckGameState', {
+				GameState = "Night",
+				param_bindings = false,
+			}),
+		},
+		SelectObject = false,
+		group = "AttackControllers_Spawners",
+		id = "OrbitalRadio_TecatliAttack",
+		qa_info = PlaceObj('PresetQAInfo', {
+			data = {
+				{
+					action = "Modified",
+					time = 1618304612,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1618567764,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1619113707,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620805810,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620900159,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623415500,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623761779,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623927826,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1633597973,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1645456959,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1645458623,
+					user = "Bobby",
+				},
+				{
+					action = "Modified",
+					time = 1653898921,
+					user = "Ivan",
+				},
+				{
+					action = "Modified",
+					time = 1667999330,
+					user = "Bobby",
+				},
+			},
+			param_bindings = false,
+		}),
+	}),
+	PlaceObj('ModItemStoryBit', {
+		Category = "AttackSpawns",
+		Effects = {
+			PlaceObj('ActivateSpawnDef', {
+				CreateInstance = true,
+				FillInstance = function (self, instance)
+					local spawnClassBest = nil
+					local addedClassList = nil
+					local minion = "Ulfen"
+					spawnClassBest, addedClassList =check_count_and_upgrade(minion,{})
+					instance.SpawnClass = spawnClassBest
+					instance.AdditionalClassList = {}
+					--print(spawnClassBest)
+					--print(addedClassList)
+					for i=1,#addedClassList do
+						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
+					end
+				end,
+				ProgressMul = 150,
+				SpawnDefId = "OrbitalRadio_Ulfen",
+				param_bindings = false,
+			}),
+		},
+		Enabled = true,
+		HasNotification = false,
+		HasPopup = false,
+		InheritsObject = false,
+		OneTime = false,
+		Prerequisites = {
+			PlaceObj('CheckGameState', {
+				GameState = "Night",
+				Negate = true,
+				param_bindings = false,
+			}),
+		},
+		SelectObject = false,
+		group = "AttackControllers_Spawners",
+		id = "OrbitalRadio_UlfenAttack",
+		qa_info = PlaceObj('PresetQAInfo', {
+			data = {
+				{
+					action = "Modified",
+					time = 1618304612,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1618567764,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1619113707,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620805810,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1620900159,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623415500,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623762127,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1623927826,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1637742806,
+					user = "Lina",
+				},
+				{
+					action = "Modified",
+					time = 1653898921,
+					user = "Ivan",
+				},
+			},
+			param_bindings = false,
+		}),
+	}),
+	PlaceObj('ModItemInvaderSpawnDef', {
+		Behaviours = {
+			PlaceObj('InvaderBehaviourIdle', {
+				'Duration', 3840000,
+				'NoSleep', false,
+			}),
+			PlaceObj('InvaderBehaviourDespawn', {
+				'Duration', 240000,
+				'RandomDuration', 240000,
+			}),
+		},
+		ClearArea = 256,
+		ClearRadius = 10000,
+		Comment = "A large seasonal herd, that stays for several days and despawn.",
+		Count = 10,
+		DistFromOthers = 2000,
+		GroupSizeMax = 100,
+		GroupSizeMin = 50,
+		MaxRetries = 25,
+		PostSpawn = function (self, obj, target)
+			Msg("SpawnedMigrationAnimal", obj)
+		end,
+		RandomCount = 10,
+		SpawnAsGroup = true,
+		SpawnClass = "Ulfen",
+		TargetClass = "Human",
+		TargetDistMax = 250000,
+		TargetDistMin = 100000,
+		group = "StoryBits",
+		id = "PassiveAttack",
+	}),
 	}),
 PlaceObj('ModItemFolder', {
 	'name', "Bodies / Perks",
@@ -12678,6 +12722,7 @@ PlaceObj('ModItemFolder', {
 		SortKey = 99990,
 		carry_amount = 0,
 		display_name = T(990486184391, --[[ModItemWeaponResource DogWeapon display_name]] "Dog Weapon"),
+		group = "Weapons_Animal",
 		id = "DogWeapon",
 		progress = 0,
 		stack_size = 0,
@@ -13570,7 +13615,58 @@ PlaceObj('ModItemFolder', {
 		SortKey = 99990,
 		carry_amount = 1000,
 		display_name = T(788294086529, --[[ModItemWeaponResource toxic_gun display_name]] "Dual machine gun"),
+		group = "Weapons_AutomatedTurret",
 		id = "toxic_gun",
+		progress = 0,
+		stack_size = 1000,
+		transportable = false,
+		visible = false,
+	}),
+	PlaceObj('ModItemWeaponResource', {
+		AimAnimIdle = "",
+		AlwaysFace = false,
+		AnimTestEntity = "Turret_Gun",
+		AnimateWeapon = true,
+		AreaOfEffect = 1000,
+		AttackAngleTolerance = 120,
+		AttackCooldown = 5000,
+		AttackCooldownMaxSkill = 3000,
+		AttackMoments = {
+			"hit",
+			"hit2",
+		},
+		AttackRange = 45000,
+		AttackType = "ranged",
+		CanAttackBelowMinRange = false,
+		CritChance = 0,
+		CritChanceMaxSkill = 0,
+		DamageToBuildings = 75000,
+		DamageTypes = {
+			blunt = true,
+		},
+		HitChance = 70,
+		HitChanceMaxSkill = 90,
+		HitEffect = {
+			PlaceObj('HealthConditionOption', {
+				effect = "Gunshot_Body_Light",
+				weight = 50,
+			}),
+		},
+		MinAttackRange = 40000,
+		ProjectileEntity = "InvisibleObject",
+		ProjectileFXClass = "Machine_Gun_Projectile",
+		ProjectileScaleWithWeapon = true,
+		ProjectileSpeed = 50000,
+		ProjectileSpot = "Weaponsight",
+		RangeTerrainDistortion = "always",
+		ScaleDamageWithUnit = false,
+		ScaleRangeWithUnit = false,
+		SortKey = 99990,
+		TriggerResponse = false,
+		carry_amount = 1000,
+		display_name = T(445988362432, --[[ModItemWeaponResource Crawler_cannon_weak display_name]] "1 Inch Bore Cannons"),
+		group = "Weapons_Robots",
+		id = "Crawler_cannon_weak",
 		progress = 0,
 		stack_size = 1000,
 		transportable = false,
@@ -13604,7 +13700,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(754094962645, --[[ModItemRobotCompositeDef LightHostileRobot_LVL1 DisplayNameShort]] "DA1"),
 			'DisplayNamePl', T(993542161096, --[[ModItemRobotCompositeDef LightHostileRobot_LVL1 DisplayNamePl]] "Drone A series"),
 			'Description', T(334414305147, --[[ModItemRobotCompositeDef LightHostileRobot_LVL1 Description]] "Mass produced, lightly equipped, easy to distract. Threatening only in great number. No defenses."),
-			'SalvageLootTable', "LightHostileRobots_1",
+			'SalvageLootTable', "ILU_Robot_Human_T1",
 			'Skills', {},
 			'DistressEnrageChance', 5,
 			'DistressCallRange', 5000,
@@ -13673,7 +13769,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(142244256287, --[[ModItemRobotCompositeDef LightHostileRobot_LVL2 DisplayNameShort]] "DA2"),
 			'DisplayNamePl', T(298340055036, --[[ModItemRobotCompositeDef LightHostileRobot_LVL2 DisplayNamePl]] "Drone A series"),
 			'Description', T(248109247620, --[[ModItemRobotCompositeDef LightHostileRobot_LVL2 Description]] "The consortium is dedicating more resources to this series; while still trying cheaply mass produce them. This is mainly done by allowing the robot to operate at higher capacity than what is safe for the robots frame. Has <color TechSubtitleBlue>0% Piercing Deflection</color>, <color TextButton>5% Blunt Deflection</color>, <color TextNegative>5% Energy Deflection</color>, <color TextPositive>20% Gas Deflection</color>"),
-			'SalvageLootTable', "LightHostileRobots_2",
+			'SalvageLootTable', "ILU_Robot_Human_T2",
 			'Skills', {
 				Combat = 2,
 			},
@@ -13746,7 +13842,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(717669841682, --[[ModItemRobotCompositeDef LightHostileRobot_LVL3 DisplayNameShort]] "DA3"),
 			'DisplayNamePl', T(326566177705, --[[ModItemRobotCompositeDef LightHostileRobot_LVL3 DisplayNamePl]] "Drone A series"),
 			'Description', T(422993075353, --[[ModItemRobotCompositeDef LightHostileRobot_LVL3 Description]] "Now comes armed with a pulse rifle. While more expensive than carbon crossbows to procur, this increases the combat power of the robot without adding to the manufactoring costs. Has <color TechSubtitleBlue>0% Piercing Deflection</color>, <color TextButton>10% Blunt Deflection</color>, <color TextNegative>10% Energy Deflection</color>, <color TextPositive>30% Gas Deflection</color>"),
-			'SalvageLootTable', "LightHostileRobots_3",
+			'SalvageLootTable', "ILU_Robot_Human_T3",
 			'Skills', {
 				Combat = 4,
 			},
@@ -13825,7 +13921,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(106673576958, --[[ModItemRobotCompositeDef LightHostileRobot_LVL4 DisplayNameShort]] "DA4"),
 			'DisplayNamePl', T(201543158479, --[[ModItemRobotCompositeDef LightHostileRobot_LVL4 DisplayNamePl]] "Drone A series"),
 			'Description', T(512179079752, --[[ModItemRobotCompositeDef LightHostileRobot_LVL4 Description]] "Boasting an enhanced overclocking component and mildly more durable frame; this series is widely considered the best for it's price point. A great front line unit for any role. Has <color TechSubtitleBlue>5% Piercing Deflection</color>, <color TextButton>20% Blunt Deflection</color>, <color TextNegative>20% Energy Deflection</color>, <color TextPositive>30% Gas Deflection</color>"),
-			'SalvageLootTable', "LightHostileRobots_3",
+			'SalvageLootTable', "ILU_Robot_Human_T4",
 			'Skills', {},
 			'darkness_penalty', 0,
 			'DistressEnrageChance', 0,
@@ -13897,7 +13993,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(938995850579, --[[ModItemRobotCompositeDef LightHostileRobot_LVL5 DisplayNameShort]] "DA5"),
 			'DisplayNamePl', T(225365074235, --[[ModItemRobotCompositeDef LightHostileRobot_LVL5 DisplayNamePl]] "Drone A series"),
 			'Description', T(933791149638, --[[ModItemRobotCompositeDef LightHostileRobot_LVL5 Description]] "The Consortium's top of the line assault series. Only the richest oligarchs, nation states, and the Consortium itself can field a great amount of these. Has enhanced Gas and Acid resistance to enable this unit to deploy into even the most hazardous of locations. Has <color TechSubtitleBlue>20% Piercing Deflection</color>, <color TextButton>45% Blunt Deflection</color>, <color TextNegative>45% Energy Deflection</color>, <color TextPositive>90% Gas Deflection</color>"),
-			'SalvageLootTable', "LightHostileRobots_3",
+			'SalvageLootTable', "ILU_Robot_Crawl_T5",
 			'Skills', {},
 			'darkness_penalty', 0,
 			'DistressEnrageChance', 0,
@@ -13950,7 +14046,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(703140542529, --[[ModItemRobotCompositeDef HostileRobot_Scout_LVL1 DisplayNameShort]] "DB1"),
 			'DisplayNamePl', T(513596480085, --[[ModItemRobotCompositeDef HostileRobot_Scout_LVL1 DisplayNamePl]] "Drone B Series"),
 			'Description', T(173875654953, --[[ModItemRobotCompositeDef HostileRobot_Scout_LVL1 Description]] "This robot has increased detection range. It's role is meant to spot targets and hopefully survive initial engagement to alert all nearby Consortium robots in the vicinity.Has no defenses."),
-			'SalvageLootTable', "LightHostileRobots_1",
+			'SalvageLootTable', "ILU_Robot_Human_T1",
 			'Skills', {},
 			'SightRange', 40000,
 			'HearingRange', 25000,
@@ -13996,7 +14092,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(705000373000, --[[ModItemRobotCompositeDef HostileRobot_Scout_LVL2 DisplayNameShort]] "DB2"),
 			'DisplayNamePl', T(321247063067, --[[ModItemRobotCompositeDef HostileRobot_Scout_LVL2 DisplayNamePl]] "Drone B Series"),
 			'Description', T(511989141744, --[[ModItemRobotCompositeDef HostileRobot_Scout_LVL2 Description]] "In leau of enhanced durability or firepower, this control unit has gained the ability to share targeting parameters before combat has started. This combined with the base models enhanced spotting means it is incredibly difficult to sneak up on a squad of Consortium robots with an assigned O-A2-0ff1c3r.Has no defenses."),
-			'SalvageLootTable', "LightHostileRobots_1",
+			'SalvageLootTable', "ILU_Robot_Human_T2",
 			'Skills', {},
 			'SightRange', 40000,
 			'HearingRange', 25000,
@@ -14040,7 +14136,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(525907746310, --[[ModItemRobotCompositeDef HostileRobot_Scout_LVL3 DisplayNameShort]] "DB3"),
 			'DisplayNamePl', T(278877312501, --[[ModItemRobotCompositeDef HostileRobot_Scout_LVL3 DisplayNamePl]] "Drone B Series"),
 			'Description', T(800778437273, --[[ModItemRobotCompositeDef HostileRobot_Scout_LVL3 Description]] "The Consortium is after all a profit driven company. They didn't even change this model at all, but they now garuntee that each comes equipped with a railgun sniper. The Consortium is lucky that this does increase it's combat utility immensely, otherwise customers would start to throw accusations of shrinkflation!Still has no defenses."),
-			'SalvageLootTable', "LightHostileRobots_1",
+			'SalvageLootTable', "ILU_Robot_Human_T3",
 			'Skills', {},
 			'SightRange', 40000,
 			'HearingRange', 25000,
@@ -14101,7 +14197,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(898920198613, --[[ModItemRobotCompositeDef HostileRobot_Scout_LVL4 DisplayNameShort]] "DB4"),
 			'DisplayNamePl', T(365084805460, --[[ModItemRobotCompositeDef HostileRobot_Scout_LVL4 DisplayNamePl]] "Drone B Series"),
 			'Description', T(491894615204, --[[ModItemRobotCompositeDef HostileRobot_Scout_LVL4 Description]] "Durability has finally been dedicated to the Officer series of Consortium bots. This combined with a Cyber Crystal Eye means these robots can spot and target a unit from farther ranges away!Has <color TechSubtitleBlue>10% Piercing Deflection</color>, <color TextButton>10% Blunt Deflection</color>, <color TextNegative>10% Energy Deflection</color>, <color TextPositive>10% Gas Deflection</color>"),
-			'SalvageLootTable', "LightHostileRobots_1",
+			'SalvageLootTable', "ILU_Robot_Human_T4",
 			'Skills', {},
 			'SightRange', 40000,
 			'HearingRange', 25000,
@@ -14162,7 +14258,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(650941323868, --[[ModItemRobotCompositeDef HostileRobot_Scout_LVL5 DisplayNameShort]] "DB5"),
 			'DisplayNamePl', T(591182767134, --[[ModItemRobotCompositeDef HostileRobot_Scout_LVL5 DisplayNamePl]] "Drone B Series"),
 			'Description', T(726278753545, --[[ModItemRobotCompositeDef HostileRobot_Scout_LVL5 Description]] "When given the order to fire by the most expensive Officer model, the rank and file robots also receive advanced targeting information. This leads to the effective range against an Officers target being larger than what robots could normally achieve!Has <color TechSubtitleBlue>15% Piercing Deflection</color>, <color TextButton>15% Blunt Deflection</color>, <color TextNegative>15% Energy Deflection</color>, <color TextPositive>15% Gas Deflection</color>"),
-			'SalvageLootTable', "LightHostileRobots_1",
+			'SalvageLootTable', "ILU_Robot_Human_T5",
 			'Skills', {},
 			'SightRange', 40000,
 			'HearingRange', 25000,
@@ -14214,7 +14310,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(421790080676, --[[ModItemRobotCompositeDef HostileRobot_Monk_LVL1 DisplayNameShort]] "DC1"),
 			'DisplayNamePl', T(610571954395, --[[ModItemRobotCompositeDef HostileRobot_Monk_LVL1 DisplayNamePl]] "Drone C Series"),
 			'Description', T(374236776710, --[[ModItemRobotCompositeDef HostileRobot_Monk_LVL1 Description]] "The C series is a very new and interesting design. The RAM is 10x more expensive than their frame. This has led to the frame being little more than a brittle casing; and no gaurunteed weapon. I wonder what the Consortium has planned for this model?Has no defenses"),
-			'SalvageLootTable', "LightHostileRobots_1",
+			'SalvageLootTable', "ILU_Robot_Human_T1",
 			'Skills', {},
 			'darkness_penalty', 0,
 			'DistressEnrageChance', 5,
@@ -14251,7 +14347,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(193559566610, --[[ModItemRobotCompositeDef HostileRobot_Monk_LVL2 DisplayNameShort]] "DC2"),
 			'DisplayNamePl', T(387015977934, --[[ModItemRobotCompositeDef HostileRobot_Monk_LVL2 DisplayNamePl]] "Drone C Series"),
 			'Description', T(871114379245, --[[ModItemRobotCompositeDef HostileRobot_Monk_LVL2 Description]] "The Consortium has now increased the C series motor function. I suspect this is to allow this unit to get into melee range. Since this series is still reliant on it's own metal fists. Not surprisingly, the C series is proven to be a tough sell to most governments and wealthy elites. Has <color TechSubtitleBlue>20% Piercing Deflection</color>, <color TextButton>0% Blunt Deflection</color>, <color TextNegative>0% Energy Deflection</color>, <color TextPositive>0% Gas Deflection</color>"),
-			'SalvageLootTable', "LightHostileRobots_1",
+			'SalvageLootTable', "ILU_Robot_Human_T2",
 			'Skills', {},
 			'darkness_penalty', 0,
 			'DistressEnrageChance', 5,
@@ -14288,7 +14384,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(329125724185, --[[ModItemRobotCompositeDef HostileRobot_Monk_LVL3 DisplayNameShort]] "DC3"),
 			'DisplayNamePl', T(126278076837, --[[ModItemRobotCompositeDef HostileRobot_Monk_LVL3 DisplayNamePl]] "Drone C Series"),
 			'Description', T(321981301116, --[[ModItemRobotCompositeDef HostileRobot_Monk_LVL3 Description]] "All of the research in object tracking and how to respond is paying off. This latest C series model boasts a better harm reduction reflex from even closer to the model. This combined with a lightweight durable alloy means any damage it receives is not an immediate death knell. <color TechSubtitleBlue>33% Piercing Deflection</color>, <color TextButton>0% Blunt Deflection</color>, <color TextNegative>0% Energy Deflection</color>, <color TextPositive>0% Gas Deflection</color>"),
-			'SalvageLootTable', "LightHostileRobots_1",
+			'SalvageLootTable', "ILU_Robot_Human_T3",
 			'Skills', {},
 			'darkness_penalty', 0,
 			'DistressEnrageChance', 5,
@@ -14334,7 +14430,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(758317584190, --[[ModItemRobotCompositeDef HostileRobot_Monk_LVL4 DisplayNameShort]] "DC4"),
 			'DisplayNamePl', T(279744728787, --[[ModItemRobotCompositeDef HostileRobot_Monk_LVL4 DisplayNamePl]] "Drone C Series"),
 			'Description', T(238832281740, --[[ModItemRobotCompositeDef HostileRobot_Monk_LVL4 Description]] "When enough funding, massive scientific leaps can be achieved. The marketing demo for this model is nothing to scoff at. Two models where placed in seperate rooms. One had an RPG fired at point blank range. The other had it fired from ~13 meters away. The model with even that small time to react fared MUCH better than it's counterpart. <color TechSubtitleBlue>50% Piercing Deflection</color>, <color TextButton>10% Blunt Deflection</color>, <color TextNegative>10% Energy Deflection</color>, <color TextPositive>10% Gas Deflection</color>"),
-			'SalvageLootTable', "LightHostileRobots_1",
+			'SalvageLootTable', "ILU_Robot_Human_T4",
 			'Skills', {},
 			'darkness_penalty', 0,
 			'DistressEnrageChance', 5,
@@ -14380,7 +14476,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(407598470713, --[[ModItemRobotCompositeDef HostileRobot_Monk_LVL5 DisplayNameShort]] "DC5"),
 			'DisplayNamePl', T(773286905714, --[[ModItemRobotCompositeDef HostileRobot_Monk_LVL5 DisplayNamePl]] "Drone C Series"),
 			'Description', T(454552688170, --[[ModItemRobotCompositeDef HostileRobot_Monk_LVL5 Description]] "The amount of money the Consortium must have invested to achieve this unit cannot be fathomed. This model now finally comes with a weapon, notably the laser sword. The viral videos show in slow motion how this robot can catch any projectile out of the air, and send it back to the sender. People have been showing off bullets, laser blasts (Thanks to the laser sword), and even some missiles! <color TechSubtitleBlue>55% Piercing Deflection</color>, <color TextButton>30% Blunt Deflection</color>, <color TextNegative>55% Energy Deflection</color>, <color TextPositive>25% Gas Deflection</color>"),
-			'SalvageLootTable', "LightHostileRobots_1",
+			'SalvageLootTable', "ILU_Robot_Human_T5",
 			'Skills', {},
 			'darkness_penalty', 0,
 			'DistressEnrageChance', 5,
@@ -14429,7 +14525,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(985076455466, --[[ModItemRobotCompositeDef HeavyHostileRobot_LVL1 DisplayNameShort]] "DD1"),
 			'DisplayNamePl', T(184728554259, --[[ModItemRobotCompositeDef HeavyHostileRobot_LVL1 DisplayNamePl]] "Drone Series D"),
 			'Description', T(774533481819, --[[ModItemRobotCompositeDef HeavyHostileRobot_LVL1 Description]] "The heaviest model; trading survivability for damage. It moves slower, has shorter range, and attacks slower. But a completely redesigned armor plating enables absorption and reduction to all incoming damage. Has <color TechSubtitleBlue>10% Piercing Damage</color></color TextEmphasis> Reduction</color>, <color TextButton>20% Blunt Damage</color><color TextEmphasis> Reduction</color>, <color TextNegative>20% Energy Damage</color><color TextEmphasis> Reduction</color>, <color TextPositive>20% Gas Damage</color><color TextEmphasis> Reduction</color>"),
-			'SalvageLootTable', "LightHostileRobots_3",
+			'SalvageLootTable', "ILU_Robot_Human_T1",
 			'EventProgressValue', 75,
 			'SpawnDefWeight', 90,
 			'SpawnTags', set( "Boss" ),
@@ -14483,7 +14579,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(337582489273, --[[ModItemRobotCompositeDef HeavyHostileRobot_LVL2 DisplayNameShort]] "DD2"),
 			'DisplayNamePl', T(606989825151, --[[ModItemRobotCompositeDef HeavyHostileRobot_LVL2 DisplayNamePl]] "Drone Series D"),
 			'Description', T(621138978094, --[[ModItemRobotCompositeDef HeavyHostileRobot_LVL2 Description]] "The latest heavy model has included general survivability improvements, and a special addition. It now comes with a built in signal jammer and loudspeaker. When an enemy combatant is targeted, they both will try and distract or interfere with computations. Thankfully it's software is relatively primitive, and only effective at close range. Has <color TechSubtitleBlue>15% Piercing Damage</color><color TextEmphasis> Reduction</color>, <color TextButton>40% Blunt Damage</color><color TextEmphasis> Reduction</color>, <color TextNegative>30% Energy Damage</color><color TextEmphasis> Reduction</color>, <color TextPositive>25% Gas Damage</color><color TextEmphasis> Reduction</color>"),
-			'SalvageLootTable', "LightHostileRobots_3",
+			'SalvageLootTable', "ILU_Robot_Human_T2",
 			'EventProgressValue', 200,
 			'SpawnDefWeight', 90,
 			'SpawnTags', set( "Boss" ),
@@ -14537,7 +14633,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(151002090816, --[[ModItemRobotCompositeDef HeavyHostileRobot_LVL3 DisplayNameShort]] "DD3"),
 			'DisplayNamePl', T(842264659283, --[[ModItemRobotCompositeDef HeavyHostileRobot_LVL3 DisplayNamePl]] "Drone Series D"),
 			'Description', T(731721510580, --[[ModItemRobotCompositeDef HeavyHostileRobot_LVL3 Description]] "The Consortium now guarantees a special Laser Pistol. When wielded, the Heavy can override the normal projectiles, and instead scatter the beam. This leads to less direct damage to enemy combatants, but lowers the targets chances to deflect an attack. Has <color TechSubtitleBlue>15% Piercing Damage</color><color TextEmphasis> Reduction</color>, <color TextButton>60% Blunt Damage</color><color TextEmphasis> Reduction</color>, <color TextNegative>400% Energy Damage</color><color TextEmphasis> Reduction</color>, <color TextPositive>30% Gas Damage</color><color TextEmphasis> Reduction</color>"),
-			'SalvageLootTable', "LightHostileRobots_3",
+			'SalvageLootTable', "ILU_Robot_Human_T3",
 			'EventProgressValue', 900,
 			'SpawnDefWeight', 90,
 			'SpawnTags', set( "Boss" ),
@@ -14585,7 +14681,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(270899736782, --[[ModItemRobotCompositeDef HeavyHostileRobot_LVL4 DisplayNameShort]] "DD4"),
 			'DisplayNamePl', T(443848099264, --[[ModItemRobotCompositeDef HeavyHostileRobot_LVL4 DisplayNamePl]] "Drone Series D"),
 			'Description', T(354144482543, --[[ModItemRobotCompositeDef HeavyHostileRobot_LVL4 Description]] "The signal jammer and speakers have received a major upgrade. Rather than relying on a single jamming frequency or single song; it will cycle through variations until maximum suppression is achieved. Has <color TechSubtitleBlue>15% Piercing Damage</color><color TextEmphasis> Reduction</color>, <color TextButton>75% Blunt Damage Reduction</color>, <color TextNegative>55% Energy Damage Reduction</color>, <color TextPositive>35% Gas Damage Reduction</color>"),
-			'SalvageLootTable', "LightHostileRobots_3",
+			'SalvageLootTable', "ILU_Robot_Human_T4",
 			'EventProgressValue', 1800,
 			'SpawnDefWeight', 90,
 			'SpawnTags', set( "Boss" ),
@@ -14633,7 +14729,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(964653480644, --[[ModItemRobotCompositeDef HeavyHostileRobot_LVL5 DisplayNameShort]] "DD5"),
 			'DisplayNamePl', T(899722389212, --[[ModItemRobotCompositeDef HeavyHostileRobot_LVL5 DisplayNamePl]] "Drone Series D"),
 			'Description', T(746619506377, --[[ModItemRobotCompositeDef HeavyHostileRobot_LVL5 Description]] "Not satisfied with small arms fire, this unit now comes with a 15 Kiloton rating. Any explosion with a smaller payload will not destroy this model. The Consortium's sales pitch for this model is \"Leaves you and only you blown away!\". Combined with a refined laser scatter plugin destroying more enemy armor makes this unit extremely desirable for front-line engagements. Has <color TechSubtitleBlue>15% Piercing Damage </color><color TextEmphasis>Reduction</color>, <color TextButton>40% Blunt Damage</color><color TextEmphasis> Reduction</color>, <color TextNegative>30% Energy Damage</color><color TextEmphasis> Reduction</color>, <color TextPositive>25% Gas Damage</color><color TextEmphasis> Reduction</color>"),
-			'SalvageLootTable', "LightHostileRobots_3",
+			'SalvageLootTable', "ILU_Robot_Human_T5",
 			'EventProgressValue', 3300,
 			'SpawnDefWeight', 90,
 			'SpawnTags', set( "Boss" ),
@@ -14662,6 +14758,39 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemRobotCompositeDef', {
+			'Id', "Crawl_Cannon_T0",
+			'object_class', "CrawlerMachineGun",
+			'Health', 200000,
+			'MaxHealth', 200000,
+			'HumanThreat', true,
+			'Movement', 50000,
+			'DisplayName', T(290187543716, --[[ModItemRobotCompositeDef Crawl_Cannon_T0 DisplayName]] "C-A1-f4lun37"),
+			'DisplayNameShort', T(768088241341, --[[ModItemRobotCompositeDef Crawl_Cannon_T0 DisplayNameShort]] "CA0"),
+			'DisplayNamePl', T(517698539396, --[[ModItemRobotCompositeDef Crawl_Cannon_T0 DisplayNamePl]] "Crawler Series AA"),
+			'Description', T(299223050388, --[[ModItemRobotCompositeDef Crawl_Cannon_T0 Description]] "Legally this longer-ranged-than-average crawler does not break the text of any automated arm laws; but certainly breaks each laws spirit. Mounted on top is a small bore weapon that fires anti-personal rounds. Weapon fire-rate was de-prioritized in favor of trajectory calculations and an improved suspension. Has a very limited effective range of fire, and has been easily thwarted by just... walking closer to it a few steps. Deals <color TextButton>Blunt</color> Damage. <em>Can only attack targets between 40 and 45 meters away.</em>"),
+			'SalvageLootTable', "ILU_Robot_Crawl_T2",
+			'SwitchTargetChance', 0,
+			'CombatSearchFlags', 536871176,
+			'CombatRestrictPFBonus', 1000,
+			'EventProgressValue', 250,
+			'SpawnDefWeight', 10,
+			'SpawnTags', set( "Boss" ),
+			'can_be_navigated', false,
+			'can_navigate_others', false,
+			'composite_part_target', "Crawl_Cannon_T1",
+			'composite_part_groups', {
+				"CrawlerRobot_Medium",
+			},
+			'max_skinned_decals_low', -1,
+			'display_name', T(588555800530, --[[ModItemRobotCompositeDef Crawl_Cannon_T0 display_name]] "MG Siege machine"),
+			'display_name_pl', T(488086439009, --[[ModItemRobotCompositeDef Crawl_Cannon_T0 display_name_pl]] "MG Siege machines"),
+			'siege_time', 10000,
+			'FieldResearchTech', "FieldCrawler",
+			'ObservationDistanceMin', 2000,
+			'ObservationDistanceMax', 5000,
+			'attack_weapon', "Crawler_cannon_weak",
+		}),
+		PlaceObj('ModItemRobotCompositeDef', {
 			'Id', "Crawl_Cannon_T1",
 			'object_class', "CrawlerMachineGun",
 			'Health', 250000,
@@ -14672,11 +14801,11 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(247098477910, --[[ModItemRobotCompositeDef Crawl_Cannon_T1 DisplayNameShort]] "CA1"),
 			'DisplayNamePl', T(334837440132, --[[ModItemRobotCompositeDef Crawl_Cannon_T1 DisplayNamePl]] "Crawler Series A"),
 			'Description', T(894183744919, --[[ModItemRobotCompositeDef Crawl_Cannon_T1 Description]] "Illegal to field except in times of extreme crisis; the Artillery variants of Consortium Crawler has officially been disconinuted. The fact we are seeing them deployed leads us to sincerely doubt these claims. Has incredibly long range, and prioritizes static defenses. Has no defenses, as it's core role is long range support. Deals <color TextButton>Blunt</color> Damage. <em>70 meter range. Cannot attack targets within 40 meters</em>"),
-			'SalvageLootTable', "HostileCrawlers",
+			'SalvageLootTable', "ILU_Robot_Crawl_T3",
 			'SwitchTargetChance', 0,
 			'CombatSearchFlags', 536871176,
 			'CombatRestrictPFBonus', 1000,
-			'EventProgressValue', 600,
+			'EventProgressValue', 1000,
 			'SpawnDefWeight', 10,
 			'SpawnTags', set( "Boss" ),
 			'can_be_navigated', false,
@@ -14703,11 +14832,11 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(989911872671, --[[ModItemRobotCompositeDef Crawl_Cannon_T2 DisplayNameShort]] "CA2"),
 			'DisplayNamePl', T(281429632445, --[[ModItemRobotCompositeDef Crawl_Cannon_T2 DisplayNamePl]] "Crawler Series A"),
 			'Description', T(271891081815, --[[ModItemRobotCompositeDef Crawl_Cannon_T2 Description]] "The second purchasable tier of Artillery Crawlers sees slight modifications to the stabilization and frame. This allowed for better combat ability. Rather than increase the munition size, a range increase was prioritized. Meant to blow holes in fortified positions for the assault troops to flood into. Based on prior interactions, it's software is solely focused on leveling our colony. Has no defenses. Deals <color TextButton>Blunt</color> Damage.<em>90 meter range. Cannot attack targets within 50 meters</em>"),
-			'SalvageLootTable', "HostileCrawlers",
+			'SalvageLootTable', "ILU_Robot_Crawl_T4",
 			'SwitchTargetChance', 0,
 			'CombatSearchFlags', 536871176,
 			'CombatRestrictPFBonus', 1000,
-			'EventProgressValue', 1300,
+			'EventProgressValue', 2000,
 			'SpawnDefWeight', 10,
 			'SpawnTags', set( "Boss" ),
 			'can_be_navigated', false,
@@ -14737,7 +14866,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(264123210954, --[[ModItemRobotCompositeDef Crawl_Cannon_T3 DisplayNameShort]] "CA3"),
 			'DisplayNamePl', T(389676495865, --[[ModItemRobotCompositeDef Crawl_Cannon_T3 DisplayNamePl]] "Crawler Series A"),
 			'Description', T(844803720786, --[[ModItemRobotCompositeDef Crawl_Cannon_T3 Description]] "This variant is not for sale. Searching through the intergalactic coms has not revealed anything about this unit. The barrel is larger, less maneuverable than a snail, and it is constantly billowing smoke. We hope that the bombardment can be weathered... Oh there. Has no defense. Deals <color TextButton>Blunt</color> Damage. <em>100 meter range. Cannot attack targets within 40 meters</em>"),
-			'SalvageLootTable', "HostileCrawlers",
+			'SalvageLootTable', "ILU_Robot_Crawl_T5",
 			'SwitchTargetChance', 0,
 			'CombatSearchFlags', 536871176,
 			'CombatRestrictPFBonus', 1000,
@@ -14777,7 +14906,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(291697755136, --[[ModItemRobotCompositeDef Crawl_APC_LVL1 DisplayNameShort]] "CB1"),
 			'DisplayNamePl', T(169291530050, --[[ModItemRobotCompositeDef Crawl_APC_LVL1 DisplayNamePl]] "Crawler Series B"),
 			'Description', T(534710352216, --[[ModItemRobotCompositeDef Crawl_APC_LVL1 Description]] "Armored Personal Carriers are out of style when fielding mass cheap robots. What is in style is purchasing small numbers of very durable & portable armories. Using the spent bullet casings, and it's own armour, it will occasionally grant the nearest robot fortifications. It deals <color TextButton>Blunt</color> Damage. <color TechSubtitleBlue>50% Piercing Damage</color> <em>Reduction</em>, <color TextButton>50% Blunt Damage</color><color TextEmphasis> Reduction</color>, <color TextNegative>50% Energy Damage</color><color TextEmphasis> Reduction</color>, <color TextPositive>50% Gas Damage</color><color TextEmphasis> Reduction</color>"),
-			'SalvageLootTable', "HostileCrawlers",
+			'SalvageLootTable', "ILU_Robot_Crawl_T3",
 			'darkness_penalty', 0,
 			'EventProgressValue', 250,
 			'SpawnDefWeight', 25,
@@ -14807,7 +14936,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(966072968147, --[[ModItemRobotCompositeDef Crawl_APC_LVL2 DisplayNameShort]] "CB2"),
 			'DisplayNamePl', T(979005459672, --[[ModItemRobotCompositeDef Crawl_APC_LVL2 DisplayNamePl]] "Crawler Series B"),
 			'Description', T(127818288256, --[[ModItemRobotCompositeDef Crawl_APC_LVL2 Description]] "This variant of crawler has been upgraded to become a battlefield scavenger. It has significantly increased motor functions, speeding up it's movement. Specifically to enable quick movement towards robot corpses, to fuel it's infernal forge. This was received to critical acclaim galaxy wide, as it allows whoever is deploying these to rest easier. Because even if the battle is lost, there will be minimal things to scavenge. Has <color TechSubtitleBlue>60% Piercing Damage</color> <em>Reduction</em>, <color TextButton>60% Blunt Damage</color><color TextEmphasis> Reduction</color>, <color TextNegative>60% Energy Damage</color><color TextEmphasis> Reduction</color>, <color TextPositive>60% Gas Damage</color><color TextEmphasis> Reduction</color>"),
-			'SalvageLootTable', "HostileCrawlers",
+			'SalvageLootTable', "ILU_Robot_Crawl_T4",
 			'darkness_penalty', 0,
 			'EventProgressValue', 250,
 			'SpawnDefWeight', 25,
@@ -14838,7 +14967,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(863292482755, --[[ModItemRobotCompositeDef Crawl_APC_LVL3 DisplayNameShort]] "CB3"),
 			'DisplayNamePl', T(960161869122, --[[ModItemRobotCompositeDef Crawl_APC_LVL3 DisplayNamePl]] "Crawler Series B"),
 			'Description', T(796956369685, --[[ModItemRobotCompositeDef Crawl_APC_LVL3 Description]] 'After facing heavy criticism regarding the previous models failure rate to actually reforge allied droids; all development has focused on minimizing the chance of failure. According to financial filings, this cost billions to develop and is a major risk on their upcoming earnings report. The new models boast a failure rate of under 10%; meaning this "premium model" now achieves what the prior tier was suppose to do. Has <color TechSubtitleBlue>80% Piercing Damage</color> <em>Reduction</em>, <color TextButton>80% Blunt Damage</color><color TextEmphasis> Reduction</color>, <color TextNegative>80% Energy Damage</color><color TextEmphasis> Reduction</color>, <color TextPositive>80% Gas Damage</color><color TextEmphasis> Reduction</color>'),
-			'SalvageLootTable', "HostileCrawlers",
+			'SalvageLootTable', "ILU_Robot_Crawl_T5",
 			'EventProgressValue', 250,
 			'SpawnDefWeight', 25,
 			'SpawnTags', set( "Boss" ),
@@ -14864,7 +14993,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(779620740159, --[[ModItemRobotCompositeDef HostileCombatQuadcopter_LVL2 DisplayNameShort]] "DF2"),
 			'DisplayNamePl', T(369263638877, --[[ModItemRobotCompositeDef HostileCombatQuadcopter_LVL2 DisplayNamePl]] "F Series Drones"),
 			'Description', T(525941302304, --[[ModItemRobotCompositeDef HostileCombatQuadcopter_LVL2 Description]] "The Consortium spend many engineer hours and R&D budget on the highly acidic fuel tanks, they felt it would be wasteful to not include it in another variant. The humble Quadcopter now has 2 smaller fuel tanks, designed to coat it's small arms in the same acid. Thankfully all explosions from destroyed quadcopters will not damage other robots that the buyer is fielding! Has <color TechSubtitleBlue>5% Piercing Damage</color> <em>Reduction</em>."),
-			'SalvageLootTable', "HostileQuadcopters",
+			'SalvageLootTable', "ILU_Robot_Misc",
 			'Skills', {},
 			'CombatSearchFlags', 536871176,
 			'EventProgressValue', 125,
@@ -14885,7 +15014,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(804317535414, --[[ModItemRobotCompositeDef HostileCombatQuadcopter_LVL3 DisplayNameShort]] "DF3"),
 			'DisplayNamePl', T(133438259417, --[[ModItemRobotCompositeDef HostileCombatQuadcopter_LVL3 DisplayNamePl]] "F Series Drones"),
 			'Description', T(911609558342, --[[ModItemRobotCompositeDef HostileCombatQuadcopter_LVL3 Description]] "Higher quality and denser acid makes a quadcopter with this upgrade not a straight upgrade. News stories show how earlier models dashed in to destroy key buildings and dart out. This model will be easier to down, but be quicker about destroying enemy defenses. Has <color TechSubtitleBlue>10% Piercing Damage</color> <em>Reduction</em>."),
-			'SalvageLootTable', "HostileQuadcopters",
+			'SalvageLootTable', "ILU_Robot_Misc",
 			'Skills', {},
 			'CombatSearchFlags', 536871176,
 			'EventProgressValue', 200,
@@ -14907,7 +15036,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(283426405849, --[[ModItemRobotCompositeDef HostileCombatQuadcopter_LVL4 DisplayNameShort]] "DF4"),
 			'DisplayNamePl', T(375497859599, --[[ModItemRobotCompositeDef HostileCombatQuadcopter_LVL4 DisplayNamePl]] "F Series Drones"),
 			'Description', T(583067491707, --[[ModItemRobotCompositeDef HostileCombatQuadcopter_LVL4 Description]] "No major changes where announced for the F series. But it is considered a generally solid upgrade. Slightly faster to offset the fuel tank weight, better targeting software, and durable enough to take a single flak blast. Reception has been relatively positive. Has <color TechSubtitleBlue>15% Piercing Damage</color> <em>Reduction</em>."),
-			'SalvageLootTable', "HostileQuadcopters",
+			'SalvageLootTable', "ILU_Robot_Misc",
 			'Skills', {
 				Combat = 5,
 			},
@@ -14931,7 +15060,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(260759826748, --[[ModItemRobotCompositeDef HostileCombatQuadcopter_LVL5 DisplayNameShort]] "DF5"),
 			'DisplayNamePl', T(561655984337, --[[ModItemRobotCompositeDef HostileCombatQuadcopter_LVL5 DisplayNamePl]] "F Series Drones"),
 			'Description', T(124529310792, --[[ModItemRobotCompositeDef HostileCombatQuadcopter_LVL5 Description]] 'Double the durability for double the destruction! At least that is the sales pitch for the most expensive F model. Major software changes where required to enable the same "Hot Glue" or "Acid" that the E series does mechanically via it\'s special spear. Overall this model is considered the best leveler of enemy encampments, even above modern artillery. Mainly because this is orders of magnitudes cheaper to produce! Has <color TechSubtitleBlue>20% Piercing Damage</color> <em>Reduction</em>.'),
-			'SalvageLootTable', "HostileQuadcopters",
+			'SalvageLootTable', "ILU_Robot_Misc",
 			'Skills', {
 				Combat = 7,
 			},
@@ -14965,7 +15094,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(577195232618, --[[ModItemRobotCompositeDef Demo_1 DisplayNameShort]] "DE1"),
 			'DisplayNamePl', T(868338985251, --[[ModItemRobotCompositeDef Demo_1 DisplayNamePl]] "Drone Series E"),
 			'Description', T(435729608418, --[[ModItemRobotCompositeDef Demo_1 Description]] "It is a running joke in Consortium media that purple makes robots stealthier. So when a new model was announced sold as a stealth sabotage unit, it came to noones surprise in a shade of purple. They even made the acid purple colored! Has <color TechSubtitleBlue>0% Piercing Damage</color> <em>Reduction</em>, <color TextButton>10% Blunt Damage</color><color TextEmphasis> Reduction</color>, <color TextNegative>5% Energy Damage</color><color TextEmphasis> Reduction</color>, <color TextPositive>25% Gas Damage</color><color TextEmphasis> Reduction</color>"),
-			'SalvageLootTable', "LightHostileRobots_3",
+			'SalvageLootTable', "ILU_Robot_Human_T1",
 			'Skills', {
 				Combat = 5,
 			},
@@ -15025,7 +15154,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(489278802929, --[[ModItemRobotCompositeDef Demo_2 DisplayNameShort]] "DE2"),
 			'DisplayNamePl', T(754647319790, --[[ModItemRobotCompositeDef Demo_2 DisplayNamePl]] "Drone Series E"),
 			'Description', T(647923552284, --[[ModItemRobotCompositeDef Demo_2 Description]] "The novelty has worn off, and the Consortium has had to increase the combat capabilities of this model line. This upgraded frame should now reasonably survive a head on assault, and be a wall breaker for other troops. Has <color TechSubtitleBlue>5% Piercing Damage</color> <em>Reduction</em>, <color TextButton>15% Blunt Damage</color><color TextEmphasis> Reduction</color>, <color TextNegative>10% Energy Damage</color><color TextEmphasis> Reduction</color>, <color TextPositive>30% Gas Damage</color><color TextEmphasis> Reduction</color>"),
-			'SalvageLootTable', "LightHostileRobots_3",
+			'SalvageLootTable', "ILU_Robot_Human_T2",
 			'Skills', {
 				Combat = 6,
 			},
@@ -15085,7 +15214,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(562208439146, --[[ModItemRobotCompositeDef Demo_3 DisplayNameShort]] "DE3"),
 			'DisplayNamePl', T(541755977736, --[[ModItemRobotCompositeDef Demo_3 DisplayNamePl]] "Drone Series E"),
 			'Description', T(971100673913, --[[ModItemRobotCompositeDef Demo_3 Description]] "The chemists have never stopped trying to improve upon the corrosive capabilities; and have improved the fuel formula. It is now much denser, but can properly disentigrates all major building materials. The increased weight has been offset by substantial improvements to the hydraulics for no net movement loss. Has <color TechSubtitleBlue>10% Piercing Damage</color> <em>Reduction</em>, <color TextButton>20% Blunt Damage</color><color TextEmphasis> Reduction</color>, <color TextNegative>15% Energy Damage</color><color TextEmphasis> Reduction</color>, <color TextPositive>35% Gas Damage</color><color TextEmphasis> Reduction</color>"),
-			'SalvageLootTable', "LightHostileRobots_3",
+			'SalvageLootTable', "ILU_Robot_Human_T3",
 			'Skills', {
 				Combat = 7,
 			},
@@ -15145,7 +15274,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(970881324308, --[[ModItemRobotCompositeDef Demo_4 DisplayNameShort]] "DE4"),
 			'DisplayNamePl', T(414115315193, --[[ModItemRobotCompositeDef Demo_4 DisplayNamePl]] "Drone Series E"),
 			'Description', T(598057090716, --[[ModItemRobotCompositeDef Demo_4 Description]] "For an upcharge, a prospective robot army owner can purchase a survivability upgrade for the sabatoge model. This ensures that all units ship with the Consortium's modified Laser Spear. A tube runs from the fuel tank to the tip of the spear. Buildings cannot maintain structural integrity when a vat of acid is placed directly on it's support beams! Has <color TechSubtitleBlue>15% Piercing Damage</color> <em>Reduction</em>, <color TextButton>25% Blunt Damage</color><color TextEmphasis> Reduction</color>, <color TextNegative>20% Energy Damage</color><color TextEmphasis> Reduction</color>, <color TextPositive>45% Gas Damage</color><color TextEmphasis> Reduction</color>"),
-			'SalvageLootTable', "LightHostileRobots_3",
+			'SalvageLootTable', "ILU_Robot_Human_T4",
 			'Skills', {
 				Combat = 8,
 			},
@@ -15192,7 +15321,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameShort', T(654156072296, --[[ModItemRobotCompositeDef Demo_5 DisplayNameShort]] "DE5"),
 			'DisplayNamePl', T(780181404433, --[[ModItemRobotCompositeDef Demo_5 DisplayNamePl]] "Drone Series E"),
 			'Description', T(489965093553, --[[ModItemRobotCompositeDef Demo_5 Description]] "The acid fuel tanks are now a mobile alchemy station. The Acid Spear changes the composition, based on what it is stabbing. Attacks coat organic enemies in extra strong adhesives. Sales and deployments continue, even as the galactic community decries it's immorality. Has <color TechSubtitleBlue>20% Piercing Damage</color> <em>Reduction</em>, <color TextButton>30% Blunt Damage</color><color TextEmphasis> Reduction</color>, <color TextNegative>25% Energy Damage</color><color TextEmphasis> Reduction</color>, <color TextPositive>50% Gas Damage</color><color TextEmphasis> Reduction</color>"),
-			'SalvageLootTable', "LightHostileRobots_3",
+			'SalvageLootTable', "ILU_Robot_Human_T5",
 			'darkness_penalty', 0,
 			'CombatSearchFlags', 536871176,
 			'EventProgressValue', 1500,
@@ -15219,8 +15348,9 @@ PlaceObj('ModItemFolder', {
 		'NameColor', RGBA(153, 63, 63, 255),
 	}, {
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Temperate",
+			'Group', "Evolutions",
 			'Id', "GujoT5",
+			'comment', "T5",
 			'object_class', "GujoBase",
 			'SpeciesGroup', "birds",
 			'RoamIntervalMin', 2000,
@@ -15343,8 +15473,9 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Temperate",
+			'Group', "Evolutions",
 			'Id', "GujoT4",
+			'comment', "T4",
 			'object_class', "GujoBase",
 			'SpeciesGroup', "birds",
 			'RoamIntervalMin', 2000,
@@ -15468,8 +15599,9 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Temperate",
+			'Group', "Evolutions",
 			'Id', "GujoT3",
+			'comment', "T3",
 			'object_class', "GujoBase",
 			'SpeciesGroup', "birds",
 			'RoamIntervalMin', 2000,
@@ -15591,8 +15723,9 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Temperate",
+			'Group', "Evolutions",
 			'Id', "GujoT2",
+			'comment', "T2",
 			'object_class', "GujoBase",
 			'SpeciesGroup', "birds",
 			'RoamIntervalMin', 2000,
@@ -15715,6 +15848,7 @@ PlaceObj('ModItemFolder', {
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
 			'Group', "Temperate",
 			'Id', "Gujo",
+			'comment', "T1",
 			'object_class', "GujoBase",
 			'SpeciesGroup', "birds",
 			'RoamIntervalMin', 2000,
@@ -15826,117 +15960,9 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Insects",
-			'Id', "Fast_Frenzied_Fortified_Bomber_Dragonfly",
-			'object_class', "DragonflyBase",
-			'SpeciesGroup', "insects",
-			'RoamMinDist', 5000,
-			'RoamMaxDist', 40000,
-			'RoamIntervalMin', 4000,
-			'RoamIntervalMax', 10000,
-			'composite_part_groups', {
-				"Dragonfly",
-			},
-			'PainMask', "PainMask",
-			'EventProgressValue', 1377,
-			'SightRange', 10000,
-			'CombatGroup', "Insects",
-			'HitNegationChance', {
-				blunt = 20,
-				energy = 20,
-				gas = 20,
-				pacify = 80,
-				piercing = 20,
-			},
-			'HitNegationChance_blunt', 20,
-			'HitNegationChance_piercing', 20,
-			'HitNegationChance_energy', 20,
-			'HitNegationChance_gas', 20,
-			'HitNegationChance_pacify', 80,
-			'HumanThreat', true,
-			'RobotThreat', true,
-			'EnrageChance', 5,
-			'BloodColor', RGBA(119, 184, 211, 255),
-			'max_skinned_decals_low', -1,
-			'FieldResearchTech', "Field_Dragonfly_T4",
-			'ObservationDistanceMin', 17000,
-			'ObservationDistanceMax', 21000,
-			'SkipTesting', true,
-			'Icon', "UI/Icons/Resources/res_dragonfly",
-			'DisplayName', T(661997517268, --[[ModItemUnitAnimalCompositeDef Fast_Frenzied_Fortified_Bomber_Dragonfly DisplayName]] "Fast Frenzied Fortified Bomber Deathfly"),
-			'DisplayNamePl', T(362935075377, --[[ModItemUnitAnimalCompositeDef Fast_Frenzied_Fortified_Bomber_Dragonfly DisplayNamePl]] "Fast Frenzied Fortified Bomber Deathfly"),
-			'DisplayNameUnknown', T(--[[ModItemUnitAnimalCompositeDef Fast_Frenzied_Fortified_Bomber_Dragonfly DisplayNameUnknown]] "Dragonfly Final Form?"),
-			'DisplayNameUnknownPL', T(--[[ModItemUnitAnimalCompositeDef Fast_Frenzied_Fortified_Bomber_Dragonfly DisplayNameUnknownPL]] "Dragonfly Final Form?"),
-			'Description', T(998813574519, --[[ModItemUnitAnimalCompositeDef Fast_Frenzied_Fortified_Bomber_Dragonfly Description]] "Oh great, now they are fast, deal area damage, incredibly bulky.... No clear weakness either. Deals <color TextNegative>Energy</color> damage."),
-			'BaseMaxHealth', 160000,
-			'FoodResources', {
-				"FoodAnimalHerbivore",
-				"FoodAnimalCarnivore",
-				"Slop",
-			},
-			'DailyEatingAmount', 10000,
-			'Diet', "Omnivore",
-			'EatingDuration', 4000,
-			'ButcherResources', {
-				PlaceObj('ButcherResAmount', {
-					'resource', "RawMeatInsect",
-					'min_amount', 8000,
-				}),
-			},
-			'SelectionRadius', 1250,
-			'BodySize', "small",
-			'AnimalPerks', {
-				"AP_Fast",
-				"AP_Frenzy",
-			},
-			'radius', 1000,
-			'attack_weapon', "Dragonfly_bomb",
-			'EatStartAnim', "eat_Start",
-			'EatIdleAnim', {
-				"eat_Idle",
-			},
-			'EatEndAnim', "eat_End",
-			'anim_idle', {
-				"idle",
-				"idle_Active",
-				"idle_Active2",
-			},
-			'anim_idle_nervous', {
-				"idle_Nervous",
-			},
-			'SleepStartAnim', "sleep_Start",
-			'SleepIdleAnim', "sleep_Idle",
-			'SleepEndAnim', "sleep_End",
-			'SleepInterruptedAnim', "sleep_Interupted",
-			'MinGrownScale', 70,
-			'MaxGrownScale', 90,
-			'FlightMinPitch', -2700,
-			'FlightMaxPitch', 2700,
-			'FlightMaxRoll', 3600,
-			'FlightYawRotToRoll', 150,
-			'FlightDecelDist', 6000,
-			'FlightSimHeightMax', 6000,
-			'FlightSimFrictionXY', 30,
-			'FlightSimAttract', 2000,
-			'FlightSimLift', 1000,
-			'FlightSimMaxLift', 5000,
-			'FlightSimWeight', 1000,
-			'FlightSimMinStep', 5000,
-			'FlightSimMaxStep', 20000,
-			'FlightSimDecelDist', 20000,
-			'FlightSimSplineErr', 1000,
-			'FlightSlopePenalty', 500,
-			'FlightMinObstacleHeight', 1050,
-			'UnitPerkFrenzy', true,
-			'FrenzyHealthPct', 99,
-			'FrenzyEffects', {
-				"Frenzy_Fast",
-				"Frenzy_Conscious_4",
-			},
-		}),
-		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Dogs",
+			'Group', "Evolutions",
 			'Id', "dog_T5",
+			'comment', "T5",
 			'object_class', "DogBase",
 			'SpeciesGroup', "dogs",
 			'RoamRadius', 15000,
@@ -15964,7 +15990,6 @@ PlaceObj('ModItemFolder', {
 			'HitNegationChance_energy', 30,
 			'HitNegationChance_gas', 30,
 			'HitNegationChance_pacify', 80,
-			'HumanThreat', true,
 			'EnrageChance', 5,
 			'AttackMemory', 45000,
 			'CombatGiveUpNoHit', 30000,
@@ -16082,8 +16107,9 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Dogs",
+			'Group', "Evolutions",
 			'Id', "dog_T4",
+			'comment', "T4",
 			'object_class', "DogBase",
 			'SpeciesGroup', "dogs",
 			'RoamRadius', 15000,
@@ -16110,7 +16136,6 @@ PlaceObj('ModItemFolder', {
 			'HitNegationChance_energy', 25,
 			'HitNegationChance_gas', 25,
 			'HitNegationChance_pacify', 60,
-			'HumanThreat', true,
 			'EnrageChance', 5,
 			'AttackMemory', 45000,
 			'CombatGiveUpNoHit', 30000,
@@ -16228,8 +16253,9 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Dogs",
+			'Group', "Evolutions",
 			'Id', "dog_T3",
+			'comment', "T3",
 			'object_class', "DogBase",
 			'SpeciesGroup', "dogs",
 			'RoamRadius', 15000,
@@ -16256,7 +16282,6 @@ PlaceObj('ModItemFolder', {
 			'HitNegationChance_energy', 15,
 			'HitNegationChance_gas', 15,
 			'HitNegationChance_pacify', 40,
-			'HumanThreat', true,
 			'EnrageChance', 5,
 			'AttackMemory', 45000,
 			'CombatGiveUpNoHit', 30000,
@@ -16374,8 +16399,9 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Dogs",
+			'Group', "Evolutions",
 			'Id', "dog_T1",
+			'comment', "T2",
 			'object_class', "DogBase",
 			'SpeciesGroup', "dogs",
 			'RoamRadius', 15000,
@@ -16402,7 +16428,6 @@ PlaceObj('ModItemFolder', {
 			'HitNegationChance_energy', 5,
 			'HitNegationChance_gas', 5,
 			'HitNegationChance_pacify', 20,
-			'HumanThreat', true,
 			'EnrageChance', 5,
 			'AttackMemory', 45000,
 			'CombatGiveUpNoHit', 30000,
@@ -16499,8 +16524,9 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Insects",
+			'Group', "Evolutions",
 			'Id', "Heavily_Mutated_PEx_Skarabei_Brute",
+			'comment', "T5",
 			'object_class', "GroundAnimal",
 			'SpeciesGroup', "scarabs",
 			'UnitTags', set( "AgitatedByPheromones", "Animal" ),
@@ -16514,16 +16540,16 @@ PlaceObj('ModItemFolder', {
 			'SightRange', 15000,
 			'CombatGroup', "Insects",
 			'HitNegationChance', {
-				blunt = 30,
-				energy = 90,
-				gas = 20,
+				blunt = 25,
+				energy = 60,
+				gas = 15,
 				pacify = 80,
-				piercing = 95,
+				piercing = 80,
 			},
-			'HitNegationChance_blunt', 30,
-			'HitNegationChance_piercing', 95,
-			'HitNegationChance_energy', 90,
-			'HitNegationChance_gas', 20,
+			'HitNegationChance_blunt', 25,
+			'HitNegationChance_piercing', 80,
+			'HitNegationChance_energy', 60,
+			'HitNegationChance_gas', 15,
 			'HitNegationChance_pacify', 80,
 			'HumanThreat', true,
 			'RobotThreat', true,
@@ -16551,7 +16577,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameUnknownPL', T(--[[ModItemUnitAnimalCompositeDef Heavily_Mutated_PEx_Skarabei_Brute DisplayNameUnknownPL]] "Skarabei Final Form?"),
 			'Description', T(791364568593, --[[ModItemUnitAnimalCompositeDef Heavily_Mutated_PEx_Skarabei_Brute Description]] "A Skarabei that has undergone extreme mutations. Poisons and explodes on death. Carapace practically immune to to pierce and energy attacks. Deals <color TextButton>Blunt</color> and <color TextPositive>Gas</color> damage."),
 			'fx_actor_base_class', "Skarabei",
-			'BaseMaxHealth', 1200000,
+			'BaseMaxHealth', 800000,
 			'FoodResources', {
 				"FoodAnimalHerbivore",
 				"FoodAnimalCarnivore",
@@ -16602,8 +16628,9 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Insects",
+			'Group', "Evolutions",
 			'Id', "Mutated_PEx_Skarabei_Brute",
+			'comment', "T4",
 			'object_class', "GroundAnimal",
 			'SpeciesGroup', "scarabs",
 			'UnitTags', set( "AgitatedByPheromones", "Animal" ),
@@ -16617,16 +16644,16 @@ PlaceObj('ModItemFolder', {
 			'SightRange', 15000,
 			'CombatGroup', "Insects",
 			'HitNegationChance', {
-				blunt = 25,
-				energy = 50,
-				gas = 20,
+				blunt = 20,
+				energy = 45,
+				gas = 10,
 				pacify = 60,
-				piercing = 80,
+				piercing = 70,
 			},
-			'HitNegationChance_blunt', 25,
-			'HitNegationChance_piercing', 80,
-			'HitNegationChance_energy', 50,
-			'HitNegationChance_gas', 20,
+			'HitNegationChance_blunt', 20,
+			'HitNegationChance_piercing', 70,
+			'HitNegationChance_energy', 45,
+			'HitNegationChance_gas', 10,
 			'HitNegationChance_pacify', 60,
 			'HumanThreat', true,
 			'RobotThreat', true,
@@ -16654,7 +16681,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameUnknownPL', T(286154528403, --[[ModItemUnitAnimalCompositeDef Mutated_PEx_Skarabei_Brute DisplayNameUnknownPL]] "Unknown Skarabei Evolution"),
 			'Description', T(669250918824, --[[ModItemUnitAnimalCompositeDef Mutated_PEx_Skarabei_Brute Description]] "Never thought I would be scared of a single Skarabei, but here we are. Carapace extremely resistant to pierce and energy attacks.  Deals <color TextButton>Blunt</color> and <color TextPositive>Gas</color> damage."),
 			'fx_actor_base_class', "Skarabei",
-			'BaseMaxHealth', 750000,
+			'BaseMaxHealth', 500000,
 			'FoodResources', {
 				"FoodAnimalHerbivore",
 				"FoodAnimalCarnivore",
@@ -16705,8 +16732,9 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Insects",
+			'Group', "Evolutions",
 			'Id', "PEx_Skarabei_Brute",
+			'comment', "T3",
 			'object_class', "GroundAnimal",
 			'SpeciesGroup', "scarabs",
 			'UnitTags', set( "AgitatedByPheromones", "Animal" ),
@@ -16720,16 +16748,15 @@ PlaceObj('ModItemFolder', {
 			'SightRange', 15000,
 			'CombatGroup', "Insects",
 			'HitNegationChance', {
-				blunt = 20,
-				energy = 50,
-				gas = 20,
+				blunt = 10,
+				energy = 35,
+				gas = 0,
 				pacify = 40,
-				piercing = 50,
+				piercing = 40,
 			},
-			'HitNegationChance_blunt', 20,
-			'HitNegationChance_piercing', 50,
-			'HitNegationChance_energy', 50,
-			'HitNegationChance_gas', 20,
+			'HitNegationChance_blunt', 10,
+			'HitNegationChance_piercing', 40,
+			'HitNegationChance_energy', 35,
 			'HitNegationChance_pacify', 40,
 			'HumanThreat', true,
 			'RobotThreat', true,
@@ -16757,7 +16784,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameUnknownPL', T(--[[ModItemUnitAnimalCompositeDef PEx_Skarabei_Brute DisplayNameUnknownPL]] "Unknown Skarabei evolution"),
 			'Description', T(173524527878, --[[ModItemUnitAnimalCompositeDef PEx_Skarabei_Brute Description]] "These Skarabei are the largest we have observed! But the carapace is stronger than ever. Very resistant to pierce attacks.  Deals <color TextButton>Blunt</color> and <color TextPositive>Gas</color> damage."),
 			'fx_actor_base_class', "Skarabei",
-			'BaseMaxHealth', 300000,
+			'BaseMaxHealth', 200000,
 			'FoodResources', {
 				"FoodAnimalHerbivore",
 				"FoodAnimalCarnivore",
@@ -16805,8 +16832,9 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Insects",
+			'Group', "Evolutions",
 			'Id', "PEx_Skarabei",
+			'comment', "T2",
 			'object_class', "GroundAnimal",
 			'SpeciesGroup', "scarabs",
 			'UnitTags', set( "AgitatedByPheromones", "Animal" ),
@@ -16820,16 +16848,14 @@ PlaceObj('ModItemFolder', {
 			'SightRange', 15000,
 			'CombatGroup', "Insects",
 			'HitNegationChance', {
-				blunt = 15,
-				energy = 15,
-				gas = 10,
+				blunt = 0,
+				energy = 10,
+				gas = 0,
 				pacify = 20,
 				piercing = 20,
 			},
-			'HitNegationChance_blunt', 15,
 			'HitNegationChance_piercing', 20,
-			'HitNegationChance_energy', 15,
-			'HitNegationChance_gas', 10,
+			'HitNegationChance_energy', 10,
 			'HitNegationChance_pacify', 20,
 			'HumanThreat', true,
 			'RobotThreat', true,
@@ -16857,7 +16883,6 @@ PlaceObj('ModItemFolder', {
 			'DisplayNameUnknownPL', T(--[[ModItemUnitAnimalCompositeDef PEx_Skarabei DisplayNameUnknownPL]] "Unknown Skarabei evolution"),
 			'Description', T(881139664981, --[[ModItemUnitAnimalCompositeDef PEx_Skarabei Description]] "A Skarabei swarm warrior. Poisons and explodes on death. Carapace becoming resistant to pierce and energy attacks. Deals <color TextButton>Blunt</color> and <color TextPositive>Gas</color> damage."),
 			'fx_actor_base_class', "Skarabei",
-			'BaseMaxHealth', 150000,
 			'FoodResources', {
 				"FoodAnimalHerbivore",
 				"FoodAnimalCarnivore",
@@ -16905,8 +16930,9 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Insects",
+			'Group', "Evolutions",
 			'Id', "BadTrip_Bloated_Glutch_Stitcher",
+			'comment', "T5",
 			'object_class', "GroundAnimal",
 			'SpeciesGroup', "insects",
 			'UnitTags', set( "AgitatedByPheromones", "Animal" ),
@@ -17004,8 +17030,9 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Insects",
+			'Group', "Evolutions",
 			'Id', "BadTrip_Bloated_Glutch",
+			'comment', "T4",
 			'object_class', "GroundAnimal",
 			'SpeciesGroup', "insects",
 			'UnitTags', set( "AgitatedByPheromones", "Animal" ),
@@ -17103,8 +17130,9 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Insects",
+			'Group', "Evolutions",
 			'Id', "Bloated_Glutch",
+			'comment', "T3",
 			'object_class', "GroundAnimal",
 			'SpeciesGroup', "insects",
 			'UnitTags', set( "AgitatedByPheromones", "Animal" ),
@@ -17200,8 +17228,9 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Insects",
+			'Group', "Evolutions",
 			'Id', "Glutch_Stitcher",
+			'comment', "T2",
 			'object_class', "GroundAnimal",
 			'SpeciesGroup', "insects",
 			'UnitTags', set( "AgitatedByPheromones", "Animal" ),
@@ -17294,8 +17323,119 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Insects",
+			'Group', "Evolutions",
+			'Id', "Fast_Frenzied_Fortified_Bomber_Dragonfly",
+			'comment', "T5",
+			'object_class', "DragonflyBase",
+			'SpeciesGroup', "insects",
+			'RoamMinDist', 5000,
+			'RoamMaxDist', 40000,
+			'RoamIntervalMin', 4000,
+			'RoamIntervalMax', 10000,
+			'composite_part_groups', {
+				"Dragonfly",
+			},
+			'PainMask', "PainMask",
+			'EventProgressValue', 1377,
+			'SightRange', 10000,
+			'CombatGroup', "Insects",
+			'HitNegationChance', {
+				blunt = 20,
+				energy = 20,
+				gas = 20,
+				pacify = 80,
+				piercing = 20,
+			},
+			'HitNegationChance_blunt', 20,
+			'HitNegationChance_piercing', 20,
+			'HitNegationChance_energy', 20,
+			'HitNegationChance_gas', 20,
+			'HitNegationChance_pacify', 80,
+			'HumanThreat', true,
+			'RobotThreat', true,
+			'EnrageChance', 5,
+			'BloodColor', RGBA(119, 184, 211, 255),
+			'max_skinned_decals_low', -1,
+			'FieldResearchTech', "Field_Dragonfly_T4",
+			'ObservationDistanceMin', 17000,
+			'ObservationDistanceMax', 21000,
+			'SkipTesting', true,
+			'Icon', "UI/Icons/Resources/res_dragonfly",
+			'DisplayName', T(661997517268, --[[ModItemUnitAnimalCompositeDef Fast_Frenzied_Fortified_Bomber_Dragonfly DisplayName]] "Fast Frenzied Fortified Bomber Deathfly"),
+			'DisplayNamePl', T(362935075377, --[[ModItemUnitAnimalCompositeDef Fast_Frenzied_Fortified_Bomber_Dragonfly DisplayNamePl]] "Fast Frenzied Fortified Bomber Deathfly"),
+			'DisplayNameUnknown', T(--[[ModItemUnitAnimalCompositeDef Fast_Frenzied_Fortified_Bomber_Dragonfly DisplayNameUnknown]] "Dragonfly Final Form?"),
+			'DisplayNameUnknownPL', T(--[[ModItemUnitAnimalCompositeDef Fast_Frenzied_Fortified_Bomber_Dragonfly DisplayNameUnknownPL]] "Dragonfly Final Form?"),
+			'Description', T(998813574519, --[[ModItemUnitAnimalCompositeDef Fast_Frenzied_Fortified_Bomber_Dragonfly Description]] "Oh great, now they are fast, deal area damage, incredibly bulky.... No clear weakness either. Deals <color TextNegative>Energy</color> damage."),
+			'BaseMaxHealth', 160000,
+			'FoodResources', {
+				"FoodAnimalHerbivore",
+				"FoodAnimalCarnivore",
+				"Slop",
+			},
+			'DailyEatingAmount', 10000,
+			'Diet', "Omnivore",
+			'EatingDuration', 4000,
+			'ButcherResources', {
+				PlaceObj('ButcherResAmount', {
+					'resource', "RawMeatInsect",
+					'min_amount', 8000,
+				}),
+			},
+			'SelectionRadius', 1250,
+			'BodySize', "small",
+			'AnimalPerks', {
+				"AP_Fast",
+				"AP_Frenzy",
+			},
+			'radius', 1000,
+			'attack_weapon', "Dragonfly_bomb",
+			'EatStartAnim', "eat_Start",
+			'EatIdleAnim', {
+				"eat_Idle",
+			},
+			'EatEndAnim', "eat_End",
+			'anim_idle', {
+				"idle",
+				"idle_Active",
+				"idle_Active2",
+			},
+			'anim_idle_nervous', {
+				"idle_Nervous",
+			},
+			'SleepStartAnim', "sleep_Start",
+			'SleepIdleAnim', "sleep_Idle",
+			'SleepEndAnim', "sleep_End",
+			'SleepInterruptedAnim', "sleep_Interupted",
+			'MinGrownScale', 70,
+			'MaxGrownScale', 90,
+			'FlightMinPitch', -2700,
+			'FlightMaxPitch', 2700,
+			'FlightMaxRoll', 3600,
+			'FlightYawRotToRoll', 150,
+			'FlightDecelDist', 6000,
+			'FlightSimHeightMax', 6000,
+			'FlightSimFrictionXY', 30,
+			'FlightSimAttract', 2000,
+			'FlightSimLift', 1000,
+			'FlightSimMaxLift', 5000,
+			'FlightSimWeight', 1000,
+			'FlightSimMinStep', 5000,
+			'FlightSimMaxStep', 20000,
+			'FlightSimDecelDist', 20000,
+			'FlightSimSplineErr', 1000,
+			'FlightSlopePenalty', 500,
+			'FlightMinObstacleHeight', 1050,
+			'UnitPerkFrenzy', true,
+			'FrenzyHealthPct', 99,
+			'FrenzyEffects', {
+				"Frenzy_Fast",
+				"Frenzy_Conscious_4",
+			},
+		}),
+		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Group', "Evolutions",
 			'Id', "Frenzied_Fortified_Bomber_Dragonfly",
+			'comment', "T4",
 			'object_class', "DragonflyBase",
 			'SpeciesGroup', "insects",
 			'RoamMinDist', 5000,
@@ -17401,8 +17541,9 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Insects",
+			'Group', "Evolutions",
 			'Id', "Frenzied_Bomber_Dragonfly",
+			'comment', "T3",
 			'object_class', "DragonflyBase",
 			'SpeciesGroup', "insects",
 			'RoamMinDist', 5000,
@@ -17508,8 +17649,9 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Insects",
+			'Group', "Evolutions",
 			'Id', "Frenzied_Dragonfly",
+			'comment', "T2",
 			'object_class', "DragonflyBase",
 			'SpeciesGroup', "insects",
 			'RoamMinDist', 5000,
@@ -17610,8 +17752,9 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Insects",
+			'Group', "Evolutions",
 			'Id', "Spellsword_Tecatli",
+			'comment', "T5",
 			'object_class', "TecatliBase",
 			'BypassTrapsChance', 90,
 			'composite_part_target', "Spellsword_Tecatli",
@@ -17687,8 +17830,9 @@ PlaceObj('ModItemFolder', {
 			'NewbornClass', "Spellsword_Tecatli",
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Insects",
+			'Group', "Evolutions",
 			'Id', "Intelligent_Tecatli",
+			'comment', "T4",
 			'object_class', "TecatliBase",
 			'BypassTrapsChance', 90,
 			'composite_part_target', "Intelligent_Tecatli",
@@ -17764,8 +17908,9 @@ PlaceObj('ModItemFolder', {
 			'NewbornClass', "Spellsword_Tecatli",
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Insects",
+			'Group', "Evolutions",
 			'Id', "Heat_Reinforced_Tecatli",
+			'comment', "T3",
 			'object_class', "TecatliBase",
 			'composite_part_target', "Heat_Reinforced_Tecatli",
 			'composite_part_groups', {
@@ -17841,8 +17986,9 @@ PlaceObj('ModItemFolder', {
 			'NewbornClass', "Intelligent_Tecatli",
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Insects",
+			'Group', "Evolutions",
 			'Id', "Entombed_Tecatli",
+			'comment', "T2",
 			'object_class', "TecatliBase",
 			'composite_part_target', "Entombed_Tecatli",
 			'composite_part_groups', {
@@ -17918,6 +18064,7 @@ PlaceObj('ModItemFolder', {
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
 			'Group', "Desert",
 			'Id', "Tecatli",
+			'comment', "T1",
 			'object_class', "TecatliBase",
 			'SpeciesGroup', "hoofed",
 			'RoamIntervalMin', 2000,
@@ -18004,8 +18151,9 @@ PlaceObj('ModItemFolder', {
 			'MovementSpeedStarving', 1250,
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Temperate",
+			'Group', "Evolutions",
 			'Id', "VenomousRaptors",
+			'comment', "T1",
 			'object_class', "TecatliBase",
 			'SpeciesGroup', "hoofed",
 			'RoamIntervalMin', 2000,
@@ -18110,10 +18258,11 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 5,
 			'ReproductionType', "two sexes",
+			'ReproductionGroup', "Tecatli",
 			'DailyPregnancyChance', 55,
 			'PregnancyDuration', 4800000,
 			'GrowDuration', 4800000,
-			'NewbornClass', "Tecatli",
+			'NewbornClass', "Entombed_Tecatli",
 			'MinNewbornScale', 35,
 			'MaxNewbornScale', 35,
 			'MinGrownScale', 65,
@@ -18125,8 +18274,9 @@ PlaceObj('ModItemFolder', {
 			'FrenzyHealthPct', 80,
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Insects",
+			'Group', "Evolutions",
 			'Id', "Rage_Focused_Scissorhands",
+			'comment', "T5",
 			'object_class', "Scissorhands",
 			'EventProgressValue', 1755,
 			'SpawnDefWeight', 30,
@@ -18193,72 +18343,9 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Insects",
-			'Id', "Brutal_Duelist_Scissorhands",
-			'object_class', "Scissorhands",
-			'EventProgressValue', 350,
-			'SpawnDefWeight', 30,
-			'CombatHostile', false,
-			'HitNegationChance', {
-				blunt = 30,
-				energy = 30,
-				gas = 15,
-				pacify = 40,
-				piercing = 15,
-			},
-			'HitNegationChance_blunt', 30,
-			'HitNegationChance_piercing', 15,
-			'HitNegationChance_energy', 30,
-			'HitNegationChance_gas', 15,
-			'HitNegationChance_pacify', 40,
-			'HumanThreat', true,
-			'RobotThreat', true,
-			'FieldResearchTech', "Field_Scissorhands_T2",
-			'lead_priority', 12,
-			'DisplayName', T(--[[ModItemUnitAnimalCompositeDef Brutal_Duelist_Scissorhands DisplayName]] "Brutal Scissorhand Duelist"),
-			'DisplayNamePl', T(--[[ModItemUnitAnimalCompositeDef Brutal_Duelist_Scissorhands DisplayNamePl]] "Brutal Scissorhand Duelist"),
-			'DisplayNameUnknown', T(568883049640, --[[ModItemUnitAnimalCompositeDef Brutal_Duelist_Scissorhands DisplayNameUnknown]] "Unknown Scissorhands Evolution"),
-			'DisplayNameUnknownPL', T(183266165907, --[[ModItemUnitAnimalCompositeDef Brutal_Duelist_Scissorhands DisplayNameUnknownPL]] "Unknown Scissorhands Evolution"),
-			'Description', T(810154241954, --[[ModItemUnitAnimalCompositeDef Brutal_Duelist_Scissorhands Description]] "Blades that are honed by attacking or defending from other Scissorhands. If this blade touches us, it will be more likely to deal critical wounds. Able to deftly dodge blunt force, and dissapates any energy attacks with ease. Deals <color TextSubtitleBlue>Piercing</color> damage."),
-			'BaseMaxHealth', 400000,
-			'DailyEatingAmount', 3000,
-			'ButcherResources', {
-				PlaceObj('ButcherResAmount', {
-					'resource', "RawMeatInsect",
-					'min_amount', 40000,
-				}),
-			},
-			'ProduceResources', {
-				PlaceObj('ResAmount', {
-					'resource', "Stone",
-					'amount', 45000,
-				}),
-			},
-			'ProduceResInterval', 2400000,
-			'AnimalPerks', {
-				"StrongAnimal",
-				"StoneDigger",
-				"DraftableAnimal",
-			},
-			'attack_weapon', "ScissorhandsMelee_Brute",
-			'TamingChance', 60,
-			'DailyPregnancyChance', 65,
-			'PregnancyDuration', 3840000,
-			'GrowDuration', 3840000,
-			'NewbornClass', "Rage_Fueled_Scissorhand_Duelist",
-			'MinNewbornScale', 60,
-			'MaxNewbornScale', 60,
-			'MinGrownScale', 115,
-			'MaxGrownScale', 120,
-			'UnitPerkFrenzy', true,
-			'FrenzyHealthPct', 99,
-			'FrenzyEffects', {
-				"Frenzy_Conscious_2",
-			},
-		}),
-		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Insects",
+			'Group', "Evolutions",
 			'Id', "Rage_Fueled_Scissorhand_Duelist",
+			'comment', "T4",
 			'object_class', "Scissorhands",
 			'EventProgressValue', 700,
 			'SpawnDefWeight', 30,
@@ -18322,65 +18409,203 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Group', "Evolutions",
+			'Id', "Brutal_Duelist_Scissorhands",
+			'comment', "T3",
+			'object_class', "Scissorhands",
+			'EventProgressValue', 350,
+			'SpawnDefWeight', 30,
+			'CombatHostile', false,
+			'HitNegationChance', {
+				blunt = 30,
+				energy = 30,
+				gas = 15,
+				pacify = 40,
+				piercing = 15,
+			},
+			'HitNegationChance_blunt', 30,
+			'HitNegationChance_piercing', 15,
+			'HitNegationChance_energy', 30,
+			'HitNegationChance_gas', 15,
+			'HitNegationChance_pacify', 40,
+			'HumanThreat', true,
+			'RobotThreat', true,
+			'FieldResearchTech', "Field_Scissorhands_T2",
+			'lead_priority', 12,
+			'DisplayName', T(--[[ModItemUnitAnimalCompositeDef Brutal_Duelist_Scissorhands DisplayName]] "Brutal Scissorhand Duelist"),
+			'DisplayNamePl', T(--[[ModItemUnitAnimalCompositeDef Brutal_Duelist_Scissorhands DisplayNamePl]] "Brutal Scissorhand Duelist"),
+			'DisplayNameUnknown', T(568883049640, --[[ModItemUnitAnimalCompositeDef Brutal_Duelist_Scissorhands DisplayNameUnknown]] "Unknown Scissorhands Evolution"),
+			'DisplayNameUnknownPL', T(183266165907, --[[ModItemUnitAnimalCompositeDef Brutal_Duelist_Scissorhands DisplayNameUnknownPL]] "Unknown Scissorhands Evolution"),
+			'Description', T(810154241954, --[[ModItemUnitAnimalCompositeDef Brutal_Duelist_Scissorhands Description]] "Blades that are honed by attacking or defending from other Scissorhands. If this blade touches us, it will be more likely to deal critical wounds. Able to deftly dodge blunt force, and dissapates any energy attacks with ease. Deals <color TextSubtitleBlue>Piercing</color> damage."),
+			'BaseMaxHealth', 400000,
+			'DailyEatingAmount', 3000,
+			'ButcherResources', {
+				PlaceObj('ButcherResAmount', {
+					'resource', "RawMeatInsect",
+					'min_amount', 40000,
+				}),
+			},
+			'ProduceResources', {
+				PlaceObj('ResAmount', {
+					'resource', "Stone",
+					'amount', 45000,
+				}),
+			},
+			'ProduceResInterval', 2400000,
+			'AnimalPerks', {
+				"StrongAnimal",
+				"StoneDigger",
+				"DraftableAnimal",
+			},
+			'attack_weapon', "ScissorhandsMelee_Brute",
+			'TamingChance', 60,
+			'DailyPregnancyChance', 65,
+			'PregnancyDuration', 3840000,
+			'GrowDuration', 3840000,
+			'NewbornClass', "Rage_Fueled_Scissorhand_Duelist",
+			'MinNewbornScale', 60,
+			'MaxNewbornScale', 60,
+			'MinGrownScale', 115,
+			'MaxGrownScale', 120,
+			'UnitPerkFrenzy', true,
+			'FrenzyHealthPct', 99,
+			'FrenzyEffects', {
+				"Frenzy_Conscious_2",
+			},
+		}),
+		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Group', "Evolutions",
+			'Id', "Scissorhands_Brute",
+			'comment', "T2",
+			'object_class', "Scissorhands",
+			'EventProgressValue', 180,
+			'lead_priority', 12,
+			'DisplayName', T(803640083458, --[[ModItemUnitAnimalCompositeDef Scissorhands_Brute DisplayName]] "Scissorhands demolisher"),
+			'DisplayNamePl', T(381190689622, --[[ModItemUnitAnimalCompositeDef Scissorhands_Brute DisplayNamePl]] "Scissorhands demolishers"),
+			'DisplayNameUnknown', T(587799246476, --[[ModItemUnitAnimalCompositeDef Scissorhands_Brute DisplayNameUnknown]] "Huge purple mantis"),
+			'DisplayNameUnknownPL', T(531570130410, --[[ModItemUnitAnimalCompositeDef Scissorhands_Brute DisplayNameUnknownPL]] "Huge purple mantises"),
+			'BaseMaxHealth', 200000,
+			'ButcherResources', {
+				PlaceObj('ButcherResAmount', {
+					'resource', "RawMeatInsect",
+					'min_amount', 40000,
+				}),
+			},
+			'ProduceResources', {
+				PlaceObj('ResAmount', {
+					'resource', "Stone",
+					'amount', 45000,
+				}),
+			},
+			'ProduceResInterval', 2400000,
+			'AnimalPerks', {
+				"StrongAnimal",
+				"StoneDigger",
+				"DraftableAnimal",
+			},
+			'attack_weapon', "ScissorhandsMelee_Brute",
+			'NewbornClass', "Brutal_Duelist_Scissorhands",
+			'MinNewbornScale', 60,
+			'MaxNewbornScale', 60,
+			'MinGrownScale', 115,
+			'MaxGrownScale', 120,
+		}),
+		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Group', "Evolutions",
+			'Id', "Scissorhands_Brute_Nesting",
+			'comment', "T2",
+			'object_class', "Scissorhands",
+			'composite_part_target', "Scissorhands_Brute",
+			'EventProgressValue', 180,
+			'lead_priority', 12,
+			'DisplayName', T(862409597776, --[[ModItemUnitAnimalCompositeDef Scissorhands_Brute_Nesting DisplayName]] "Scissorhands demolisher"),
+			'DisplayNamePl', T(225616689551, --[[ModItemUnitAnimalCompositeDef Scissorhands_Brute_Nesting DisplayNamePl]] "Scissorhands demolishers"),
+			'DisplayNameUnknown', T(284618171634, --[[ModItemUnitAnimalCompositeDef Scissorhands_Brute_Nesting DisplayNameUnknown]] "Huge purple mantis"),
+			'DisplayNameUnknownPL', T(789645003181, --[[ModItemUnitAnimalCompositeDef Scissorhands_Brute_Nesting DisplayNameUnknownPL]] "Huge purple mantises"),
+			'BaseMaxHealth', 200000,
+			'ButcherResources', {
+				PlaceObj('ButcherResAmount', {
+					'resource', "RawMeatInsect",
+					'min_amount', 40000,
+				}),
+			},
+			'ProduceResources', {
+				PlaceObj('ResAmount', {
+					'resource', "Stone",
+					'amount', 45000,
+				}),
+			},
+			'ProduceResInterval', 2400000,
+			'AnimalPerks', {
+				"StrongAnimal",
+				"StoneDigger",
+				"DraftableAnimal",
+			},
+			'attack_weapon', "ScissorhandsMelee_Brute",
+			'MinNewbornScale', 60,
+			'MaxNewbornScale', 60,
+			'MinGrownScale', 115,
+			'MaxGrownScale', 120,
+			'UnitNesting', true,
+			'CanBeNestGuardian', "always",
+		}),
+		PlaceObj('ModItemUnitAnimalCompositeDef', {
 			'Group', "Insects",
-			'Id', "Juno",
+			'Id', "Scissorhands",
+			'comment', "T1",
 			'object_class', "GroundAnimal",
 			'SpeciesGroup', "insects",
+			'UnitTags', set( "AgitatedByPheromones", "Animal" ),
 			'RoamRadius', 10000,
-			'BypassTrapsChance', 90,
 			'pfclass', 5,
 			'composite_part_groups', {
-				"Juno",
+				"Scissorhands",
 			},
 			'PainMask', "PainMask",
-			'SpecialOrientation', 9,
-			'EventProgressValue', 250,
-			'SpawnDefWeight', 5,
+			'SpecialOrientation', 2,
+			'EventProgressValue', 90,
+			'SpawnDefWeight', 10,
 			'SpawnTags', set( "Boss" ),
+			'SightRange', 25000,
+			'HearingRange', 2500,
 			'CombatGroup', "Insects",
 			'CombatHostile', true,
-			'AttackMemory', 45000,
+			'CombatRestrictPFBonus', 50000,
 			'CombatGiveUpNoHit', 30000,
 			'CombatFleeAccuracy', 0,
 			'aim_spot', "Aim",
-			'ButcherDuration', 20000,
 			'BloodColor', RGBA(4, 60, 70, 255),
 			'max_skinned_decals_low', -1,
-			'FieldResearchTech', "FieldJuno",
+			'FieldResearchTech', "FieldScissorhands",
 			'ObservationDistanceMin', 500,
 			'ObservationDistanceMax', 1500,
-			'lead_priority', 5,
-			'Icon', "UI/Icons/Resources/res_juno",
-			'DisplayName', T(462402603600, --[[ModItemUnitAnimalCompositeDef Juno DisplayName]] "Juno"),
-			'DisplayNamePl', T(886155905930, --[[ModItemUnitAnimalCompositeDef Juno DisplayNamePl]] "Junos"),
-			'Description', T(403495234672, --[[ModItemUnitAnimalCompositeDef Juno Description]] "Large highly-intelligent insect that moves incredibly quick, avoids traps and deals immense damage to structures."),
-			'BaseMaxHealth', 150000,
+			'lead_priority', 11,
+			'Icon', "UI/Icons/Resources/res_scissorhands",
+			'DisplayName', T(549254988897, --[[ModItemUnitAnimalCompositeDef Scissorhands DisplayName]] "Scissorhands"),
+			'DisplayNamePl', T(460750445860, --[[ModItemUnitAnimalCompositeDef Scissorhands DisplayNamePl]] "Scissorhands"),
+			'Description', T(279773210327, --[[ModItemUnitAnimalCompositeDef Scissorhands Description]] "Large highly-intelligent insect."),
+			'fx_actor_base_class', "Scissorhands",
 			'FoodResources', {
-				"RawMeatHuman",
+				"FoodAnimalHerbivore",
 				"FoodAnimalCarnivore",
 				"Slop",
 			},
 			'DailyEatingAmount', 1000,
-			'Diet', "Carnivore",
+			'Diet', "Omnivore",
 			'EatingDuration', 4000,
-			'FoodSourceClasses', {
-				"ResourcePile",
-				"UnitCorpse",
-				"AnimalFeeder",
-			},
 			'ButcherResources', {
 				PlaceObj('ButcherResAmount', {
 					'resource', "RawMeatInsect",
-					'min_amount', 50000,
+					'min_amount', 25000,
 				}),
 			},
-			'SelectionRadius', 2000,
-			'ChanceToBeMale', 75,
+			'SelectionRadius', 1500,
+			'ChanceToBeMale', 50,
 			'BodySize', "large",
 			'ProduceResources', {
 				PlaceObj('ResAmount', {
 					'resource', "Stone",
-					'amount', 50000,
+					'amount', 30000,
 				}),
 			},
 			'ProduceResInterval', 1920000,
@@ -18390,16 +18615,14 @@ PlaceObj('ModItemFolder', {
 			end,
 			'AnimalPerks', {
 				"StoneDigger",
-				"SmartPredator",
 				"DraftableAnimal",
 			},
-			'radius', 1200,
-			'collision_radius_mod', 1250,
-			'movement_adjust', 750,
+			'radius', 1000,
+			'collision_radius_mod', 1200,
 			'pfclass_tamed', 11,
 			'pfclass_tamed_lead', 14,
 			'EnrageChanceOtherAnimals', 100,
-			'attack_weapon', "JunoMelee",
+			'attack_weapon', "ScissorhandsMelee",
 			'EatStartAnim', "eat_Start",
 			'EatIdleAnim', {
 				"eat_Idle",
@@ -18418,7 +18641,7 @@ PlaceObj('ModItemFolder', {
 			'SleepEndAnim', "sleep_End",
 			'SleepInterruptedAnim', "sleep_Interrupted",
 			'Tameable', true,
-			'TamingFood', "RawMeatHuman",
+			'TamingFood', "RawMeat",
 			'TamingFoodAmount', 10000,
 			'TamingMinimumSkill', 5,
 			'TamingChance', 70,
@@ -18429,191 +18652,130 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 5,
 			'ReproductionType', "two sexes",
-			'ReproductionGroup', "Junos",
+			'ReproductionGroup', "Scissorhands",
 			'DailyPregnancyChance', 55,
 			'PregnancyDuration', 4800000,
 			'GrowDuration', 4800000,
-			'NewbornClass', "Juno_Brute",
-			'MinGrownScale', 70,
-			'MaxGrownScale', 90,
+			'NewbornClass', "Scissorhands_Brute",
+			'MinGrownScale', 100,
+			'MaxGrownScale', 110,
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
 			'Group', "Insects",
-			'Id', "Juno_Brute",
-			'object_class', "Juno",
-			'EventProgressValue', 500,
-			'lead_priority', 6,
-			'DisplayName', T(700763245375, --[[ModItemUnitAnimalCompositeDef Juno_Brute DisplayName]] "Juno demolisher"),
-			'DisplayNamePl', T(195660478051, --[[ModItemUnitAnimalCompositeDef Juno_Brute DisplayNamePl]] "Juno demolishers"),
-			'DisplayNameUnknown', T(159439380678, --[[ModItemUnitAnimalCompositeDef Juno_Brute DisplayNameUnknown]] "Large horned insect"),
-			'DisplayNameUnknownPL', T(362184721654, --[[ModItemUnitAnimalCompositeDef Juno_Brute DisplayNameUnknownPL]] "Large horned insect"),
-			'BaseMaxHealth', 300000,
+			'Id', "Scissorhands_Nesting",
+			'comment', "T0.1",
+			'object_class', "GroundAnimal",
+			'SpeciesGroup', "insects",
+			'UnitTags', set( "AgitatedByPheromones", "Animal" ),
+			'RoamRadius', 10000,
+			'pfclass', 5,
+			'composite_part_target', "Scissorhands",
+			'composite_part_groups', {
+				"Scissorhands",
+			},
+			'PainMask', "PainMask",
+			'SpecialOrientation', 2,
+			'EventProgressValue', 90,
+			'SpawnDefWeight', 10,
+			'SpawnTags', set( "Boss" ),
+			'SightRange', 25000,
+			'HearingRange', 2500,
+			'CombatGroup', "Insects",
+			'CombatHostile', true,
+			'CombatRestrictPFBonus', 50000,
+			'CombatGiveUpNoHit', 30000,
+			'CombatFleeAccuracy', 0,
+			'aim_spot', "Aim",
+			'BloodColor', RGBA(4, 60, 70, 255),
+			'max_skinned_decals_low', -1,
+			'FieldResearchTech', "FieldScissorhands",
+			'ObservationDistanceMin', 500,
+			'ObservationDistanceMax', 1500,
+			'lead_priority', 11,
+			'Icon', "UI/Icons/Resources/res_scissorhands",
+			'DisplayName', T(282850352588, --[[ModItemUnitAnimalCompositeDef Scissorhands_Nesting DisplayName]] "Scissorhands"),
+			'DisplayNamePl', T(855408200427, --[[ModItemUnitAnimalCompositeDef Scissorhands_Nesting DisplayNamePl]] "Scissorhands"),
+			'Description', T(641150827518, --[[ModItemUnitAnimalCompositeDef Scissorhands_Nesting Description]] "Large highly-intelligent insect."),
+			'fx_actor_base_class', "Scissorhands",
+			'FoodResources', {
+				"FoodAnimalHerbivore",
+				"FoodAnimalCarnivore",
+				"Slop",
+			},
+			'DailyEatingAmount', 10000,
+			'Diet', "Omnivore",
+			'EatingDuration', 4000,
 			'ButcherResources', {
 				PlaceObj('ButcherResAmount', {
 					'resource', "RawMeatInsect",
-					'min_amount', 75000,
+					'min_amount', 25000,
 				}),
 			},
+			'SelectionRadius', 1500,
+			'ChanceToBeMale', 50,
+			'BodySize', "large",
 			'ProduceResources', {
 				PlaceObj('ResAmount', {
 					'resource', "Stone",
-					'amount', 75000,
+					'amount', 30000,
 				}),
 			},
-			'ProduceResInterval', 2400000,
+			'ProduceResInterval', 1920000,
+			'CmdProduceResources', function (animal)
+				if not animal:IsTamed() then return animal:UpdateProductionTime() end
+				return animal:DoProduceResources()
+			end,
 			'AnimalPerks', {
-				"StrongAnimal",
-				"BloodFrenzy",
-				"SmartPredator",
 				"StoneDigger",
 				"DraftableAnimal",
 			},
-			'attack_weapon', "JunoMelee_Brute",
-			'TamingChance', 60,
-			'NewbornClass', "Angry_Juno",
-			'UnitPerkFrenzy', true,
-			'FrenzyHealthPct', 70,
-			'FrenzyChance', 50,
-			'FrenzyDuration', 80000,
-			'FrenzyCooldown', 40000,
-			'FrenzyEffects', {
-				"JunoFrenzy",
+			'radius', 1000,
+			'collision_radius_mod', 1200,
+			'pfclass_tamed', 11,
+			'pfclass_tamed_lead', 14,
+			'EnrageChanceOtherAnimals', 100,
+			'attack_weapon', "ScissorhandsMelee",
+			'EatStartAnim', "eat_Start",
+			'EatIdleAnim', {
+				"eat_Idle",
 			},
+			'EatEndAnim', "eat_End",
+			'anim_idle', {
+				"idle",
+				"idle_Active",
+				"idle_Active2",
+			},
+			'anim_idle_nervous', {
+				"idle_Nervous",
+			},
+			'SleepStartAnim', "sleep_Start",
+			'SleepIdleAnim', "sleep_Idle",
+			'SleepEndAnim', "sleep_End",
+			'SleepInterruptedAnim', "sleep_Interrupted",
+			'Tameable', true,
+			'TamingFood', "RawMeat",
+			'TamingFoodAmount', 10000,
+			'TamingMinimumSkill', 5,
+			'TamingChance', 50,
+			'TamingAggressiveChance', 20,
+			'TamingDistance', 10000,
+			'TamedLifetimeMin', 184320000,
+			'TamedLifetimeMax', 322560000,
+			'CombatSkillInitial', range(1, 3),
+			'BondingChance', 5,
+			'ReproductionType', "two sexes",
+			'ReproductionGroup', "Scissorhands",
+			'DailyPregnancyChance', 55,
+			'NewbornClass', "Scissorhands_Brute",
+			'MinGrownScale', 100,
+			'MaxGrownScale', 110,
+			'UnitNesting', true,
+			'CanBeNestGuardian', true,
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Insects",
-			'Id', "Angry_Juno",
-			'object_class', "Juno",
-			'EventProgressValue', 900,
-			'SpawnDefWeight', 30,
-			'CombatHostile', false,
-			'HitNegationChance', {
-				blunt = 15,
-				energy = 15,
-				gas = 15,
-				pacify = 20,
-				piercing = 15,
-			},
-			'HitNegationChance_blunt', 15,
-			'HitNegationChance_piercing', 15,
-			'HitNegationChance_energy', 15,
-			'HitNegationChance_gas', 15,
-			'HitNegationChance_pacify', 20,
-			'HumanThreat', true,
-			'RobotThreat', true,
-			'FieldResearchTech', "Field_Juno_T2",
-			'ForcedApproachPlanning', true,
-			'lead_priority', 6,
-			'DisplayName', T(--[[ModItemUnitAnimalCompositeDef Angry_Juno DisplayName]] "Angry Juno"),
-			'DisplayNamePl', T(--[[ModItemUnitAnimalCompositeDef Angry_Juno DisplayNamePl]] "Angry Juno"),
-			'DisplayNameUnknown', T(--[[ModItemUnitAnimalCompositeDef Angry_Juno DisplayNameUnknown]] "Unknown Juno Evolution"),
-			'DisplayNameUnknownPL', T(--[[ModItemUnitAnimalCompositeDef Angry_Juno DisplayNameUnknownPL]] "Unknown Juno Evolution"),
-			'Description', T(191163878118, --[[ModItemUnitAnimalCompositeDef Angry_Juno Description]] "This Juno's species has focused it's biology on killing, and identifying what needs to be killed next. Low defenses, high damage. Deals <color TextButton>Blunt</color> damage."),
-			'BaseMaxHealth', 500000,
-			'DailyEatingAmount', 2000,
-			'ButcherResources', {
-				PlaceObj('ButcherResAmount', {
-					'resource', "RawMeatInsect",
-					'min_amount', 75000,
-				}),
-			},
-			'ProduceResources', {
-				PlaceObj('ResAmount', {
-					'resource', "Stone",
-					'amount', 75000,
-				}),
-			},
-			'ProduceResInterval', 2400000,
-			'AnimalPerks', {
-				"StrongAnimal",
-				"BloodFrenzy",
-				"SmartPredator",
-				"StoneDigger",
-				"DraftableAnimal",
-			},
-			'attack_weapon', "JunoMelee_Brute",
-			'DailyPregnancyChance', 85,
-			'PregnancyDuration', 3840000,
-			'GrowDuration', 3840000,
-			'NewbornClass', "Hulk_Juno",
-			'UnitPerkFrenzy', true,
-			'FrenzyHealthPct', 99,
-			'FrenzyEffects', {
-				"JunoFrenzy",
-				"Frenzy_Conscious_2",
-				"Frenzy_Fast",
-			},
-		}),
-		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Insects",
-			'Id', "Hulk_Juno",
-			'object_class', "Juno",
-			'EventProgressValue', 1100,
-			'SpawnDefWeight', 30,
-			'CombatHostile', false,
-			'HitNegationChance', {
-				blunt = 30,
-				energy = 30,
-				gas = 30,
-				pacify = 40,
-				piercing = 30,
-			},
-			'HitNegationChance_blunt', 30,
-			'HitNegationChance_piercing', 30,
-			'HitNegationChance_energy', 30,
-			'HitNegationChance_gas', 30,
-			'HitNegationChance_pacify', 40,
-			'HumanThreat', true,
-			'RobotThreat', true,
-			'FieldResearchTech', "Field_Juno_T2",
-			'ForcedApproachPlanning', true,
-			'lead_priority', 6,
-			'DisplayName', T(--[[ModItemUnitAnimalCompositeDef Hulk_Juno DisplayName]] "Hulk Juno"),
-			'DisplayNamePl', T(--[[ModItemUnitAnimalCompositeDef Hulk_Juno DisplayNamePl]] "Hulk Juno"),
-			'DisplayNameUnknown', T(--[[ModItemUnitAnimalCompositeDef Hulk_Juno DisplayNameUnknown]] "Unknown Juno Evolution"),
-			'DisplayNameUnknownPL', T(--[[ModItemUnitAnimalCompositeDef Hulk_Juno DisplayNameUnknownPL]] "Unknown Juno Evolution"),
-			'Description', T(453181849768, --[[ModItemUnitAnimalCompositeDef Hulk_Juno Description]] "Somehow, this creature is even more aggressive than the last. Thankfully evolution has not deemed defenses to be a high priority. Low defenses, high damage. Deals <color TextButton>Blunt</color> damage."),
-			'BaseMaxHealth', 1200000,
-			'DailyEatingAmount', 3000,
-			'ButcherResources', {
-				PlaceObj('ButcherResAmount', {
-					'resource', "RawMeatInsect",
-					'min_amount', 75000,
-				}),
-			},
-			'ProduceResources', {
-				PlaceObj('ResAmount', {
-					'resource', "Stone",
-					'amount', 75000,
-				}),
-			},
-			'ProduceResInterval', 2400000,
-			'AnimalPerks', {
-				"StrongAnimal",
-				"BloodFrenzy",
-				"SmartPredator",
-				"StoneDigger",
-				"DraftableAnimal",
-				"AP_Regen",
-				"AP_Frenzy",
-			},
-			'attack_weapon', "Juno_Hulk",
-			'TamingChance', 40,
-			'DailyPregnancyChance', 75,
-			'PregnancyDuration', 2880000,
-			'GrowDuration', 2880000,
-			'UnitPerkFrenzy', true,
-			'FrenzyHealthPct', 99,
-			'FrenzyChance', 200,
-			'FrenzyEffects', {
-				"JunoFrenzy",
-				"Frenzy_Regen",
-				"Frenzy_Conscious_3",
-			},
-		}),
-		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Insects",
+			'Group', "Evolutions",
 			'Id', "Junoskar",
+			'comment', "T6",
 			'object_class', "UnitAnimal",
 			'SpeciesGroup', "insects",
 			'RoamRadius', 10000,
@@ -18752,8 +18914,627 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Group', "Evolutions",
+			'Id', "Too_Angry_Too_Die_Juno",
+			'comment', "T5",
+			'object_class', "Juno",
+			'EventProgressValue', 1500,
+			'SpawnDefWeight', 30,
+			'CombatHostile', false,
+			'HitNegationChance', {
+				blunt = 35,
+				energy = 35,
+				gas = 35,
+				pacify = 60,
+				piercing = 35,
+			},
+			'HitNegationChance_blunt', 35,
+			'HitNegationChance_piercing', 35,
+			'HitNegationChance_energy', 35,
+			'HitNegationChance_gas', 35,
+			'HitNegationChance_pacify', 60,
+			'HumanThreat', true,
+			'RobotThreat', true,
+			'FieldResearchTech', "Field_Juno_T4",
+			'ForcedApproachPlanning', true,
+			'lead_priority', 6,
+			'DisplayName', T(--[[ModItemUnitAnimalCompositeDef Too_Angry_Too_Die_Juno DisplayName]] "Too-Angry-Too-Die Juno"),
+			'DisplayNamePl', T(--[[ModItemUnitAnimalCompositeDef Too_Angry_Too_Die_Juno DisplayNamePl]] "Too-Angry-Too-Die Juno"),
+			'DisplayNameUnknown', T(434314719262, --[[ModItemUnitAnimalCompositeDef Too_Angry_Too_Die_Juno DisplayNameUnknown]] "Unknown Juno Evolution"),
+			'DisplayNameUnknownPL', T(397893098380, --[[ModItemUnitAnimalCompositeDef Too_Angry_Too_Die_Juno DisplayNameUnknownPL]] "Unknown Juno Evolution"),
+			'Description', T(967813562361, --[[ModItemUnitAnimalCompositeDef Too_Angry_Too_Die_Juno Description]] "Impossible to be knocked unconscious or pacified, our only option is to cause enough damage to render their bodies impossible to move. Deals <color TextButton>Blunt</color> damage."),
+			'BaseMaxHealth', 1800000,
+			'DailyEatingAmount', 4000,
+			'ButcherResources', {
+				PlaceObj('ButcherResAmount', {
+					'resource', "RawMeatInsect",
+					'min_amount', 75000,
+				}),
+			},
+			'ProduceResources', {
+				PlaceObj('ResAmount', {
+					'resource', "Stone",
+					'amount', 75000,
+				}),
+			},
+			'ProduceResInterval', 2400000,
+			'AnimalPerks', {
+				"StrongAnimal",
+				"BloodFrenzy",
+				"SmartPredator",
+				"StoneDigger",
+				"DraftableAnimal",
+				"AP_Fast",
+				"AP_Frenzy",
+				"AP_Regen",
+			},
+			'attack_weapon', "Juno_Hulk",
+			'TamingChance', 40,
+			'DailyPregnancyChance', 85,
+			'PregnancyDuration', 1920000,
+			'GrowDuration', 1920000,
+			'NewbornClass', "Junoskar",
+			'UnitPerkFrenzy', true,
+			'FrenzyHealthPct', 99,
+			'FrenzyEffects', {
+				"JunoFrenzy",
+				"Frenzy_Conscious_4",
+				"Frenzy_Conscious_Perfect",
+				"Frenzy_Regen",
+				"Frenzy_Fast",
+			},
+		}),
+		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Group', "Evolutions",
+			'Id', "Hulk_Juno",
+			'comment', "T4",
+			'object_class', "Juno",
+			'EventProgressValue', 1100,
+			'SpawnDefWeight', 30,
+			'CombatHostile', false,
+			'HitNegationChance', {
+				blunt = 30,
+				energy = 30,
+				gas = 30,
+				pacify = 40,
+				piercing = 30,
+			},
+			'HitNegationChance_blunt', 30,
+			'HitNegationChance_piercing', 30,
+			'HitNegationChance_energy', 30,
+			'HitNegationChance_gas', 30,
+			'HitNegationChance_pacify', 40,
+			'HumanThreat', true,
+			'RobotThreat', true,
+			'FieldResearchTech', "Field_Juno_T2",
+			'ForcedApproachPlanning', true,
+			'lead_priority', 6,
+			'DisplayName', T(--[[ModItemUnitAnimalCompositeDef Hulk_Juno DisplayName]] "Hulk Juno"),
+			'DisplayNamePl', T(--[[ModItemUnitAnimalCompositeDef Hulk_Juno DisplayNamePl]] "Hulk Juno"),
+			'DisplayNameUnknown', T(--[[ModItemUnitAnimalCompositeDef Hulk_Juno DisplayNameUnknown]] "Unknown Juno Evolution"),
+			'DisplayNameUnknownPL', T(--[[ModItemUnitAnimalCompositeDef Hulk_Juno DisplayNameUnknownPL]] "Unknown Juno Evolution"),
+			'Description', T(453181849768, --[[ModItemUnitAnimalCompositeDef Hulk_Juno Description]] "Somehow, this creature is even more aggressive than the last. Thankfully evolution has not deemed defenses to be a high priority. Low defenses, high damage. Deals <color TextButton>Blunt</color> damage."),
+			'BaseMaxHealth', 1200000,
+			'DailyEatingAmount', 3000,
+			'ButcherResources', {
+				PlaceObj('ButcherResAmount', {
+					'resource', "RawMeatInsect",
+					'min_amount', 75000,
+				}),
+			},
+			'ProduceResources', {
+				PlaceObj('ResAmount', {
+					'resource', "Stone",
+					'amount', 75000,
+				}),
+			},
+			'ProduceResInterval', 2400000,
+			'AnimalPerks', {
+				"StrongAnimal",
+				"BloodFrenzy",
+				"SmartPredator",
+				"StoneDigger",
+				"DraftableAnimal",
+				"AP_Regen",
+				"AP_Frenzy",
+			},
+			'attack_weapon', "Juno_Hulk",
+			'TamingChance', 40,
+			'DailyPregnancyChance', 75,
+			'PregnancyDuration', 2880000,
+			'GrowDuration', 2880000,
+			'UnitPerkFrenzy', true,
+			'FrenzyHealthPct', 99,
+			'FrenzyChance', 200,
+			'FrenzyEffects', {
+				"JunoFrenzy",
+				"Frenzy_Regen",
+				"Frenzy_Conscious_3",
+			},
+		}),
+		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Group', "Evolutions",
+			'Id', "Angry_Juno",
+			'comment', "T3",
+			'object_class', "Juno",
+			'EventProgressValue', 900,
+			'SpawnDefWeight', 30,
+			'CombatHostile', false,
+			'HitNegationChance', {
+				blunt = 15,
+				energy = 15,
+				gas = 15,
+				pacify = 20,
+				piercing = 15,
+			},
+			'HitNegationChance_blunt', 15,
+			'HitNegationChance_piercing', 15,
+			'HitNegationChance_energy', 15,
+			'HitNegationChance_gas', 15,
+			'HitNegationChance_pacify', 20,
+			'HumanThreat', true,
+			'RobotThreat', true,
+			'FieldResearchTech', "Field_Juno_T2",
+			'ForcedApproachPlanning', true,
+			'lead_priority', 6,
+			'DisplayName', T(--[[ModItemUnitAnimalCompositeDef Angry_Juno DisplayName]] "Angry Juno"),
+			'DisplayNamePl', T(--[[ModItemUnitAnimalCompositeDef Angry_Juno DisplayNamePl]] "Angry Juno"),
+			'DisplayNameUnknown', T(--[[ModItemUnitAnimalCompositeDef Angry_Juno DisplayNameUnknown]] "Unknown Juno Evolution"),
+			'DisplayNameUnknownPL', T(--[[ModItemUnitAnimalCompositeDef Angry_Juno DisplayNameUnknownPL]] "Unknown Juno Evolution"),
+			'Description', T(191163878118, --[[ModItemUnitAnimalCompositeDef Angry_Juno Description]] "This Juno's species has focused it's biology on killing, and identifying what needs to be killed next. Low defenses, high damage. Deals <color TextButton>Blunt</color> damage."),
+			'BaseMaxHealth', 500000,
+			'DailyEatingAmount', 2000,
+			'ButcherResources', {
+				PlaceObj('ButcherResAmount', {
+					'resource', "RawMeatInsect",
+					'min_amount', 75000,
+				}),
+			},
+			'ProduceResources', {
+				PlaceObj('ResAmount', {
+					'resource', "Stone",
+					'amount', 75000,
+				}),
+			},
+			'ProduceResInterval', 2400000,
+			'AnimalPerks', {
+				"StrongAnimal",
+				"BloodFrenzy",
+				"SmartPredator",
+				"StoneDigger",
+				"DraftableAnimal",
+			},
+			'attack_weapon', "JunoMelee_Brute",
+			'DailyPregnancyChance', 85,
+			'PregnancyDuration', 3840000,
+			'GrowDuration', 3840000,
+			'NewbornClass', "Hulk_Juno",
+			'UnitPerkFrenzy', true,
+			'FrenzyHealthPct', 99,
+			'FrenzyEffects', {
+				"JunoFrenzy",
+				"Frenzy_Conscious_2",
+				"Frenzy_Fast",
+			},
+		}),
+		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Group', "Evolutions",
+			'Id', "Juno_Brute",
+			'comment', "T2",
+			'object_class', "Juno",
+			'EventProgressValue', 500,
+			'lead_priority', 6,
+			'DisplayName', T(700763245375, --[[ModItemUnitAnimalCompositeDef Juno_Brute DisplayName]] "Juno demolisher"),
+			'DisplayNamePl', T(195660478051, --[[ModItemUnitAnimalCompositeDef Juno_Brute DisplayNamePl]] "Juno demolishers"),
+			'DisplayNameUnknown', T(159439380678, --[[ModItemUnitAnimalCompositeDef Juno_Brute DisplayNameUnknown]] "Large horned insect"),
+			'DisplayNameUnknownPL', T(362184721654, --[[ModItemUnitAnimalCompositeDef Juno_Brute DisplayNameUnknownPL]] "Large horned insect"),
+			'BaseMaxHealth', 300000,
+			'ButcherResources', {
+				PlaceObj('ButcherResAmount', {
+					'resource', "RawMeatInsect",
+					'min_amount', 75000,
+				}),
+			},
+			'ProduceResources', {
+				PlaceObj('ResAmount', {
+					'resource', "Stone",
+					'amount', 75000,
+				}),
+			},
+			'ProduceResInterval', 2400000,
+			'AnimalPerks', {
+				"StrongAnimal",
+				"BloodFrenzy",
+				"SmartPredator",
+				"StoneDigger",
+				"DraftableAnimal",
+			},
+			'attack_weapon', "JunoMelee_Brute",
+			'TamingChance', 60,
+			'NewbornClass', "Angry_Juno",
+			'UnitPerkFrenzy', true,
+			'FrenzyHealthPct', 70,
+			'FrenzyChance', 50,
+			'FrenzyDuration', 80000,
+			'FrenzyCooldown', 40000,
+			'FrenzyEffects', {
+				"JunoFrenzy",
+			},
+		}),
+		PlaceObj('ModItemUnitAnimalCompositeDef', {
 			'Group', "Insects",
+			'Id', "Juno",
+			'comment', "T1",
+			'object_class', "GroundAnimal",
+			'SpeciesGroup', "insects",
+			'RoamRadius', 10000,
+			'BypassTrapsChance', 90,
+			'pfclass', 5,
+			'composite_part_groups', {
+				"Juno",
+			},
+			'PainMask', "PainMask",
+			'SpecialOrientation', 9,
+			'EventProgressValue', 250,
+			'SpawnDefWeight', 5,
+			'SpawnTags', set( "Boss" ),
+			'CombatGroup', "Insects",
+			'CombatHostile', true,
+			'AttackMemory', 45000,
+			'CombatGiveUpNoHit', 30000,
+			'CombatFleeAccuracy', 0,
+			'aim_spot', "Aim",
+			'ButcherDuration', 20000,
+			'BloodColor', RGBA(4, 60, 70, 255),
+			'max_skinned_decals_low', -1,
+			'FieldResearchTech', "FieldJuno",
+			'ObservationDistanceMin', 500,
+			'ObservationDistanceMax', 1500,
+			'lead_priority', 5,
+			'Icon', "UI/Icons/Resources/res_juno",
+			'DisplayName', T(462402603600, --[[ModItemUnitAnimalCompositeDef Juno DisplayName]] "Juno"),
+			'DisplayNamePl', T(886155905930, --[[ModItemUnitAnimalCompositeDef Juno DisplayNamePl]] "Junos"),
+			'Description', T(403495234672, --[[ModItemUnitAnimalCompositeDef Juno Description]] "Large highly-intelligent insect that moves incredibly quick, avoids traps and deals immense damage to structures."),
+			'BaseMaxHealth', 150000,
+			'FoodResources', {
+				"RawMeatHuman",
+				"FoodAnimalCarnivore",
+				"Slop",
+			},
+			'DailyEatingAmount', 1000,
+			'Diet', "Carnivore",
+			'EatingDuration', 4000,
+			'FoodSourceClasses', {
+				"ResourcePile",
+				"UnitCorpse",
+				"AnimalFeeder",
+			},
+			'ButcherResources', {
+				PlaceObj('ButcherResAmount', {
+					'resource', "RawMeatInsect",
+					'min_amount', 50000,
+				}),
+			},
+			'SelectionRadius', 2000,
+			'ChanceToBeMale', 75,
+			'BodySize', "large",
+			'ProduceResources', {
+				PlaceObj('ResAmount', {
+					'resource', "Stone",
+					'amount', 50000,
+				}),
+			},
+			'ProduceResInterval', 1920000,
+			'CmdProduceResources', function (animal)
+				if not animal:IsTamed() then return animal:UpdateProductionTime() end
+				return animal:DoProduceResources()
+			end,
+			'AnimalPerks', {
+				"StoneDigger",
+				"SmartPredator",
+				"DraftableAnimal",
+			},
+			'radius', 1200,
+			'collision_radius_mod', 1250,
+			'movement_adjust', 750,
+			'pfclass_tamed', 11,
+			'pfclass_tamed_lead', 14,
+			'EnrageChanceOtherAnimals', 100,
+			'attack_weapon', "JunoMelee",
+			'EatStartAnim', "eat_Start",
+			'EatIdleAnim', {
+				"eat_Idle",
+			},
+			'EatEndAnim', "eat_End",
+			'anim_idle', {
+				"idle",
+				"idle_Active",
+				"idle_Active2",
+			},
+			'anim_idle_nervous', {
+				"idle_Nervous",
+			},
+			'SleepStartAnim', "sleep_Start",
+			'SleepIdleAnim', "sleep_Idle",
+			'SleepEndAnim', "sleep_End",
+			'SleepInterruptedAnim', "sleep_Interrupted",
+			'Tameable', true,
+			'TamingFood', "RawMeatHuman",
+			'TamingFoodAmount', 10000,
+			'TamingMinimumSkill', 5,
+			'TamingChance', 70,
+			'TamingAggressiveChance', 20,
+			'TamingDistance', 10000,
+			'TamedLifetimeMin', 184320000,
+			'TamedLifetimeMax', 322560000,
+			'CombatSkillInitial', range(5, 6),
+			'BondingChance', 5,
+			'ReproductionType', "two sexes",
+			'ReproductionGroup', "Junos",
+			'DailyPregnancyChance', 55,
+			'PregnancyDuration', 4800000,
+			'GrowDuration', 4800000,
+			'NewbornClass', "Juno_Brute",
+			'MinGrownScale', 70,
+			'MaxGrownScale', 90,
+		}),
+		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Group', "Evolutions",
+			'Id', "Sniping_Entropy_Shielded_Shrieker",
+			'comment', "T5",
+			'object_class', "Shrieker_Manhunting",
+			'EventProgressValue', 2000,
+			'SpawnDefWeight', 30,
+			'CombatHostile', false,
+			'CombatUseCover', true,
+			'HitNegationChance', {
+				blunt = 75,
+				energy = 25,
+				gas = 50,
+				pacify = 80,
+				piercing = 90,
+			},
+			'HitNegationChance_blunt', 75,
+			'HitNegationChance_piercing', 90,
+			'HitNegationChance_energy', 25,
+			'HitNegationChance_gas', 50,
+			'HitNegationChance_pacify', 80,
+			'HumanThreat', true,
+			'RobotThreat', true,
+			'FieldResearchTech', "Field_Shrieker_T4",
+			'lead_priority', 6,
+			'DisplayName', T(219852402884, --[[ModItemUnitAnimalCompositeDef Sniping_Entropy_Shielded_Shrieker DisplayName]] "Sniping Entropic Shielded Shrieker"),
+			'DisplayNamePl', T(394183373238, --[[ModItemUnitAnimalCompositeDef Sniping_Entropy_Shielded_Shrieker DisplayNamePl]] "Sniping Entropic Shielded Shrieker"),
+			'DisplayNameUnknown', T(358521198402, --[[ModItemUnitAnimalCompositeDef Sniping_Entropy_Shielded_Shrieker DisplayNameUnknown]] "Unknown Shrieker Evolution"),
+			'DisplayNameUnknownPL', T(224838244446, --[[ModItemUnitAnimalCompositeDef Sniping_Entropy_Shielded_Shrieker DisplayNameUnknownPL]] "Unknown Shrieker Evolution"),
+			'Description', T(919946988433, --[[ModItemUnitAnimalCompositeDef Sniping_Entropy_Shielded_Shrieker Description]] "A regenerating, long range, durable Shrieker. The only thing that can reliably hit them are energy weapons, filling their sealed exoskeleton with energy. Deals <color TextButton>Blunt</color> and <color TextSubtitleBlue>Piercing</color> damage."),
+			'BaseMaxHealth', 1000000,
+			'ButcherResources', {
+				PlaceObj('ButcherResAmount', {
+					'resource', "RawMeatInsect",
+					'min_amount', 75000,
+				}),
+			},
+			'ChanceToBeMale', 50,
+			'ProduceResources', {
+				PlaceObj('ResAmount', {
+					'resource', "Stone",
+					'amount', 75000,
+				}),
+			},
+			'ProduceResInterval', 2400000,
+			'AnimalPerks', {
+				"StrongAnimal",
+				"SmartPredator",
+				"StoneDigger",
+				"DraftableAnimal",
+				"AP_Fortified",
+				"AP_Regen",
+			},
+			'TamingMinimumSkill', 8,
+			'TamingChance', 25,
+			'DailyPregnancyChance', 60,
+			'PregnancyDuration', 1920000,
+			'GrowDuration', 1920000,
+			'NewbornClass', "Sniping_Entropy_Shielded_Shrieker",
+			'UnitAreaEffect', true,
+			'UnitPerkFrenzy', true,
+			'AffectRadius', 25000,
+			'AffectClass', "UnitAnimal",
+			'Effects', {
+				PlaceObj('AreaEffectHealthCondition', {
+					BodyPartGroup = "WholeBody",
+					HealthCond = "BroodMotherNearby",
+					HealthCondType = "Buff",
+				}),
+			},
+			'Disabled', function (self)
+				return self:IsDead() or self:IsUnconscious()
+			end,
+			'AffectFilter', function (self, target)
+				return target.CombatGroup == self.CombatGroup
+					and target:HasUnitTag("AgitatedByPheromones")
+					and not target:IsDead()
+					and not target:IsUnconscious()
+			end,
+			'FrenzyHealthPct', 99,
+			'FrenzyEffects', {
+				"Frenzy_Regen",
+				"Frenzy_Conscious_4",
+			},
+		}),
+		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Group', "Evolutions",
+			'Id', "Plague_Sniper_Shrieker",
+			'comment', "T4",
+			'object_class', "Shrieker_Manhunting",
+			'EventProgressValue', 1100,
+			'SpawnDefWeight', 30,
+			'CombatHostile', false,
+			'CombatUseCover', true,
+			'HitNegationChance', {
+				blunt = 25,
+				energy = 15,
+				gas = 15,
+				pacify = 60,
+				piercing = 55,
+			},
+			'HitNegationChance_blunt', 25,
+			'HitNegationChance_piercing', 55,
+			'HitNegationChance_energy', 15,
+			'HitNegationChance_gas', 15,
+			'HitNegationChance_pacify', 60,
+			'HumanThreat', true,
+			'RobotThreat', true,
+			'FieldResearchTech', "Field_Shrieker_T2",
+			'lead_priority', 6,
+			'DisplayName', T(--[[ModItemUnitAnimalCompositeDef Plague_Sniper_Shrieker DisplayName]] "Plague Sniper Shrieker"),
+			'DisplayNamePl', T(--[[ModItemUnitAnimalCompositeDef Plague_Sniper_Shrieker DisplayNamePl]] "Plague Sniper Shrieker"),
+			'DisplayNameUnknown', T(632905210618, --[[ModItemUnitAnimalCompositeDef Plague_Sniper_Shrieker DisplayNameUnknown]] "Unknown Shrieker Evolution"),
+			'DisplayNameUnknownPL', T(256115533630, --[[ModItemUnitAnimalCompositeDef Plague_Sniper_Shrieker DisplayNameUnknownPL]] "Unknown Shrieker Evolution"),
+			'Description', T(197605412242, --[[ModItemUnitAnimalCompositeDef Plague_Sniper_Shrieker Description]] "Attacks that slow, and longer range than even our upgraded railguns. All while their durability has increased.... Thankfully still weak to energy and gas weapons. Deals <color TextButton>Blunt</color> and <color TextSubtitleBlue>Piercing</color> damage."),
+			'BaseMaxHealth', 600000,
+			'DailyEatingAmount', 3000,
+			'ButcherResources', {
+				PlaceObj('ButcherResAmount', {
+					'resource', "RawMeatInsect",
+					'min_amount', 75000,
+				}),
+			},
+			'ChanceToBeMale', 50,
+			'ProduceResources', {
+				PlaceObj('ResAmount', {
+					'resource', "Stone",
+					'amount', 75000,
+				}),
+			},
+			'ProduceResInterval', 2400000,
+			'AnimalPerks', {
+				"StrongAnimal",
+				"SmartPredator",
+				"StoneDigger",
+				"DraftableAnimal",
+			},
+			'attack_weapon', "shriker_range_long",
+			'TamingChance', 50,
+			'DailyPregnancyChance', 75,
+			'PregnancyDuration', 2880000,
+			'GrowDuration', 2880000,
+			'NewbornClass', "Sniping_Entropy_Shielded_Shrieker",
+			'UnitAreaEffect', true,
+			'UnitPerkFrenzy', true,
+			'AffectRadius', 25000,
+			'AffectClass', "UnitAnimal",
+			'Effects', {
+				PlaceObj('AreaEffectHealthCondition', {
+					BodyPartGroup = "WholeBody",
+					HealthCond = "BroodMotherNearby",
+					HealthCondType = "Buff",
+				}),
+			},
+			'Disabled', function (self)
+				return self:IsDead() or self:IsUnconscious()
+			end,
+			'AffectFilter', function (self, target)
+				return target.CombatGroup == self.CombatGroup
+					and target:HasUnitTag("AgitatedByPheromones")
+					and not target:IsDead()
+					and not target:IsUnconscious()
+			end,
+			'FrenzyHealthPct', 99,
+			'FrenzyEffects', {
+				"Frenzy_Conscious_3",
+			},
+		}),
+		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Group', "Evolutions",
+			'Id', "Entropic_Shrieker",
+			'comment', "T3",
+			'object_class', "Shrieker_Manhunting",
+			'EventProgressValue', 750,
+			'SpawnDefWeight', 30,
+			'SpawnTags', set(),
+			'CombatHostile', false,
+			'CombatUseCover', true,
+			'HitNegationChance', {
+				blunt = 10,
+				energy = 10,
+				gas = 10,
+				pacify = 40,
+				piercing = 50,
+			},
+			'HitNegationChance_blunt', 10,
+			'HitNegationChance_piercing', 50,
+			'HitNegationChance_energy', 10,
+			'HitNegationChance_gas', 10,
+			'HitNegationChance_pacify', 40,
+			'HumanThreat', true,
+			'RobotThreat', true,
+			'FieldResearchTech', "Field_Shrieker_T2",
+			'lead_priority', 6,
+			'DisplayName', T(--[[ModItemUnitAnimalCompositeDef Entropic_Shrieker DisplayName]] "Entropic Shrieker"),
+			'DisplayNamePl', T(--[[ModItemUnitAnimalCompositeDef Entropic_Shrieker DisplayNamePl]] "Entropic Shrieker"),
+			'DisplayNameUnknown', T(507956053632, --[[ModItemUnitAnimalCompositeDef Entropic_Shrieker DisplayNameUnknown]] "Unknown Shrieker Evolution"),
+			'DisplayNameUnknownPL', T(458576588964, --[[ModItemUnitAnimalCompositeDef Entropic_Shrieker DisplayNameUnknownPL]] "Unknown Shrieker Evolution"),
+			'Description', T(322528609672, --[[ModItemUnitAnimalCompositeDef Entropic_Shrieker Description]] "Shrieker's who have evolved long barbed spikes. Resistant to piercing attacks, the barbs fully pierce and lodge in nearby terrain, lowering movement speed. Deals <color TextButton>Blunt</color> and <color TextSubtitleBlue>Piercing</color> damage."),
+			'BaseMaxHealth', 400000,
+			'DailyEatingAmount', 2000,
+			'ButcherResources', {
+				PlaceObj('ButcherResAmount', {
+					'resource', "RawMeatInsect",
+					'min_amount', 75000,
+				}),
+			},
+			'ChanceToBeMale', 50,
+			'ProduceResources', {
+				PlaceObj('ResAmount', {
+					'resource', "Stone",
+					'amount', 75000,
+				}),
+			},
+			'ProduceResInterval', 2400000,
+			'AnimalPerks', {
+				"StrongAnimal",
+				"BloodFrenzy",
+				"SmartPredator",
+				"StoneDigger",
+				"DraftableAnimal",
+			},
+			'attack_weapon', "shriker_range_move",
+			'TamingChance', 60,
+			'DailyPregnancyChance', 65,
+			'PregnancyDuration', 3840000,
+			'GrowDuration', 3840000,
+			'NewbornClass', "Plague_Sniper_Shrieker",
+			'UnitAreaEffect', true,
+			'UnitPerkFrenzy', true,
+			'AffectRadius', 25000,
+			'AffectClass', "UnitAnimal",
+			'Effects', {
+				PlaceObj('AreaEffectHealthCondition', {
+					BodyPartGroup = "WholeBody",
+					HealthCond = "BroodMotherNearby",
+					HealthCondType = "Buff",
+				}),
+			},
+			'Disabled', function (self)
+				return self:IsDead() or self:IsUnconscious()
+			end,
+			'AffectFilter', function (self, target)
+				return target.CombatGroup == self.CombatGroup
+					and target:HasUnitTag("AgitatedByPheromones")
+					and not target:IsDead()
+					and not target:IsUnconscious()
+			end,
+			'FrenzyHealthPct', 99,
+			'FrenzyEffects', {
+				"Frenzy_Conscious_2",
+			},
+		}),
+		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Group', "Evolutions",
 			'Id', "Shrieker_Manhunting",
+			'comment', "T2",
 			'object_class', "ShriekerBase",
 			'SpeciesGroup', "insects",
 			'UnitTags', set( "AgitatedByPheromones", "Animal" ),
@@ -18855,6 +19636,7 @@ PlaceObj('ModItemFolder', {
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
 			'Group', "Insects",
 			'Id', "Shrieker_Manhunting_Mother",
+			'comment', "T1",
 			'object_class', "Shrieker_Manhunting",
 			'UnitTags', set( "Animal" ),
 			'pfclass', 3,
@@ -18933,403 +19715,8 @@ PlaceObj('ModItemFolder', {
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
 			'Group', "Insects",
-			'Id', "Entropic_Shrieker",
-			'object_class', "Shrieker_Manhunting",
-			'EventProgressValue', 750,
-			'SpawnDefWeight', 30,
-			'SpawnTags', set(),
-			'CombatHostile', false,
-			'CombatUseCover', true,
-			'HitNegationChance', {
-				blunt = 10,
-				energy = 10,
-				gas = 10,
-				pacify = 40,
-				piercing = 50,
-			},
-			'HitNegationChance_blunt', 10,
-			'HitNegationChance_piercing', 50,
-			'HitNegationChance_energy', 10,
-			'HitNegationChance_gas', 10,
-			'HitNegationChance_pacify', 40,
-			'HumanThreat', true,
-			'RobotThreat', true,
-			'FieldResearchTech', "Field_Shrieker_T2",
-			'lead_priority', 6,
-			'DisplayName', T(--[[ModItemUnitAnimalCompositeDef Entropic_Shrieker DisplayName]] "Entropic Shrieker"),
-			'DisplayNamePl', T(--[[ModItemUnitAnimalCompositeDef Entropic_Shrieker DisplayNamePl]] "Entropic Shrieker"),
-			'DisplayNameUnknown', T(507956053632, --[[ModItemUnitAnimalCompositeDef Entropic_Shrieker DisplayNameUnknown]] "Unknown Shrieker Evolution"),
-			'DisplayNameUnknownPL', T(458576588964, --[[ModItemUnitAnimalCompositeDef Entropic_Shrieker DisplayNameUnknownPL]] "Unknown Shrieker Evolution"),
-			'Description', T(322528609672, --[[ModItemUnitAnimalCompositeDef Entropic_Shrieker Description]] "Shrieker's who have evolved long barbed spikes. Resistant to piercing attacks, the barbs fully pierce and lodge in nearby terrain, lowering movement speed. Deals <color TextButton>Blunt</color> and <color TextSubtitleBlue>Piercing</color> damage."),
-			'BaseMaxHealth', 400000,
-			'DailyEatingAmount', 2000,
-			'ButcherResources', {
-				PlaceObj('ButcherResAmount', {
-					'resource', "RawMeatInsect",
-					'min_amount', 75000,
-				}),
-			},
-			'ChanceToBeMale', 50,
-			'ProduceResources', {
-				PlaceObj('ResAmount', {
-					'resource', "Stone",
-					'amount', 75000,
-				}),
-			},
-			'ProduceResInterval', 2400000,
-			'AnimalPerks', {
-				"StrongAnimal",
-				"BloodFrenzy",
-				"SmartPredator",
-				"StoneDigger",
-				"DraftableAnimal",
-			},
-			'attack_weapon', "shriker_range_move",
-			'TamingChance', 60,
-			'DailyPregnancyChance', 65,
-			'PregnancyDuration', 3840000,
-			'GrowDuration', 3840000,
-			'NewbornClass', "Plague_Sniper_Shrieker",
-			'UnitAreaEffect', true,
-			'UnitPerkFrenzy', true,
-			'AffectRadius', 25000,
-			'AffectClass', "UnitAnimal",
-			'Effects', {
-				PlaceObj('AreaEffectHealthCondition', {
-					BodyPartGroup = "WholeBody",
-					HealthCond = "BroodMotherNearby",
-					HealthCondType = "Buff",
-				}),
-			},
-			'Disabled', function (self)
-				return self:IsDead() or self:IsUnconscious()
-			end,
-			'AffectFilter', function (self, target)
-				return target.CombatGroup == self.CombatGroup
-					and target:HasUnitTag("AgitatedByPheromones")
-					and not target:IsDead()
-					and not target:IsUnconscious()
-			end,
-			'FrenzyHealthPct', 99,
-			'FrenzyEffects', {
-				"Frenzy_Conscious_2",
-			},
-		}),
-		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Insects",
-			'Id', "Plague_Sniper_Shrieker",
-			'object_class', "Shrieker_Manhunting",
-			'EventProgressValue', 1100,
-			'SpawnDefWeight', 30,
-			'CombatHostile', false,
-			'CombatUseCover', true,
-			'HitNegationChance', {
-				blunt = 25,
-				energy = 15,
-				gas = 15,
-				pacify = 60,
-				piercing = 55,
-			},
-			'HitNegationChance_blunt', 25,
-			'HitNegationChance_piercing', 55,
-			'HitNegationChance_energy', 15,
-			'HitNegationChance_gas', 15,
-			'HitNegationChance_pacify', 60,
-			'HumanThreat', true,
-			'RobotThreat', true,
-			'FieldResearchTech', "Field_Shrieker_T2",
-			'lead_priority', 6,
-			'DisplayName', T(--[[ModItemUnitAnimalCompositeDef Plague_Sniper_Shrieker DisplayName]] "Plague Sniper Shrieker"),
-			'DisplayNamePl', T(--[[ModItemUnitAnimalCompositeDef Plague_Sniper_Shrieker DisplayNamePl]] "Plague Sniper Shrieker"),
-			'DisplayNameUnknown', T(632905210618, --[[ModItemUnitAnimalCompositeDef Plague_Sniper_Shrieker DisplayNameUnknown]] "Unknown Shrieker Evolution"),
-			'DisplayNameUnknownPL', T(256115533630, --[[ModItemUnitAnimalCompositeDef Plague_Sniper_Shrieker DisplayNameUnknownPL]] "Unknown Shrieker Evolution"),
-			'Description', T(197605412242, --[[ModItemUnitAnimalCompositeDef Plague_Sniper_Shrieker Description]] "Attacks that slow, and longer range than even our upgraded railguns. All while their durability has increased.... Thankfully still weak to energy and gas weapons. Deals <color TextButton>Blunt</color> and <color TextSubtitleBlue>Piercing</color> damage."),
-			'BaseMaxHealth', 600000,
-			'DailyEatingAmount', 3000,
-			'ButcherResources', {
-				PlaceObj('ButcherResAmount', {
-					'resource', "RawMeatInsect",
-					'min_amount', 75000,
-				}),
-			},
-			'ChanceToBeMale', 50,
-			'ProduceResources', {
-				PlaceObj('ResAmount', {
-					'resource', "Stone",
-					'amount', 75000,
-				}),
-			},
-			'ProduceResInterval', 2400000,
-			'AnimalPerks', {
-				"StrongAnimal",
-				"SmartPredator",
-				"StoneDigger",
-				"DraftableAnimal",
-			},
-			'attack_weapon', "shriker_range_long",
-			'TamingChance', 50,
-			'DailyPregnancyChance', 75,
-			'PregnancyDuration', 2880000,
-			'GrowDuration', 2880000,
-			'NewbornClass', "Sniping_Entropy_Shielded_Shrieker",
-			'UnitAreaEffect', true,
-			'UnitPerkFrenzy', true,
-			'AffectRadius', 25000,
-			'AffectClass', "UnitAnimal",
-			'Effects', {
-				PlaceObj('AreaEffectHealthCondition', {
-					BodyPartGroup = "WholeBody",
-					HealthCond = "BroodMotherNearby",
-					HealthCondType = "Buff",
-				}),
-			},
-			'Disabled', function (self)
-				return self:IsDead() or self:IsUnconscious()
-			end,
-			'AffectFilter', function (self, target)
-				return target.CombatGroup == self.CombatGroup
-					and target:HasUnitTag("AgitatedByPheromones")
-					and not target:IsDead()
-					and not target:IsUnconscious()
-			end,
-			'FrenzyHealthPct', 99,
-			'FrenzyEffects', {
-				"Frenzy_Conscious_3",
-			},
-		}),
-		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Insects",
-			'Id', "Sniping_Entropy_Shielded_Shrieker",
-			'object_class', "Shrieker_Manhunting",
-			'EventProgressValue', 2000,
-			'SpawnDefWeight', 30,
-			'CombatHostile', false,
-			'CombatUseCover', true,
-			'HitNegationChance', {
-				blunt = 75,
-				energy = 25,
-				gas = 50,
-				pacify = 80,
-				piercing = 90,
-			},
-			'HitNegationChance_blunt', 75,
-			'HitNegationChance_piercing', 90,
-			'HitNegationChance_energy', 25,
-			'HitNegationChance_gas', 50,
-			'HitNegationChance_pacify', 80,
-			'HumanThreat', true,
-			'RobotThreat', true,
-			'FieldResearchTech', "Field_Shrieker_T4",
-			'lead_priority', 6,
-			'DisplayName', T(219852402884, --[[ModItemUnitAnimalCompositeDef Sniping_Entropy_Shielded_Shrieker DisplayName]] "Sniping Entropic Shielded Shrieker"),
-			'DisplayNamePl', T(394183373238, --[[ModItemUnitAnimalCompositeDef Sniping_Entropy_Shielded_Shrieker DisplayNamePl]] "Sniping Entropic Shielded Shrieker"),
-			'DisplayNameUnknown', T(358521198402, --[[ModItemUnitAnimalCompositeDef Sniping_Entropy_Shielded_Shrieker DisplayNameUnknown]] "Unknown Shrieker Evolution"),
-			'DisplayNameUnknownPL', T(224838244446, --[[ModItemUnitAnimalCompositeDef Sniping_Entropy_Shielded_Shrieker DisplayNameUnknownPL]] "Unknown Shrieker Evolution"),
-			'Description', T(919946988433, --[[ModItemUnitAnimalCompositeDef Sniping_Entropy_Shielded_Shrieker Description]] "A regenerating, long range, durable Shrieker. The only thing that can reliably hit them are energy weapons, filling their sealed exoskeleton with energy. Deals <color TextButton>Blunt</color> and <color TextSubtitleBlue>Piercing</color> damage."),
-			'BaseMaxHealth', 1000000,
-			'ButcherResources', {
-				PlaceObj('ButcherResAmount', {
-					'resource', "RawMeatInsect",
-					'min_amount', 75000,
-				}),
-			},
-			'ChanceToBeMale', 50,
-			'ProduceResources', {
-				PlaceObj('ResAmount', {
-					'resource', "Stone",
-					'amount', 75000,
-				}),
-			},
-			'ProduceResInterval', 2400000,
-			'AnimalPerks', {
-				"StrongAnimal",
-				"SmartPredator",
-				"StoneDigger",
-				"DraftableAnimal",
-				"AP_Fortified",
-				"AP_Regen",
-			},
-			'TamingMinimumSkill', 8,
-			'TamingChance', 25,
-			'DailyPregnancyChance', 60,
-			'PregnancyDuration', 1920000,
-			'GrowDuration', 1920000,
-			'NewbornClass', "Sniping_Entropy_Shielded_Shrieker",
-			'UnitAreaEffect', true,
-			'UnitPerkFrenzy', true,
-			'AffectRadius', 25000,
-			'AffectClass', "UnitAnimal",
-			'Effects', {
-				PlaceObj('AreaEffectHealthCondition', {
-					BodyPartGroup = "WholeBody",
-					HealthCond = "BroodMotherNearby",
-					HealthCondType = "Buff",
-				}),
-			},
-			'Disabled', function (self)
-				return self:IsDead() or self:IsUnconscious()
-			end,
-			'AffectFilter', function (self, target)
-				return target.CombatGroup == self.CombatGroup
-					and target:HasUnitTag("AgitatedByPheromones")
-					and not target:IsDead()
-					and not target:IsUnconscious()
-			end,
-			'FrenzyHealthPct', 99,
-			'FrenzyEffects', {
-				"Frenzy_Regen",
-				"Frenzy_Conscious_4",
-			},
-		}),
-		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Insects",
-			'Id', "Scissorhands",
-			'object_class', "GroundAnimal",
-			'SpeciesGroup', "insects",
-			'UnitTags', set( "AgitatedByPheromones", "Animal" ),
-			'RoamRadius', 10000,
-			'pfclass', 5,
-			'composite_part_groups', {
-				"Scissorhands",
-			},
-			'PainMask', "PainMask",
-			'SpecialOrientation', 2,
-			'EventProgressValue', 90,
-			'SpawnDefWeight', 10,
-			'SpawnTags', set( "Boss" ),
-			'SightRange', 25000,
-			'HearingRange', 2500,
-			'CombatGroup', "Insects",
-			'CombatHostile', true,
-			'CombatRestrictPFBonus', 50000,
-			'CombatGiveUpNoHit', 30000,
-			'CombatFleeAccuracy', 0,
-			'aim_spot', "Aim",
-			'BloodColor', RGBA(4, 60, 70, 255),
-			'max_skinned_decals_low', -1,
-			'FieldResearchTech', "FieldScissorhands",
-			'ObservationDistanceMin', 500,
-			'ObservationDistanceMax', 1500,
-			'lead_priority', 11,
-			'Icon', "UI/Icons/Resources/res_scissorhands",
-			'DisplayName', T(549254988897, --[[ModItemUnitAnimalCompositeDef Scissorhands DisplayName]] "Scissorhands"),
-			'DisplayNamePl', T(460750445860, --[[ModItemUnitAnimalCompositeDef Scissorhands DisplayNamePl]] "Scissorhands"),
-			'Description', T(279773210327, --[[ModItemUnitAnimalCompositeDef Scissorhands Description]] "Large highly-intelligent insect."),
-			'fx_actor_base_class', "Scissorhands",
-			'FoodResources', {
-				"FoodAnimalHerbivore",
-				"FoodAnimalCarnivore",
-				"Slop",
-			},
-			'DailyEatingAmount', 1000,
-			'Diet', "Omnivore",
-			'EatingDuration', 4000,
-			'ButcherResources', {
-				PlaceObj('ButcherResAmount', {
-					'resource', "RawMeatInsect",
-					'min_amount', 25000,
-				}),
-			},
-			'SelectionRadius', 1500,
-			'ChanceToBeMale', 50,
-			'BodySize', "large",
-			'ProduceResources', {
-				PlaceObj('ResAmount', {
-					'resource', "Stone",
-					'amount', 30000,
-				}),
-			},
-			'ProduceResInterval', 1920000,
-			'CmdProduceResources', function (animal)
-				if not animal:IsTamed() then return animal:UpdateProductionTime() end
-				return animal:DoProduceResources()
-			end,
-			'AnimalPerks', {
-				"StoneDigger",
-				"DraftableAnimal",
-			},
-			'radius', 1000,
-			'collision_radius_mod', 1200,
-			'pfclass_tamed', 11,
-			'pfclass_tamed_lead', 14,
-			'EnrageChanceOtherAnimals', 100,
-			'attack_weapon', "ScissorhandsMelee",
-			'EatStartAnim', "eat_Start",
-			'EatIdleAnim', {
-				"eat_Idle",
-			},
-			'EatEndAnim', "eat_End",
-			'anim_idle', {
-				"idle",
-				"idle_Active",
-				"idle_Active2",
-			},
-			'anim_idle_nervous', {
-				"idle_Nervous",
-			},
-			'SleepStartAnim', "sleep_Start",
-			'SleepIdleAnim', "sleep_Idle",
-			'SleepEndAnim', "sleep_End",
-			'SleepInterruptedAnim', "sleep_Interrupted",
-			'Tameable', true,
-			'TamingFood', "RawMeat",
-			'TamingFoodAmount', 10000,
-			'TamingMinimumSkill', 5,
-			'TamingChance', 70,
-			'TamingAggressiveChance', 20,
-			'TamingDistance', 10000,
-			'TamedLifetimeMin', 184320000,
-			'TamedLifetimeMax', 322560000,
-			'CombatSkillInitial', range(5, 6),
-			'BondingChance', 5,
-			'ReproductionType', "two sexes",
-			'ReproductionGroup', "Scissorhands",
-			'DailyPregnancyChance', 55,
-			'PregnancyDuration', 4800000,
-			'GrowDuration', 4800000,
-			'NewbornClass', "Scissorhands_Brute",
-			'MinGrownScale', 100,
-			'MaxGrownScale', 110,
-		}),
-		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Insects",
-			'Id', "Scissorhands_Brute",
-			'object_class', "Scissorhands",
-			'EventProgressValue', 180,
-			'lead_priority', 12,
-			'DisplayName', T(803640083458, --[[ModItemUnitAnimalCompositeDef Scissorhands_Brute DisplayName]] "Scissorhands demolisher"),
-			'DisplayNamePl', T(381190689622, --[[ModItemUnitAnimalCompositeDef Scissorhands_Brute DisplayNamePl]] "Scissorhands demolishers"),
-			'DisplayNameUnknown', T(587799246476, --[[ModItemUnitAnimalCompositeDef Scissorhands_Brute DisplayNameUnknown]] "Huge purple mantis"),
-			'DisplayNameUnknownPL', T(531570130410, --[[ModItemUnitAnimalCompositeDef Scissorhands_Brute DisplayNameUnknownPL]] "Huge purple mantises"),
-			'BaseMaxHealth', 200000,
-			'ButcherResources', {
-				PlaceObj('ButcherResAmount', {
-					'resource', "RawMeatInsect",
-					'min_amount', 40000,
-				}),
-			},
-			'ProduceResources', {
-				PlaceObj('ResAmount', {
-					'resource', "Stone",
-					'amount', 45000,
-				}),
-			},
-			'ProduceResInterval', 2400000,
-			'AnimalPerks', {
-				"StrongAnimal",
-				"StoneDigger",
-				"DraftableAnimal",
-			},
-			'attack_weapon', "ScissorhandsMelee_Brute",
-			'NewbornClass', "Brutal_Duelist_Scissorhands",
-			'MinNewbornScale', 60,
-			'MaxNewbornScale', 60,
-			'MinGrownScale', 115,
-			'MaxGrownScale', 120,
-		}),
-		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Insects",
 			'Id', "Shrieker_Mother",
+			'comment', "T1",
 			'object_class', "Shrieker_Manhunting_Mother",
 			'RoamIntervalMin', 40000,
 			'RoamIntervalMax', 80000,
@@ -19340,156 +19727,123 @@ PlaceObj('ModItemFolder', {
 			'CanBeNestGuardian', "always",
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Insects",
-			'Id', "Scissorhands_Nesting",
-			'object_class', "GroundAnimal",
-			'SpeciesGroup', "insects",
-			'UnitTags', set( "AgitatedByPheromones", "Animal" ),
-			'RoamRadius', 10000,
-			'pfclass', 5,
-			'composite_part_target', "Scissorhands",
-			'composite_part_groups', {
-				"Scissorhands",
-			},
+			'Id', "Ulfen",
+			'object_class', "UlfenBase",
+			'SpeciesGroup', "hoofed",
+			'RoamRadius', 15000,
+			'RoamIntervalMin', 40000,
+			'RoamIntervalMax', 120000,
 			'PainMask', "PainMask",
-			'SpecialOrientation', 2,
-			'EventProgressValue', 90,
-			'SpawnDefWeight', 10,
-			'SpawnTags', set( "Boss" ),
-			'SightRange', 25000,
-			'HearingRange', 2500,
-			'CombatGroup', "Insects",
-			'CombatHostile', true,
-			'CombatRestrictPFBonus', 50000,
+			'EventProgressValue', 30,
+			'CombatGroup', "Ulfens",
+			'EnrageChance', 3,
+			'AttackMemory', 45000,
 			'CombatGiveUpNoHit', 30000,
 			'CombatFleeAccuracy', 0,
 			'aim_spot', "Aim",
-			'BloodColor', RGBA(4, 60, 70, 255),
+			'ButcherDuration', 20000,
 			'max_skinned_decals_low', -1,
-			'FieldResearchTech', "FieldScissorhands",
-			'ObservationDistanceMin', 500,
-			'ObservationDistanceMax', 1500,
-			'lead_priority', 11,
-			'Icon', "UI/Icons/Resources/res_scissorhands",
-			'DisplayName', T(282850352588, --[[ModItemUnitAnimalCompositeDef Scissorhands_Nesting DisplayName]] "Scissorhands"),
-			'DisplayNamePl', T(855408200427, --[[ModItemUnitAnimalCompositeDef Scissorhands_Nesting DisplayNamePl]] "Scissorhands"),
-			'Description', T(641150827518, --[[ModItemUnitAnimalCompositeDef Scissorhands_Nesting Description]] "Large highly-intelligent insect."),
-			'fx_actor_base_class', "Scissorhands",
+			'FieldResearchTech', "FieldUlfen",
+			'ObservationDistanceMin', 15000,
+			'ObservationDistanceMax', 20000,
+			'Icon', "UI/Icons/Resources/res_ulfen",
+			'DisplayName', T(756384334076, --[[ModItemUnitAnimalCompositeDef Ulfen DisplayName]] "Ulfen"),
+			'DisplayNamePl', T(905161765277, --[[ModItemUnitAnimalCompositeDef Ulfen DisplayNamePl]] "Ulfens"),
+			'Description', T(109888884422, --[[ModItemUnitAnimalCompositeDef Ulfen Description]] "Usually passive. Small chance to retaliate when attacked."),
 			'FoodResources', {
 				"FoodAnimalHerbivore",
-				"FoodAnimalCarnivore",
 				"Slop",
 			},
 			'DailyEatingAmount', 10000,
-			'Diet', "Omnivore",
+			'Diet', "Herbivore",
 			'EatingDuration', 4000,
+			'FoodSourceClasses', {
+				"ResourcePile",
+				"Plant",
+				"AnimalFeeder",
+			},
 			'ButcherResources', {
 				PlaceObj('ButcherResAmount', {
-					'resource', "RawMeatInsect",
-					'min_amount', 25000,
+					'resource', "RawMeat",
+					'min_amount', 40000,
+					'max_amount', 60000,
+				}),
+				PlaceObj('ButcherResAmount', {
+					'resource', "LeatherRaw",
+					'min_amount', 20000,
+					'max_amount', 40000,
 				}),
 			},
-			'SelectionRadius', 1500,
-			'ChanceToBeMale', 50,
+			'SelectionRadius', 2000,
+			'ChanceToBeMale', 40,
 			'BodySize', "large",
 			'ProduceResources', {
 				PlaceObj('ResAmount', {
-					'resource', "Stone",
-					'amount', 30000,
+					'resource', "FuelManure",
+					'amount', 20000,
 				}),
 			},
 			'ProduceResInterval', 1920000,
 			'CmdProduceResources', function (animal)
-				if not animal:IsTamed() then return animal:UpdateProductionTime() end
+				if not animal:IsTamed() then
+					if animal:Random(100, "no produce chance") > 40 then
+						return animal:UpdateProductionTime()
+					end
+				end
 				return animal:DoProduceResources()
 			end,
 			'AnimalPerks', {
-				"StoneDigger",
-				"DraftableAnimal",
+				"ManureProducer",
 			},
-			'radius', 1000,
-			'collision_radius_mod', 1200,
-			'pfclass_tamed', 11,
-			'pfclass_tamed_lead', 14,
-			'EnrageChanceOtherAnimals', 100,
-			'attack_weapon', "ScissorhandsMelee",
+			'collision_radius_mod', 1250,
+			'pfclass_tamed', 10,
+			'pfclass_tamed_lead', 13,
 			'EatStartAnim', "eat_Start",
 			'EatIdleAnim', {
 				"eat_Idle",
 			},
 			'EatEndAnim', "eat_End",
-			'anim_idle', {
-				"idle",
-				"idle_Active",
-				"idle_Active2",
-			},
 			'anim_idle_nervous', {
 				"idle_Nervous",
+			},
+			'anim_idle_playful', {
+				"idle_Playfull",
+				"idle_Playfull2",
 			},
 			'SleepStartAnim', "sleep_Start",
 			'SleepIdleAnim', "sleep_Idle",
 			'SleepEndAnim', "sleep_End",
 			'SleepInterruptedAnim', "sleep_Interrupted",
+			'SleepStartAnim2', "sleep_Start2",
+			'SleepIdleAnim2', "sleep_Idle2",
+			'SleepEndAnim2', "sleep_End2",
+			'SleepInterruptedAnim2', "sleep_Interrupted2",
 			'Tameable', true,
-			'TamingFood', "RawMeat",
+			'Petable', true,
+			'TamingFood', "Berry",
 			'TamingFoodAmount', 10000,
-			'TamingMinimumSkill', 5,
-			'TamingChance', 50,
-			'TamingAggressiveChance', 20,
+			'TamingMinimumSkill', 3,
+			'TamingChance', 70,
+			'TamingAggressiveChance', 10,
 			'TamingDistance', 10000,
-			'TamedLifetimeMin', 184320000,
-			'TamedLifetimeMax', 322560000,
-			'CombatSkillInitial', range(1, 3),
-			'BondingChance', 5,
+			'TamedLifetimeMin', 92160000,
+			'TamedLifetimeMax', 138240000,
+			'BondingChance', 10,
 			'ReproductionType', "two sexes",
-			'ReproductionGroup', "Scissorhands",
-			'DailyPregnancyChance', 55,
-			'NewbornClass', "Scissorhands_Brute",
-			'MinGrownScale', 100,
-			'MaxGrownScale', 110,
-			'UnitNesting', true,
-			'CanBeNestGuardian', true,
+			'DailyPregnancyChance', 60,
+			'PregnancyDuration', 3840000,
+			'GrowDuration', 3840000,
+			'NewbornClass', "Ulfen_T2",
+			'MinGrownScale', 70,
+			'MaxGrownScale', 90,
+			'FieldVisibilityCold', 30000,
+			'FieldVisibilityWarm', 10000,
+			'MoveSpeedCold', 1000,
+			'PlantsToEatMin', 40,
+			'PlantsToEatMax', 60,
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Insects",
-			'Id', "Scissorhands_Brute_Nesting",
-			'object_class', "Scissorhands",
-			'composite_part_target', "Scissorhands_Brute",
-			'EventProgressValue', 180,
-			'lead_priority', 12,
-			'DisplayName', T(862409597776, --[[ModItemUnitAnimalCompositeDef Scissorhands_Brute_Nesting DisplayName]] "Scissorhands demolisher"),
-			'DisplayNamePl', T(225616689551, --[[ModItemUnitAnimalCompositeDef Scissorhands_Brute_Nesting DisplayNamePl]] "Scissorhands demolishers"),
-			'DisplayNameUnknown', T(284618171634, --[[ModItemUnitAnimalCompositeDef Scissorhands_Brute_Nesting DisplayNameUnknown]] "Huge purple mantis"),
-			'DisplayNameUnknownPL', T(789645003181, --[[ModItemUnitAnimalCompositeDef Scissorhands_Brute_Nesting DisplayNameUnknownPL]] "Huge purple mantises"),
-			'BaseMaxHealth', 200000,
-			'ButcherResources', {
-				PlaceObj('ButcherResAmount', {
-					'resource', "RawMeatInsect",
-					'min_amount', 40000,
-				}),
-			},
-			'ProduceResources', {
-				PlaceObj('ResAmount', {
-					'resource', "Stone",
-					'amount', 45000,
-				}),
-			},
-			'ProduceResInterval', 2400000,
-			'AnimalPerks', {
-				"StrongAnimal",
-				"StoneDigger",
-				"DraftableAnimal",
-			},
-			'attack_weapon', "ScissorhandsMelee_Brute",
-			'MinNewbornScale', 60,
-			'MaxNewbornScale', 60,
-			'MinGrownScale', 115,
-			'MaxGrownScale', 120,
-			'UnitNesting', true,
-			'CanBeNestGuardian', "always",
-		}),
-		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Temperate",
+			'Group', "Evolutions",
 			'Id', "Ulfen_T2",
 			'object_class', "UlfenBase",
 			'SpeciesGroup', "hoofed",
@@ -19506,7 +19860,6 @@ PlaceObj('ModItemFolder', {
 			},
 			'EventProgressValue', 90,
 			'CombatGroup', "Ulfens",
-			'CombatHostile', true,
 			'HitNegationChance', {
 				HitNegationChance_blunt = 15,
 				HitNegationChance_energy = 15,
@@ -19632,7 +19985,7 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Temperate",
+			'Group', "Evolutions",
 			'Id', "Ulfen_T3",
 			'object_class', "UlfenBase",
 			'SpeciesGroup', "hoofed",
@@ -19649,7 +20002,6 @@ PlaceObj('ModItemFolder', {
 			},
 			'EventProgressValue', 180,
 			'CombatGroup', "Ulfens",
-			'CombatHostile', true,
 			'HitNegationChance', {
 				HitNegationChance_blunt = 30,
 				HitNegationChance_energy = 30,
@@ -19776,7 +20128,7 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Temperate",
+			'Group', "Evolutions",
 			'Id', "Ulfen_T4",
 			'object_class', "UlfenBase",
 			'SpeciesGroup', "hoofed",
@@ -19793,7 +20145,6 @@ PlaceObj('ModItemFolder', {
 			},
 			'EventProgressValue', 450,
 			'CombatGroup', "Ulfens",
-			'CombatHostile', true,
 			'HitNegationChance', {
 				HitNegationChance_blunt = 40,
 				HitNegationChance_energy = 40,
@@ -19944,7 +20295,7 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Temperate",
+			'Group', "Evolutions",
 			'Id', "Ulfen_T5",
 			'object_class', "UlfenBase",
 			'SpeciesGroup', "hoofed",
@@ -19962,7 +20313,6 @@ PlaceObj('ModItemFolder', {
 			},
 			'EventProgressValue', 1000,
 			'CombatGroup', "Ulfens",
-			'CombatHostile', true,
 			'HitNegationChance', {
 				HitNegationChance_blunt = 50,
 				HitNegationChance_energy = 50,
@@ -20114,76 +20464,6 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Insects",
-			'Id', "Too_Angry_Too_Die_Juno",
-			'object_class', "Juno",
-			'EventProgressValue', 1500,
-			'SpawnDefWeight', 30,
-			'CombatHostile', false,
-			'HitNegationChance', {
-				blunt = 35,
-				energy = 35,
-				gas = 35,
-				pacify = 60,
-				piercing = 35,
-			},
-			'HitNegationChance_blunt', 35,
-			'HitNegationChance_piercing', 35,
-			'HitNegationChance_energy', 35,
-			'HitNegationChance_gas', 35,
-			'HitNegationChance_pacify', 60,
-			'HumanThreat', true,
-			'RobotThreat', true,
-			'FieldResearchTech', "Field_Juno_T4",
-			'ForcedApproachPlanning', true,
-			'lead_priority', 6,
-			'DisplayName', T(--[[ModItemUnitAnimalCompositeDef Too_Angry_Too_Die_Juno DisplayName]] "Too-Angry-Too-Die Juno"),
-			'DisplayNamePl', T(--[[ModItemUnitAnimalCompositeDef Too_Angry_Too_Die_Juno DisplayNamePl]] "Too-Angry-Too-Die Juno"),
-			'DisplayNameUnknown', T(434314719262, --[[ModItemUnitAnimalCompositeDef Too_Angry_Too_Die_Juno DisplayNameUnknown]] "Unknown Juno Evolution"),
-			'DisplayNameUnknownPL', T(397893098380, --[[ModItemUnitAnimalCompositeDef Too_Angry_Too_Die_Juno DisplayNameUnknownPL]] "Unknown Juno Evolution"),
-			'Description', T(967813562361, --[[ModItemUnitAnimalCompositeDef Too_Angry_Too_Die_Juno Description]] "Impossible to be knocked unconscious or pacified, our only option is to cause enough damage to render their bodies impossible to move. Deals <color TextButton>Blunt</color> damage."),
-			'BaseMaxHealth', 1800000,
-			'DailyEatingAmount', 4000,
-			'ButcherResources', {
-				PlaceObj('ButcherResAmount', {
-					'resource', "RawMeatInsect",
-					'min_amount', 75000,
-				}),
-			},
-			'ProduceResources', {
-				PlaceObj('ResAmount', {
-					'resource', "Stone",
-					'amount', 75000,
-				}),
-			},
-			'ProduceResInterval', 2400000,
-			'AnimalPerks', {
-				"StrongAnimal",
-				"BloodFrenzy",
-				"SmartPredator",
-				"StoneDigger",
-				"DraftableAnimal",
-				"AP_Fast",
-				"AP_Frenzy",
-				"AP_Regen",
-			},
-			'attack_weapon', "Juno_Hulk",
-			'TamingChance', 40,
-			'DailyPregnancyChance', 85,
-			'PregnancyDuration', 1920000,
-			'GrowDuration', 1920000,
-			'NewbornClass', "Junoskar",
-			'UnitPerkFrenzy', true,
-			'FrenzyHealthPct', 99,
-			'FrenzyEffects', {
-				"JunoFrenzy",
-				"Frenzy_Conscious_4",
-				"Frenzy_Conscious_Perfect",
-				"Frenzy_Regen",
-				"Frenzy_Fast",
-			},
-		}),
-		PlaceObj('ModItemUnitAnimalCompositeDef', {
 			'Id', "Noth",
 			'object_class', "UlfenBase",
 			'SpeciesGroup', "hoofed",
@@ -20286,6 +20566,7 @@ PlaceObj('ModItemFolder', {
 			'HerdMergeClass', "Noth",
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Group', "Evolutions",
 			'Id', "Noth_T2",
 			'object_class', "UlfenBase",
 			'SpeciesGroup', "hoofed",
@@ -20399,6 +20680,7 @@ PlaceObj('ModItemFolder', {
 			'HerdMergeClass', "Noth",
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Group', "Evolutions",
 			'Id', "Noth_T3",
 			'object_class', "UlfenBase",
 			'SpeciesGroup', "hoofed",
@@ -20413,7 +20695,6 @@ PlaceObj('ModItemFolder', {
 			'EventProgressValue', 240,
 			'SightRange', 10000,
 			'CombatGroup', "Noths",
-			'CombatHostile', true,
 			'HitNegationChance', {
 				HitNegationChance_energy = 30,
 				HitNegationChance_pacify = 40,
@@ -20521,6 +20802,7 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Group', "Evolutions",
 			'Id', "Noth_T4",
 			'object_class', "UlfenBase",
 			'SpeciesGroup', "hoofed",
@@ -20535,7 +20817,6 @@ PlaceObj('ModItemFolder', {
 			'EventProgressValue', 600,
 			'SightRange', 10000,
 			'CombatGroup', "Noths",
-			'CombatHostile', true,
 			'HitNegationChance', {
 				HitNegationChance_energy = 40,
 				HitNegationChance_pacify = 60,
@@ -20643,6 +20924,7 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Group', "Evolutions",
 			'Id', "Noth_T5",
 			'object_class', "UlfenBase",
 			'SpeciesGroup', "hoofed",
@@ -20657,7 +20939,6 @@ PlaceObj('ModItemFolder', {
 			'EventProgressValue', 1500,
 			'SightRange', 10000,
 			'CombatGroup', "Noths",
-			'CombatHostile', true,
 			'HitNegationChance', {
 				HitNegationChance_energy = 70,
 				HitNegationChance_pacify = 80,
@@ -20881,6 +21162,7 @@ PlaceObj('ModItemFolder', {
 			'HerdMergeClass', "Draka",
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Group', "Evolutions",
 			'Id', "Draka_T2",
 			'object_class', "DrakaBase",
 			'SpeciesGroup', "hoofed",
@@ -20903,7 +21185,6 @@ PlaceObj('ModItemFolder', {
 			'PainMask', "PainMask",
 			'EventProgressValue', 200,
 			'CombatGroup', "Drakkas",
-			'CombatHostile', true,
 			'HitNegationChance', {
 				HitNegationChance_blunt = 15,
 				HitNegationChance_energy = 15,
@@ -21021,6 +21302,7 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Group', "Evolutions",
 			'Id', "Draka_T3",
 			'object_class', "DrakaBase",
 			'SpeciesGroup', "hoofed",
@@ -21043,7 +21325,6 @@ PlaceObj('ModItemFolder', {
 			'PainMask', "PainMask",
 			'EventProgressValue', 450,
 			'CombatGroup', "Drakkas",
-			'CombatHostile', true,
 			'HitNegationChance', {
 				HitNegationChance_blunt = 30,
 				HitNegationChance_energy = 30,
@@ -21161,6 +21442,7 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Group', "Evolutions",
 			'Id', "Draka_T4",
 			'object_class', "DrakaBase",
 			'SpeciesGroup', "hoofed",
@@ -21300,6 +21582,7 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
+			'Group', "Evolutions",
 			'Id', "Draka_T5",
 			'object_class', "DrakaBase",
 			'SpeciesGroup', "hoofed",
@@ -21444,122 +21727,6 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Id', "Ulfen",
-			'object_class', "UlfenBase",
-			'SpeciesGroup', "hoofed",
-			'RoamRadius', 15000,
-			'RoamIntervalMin', 40000,
-			'RoamIntervalMax', 120000,
-			'PainMask', "PainMask",
-			'EventProgressValue', 30,
-			'CombatGroup', "Ulfens",
-			'EnrageChance', 3,
-			'AttackMemory', 45000,
-			'CombatGiveUpNoHit', 30000,
-			'CombatFleeAccuracy', 0,
-			'aim_spot', "Aim",
-			'ButcherDuration', 20000,
-			'max_skinned_decals_low', -1,
-			'FieldResearchTech', "FieldUlfen",
-			'ObservationDistanceMin', 15000,
-			'ObservationDistanceMax', 20000,
-			'Icon', "UI/Icons/Resources/res_ulfen",
-			'DisplayName', T(756384334076, --[[ModItemUnitAnimalCompositeDef Ulfen DisplayName]] "Ulfen"),
-			'DisplayNamePl', T(905161765277, --[[ModItemUnitAnimalCompositeDef Ulfen DisplayNamePl]] "Ulfens"),
-			'Description', T(109888884422, --[[ModItemUnitAnimalCompositeDef Ulfen Description]] "Usually passive. Small chance to retaliate when attacked."),
-			'FoodResources', {
-				"FoodAnimalHerbivore",
-				"Slop",
-			},
-			'DailyEatingAmount', 10000,
-			'Diet', "Herbivore",
-			'EatingDuration', 4000,
-			'FoodSourceClasses', {
-				"ResourcePile",
-				"Plant",
-				"AnimalFeeder",
-			},
-			'ButcherResources', {
-				PlaceObj('ButcherResAmount', {
-					'resource', "RawMeat",
-					'min_amount', 40000,
-					'max_amount', 60000,
-				}),
-				PlaceObj('ButcherResAmount', {
-					'resource', "LeatherRaw",
-					'min_amount', 20000,
-					'max_amount', 40000,
-				}),
-			},
-			'SelectionRadius', 2000,
-			'ChanceToBeMale', 40,
-			'BodySize', "large",
-			'ProduceResources', {
-				PlaceObj('ResAmount', {
-					'resource', "FuelManure",
-					'amount', 20000,
-				}),
-			},
-			'ProduceResInterval', 1920000,
-			'CmdProduceResources', function (animal)
-				if not animal:IsTamed() then
-					if animal:Random(100, "no produce chance") > 40 then
-						return animal:UpdateProductionTime()
-					end
-				end
-				return animal:DoProduceResources()
-			end,
-			'AnimalPerks', {
-				"ManureProducer",
-			},
-			'collision_radius_mod', 1250,
-			'pfclass_tamed', 10,
-			'pfclass_tamed_lead', 13,
-			'EatStartAnim', "eat_Start",
-			'EatIdleAnim', {
-				"eat_Idle",
-			},
-			'EatEndAnim', "eat_End",
-			'anim_idle_nervous', {
-				"idle_Nervous",
-			},
-			'anim_idle_playful', {
-				"idle_Playfull",
-				"idle_Playfull2",
-			},
-			'SleepStartAnim', "sleep_Start",
-			'SleepIdleAnim', "sleep_Idle",
-			'SleepEndAnim', "sleep_End",
-			'SleepInterruptedAnim', "sleep_Interrupted",
-			'SleepStartAnim2', "sleep_Start2",
-			'SleepIdleAnim2', "sleep_Idle2",
-			'SleepEndAnim2', "sleep_End2",
-			'SleepInterruptedAnim2', "sleep_Interrupted2",
-			'Tameable', true,
-			'Petable', true,
-			'TamingFood', "Berry",
-			'TamingFoodAmount', 10000,
-			'TamingMinimumSkill', 3,
-			'TamingChance', 70,
-			'TamingAggressiveChance', 10,
-			'TamingDistance', 10000,
-			'TamedLifetimeMin', 92160000,
-			'TamedLifetimeMax', 138240000,
-			'BondingChance', 10,
-			'ReproductionType', "two sexes",
-			'DailyPregnancyChance', 60,
-			'PregnancyDuration', 3840000,
-			'GrowDuration', 3840000,
-			'NewbornClass', "Ulfen_T2",
-			'MinGrownScale', 70,
-			'MaxGrownScale', 90,
-			'FieldVisibilityCold', 30000,
-			'FieldVisibilityWarm', 10000,
-			'MoveSpeedCold', 1000,
-			'PlantsToEatMin', 40,
-			'PlantsToEatMax', 60,
-		}),
-		PlaceObj('ModItemUnitAnimalCompositeDef', {
 			'Group', "Jungle",
 			'Id', "Shogu",
 			'object_class', "ShoguBase",
@@ -21677,7 +21844,7 @@ PlaceObj('ModItemFolder', {
 			'HerdMergeClass', "Shogu",
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Jungle",
+			'Group', "Evolutions",
 			'Id', "Shogu_T2",
 			'object_class', "ShoguBase",
 			'SpeciesGroup', "hoofed",
@@ -21691,7 +21858,6 @@ PlaceObj('ModItemFolder', {
 			'PainMask', "PainMask",
 			'EventProgressValue', 70,
 			'CombatGroup', "Shogu",
-			'CombatHostile', true,
 			'HitNegationChance', {
 				HitNegationChance_gas = 15,
 				HitNegationChance_pacify = 20,
@@ -21814,7 +21980,7 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Jungle",
+			'Group', "Evolutions",
 			'Id', "Shogu_T3",
 			'object_class', "ShoguBase",
 			'SpeciesGroup', "hoofed",
@@ -21831,7 +21997,6 @@ PlaceObj('ModItemFolder', {
 			},
 			'EventProgressValue', 150,
 			'CombatGroup', "Shogu",
-			'CombatHostile', true,
 			'HitNegationChance', {
 				HitNegationChance_energy = -15,
 				HitNegationChance_gas = 30,
@@ -21957,7 +22122,7 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Jungle",
+			'Group', "Evolutions",
 			'Id', "Shogu_T4",
 			'object_class', "ShoguBase",
 			'SpeciesGroup', "hoofed",
@@ -21974,7 +22139,6 @@ PlaceObj('ModItemFolder', {
 			},
 			'EventProgressValue', 320,
 			'CombatGroup', "Shogu",
-			'CombatHostile', true,
 			'HitNegationChance', {
 				HitNegationChance_energy = -30,
 				HitNegationChance_gas = 55,
@@ -22100,7 +22264,7 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Jungle",
+			'Group', "Evolutions",
 			'Id', "Shogu_T5",
 			'object_class', "ShoguBase",
 			'SpeciesGroup', "hoofed",
@@ -22117,7 +22281,6 @@ PlaceObj('ModItemFolder', {
 			},
 			'EventProgressValue', 700,
 			'CombatGroup', "Shogu",
-			'CombatHostile', true,
 			'HitNegationChance', {
 				HitNegationChance_energy = -45,
 				HitNegationChance_gas = 70,
@@ -22362,7 +22525,7 @@ PlaceObj('ModItemFolder', {
 			'HerdMergeClass', "Camel",
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Desert",
+			'Group', "Evolutions",
 			'Id', "Camel_T2",
 			'object_class', "CamelBase",
 			'SpeciesGroup', "hoofed",
@@ -22479,7 +22642,7 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Desert",
+			'Group', "Evolutions",
 			'Id', "Camel_T3",
 			'object_class', "CamelBase",
 			'SpeciesGroup', "hoofed",
@@ -22493,7 +22656,6 @@ PlaceObj('ModItemFolder', {
 			'PainMask', "PainMask",
 			'EventProgressValue', 150,
 			'CombatGroup', "Camels",
-			'CombatHostile', true,
 			'HitNegationChance', {
 				HitNegationChance_energy = 20,
 				HitNegationChance_pacify = 40,
@@ -22608,7 +22770,7 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Desert",
+			'Group', "Evolutions",
 			'Id', "Camel_T4",
 			'object_class', "CamelBase",
 			'SpeciesGroup', "hoofed",
@@ -22622,7 +22784,6 @@ PlaceObj('ModItemFolder', {
 			'PainMask', "PainMask",
 			'EventProgressValue', 320,
 			'CombatGroup', "Camels",
-			'CombatHostile', true,
 			'HitNegationChance', {
 				HitNegationChance_blunt = 5,
 				HitNegationChance_energy = 60,
@@ -22743,7 +22904,7 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemUnitAnimalCompositeDef', {
-			'Group', "Desert",
+			'Group', "Evolutions",
 			'Id', "Camel_T5",
 			'object_class', "CamelBase",
 			'SpeciesGroup', "hoofed",
@@ -22757,7 +22918,6 @@ PlaceObj('ModItemFolder', {
 			'PainMask', "PainMask",
 			'EventProgressValue', 900,
 			'CombatGroup', "Camels",
-			'CombatHostile', true,
 			'HitNegationChance', {
 				HitNegationChance_blunt = 10,
 				HitNegationChance_energy = 80,
@@ -22877,5 +23037,581 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		}),
+	}),
+PlaceObj('ModItemTrait', {
+	HiddenTrait = true,
+	id = "ILU_reaction_holder",
+	msg_reactions = {
+		PlaceObj('MsgReaction', {
+			Event = "AnimalBorn",
+			Handler = function (self, animal)
+				if not UIPlayer.research_center:IsTechResearched(animal['FieldResearchTech']) then
+					CompleteResearch(animal['FieldResearchTech'])
+				end
+			end,
+		}),
+	},
+}),
+PlaceObj('ModItemFolder', {
+	'name', "Loot Defs",
+}, {
+	PlaceObj('ModItemLootDef', {
+		group = "Insects_Level_Up",
+		id = "ILU_Robot_Human",
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 30000,
+			MinAmount = 15000,
+			Resource = "Metal",
+			condition = "Difficulty Easy",
+			weight = 10000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 30000,
+			MinAmount = 10000,
+			Resource = "Metal",
+			condition = "Difficulty Medium",
+			weight = 10000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 25000,
+			MinAmount = 10000,
+			Resource = "Metal",
+			condition = "Difficulty Hard",
+			weight = 10000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 20000,
+			MinAmount = 10000,
+			Resource = "Metal",
+			condition = "Difficulty VeryHard",
+			weight = 10000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 15000,
+			MinAmount = 10000,
+			Resource = "Metal",
+			condition = "Difficulty Insane",
+			weight = 10000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 30000,
+			MinAmount = 15000,
+			Resource = "ScrapMetal",
+			condition = "Difficulty Easy",
+			weight = 25000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 30000,
+			MinAmount = 10000,
+			Resource = "ScrapMetal",
+			condition = "Difficulty Medium",
+			weight = 25000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 25000,
+			MinAmount = 10000,
+			Resource = "ScrapMetal",
+			condition = "Difficulty Hard",
+			weight = 25000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 20000,
+			MinAmount = 10000,
+			Resource = "ScrapMetal",
+			condition = "Difficulty VeryHard",
+			weight = 25000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 15000,
+			MinAmount = 10000,
+			Resource = "ScrapMetal",
+			condition = "Difficulty Insane",
+			weight = 25000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 5000,
+			MinAmount = 4000,
+			Resource = "RepairParts",
+			condition = "Difficulty Easy",
+			weight = 3000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 4000,
+			MinAmount = 3000,
+			Resource = "RepairParts",
+			condition = "Difficulty Medium",
+			weight = 3000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 4000,
+			MinAmount = 3000,
+			Resource = "RepairParts",
+			condition = "Difficulty Hard",
+			weight = 3000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 3000,
+			MinAmount = 2000,
+			Resource = "RepairParts",
+			condition = "Difficulty VeryHard",
+			weight = 3000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 2000,
+			Resource = "RepairParts",
+			condition = "Difficulty Insane",
+			weight = 3000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 5000,
+			MinAmount = 4000,
+			Resource = "ScrapElectronics",
+			condition = "Difficulty Easy",
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 4000,
+			MinAmount = 3000,
+			Resource = "ScrapElectronics",
+			condition = "Difficulty Medium",
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 4000,
+			MinAmount = 3000,
+			Resource = "ScrapElectronics",
+			condition = "Difficulty Hard",
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 3000,
+			MinAmount = 2000,
+			Resource = "ScrapElectronics",
+			condition = "Difficulty VeryHard",
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 2000,
+			Resource = "ScrapElectronics",
+			condition = "Difficulty Insane",
+		}),
+	}),
+	PlaceObj('ModItemLootDef', {
+		group = "Insects_Level_Up",
+		id = "ILU_Robot_Misc",
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 40000,
+			MinAmount = 15000,
+			Resource = "TradeGoods",
+			condition = "Difficulty Easy",
+			weight = 15000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 35000,
+			MinAmount = 10000,
+			Resource = "TradeGoods",
+			condition = "Difficulty Medium",
+			weight = 15000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 30000,
+			MinAmount = 10000,
+			Resource = "TradeGoods",
+			condition = "Difficulty Hard",
+			weight = 15000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 25000,
+			MinAmount = 5000,
+			Resource = "TradeGoods",
+			condition = "Difficulty VeryHard",
+			weight = 15000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 15000,
+			MinAmount = 5000,
+			Resource = "TradeGoods",
+			condition = "Difficulty Insane",
+			weight = 15000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 2000000,
+			MinAmount = 1500000,
+			Resource = "Money",
+			condition = "Difficulty Easy",
+			weight = 15000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 1500000,
+			MinAmount = 1000000,
+			Resource = "Money",
+			condition = "Difficulty Medium",
+			weight = 15000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 1000000,
+			MinAmount = 750000,
+			Resource = "Money",
+			condition = "Difficulty Hard",
+			weight = 15000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 750000,
+			MinAmount = 500000,
+			Resource = "Money",
+			condition = "Difficulty VeryHard",
+			weight = 15000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 500000,
+			MinAmount = 250000,
+			Resource = "Money",
+			condition = "Difficulty Insane",
+			weight = 15000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 6000,
+			MinAmount = 5000,
+			Resource = "Grenades",
+			condition = "Difficulty Easy",
+			weight = 5000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 5000,
+			MinAmount = 4000,
+			Resource = "Grenades",
+			condition = "Difficulty Medium",
+			weight = 5000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 4000,
+			MinAmount = 3000,
+			Resource = "Grenades",
+			condition = "Difficulty Hard",
+			weight = 5000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 3000,
+			MinAmount = 2000,
+			Resource = "Grenades",
+			condition = "Difficulty VeryHard",
+			weight = 5000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 2000,
+			Resource = "Grenades",
+			condition = "Difficulty Insane",
+			weight = 5000,
+		}),
+		PlaceObj('LootEntryResource', {
+			Resource = "CPUCore",
+			weight = 5000,
+		}),
+		PlaceObj('LootEntryResource', {
+			Resource = "PowerCell",
+			weight = 3000,
+		}),
+		PlaceObj('LootEntryResource', {
+			Resource = "AICore",
+		}),
+		PlaceObj('LootEntryNoLoot', {
+			weight = 10000,
+		}),
+	}),
+	PlaceObj('ModItemLootDef', {
+		group = "Insects_Level_Up",
+		id = "ILU_Robot_Crawler_Special",
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 3000,
+			MinAmount = 3000,
+			Resource = "ScrapElectronics",
+			condition = "Difficulty Easy",
+			weight = 10000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 3000,
+			MinAmount = 2000,
+			Resource = "ScrapElectronics",
+			condition = "Difficulty Medium",
+			weight = 10000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 2000,
+			Resource = "ScrapElectronics",
+			condition = "Difficulty Hard",
+			weight = 10000,
+		}),
+		PlaceObj('LootEntryResource', {
+			Resource = "ScrapElectronics",
+			condition = "Difficulty VeryHard",
+			weight = 10000,
+		}),
+		PlaceObj('LootEntryResource', {
+			Resource = "ScrapElectronics",
+			condition = "Difficulty Insane",
+			weight = 10000,
+		}),
+		PlaceObj('LootEntryResource', {
+			Resource = "CPUCore",
+			weight = 5000,
+		}),
+		PlaceObj('LootEntryResource', {
+			Resource = "PowerCell",
+			weight = 3000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 2000,
+			MinAmount = 2000,
+			Resource = "AICore",
+			condition = "Difficulty Easy",
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 2000,
+			Resource = "AICore",
+			condition = "Difficulty Medium",
+		}),
+		PlaceObj('LootEntryResource', {
+			Resource = "AICore",
+			condition = "Difficulty Hard",
+		}),
+		PlaceObj('LootEntryResource', {
+			Resource = "AICore",
+			condition = "Difficulty VeryHard",
+		}),
+		PlaceObj('LootEntryResource', {
+			Resource = "AICore",
+			condition = "Difficulty Insane",
+		}),
+		PlaceObj('LootEntryResource', {
+			Resource = "MechCore",
+		}),
+		PlaceObj('LootEntryResource', {
+			Resource = "MatterGenerator",
+		}),
+		PlaceObj('LootEntryNoLoot', {
+			weight = 20000,
+		}),
+	}),
+	PlaceObj('ModItemLootDef', {
+		group = "Insects_Level_Up",
+		id = "ILU_Robot_Crawler_Mats",
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 125000,
+			MinAmount = 100000,
+			Resource = "ScrapMetal",
+			condition = "Difficulty Easy",
+			weight = 10000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 100000,
+			MinAmount = 75000,
+			Resource = "ScrapMetal",
+			condition = "Difficulty Medium",
+			weight = 10000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 75000,
+			MinAmount = 50000,
+			Resource = "ScrapMetal",
+			condition = "Difficulty Hard",
+			weight = 10000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 50000,
+			MinAmount = 40000,
+			Resource = "ScrapMetal",
+			condition = "Difficulty VeryHard",
+			weight = 10000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 40000,
+			MinAmount = 30000,
+			Resource = "ScrapMetal",
+			condition = "Difficulty Insane",
+			weight = 10000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 75000,
+			MinAmount = 50000,
+			Resource = "Metal",
+			condition = "Difficulty Easy",
+			weight = 5000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 60000,
+			MinAmount = 40000,
+			Resource = "Metal",
+			condition = "Difficulty Medium",
+			weight = 5000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 50000,
+			MinAmount = 30000,
+			Resource = "Metal",
+			condition = "Difficulty Hard",
+			weight = 5000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 30000,
+			MinAmount = 20000,
+			Resource = "Metal",
+			condition = "Difficulty VeryHard",
+			weight = 5000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 25000,
+			MinAmount = 15000,
+			Resource = "Metal",
+			condition = "Difficulty Insane",
+			weight = 5000,
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 10000,
+			MinAmount = 10000,
+			Resource = "RepairParts",
+			condition = "Difficulty Easy",
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 10000,
+			MinAmount = 8000,
+			Resource = "RepairParts",
+			condition = "Difficulty Medium",
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 8000,
+			MinAmount = 6000,
+			Resource = "RepairParts",
+			condition = "Difficulty Hard",
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 6000,
+			MinAmount = 4000,
+			Resource = "RepairParts",
+			condition = "Difficulty VeryHard",
+		}),
+		PlaceObj('LootEntryResource', {
+			MaxAmount = 4000,
+			MinAmount = 2000,
+			Resource = "RepairParts",
+			condition = "Difficulty Insane",
+		}),
+	}),
+	PlaceObj('ModItemLootDef', {
+		id = "ILU_Robot_Human_T1",
+		loot = "all",
+		PlaceObj('LootEntryLootDef', {
+			loot_def = "ILU_Robot_Human",
+		}),
+		PlaceObj('LootEntryLootDef', {
+			loot_def = "ILU_Robot_Misc",
+		}),
+	}),
+	PlaceObj('ModItemLootDef', {
+		id = "ILU_Robot_Human_T2",
+		loot = "all",
+		PlaceObj('LootEntryLootDef', {
+			loot_def = "ILU_Robot_Human",
+		}),
+		PlaceObj('LootEntryLootDef', {
+			amount_modifier = 2000000,
+			loot_def = "ILU_Robot_Misc",
+		}),
+	}),
+	PlaceObj('ModItemLootDef', {
+		id = "ILU_Robot_Human_T3",
+		loot = "all",
+		PlaceObj('LootEntryLootDef', {
+			loot_def = "ILU_Robot_Human",
+		}),
+		PlaceObj('LootEntryLootDef', {
+			amount_modifier = 3000000,
+			loot_def = "ILU_Robot_Misc",
+		}),
+	}),
+	PlaceObj('ModItemLootDef', {
+		id = "ILU_Robot_Human_T4",
+		loot = "all",
+		PlaceObj('LootEntryLootDef', {
+			loot_def = "ILU_Robot_Human",
+		}),
+		PlaceObj('LootEntryLootDef', {
+			amount_modifier = 4000000,
+			loot_def = "ILU_Robot_Misc",
+		}),
+	}),
+	PlaceObj('ModItemLootDef', {
+		id = "ILU_Robot_Human_T5",
+		loot = "all",
+		PlaceObj('LootEntryLootDef', {
+			loot_def = "ILU_Robot_Human",
+		}),
+		PlaceObj('LootEntryLootDef', {
+			amount_modifier = 5000000,
+			loot_def = "ILU_Robot_Misc",
+		}),
+	}),
+	PlaceObj('ModItemLootDef', {
+		id = "ILU_Robot_Crawl_T5",
+		loot = "all",
+		PlaceObj('LootEntryLootDef', {
+			loot_def = "ILU_Robot_Crawler_Special",
+		}),
+		PlaceObj('LootEntryLootDef', {
+			amount_modifier = 2000000,
+			loot_def = "ILU_Robot_Crawler_Mats",
+		}),
+		PlaceObj('LootEntryLootDef', {
+			amount_modifier = 3000000,
+			loot_def = "ILU_Robot_Misc",
+		}),
+	}),
+	PlaceObj('ModItemLootDef', {
+		id = "ILU_Robot_Crawl_T4",
+		loot = "all",
+		PlaceObj('LootEntryLootDef', {
+			loot_def = "ILU_Robot_Crawler_Special",
+		}),
+		PlaceObj('LootEntryLootDef', {
+			amount_modifier = 2000000,
+			loot_def = "ILU_Robot_Crawler_Mats",
+		}),
+		PlaceObj('LootEntryLootDef', {
+			amount_modifier = 2000000,
+			loot_def = "ILU_Robot_Misc",
+		}),
+	}),
+	PlaceObj('ModItemLootDef', {
+		id = "ILU_Robot_Crawl_T3",
+		loot = "all",
+		PlaceObj('LootEntryLootDef', {
+			loot_def = "ILU_Robot_Crawler_Special",
+		}),
+		PlaceObj('LootEntryLootDef', {
+			loot_def = "ILU_Robot_Crawler_Mats",
+		}),
+		PlaceObj('LootEntryLootDef', {
+			amount_modifier = 2000000,
+			loot_def = "ILU_Robot_Misc",
+		}),
+	}),
+	PlaceObj('ModItemLootDef', {
+		id = "ILU_Robot_Crawl_T2",
+		loot = "all",
+		PlaceObj('LootEntryLootDef', {
+			loot_def = "ILU_Robot_Crawler_Special",
+		}),
+		PlaceObj('LootEntryLootDef', {
+			loot_def = "ILU_Robot_Crawler_Mats",
+		}),
+		PlaceObj('LootEntryLootDef', {
+			loot_def = "ILU_Robot_Misc",
+		}),
+	}),
+	PlaceObj('ModItemLootDef', {
+		id = "ILU_Robot_Crawl_T1",
+		loot = "all",
+		PlaceObj('LootEntryLootDef', {
+			loot_def = "ILU_Robot_Crawler_Special",
+		}),
+		PlaceObj('LootEntryLootDef', {
+			loot_def = "ILU_Robot_Crawler_Mats",
+		}),
+	}),
 	}),
 }

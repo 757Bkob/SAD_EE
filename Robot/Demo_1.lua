@@ -26,7 +26,7 @@ DefineClass.Demo_1 = {
 	DisplayNameShort = T(577195232618, --[[ModItemRobotCompositeDef Demo_1 DisplayNameShort]] "DE1"),
 	DisplayNamePl = T(868338985251, --[[ModItemRobotCompositeDef Demo_1 DisplayNamePl]] "Drone Series E"),
 	Description = T(435729608418, --[[ModItemRobotCompositeDef Demo_1 Description]] "It is a running joke in Consortium media that purple makes robots stealthier. So when a new model was announced sold as a stealth sabotage unit, it came to noones surprise in a shade of purple. They even made the acid purple colored! Has <color TechSubtitleBlue>0% Piercing Damage</color> <em>Reduction</em>, <color TextButton>10% Blunt Damage</color><color TextEmphasis> Reduction</color>, <color TextNegative>5% Energy Damage</color><color TextEmphasis> Reduction</color>, <color TextPositive>25% Gas Damage</color><color TextEmphasis> Reduction</color>"),
-	SalvageLootTable = "LightHostileRobots_3",
+	SalvageLootTable = "ILU_Robot_Human_T1",
 	Skills = {
 		Combat = 5,
 	},

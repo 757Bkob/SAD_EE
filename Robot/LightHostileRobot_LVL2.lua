@@ -33,7 +33,7 @@ DefineClass.LightHostileRobot_LVL2 = {
 	DisplayNameShort = T(142244256287, --[[ModItemRobotCompositeDef LightHostileRobot_LVL2 DisplayNameShort]] "DA2"),
 	DisplayNamePl = T(298340055036, --[[ModItemRobotCompositeDef LightHostileRobot_LVL2 DisplayNamePl]] "Drone A series"),
 	Description = T(248109247620, --[[ModItemRobotCompositeDef LightHostileRobot_LVL2 Description]] "The consortium is dedicating more resources to this series; while still trying cheaply mass produce them. This is mainly done by allowing the robot to operate at higher capacity than what is safe for the robots frame. Has <color TechSubtitleBlue>0% Piercing Deflection</color>, <color TextButton>5% Blunt Deflection</color>, <color TextNegative>5% Energy Deflection</color>, <color TextPositive>20% Gas Deflection</color>"),
-	SalvageLootTable = "LightHostileRobots_2",
+	SalvageLootTable = "ILU_Robot_Human_T2",
 	Skills = {
 		Combat = 2,
 	},

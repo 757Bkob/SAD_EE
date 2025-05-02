@@ -4,6 +4,7 @@ DefineClass.Too_Angry_Too_Die_Juno = {
 	__generated_by_class = "ModItemUnitAnimalCompositeDef",
 
 
+	comment = "T5",
 	object_class = "Juno",
 	EventProgressValue = 1500,
 	SpawnDefWeight = 30,

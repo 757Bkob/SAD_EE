@@ -4,6 +4,7 @@ DefineClass.PEx_Skarabei = {
 	__generated_by_class = "ModItemUnitAnimalCompositeDef",
 
 
+	comment = "T2",
 	object_class = "GroundAnimal",
 	SpeciesGroup = "scarabs",
 	UnitTags = set( "AgitatedByPheromones", "Animal" ),
@@ -17,16 +18,14 @@ DefineClass.PEx_Skarabei = {
 	SightRange = 15000,
 	CombatGroup = "Insects",
 	HitNegationChance = {
-		blunt = 15,
-		energy = 15,
-		gas = 10,
+		blunt = 0,
+		energy = 10,
+		gas = 0,
 		pacify = 20,
 		piercing = 20,
 	},
-	HitNegationChance_blunt = 15,
 	HitNegationChance_piercing = 20,
-	HitNegationChance_energy = 15,
-	HitNegationChance_gas = 10,
+	HitNegationChance_energy = 10,
 	HitNegationChance_pacify = 20,
 	HumanThreat = true,
 	RobotThreat = true,
@@ -54,7 +53,6 @@ DefineClass.PEx_Skarabei = {
 	DisplayNameUnknownPL = T(--[[ModItemUnitAnimalCompositeDef PEx_Skarabei DisplayNameUnknownPL]] "Unknown Skarabei evolution"),
 	Description = T(881139664981, --[[ModItemUnitAnimalCompositeDef PEx_Skarabei Description]] "A Skarabei swarm warrior. Poisons and explodes on death. Carapace becoming resistant to pierce and energy attacks. Deals <color TextButton>Blunt</color> and <color TextPositive>Gas</color> damage."),
 	fx_actor_base_class = "Skarabei",
-	BaseMaxHealth = 150000,
 	FoodResources = {
 		"FoodAnimalHerbivore",
 		"FoodAnimalCarnivore",

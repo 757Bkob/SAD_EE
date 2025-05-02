@@ -4,6 +4,7 @@ DefineClass.Glutch_Stitcher = {
 	__generated_by_class = "ModItemUnitAnimalCompositeDef",
 
 
+	comment = "T2",
 	object_class = "GroundAnimal",
 	SpeciesGroup = "insects",
 	UnitTags = set( "AgitatedByPheromones", "Animal" ),

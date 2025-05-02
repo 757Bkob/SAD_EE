@@ -16,7 +16,6 @@ DefineClass.Shogu_T2 = {
 	PainMask = "PainMask",
 	EventProgressValue = 70,
 	CombatGroup = "Shogu",
-	CombatHostile = true,
 	HitNegationChance = {
 		HitNegationChance_gas = 15,
 		HitNegationChance_pacify = 20,

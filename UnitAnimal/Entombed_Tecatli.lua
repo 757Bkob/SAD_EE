@@ -4,6 +4,7 @@ DefineClass.Entombed_Tecatli = {
 	__generated_by_class = "ModItemUnitAnimalCompositeDef",
 
 
+	comment = "T2",
 	object_class = "TecatliBase",
 	composite_part_target = "Entombed_Tecatli",
 	composite_part_groups = {

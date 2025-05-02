@@ -4,6 +4,7 @@ DefineClass.Juno_Brute = {
 	__generated_by_class = "ModItemUnitAnimalCompositeDef",
 
 
+	comment = "T2",
 	object_class = "Juno",
 	EventProgressValue = 500,
 	lead_priority = 6,

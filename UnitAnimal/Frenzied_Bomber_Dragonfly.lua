@@ -4,6 +4,7 @@ DefineClass.Frenzied_Bomber_Dragonfly = {
 	__generated_by_class = "ModItemUnitAnimalCompositeDef",
 
 
+	comment = "T3",
 	object_class = "DragonflyBase",
 	SpeciesGroup = "insects",
 	RoamMinDist = 5000,

@@ -4,6 +4,7 @@ DefineClass.Bloated_Glutch = {
 	__generated_by_class = "ModItemUnitAnimalCompositeDef",
 
 
+	comment = "T3",
 	object_class = "GroundAnimal",
 	SpeciesGroup = "insects",
 	UnitTags = set( "AgitatedByPheromones", "Animal" ),

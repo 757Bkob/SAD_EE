@@ -4,6 +4,7 @@ DefineClass.Brutal_Duelist_Scissorhands = {
 	__generated_by_class = "ModItemUnitAnimalCompositeDef",
 
 
+	comment = "T3",
 	object_class = "Scissorhands",
 	EventProgressValue = 350,
 	SpawnDefWeight = 30,

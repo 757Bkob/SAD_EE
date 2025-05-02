@@ -4,6 +4,7 @@ DefineClass.Junoskar = {
 	__generated_by_class = "ModItemUnitAnimalCompositeDef",
 
 
+	comment = "T6",
 	object_class = "UnitAnimal",
 	SpeciesGroup = "insects",
 	RoamRadius = 10000,

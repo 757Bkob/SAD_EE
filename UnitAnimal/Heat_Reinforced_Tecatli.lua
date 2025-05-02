@@ -4,6 +4,7 @@ DefineClass.Heat_Reinforced_Tecatli = {
 	__generated_by_class = "ModItemUnitAnimalCompositeDef",
 
 
+	comment = "T3",
 	object_class = "TecatliBase",
 	composite_part_target = "Heat_Reinforced_Tecatli",
 	composite_part_groups = {

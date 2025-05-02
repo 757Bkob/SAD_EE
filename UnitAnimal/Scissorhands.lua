@@ -4,6 +4,7 @@ DefineClass.Scissorhands = {
 	__generated_by_class = "ModItemUnitAnimalCompositeDef",
 
 
+	comment = "T1",
 	object_class = "GroundAnimal",
 	SpeciesGroup = "insects",
 	UnitTags = set( "AgitatedByPheromones", "Animal" ),

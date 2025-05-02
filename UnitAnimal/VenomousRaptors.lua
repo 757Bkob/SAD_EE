@@ -4,6 +4,7 @@ DefineClass.VenomousRaptors = {
 	__generated_by_class = "ModItemUnitAnimalCompositeDef",
 
 
+	comment = "T1",
 	object_class = "TecatliBase",
 	SpeciesGroup = "hoofed",
 	RoamIntervalMin = 2000,
@@ -108,10 +109,11 @@ DefineClass.VenomousRaptors = {
 	CombatSkillInitial = range(5, 6),
 	BondingChance = 5,
 	ReproductionType = "two sexes",
+	ReproductionGroup = "Tecatli",
 	DailyPregnancyChance = 55,
 	PregnancyDuration = 4800000,
 	GrowDuration = 4800000,
-	NewbornClass = "Tecatli",
+	NewbornClass = "Entombed_Tecatli",
 	MinNewbornScale = 35,
 	MaxNewbornScale = 35,
 	MinGrownScale = 65,

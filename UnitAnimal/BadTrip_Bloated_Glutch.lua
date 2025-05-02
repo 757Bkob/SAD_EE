@@ -4,6 +4,7 @@ DefineClass.BadTrip_Bloated_Glutch = {
 	__generated_by_class = "ModItemUnitAnimalCompositeDef",
 
 
+	comment = "T4",
 	object_class = "GroundAnimal",
 	SpeciesGroup = "insects",
 	UnitTags = set( "AgitatedByPheromones", "Animal" ),

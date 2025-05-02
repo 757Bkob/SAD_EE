@@ -27,7 +27,7 @@ DefineClass.Demo_4 = {
 	DisplayNameShort = T(970881324308, --[[ModItemRobotCompositeDef Demo_4 DisplayNameShort]] "DE4"),
 	DisplayNamePl = T(414115315193, --[[ModItemRobotCompositeDef Demo_4 DisplayNamePl]] "Drone Series E"),
 	Description = T(598057090716, --[[ModItemRobotCompositeDef Demo_4 Description]] "For an upcharge, a prospective robot army owner can purchase a survivability upgrade for the sabatoge model. This ensures that all units ship with the Consortium's modified Laser Spear. A tube runs from the fuel tank to the tip of the spear. Buildings cannot maintain structural integrity when a vat of acid is placed directly on it's support beams! Has <color TechSubtitleBlue>15% Piercing Damage</color> <em>Reduction</em>, <color TextButton>25% Blunt Damage</color><color TextEmphasis> Reduction</color>, <color TextNegative>20% Energy Damage</color><color TextEmphasis> Reduction</color>, <color TextPositive>45% Gas Damage</color><color TextEmphasis> Reduction</color>"),
-	SalvageLootTable = "LightHostileRobots_3",
+	SalvageLootTable = "ILU_Robot_Human_T4",
 	Skills = {
 		Combat = 8,
 	},

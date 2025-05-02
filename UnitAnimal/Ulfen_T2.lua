@@ -19,7 +19,6 @@ DefineClass.Ulfen_T2 = {
 	},
 	EventProgressValue = 90,
 	CombatGroup = "Ulfens",
-	CombatHostile = true,
 	HitNegationChance = {
 		HitNegationChance_blunt = 15,
 		HitNegationChance_energy = 15,

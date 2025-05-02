@@ -4,6 +4,7 @@ DefineClass.dog_T1 = {
 	__generated_by_class = "ModItemUnitAnimalCompositeDef",
 
 
+	comment = "T2",
 	object_class = "DogBase",
 	SpeciesGroup = "dogs",
 	RoamRadius = 15000,
@@ -30,7 +31,6 @@ DefineClass.dog_T1 = {
 	HitNegationChance_energy = 5,
 	HitNegationChance_gas = 5,
 	HitNegationChance_pacify = 20,
-	HumanThreat = true,
 	EnrageChance = 5,
 	AttackMemory = 45000,
 	CombatGiveUpNoHit = 30000,

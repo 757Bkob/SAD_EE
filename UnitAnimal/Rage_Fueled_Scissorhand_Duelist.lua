@@ -4,6 +4,7 @@ DefineClass.Rage_Fueled_Scissorhand_Duelist = {
 	__generated_by_class = "ModItemUnitAnimalCompositeDef",
 
 
+	comment = "T4",
 	object_class = "Scissorhands",
 	EventProgressValue = 700,
 	SpawnDefWeight = 30,

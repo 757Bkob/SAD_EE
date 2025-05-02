@@ -4,6 +4,7 @@ DefineClass.Scissorhands_Brute_Nesting = {
 	__generated_by_class = "ModItemUnitAnimalCompositeDef",
 
 
+	comment = "T2",
 	object_class = "Scissorhands",
 	composite_part_target = "Scissorhands_Brute",
 	EventProgressValue = 180,

@@ -4,6 +4,7 @@ DefineClass.Sniping_Entropy_Shielded_Shrieker = {
 	__generated_by_class = "ModItemUnitAnimalCompositeDef",
 
 
+	comment = "T5",
 	object_class = "Shrieker_Manhunting",
 	EventProgressValue = 2000,
 	SpawnDefWeight = 30,

@@ -4,6 +4,7 @@ DefineClass.Intelligent_Tecatli = {
 	__generated_by_class = "ModItemUnitAnimalCompositeDef",
 
 
+	comment = "T4",
 	object_class = "TecatliBase",
 	BypassTrapsChance = 90,
 	composite_part_target = "Intelligent_Tecatli",

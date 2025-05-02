@@ -4,6 +4,7 @@ DefineClass.BadTrip_Bloated_Glutch_Stitcher = {
 	__generated_by_class = "ModItemUnitAnimalCompositeDef",
 
 
+	comment = "T5",
 	object_class = "GroundAnimal",
 	SpeciesGroup = "insects",
 	UnitTags = set( "AgitatedByPheromones", "Animal" ),

@@ -4,6 +4,7 @@ DefineClass.Scissorhands_Brute = {
 	__generated_by_class = "ModItemUnitAnimalCompositeDef",
 
 
+	comment = "T2",
 	object_class = "Scissorhands",
 	EventProgressValue = 180,
 	lead_priority = 12,

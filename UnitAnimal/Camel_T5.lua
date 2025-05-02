@@ -16,7 +16,6 @@ DefineClass.Camel_T5 = {
 	PainMask = "PainMask",
 	EventProgressValue = 900,
 	CombatGroup = "Camels",
-	CombatHostile = true,
 	HitNegationChance = {
 		HitNegationChance_blunt = 10,
 		HitNegationChance_energy = 80,

@@ -4,6 +4,7 @@ DefineClass.Shrieker_Mother = {
 	__generated_by_class = "ModItemUnitAnimalCompositeDef",
 
 
+	comment = "T1",
 	object_class = "Shrieker_Manhunting_Mother",
 	RoamIntervalMin = 40000,
 	RoamIntervalMax = 80000,

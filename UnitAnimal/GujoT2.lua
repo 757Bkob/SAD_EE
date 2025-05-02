@@ -4,6 +4,7 @@ DefineClass.GujoT2 = {
 	__generated_by_class = "ModItemUnitAnimalCompositeDef",
 
 
+	comment = "T2",
 	object_class = "GujoBase",
 	SpeciesGroup = "birds",
 	RoamIntervalMin = 2000,

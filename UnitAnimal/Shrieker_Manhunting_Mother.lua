@@ -4,6 +4,7 @@ DefineClass.Shrieker_Manhunting_Mother = {
 	__generated_by_class = "ModItemUnitAnimalCompositeDef",
 
 
+	comment = "T1",
 	object_class = "Shrieker_Manhunting",
 	UnitTags = set( "Animal" ),
 	pfclass = 3,

@@ -3,143 +3,158 @@ local title = "Insects Level up All Species"
 local separator = " :: "
 local debugMSG = {"New Game","Game Started"}
 
-function SavegameFixups.FixGujoT2()
+-- UIPlayer.research_center:IsTechResearched(SelectedObj['FieldResearchTech'])
+
+function SavegameFixups.ILU_fixes()
 	MapForEach("map", "GujoT2", function(obj)
 		obj:ComposeBodyParts()
 		obj:InitEntity()
 	end)
+	for i, animal in ipairs(UIPlayer.labels.TamedAnimals) do
+		if not UIPlayer.research_center:IsTechResearched(animal['FieldResearchTech']) then
+			CompleteResearch(animal['FieldResearchTech'])
+		end
+		animal:InitEntity()
+	end
 end
 local base_table = {
-	{id="Juno",stop=nil,next="Juno_Brute"},
-	{id="Juno_Brute",stop=nil,next="Angry_Juno"},
-	{id="Angry_Juno",stop=nil,next="Hulk_Juno"},
-	{id="Hulk_Juno",stop=nil,next="Too_Angry_Too_Die_Juno"},
-	{id="Too_Angry_Too_Die_Juno",stop=nil,next="Junoskar"},
-	{id="Junoskar",stop="Juno",next=nil},
-	{id="VenomousRaptors",stop=nil,next="Tecatli"},
-	{id="Tecatli",stop=nil,next="Entombed_Tecatli"},
-	{id="Entombed_Tecatli",stop=nil,next="Heat_Reinforced_Tecatli"},
-	{id="Heat_Reinforced_Tecatli",stop=nil,next="Intelligent_Tecatli"},
-	{id="Intelligent_Tecatli",stop=nil,next="Spellsword_Tecatli"},
-	{id="Spellsword_Tecatli",stop="Tecatli",next=nil},
-	{id="Dragonfly",stop=nil,next="Frenzied_Dragonfly"},
-	{id="Frenzied_Dragonfly",stop=nil,next="Frenzied_Bomber_Dragonfly"},
-	{id="Frenzied_Bomber_Dragonfly",stop=nil,next="Frenzied_Fortified_Bomber_Dragonfly"},
-	{id="Frenzied_Fortified_Bomber_Dragonfly",stop=nil,next="Fast_Frenzied_Fortified_Bomber_Dragonfly"},
-	{id="Fast_Frenzied_Fortified_Bomber_Dragonfly",stop="Dragonfly",next=nil},
-	{id="Glutch_Manhunting",stop=nil,next="Glutch_Stitcher"},
-	{id="Glutch_Stitcher",stop=nil,next="Bloated_Glutch"},
-	{id="Bloated_Glutch",stop=nil,next="BadTrip_Bloated_Glutch"},
-	{id="BadTrip_Bloated_Glutch",stop=nil,next="BadTrip_Bloated_Glutch_Stitcher"},
-	{id="BadTrip_Bloated_Glutch_Stitcher",stop="Glutch",next=nil},
-	{id="Skarabei_Manhunting_Starving",stop=nil,next="Skarabei"},
-	{id="Skarabei",stop=nil,next="Skarabei_Manhunting"},
-	{id="Skarabei_Manhunting",stop=nil,next="Skarabei_Manhunting_Poisonous"},
-	{id="Skarabei_Manhunting_Poisonous",stop=nil,next="Skarabei_Manhunting_Explosive"},
-	{id="Skarabei_Manhunting_Explosive",stop=nil,next="Skarabei_Manhunting_Brute"},
-	{id="Skarabei_Manhunting_Brute",stop=nil,next="PEx_Skarabei"},
-	{id="PEx_Skarabei",stop=nil,next="PEx_Skarabei_Brute"},
-	{id="PEx_Skarabei_Brute",stop=nil,next="Mutated_PEx_Skarabei_Brute"},
-	{id="Mutated_PEx_Skarabei_Brute",stop=nil,next="Heavily_Mutated_PEx_Skarabei_Brute"},
-	{id="Heavily_Mutated_PEx_Skarabei_Brute",stop="Skarabei",next=nil},
-	{id="Shrieker_Hatchling",stop=nil,next="Shrieker_Manhunting"},
-	{id="Shrieker_Manhunting_Hatchling",stop=nil,next="Shrieker_Manhunting"},
-	{id="Shrieker",stop=nil,next="Shrieker_Manhunting"},
-	{id="Shrieker_Manhunting",stop=nil,next="Shrieker_Manhunting_Mother"},
-	{id="Shrieker_Manhunting_Mother",stop=nil,next="Entropic_Shrieker"},
-	{id="Entropic_Shrieker",stop=nil,next="Plague_Sniper_Shrieker"},
-	{id="Plague_Sniper_Shrieker",stop=nil,next="Sniping_Entropy_Shielded_Shrieker"},
-	{id="Sniping_Entropy_Shielded_Shrieker",stop="Shrieker",next=nil},
-	{id="Scissorhands_Hatchling_Starving",stop=nil,next="Scissorhands"},
-	{id="Scissorhands_Hatchling_Nesting",stop=nil,next="Scissorhands"},
-	{id="Scissorhands_Nesting",stop=nil,next="Scissorhands"},
-	{id="Scissorhands_Hatchling",stop=nil,next="Scissorhands"},
-	{id="Scissorhands",stop=nil,next="Scissorhands_Brute"},
-	{id="Scissorhands_Brute_Nesting",stop=nil,next="Scissorhands_Brute"},
-	{id="Scissorhands_Brute",stop=nil,next="Brutal_Duelist_Scissorhands"},
-	{id="Brutal_Duelist_Scissorhands",stop=nil,next="Rage_Fueled_Scissorhand_Duelist"},
-	{id="Rage_Fueled_Scissorhand_Duelist",stop=nil,next="Rage_Focused_Scissorhands"},
-	{id="Rage_Focused_Scissorhands",stop="Scissor",next=nil},
-	{id="dog_T1",stop=nil,next="dog_T3"},
-	{id="dog_T3",stop=nil,next="dog_T4"},
-	{id="dog_T4",stop=nil,next="dog_T5"},
-	{id="dog_T5",stop="dog",next=nil},
+	{id="Juno",stop=nil,next="Juno_Brute",T=1},
+	{id="Juno_Brute",stop=nil,next="Angry_Juno",T=2},
+	{id="Angry_Juno",stop=nil,next="Hulk_Juno",T=3},
+	{id="Hulk_Juno",stop=nil,next="Too_Angry_Too_Die_Juno",T=4},
+	{id="Too_Angry_Too_Die_Juno",stop=nil,next="Junoskar",T=5},
+	{id="Junoskar",stop="Juno",next=nil,T=6},
+	{id="VenomousRaptors",stop=nil,next="Tecatli",T=1},
+	{id="Tecatli",stop=nil,next="Entombed_Tecatli",T=1},
+	{id="Entombed_Tecatli",stop=nil,next="Heat_Reinforced_Tecatli",T=2},
+	{id="Heat_Reinforced_Tecatli",stop=nil,next="Intelligent_Tecatli",T=3},
+	{id="Intelligent_Tecatli",stop=nil,next="Spellsword_Tecatli",T=4},
+	{id="Spellsword_Tecatli",stop="Tecatli",next=nil,T=5},
+	{id="Dragonfly",stop=nil,next="Frenzied_Dragonfly",T=1},
+	{id="Frenzied_Dragonfly",stop=nil,next="Frenzied_Bomber_Dragonfly",T=2},
+	{id="Frenzied_Bomber_Dragonfly",stop=nil,next="Frenzied_Fortified_Bomber_Dragonfly",T=3},
+	{id="Frenzied_Fortified_Bomber_Dragonfly",stop=nil,next="Fast_Frenzied_Fortified_Bomber_Dragonfly",T=4},
+	{id="Fast_Frenzied_Fortified_Bomber_Dragonfly",stop="Dragonfly",next=nil,T=5},
+	{id="Glutch_Manhunting",stop=nil,next="Glutch_Stitcher",T=1},
+	{id="Glutch_Stitcher",stop=nil,next="Bloated_Glutch",T=2},
+	{id="Bloated_Glutch",stop=nil,next="BadTrip_Bloated_Glutch",T=3},
+	{id="BadTrip_Bloated_Glutch",stop=nil,next="BadTrip_Bloated_Glutch_Stitcher",T=4},
+	{id="BadTrip_Bloated_Glutch_Stitcher",stop="Glutch",next=nil,T=5},
+	{id="Skarabei_Manhunting_Starving",stop=nil,next="Skarabei",T=0},
+	{id="Skarabei",stop=nil,next="Skarabei_Manhunting",T=1},
+	{id="Skarabei_Manhunting",stop=nil,next="Skarabei_Manhunting_Poisonous",T=1},
+	{id="Skarabei_Manhunting_Poisonous",stop=nil,next="Skarabei_Manhunting_Explosive",T=1},
+	{id="Skarabei_Manhunting_Explosive",stop=nil,next="Skarabei_Manhunting_Brute",T=1},
+	{id="Skarabei_Manhunting_Brute",stop=nil,next="PEx_Skarabei",T=1},
+	{id="PEx_Skarabei",stop=nil,next="PEx_Skarabei_Brute",T=2},
+	{id="PEx_Skarabei_Brute",stop=nil,next="Mutated_PEx_Skarabei_Brute",T=3},
+	{id="Mutated_PEx_Skarabei_Brute",stop=nil,next="Heavily_Mutated_PEx_Skarabei_Brute",T=4},
+	{id="Heavily_Mutated_PEx_Skarabei_Brute",stop="Skarabei",next=nil,T=5},
+	{id="Shrieker_Hatchling",stop=nil,next="Shrieker_Manhunting",T=0},
+	{id="Shrieker_Manhunting_Hatchling",stop=nil,next="Shrieker_Manhunting",T=0},
+	{id="Shrieker",stop=nil,next="Shrieker_Manhunting",T=1},
+	{id="Shrieker_Manhunting",stop=nil,next="Shrieker_Manhunting_Mother",T=1},
+	{id="Shrieker_Manhunting_Mother",stop=nil,next="Entropic_Shrieker",T=2},
+	{id="Entropic_Shrieker",stop=nil,next="Plague_Sniper_Shrieker",T=3},
+	{id="Plague_Sniper_Shrieker",stop=nil,next="Sniping_Entropy_Shielded_Shrieker",T=4},
+	{id="Sniping_Entropy_Shielded_Shrieker",stop="Shrieker",next=nil,T=5},
+	{id="Scissorhands_Hatchling_Starving",stop=nil,next="Scissorhands",T=0},
+	{id="Scissorhands_Hatchling_Nesting",stop=nil,next="Scissorhands",T=0},
+	{id="Scissorhands_Nesting",stop=nil,next="Scissorhands",T=0},
+	{id="Scissorhands_Hatchling",stop=nil,next="Scissorhands",T=0},
+	{id="Scissorhands",stop=nil,next="Scissorhands_Brute",T=1},
+	{id="Scissorhands_Brute_Nesting",stop=nil,next="Scissorhands_Brute",T=1},
+	{id="Scissorhands_Brute",stop=nil,next="Brutal_Duelist_Scissorhands",T=2},
+	{id="Brutal_Duelist_Scissorhands",stop=nil,next="Rage_Fueled_Scissorhand_Duelist",T=3},
+	{id="Rage_Fueled_Scissorhand_Duelist",stop=nil,next="Rage_Focused_Scissorhands",T=4},
+	{id="Rage_Focused_Scissorhands",stop="Scissor",next=nil,T=5},
+	{id="dog_T1",stop=nil,next="dog_T3",T=2},
+	{id="dog_T3",stop=nil,next="dog_T4",T=3},
+	{id="dog_T4",stop=nil,next="dog_T5",T=4},
+	{id="dog_T5",stop="dog",next=nil,T=5},
 	-- Gujo evos
-	{id="Gujo",stop=nil,next=nil},
-	{id="GujoT2",stop=nil,next=nil},
-	{id="GujoT3",stop=nil,next=nil},
-	{id="GujoT4",stop=nil,next=nil},
-	{id="GujoT5",stop="Gujo",next=nil},
+	{id="Gujo",stop=nil,next='GujoT2',T=1},
+	{id="GujoT2",stop=nil,next='GujoT3',T=2},
+	{id="GujoT3",stop=nil,next='GujoT4',T=3},
+	{id="GujoT4",stop=nil,next='GujoT5',T=4},
+	{id="GujoT5",stop="Gujo",next=nil,T=5},
 	--light assault robot
-	{id="LightHostileRobot_LVL1",stop=nil,next='LightHostileRobot_LVL2'},
-	{id="LightHostileRobot_LVL2",stop=nil,next='LightHostileRobot_LVL3'},
-	{id="LightHostileRobot_LVL3",stop=nil,next='LightHostileRobot_LVL4'},
-	{id="LightHostileRobot_LVL4",stop=nil,next='LightHostileRobot_LVL5'},
-	{id="LightHostileRobot_LVL5",stop='Light',next=nil},
+	{id="LightHostileRobot_LVL1",stop=nil,next='LightHostileRobot_LVL2',T=1},
+	{id="LightHostileRobot_LVL2",stop=nil,next='LightHostileRobot_LVL3',T=2},
+	{id="LightHostileRobot_LVL3",stop=nil,next='LightHostileRobot_LVL4',T=3},
+	{id="LightHostileRobot_LVL4",stop=nil,next='LightHostileRobot_LVL5',T=4},
+	{id="LightHostileRobot_LVL5",stop='Light',next=nil,T=5},
 	-- heavy assault robot
-	{id="HeavyHostileRobot_LVL1",stop=nil,next='HeavyHostileRobot_LVL2'},
-	{id="HeavyHostileRobot_LVL2",stop=nil,next='HeavyHostileRobot_LVL3'},
-	{id="HeavyHostileRobot_LVL3",stop=nil,next='HeavyHostileRobot_LVL4'},
-	{id="HeavyHostileRobot_LVL4",stop=nil,next='HeavyHostileRobot_LVL5'},
-	{id="HeavyHostileRobot_LVL5",stop='Heavy',next=nil},
+	{id="HeavyHostileRobot_LVL1",stop=nil,next='HeavyHostileRobot_LVL2',T=1},
+	{id="HeavyHostileRobot_LVL2",stop=nil,next='HeavyHostileRobot_LVL3',T=2},
+	{id="HeavyHostileRobot_LVL3",stop=nil,next='HeavyHostileRobot_LVL4',T=3},
+	{id="HeavyHostileRobot_LVL4",stop=nil,next='HeavyHostileRobot_LVL5',T=4},
+	{id="HeavyHostileRobot_LVL5",stop='Heavy',next=nil,T=5},
+	-- Demolition Robot
+	{id="Demo_1",stop=nil,next='Demo_2',T=1},
+	{id="Demo_2",stop=nil,next='Demo_3',T=2},
+	{id="Demo_3",stop=nil,next='Demo_4',T=3},
+	{id="Demo_4",stop=nil,next='Demo_5',T=4},
+	{id="Demo_5",stop='Demo',next=nil,T=5},
 	-- monk robot
-	{id="HostileRobot_Monk_LVL1",stop=nil,next='HostileRobot_Monk_LVL2'},
-	{id="HostileRobot_Monk_LVL2",stop=nil,next='HostileRobot_Monk_LVL3'},
-	{id="HostileRobot_Monk_LVL3",stop=nil,next='HostileRobot_Monk_LVL4'},
-	{id="HostileRobot_Monk_LVL4",stop=nil,next='HostileRobot_Monk_LVL3'},
-	{id="HostileRobot_Monk_LVL5",stop='Monk',next=nil},
+	{id="HostileRobot_Monk_LVL1",stop=nil,next='HostileRobot_Monk_LVL2',T=1},
+	{id="HostileRobot_Monk_LVL2",stop=nil,next='HostileRobot_Monk_LVL3',T=2},
+	{id="HostileRobot_Monk_LVL3",stop=nil,next='HostileRobot_Monk_LVL4',T=3},
+	{id="HostileRobot_Monk_LVL4",stop=nil,next='HostileRobot_Monk_LVL3',T=4},
+	{id="HostileRobot_Monk_LVL5",stop='Monk',next=nil,T=5},
 	--scout robot
-	{id="HostileRobot_Scout_LVL1",stop=nil,next='HostileRobot_Scout_LVL2'},
-	{id="HostileRobot_Scout_LVL2",stop=nil,next='HostileRobot_Scout_LVL3'},
-	{id="HostileRobot_Scout_LVL3",stop=nil,next='HostileRobot_Scout_LVL4'},
-	{id="HostileRobot_Scout_LVL4",stop=nil,next='HostileRobot_Scout_LVL5'},
-	{id="HostileRobot_Scout_LVL5",stop='Scout',next=nil},
+	{id="HostileRobot_Scout_LVL1",stop=nil,next='HostileRobot_Scout_LVL2',T=1},
+	{id="HostileRobot_Scout_LVL2",stop=nil,next='HostileRobot_Scout_LVL3',T=2},
+	{id="HostileRobot_Scout_LVL3",stop=nil,next='HostileRobot_Scout_LVL4',T=3},
+	{id="HostileRobot_Scout_LVL4",stop=nil,next='HostileRobot_Scout_LVL5',T=4},
+	{id="HostileRobot_Scout_LVL5",stop='Scout',next=nil,T=5},
 	-- sup art robot
-	{id="HostileCrawler_LaserGun",stop=nil,next='Crawl_APC_LVL1'},
-	{id="HostileCrawler_MachineGun",stop=nil,next='Crawl_APC_LVL1'},
-	{id="Crawl_APC_LVL1",stop=nil,next='Crawl_APC_LVL2'},
-	{id="Crawl_APC_LVL2",stop=nil,next='Crawl_APC_LVL3'},
-	{id="Crawl_APC_LVL3",stop='Crawl_APC',next=nil},
+	{id="HostileCrawler_LaserGun",stop=nil,next='Crawl_APC_LVL1',T=2},
+	{id="HostileCrawler_MachineGun",stop=nil,next='Crawl_APC_LVL1',T=2},
+	{id="Crawl_APC_LVL1",stop=nil,next='Crawl_APC_LVL2',T=3},
+	{id="Crawl_APC_LVL2",stop=nil,next='Crawl_APC_LVL3',T=4},
+	{id="Crawl_APC_LVL3",stop='Crawl_APC',next=nil,T=5},
 	-- art art robot
-	{id="Crawl_Cannon_T1",stop=nil,next='Crawl_Cannon_T2'},
-	{id="Crawl_Cannon_T2",stop=nil,next='Crawl_Cannon_T3'},
-	{id="Crawl_Cannon_T3",stop='Cannon',next=nil},
+	{id="Crawl_Cannon_T0",stop=nil,next='Crawl_Cannon_T1',T=2},
+	{id="Crawl_Cannon_T1",stop=nil,next='Crawl_Cannon_T2',T=3},
+	{id="Crawl_Cannon_T2",stop=nil,next='Crawl_Cannon_T3',T=4},
+	{id="Crawl_Cannon_T3",stop='Cannon',next=nil,T=5},
 	-- QuadCopters
-	{id="HostileCombatQuadcopter_LVL1",stop=nil,next='HostileCombatQuadcopter_LVL2'},
-	{id="HostileCombatQuadcopter_LVL2",stop=nil,next='HostileCombatQuadcopter_LVL3'},
-	{id="HostileCombatQuadcopter_LVL3",stop=nil,next='HostileCombatQuadcopter_LVL4'},
-	{id="HostileCombatQuadcopter_LVL4",stop=nil,next='HostileCombatQuadcopter_LVL5'},
-	{id="HostileCombatQuadcopter_LVL5",stop='Quad',next=nil},
+	{id="HostileCombatQuadcopter_LVL1",stop=nil,next='HostileCombatQuadcopter_LVL2',T=1},
+	{id="HostileCombatQuadcopter_LVL2",stop=nil,next='HostileCombatQuadcopter_LVL3',T=2},
+	{id="HostileCombatQuadcopter_LVL3",stop=nil,next='HostileCombatQuadcopter_LVL4',T=3},
+	{id="HostileCombatQuadcopter_LVL4",stop=nil,next='HostileCombatQuadcopter_LVL5',T=4},
+	{id="HostileCombatQuadcopter_LVL5",stop='Quad',next=nil,T=5},
 	-- Camel
-	{id="Camel",stop=nil,next="Camel_T2"},
-	{id="Camel_T2",stop=nil,next="Camel_T3"},
-	{id="Camel_T3",stop=nil,next="Camel_T4"},
-	{id="Camel_T4",stop=nil,next="Camel_T5"},
-	{id="Camel_T5",stop="Camel",next=nil},
+	{id="Camel",stop=nil,next="Camel_T2",T=1},
+	{id="Camel_T2",stop=nil,next="Camel_T3",T=2},
+	{id="Camel_T3",stop=nil,next="Camel_T4",T=3},
+	{id="Camel_T4",stop=nil,next="Camel_T5",T=4},
+	{id="Camel_T5",stop="Camel",next=nil,T=5},
 	-- Shogu
-	{id="Shogu",stop=nil,next="Shogu_T2"},
-	{id="Shogu_T2",stop=nil,next="Shogu_T3"},
-	{id="Shogu_T3",stop=nil,next="Shogu_T4"},
-	{id="Shogu_T4",stop=nil,next="Shogu_T5"},
-	{id="Shogu_T5",stop="Shogu",next=nil},
+	{id="Shogu",stop=nil,next="Shogu_T2",T=1},
+	{id="Shogu_T2",stop=nil,next="Shogu_T3",T=2},
+	{id="Shogu_T3",stop=nil,next="Shogu_T4",T=3},
+	{id="Shogu_T4",stop=nil,next="Shogu_T5",T=4},
+	{id="Shogu_T5",stop="Shogu",next=nil,T=5},
 	-- Noth
-	{id="Noth",stop=nil,next="Noth_T2"},
-	{id="Noth_T2",stop=nil,next="Noth_T2"},
-	{id="Noth_T3",stop=nil,next="Noth_T3"},
-	{id="Noth_T4",stop=nil,next="Noth_T4"},
-	{id="Noth_T5",stop="Noth",next=nil},
+	{id="Noth",stop=nil,next="Noth_T2",T=1},
+	{id="Noth_T2",stop=nil,next="Noth_T2",T=2},
+	{id="Noth_T3",stop=nil,next="Noth_T3",T=3},
+	{id="Noth_T4",stop=nil,next="Noth_T4",T=4},
+	{id="Noth_T5",stop="Noth",next=nil,T=5},
 	-- Draka
-	{id="Draka",stop=nil,next="Draka_T2"},
-	{id="Draka_T2",stop=nil,next="Draka_T3"},
-	{id="Draka_T3",stop=nil,next="Draka_T4"},
-	{id="Draka_T4",stop=nil,next="Draka_T5"},
-	{id="Draka_T5",stop="Draka",next=nil},
+	{id="Draka",stop=nil,next="Draka_T2",T=1},
+	{id="Draka_T2",stop=nil,next="Draka_T3",T=2},
+	{id="Draka_T3",stop=nil,next="Draka_T4",T=3},
+	{id="Draka_T4",stop=nil,next="Draka_T5",T=4},
+	{id="Draka_T5",stop="Draka",next=nil,T=5},
 	-- Ulfen
-	{id="Ulfen",stop=nil,next="Ulfen_T2"},
-	{id="Ulfen_T2",stop=nil,next="Ulfen_T3"},
-	{id="Ulfen_T3",stop=nil,next="Ulfen_T4"},
-	{id="Ulfen_T4",stop=nil,next="Ulfen_T5"},
-	{id="Ulfen_T5",stop="Ulfen",next=nil},
+	{id="Ulfen",stop=nil,next="Ulfen_T2",T=1},
+	{id="Ulfen_T2",stop=nil,next="Ulfen_T3",T=2},
+	{id="Ulfen_T3",stop=nil,next="Ulfen_T4",T=3},
+	{id="Ulfen_T4",stop=nil,next="Ulfen_T5",T=4},
+	{id="Ulfen_T5",stop="Ulfen",next=nil,T=5},
 }
 
 local organs = {
@@ -177,6 +192,12 @@ local function get_stop(class_name)
 				--print("Found a stop for ",v['stop'])
 				return v['stop']
 			end
+		end
+	end
+	local dogs = {'Boxer','GreatDane','Weormaraner'}
+	for _,dog in ipairs(dogs) do
+		if dog == class_name then
+			return "dog"
 		end
 	end
 	return nil
@@ -242,7 +263,7 @@ function new_preg_rate(species_class,rate)
 	local to_return = fin_mod * base_rate / 100
 	--print("FInal pregnancy rate: ",to_return,'%')
 	return to_return
-end 
+end
 
 local function are_organs_present(butcher_resources)
 	for _,v in ipairs(butcher_resources) do
@@ -351,6 +372,8 @@ function ilu_set_map_vars()
 		{name="ILU_combat_type",init="complex"},
 		{name="ILU_flipped",init=false},
 		{name="ILU_Tame_Count",init={}},
+		{name="ILU_Tier_Max",init=6},
+		{name="ILU_Logging",init=false}
 	}
 	--print("Checking what ILU vars I need to add!")
 	for _, var in ipairs(all_vars) do
@@ -371,6 +394,7 @@ local function ApplyAnimalSet(id)
 	local options = CurrentModOptions
 	--print(options.O_simple_combat)
 	_G.ILU_max = options.O_ILU_max
+	_G.ILU_Tier_Max = options.O_ILU_max_tier
 	if options.O_simple_combat == true and _G.ILU_combat_type == "complex" then
 		_G.ILU_combat_type = "simple"
 		ILU_update_armor_hcs()
@@ -436,15 +460,20 @@ end
 
 local function getNext(name,og_name)
 	for _,v in ipairs(base_table) do
-		--[[if v['stop'] == og_name then]]
 		if v['stop'] then
 			if string.match(og_name, v['stop']) then
-				--print("Found a stop for ",v['stop'])
+				if ILU_Logging then print("Found a stop for ",v['stop']) end
 				return nil
 			end
 		elseif v['id'] == name then
-			--print('Name:',v['id'],' next:',v['next'],' Stop:',v['stop'])
-			return v['next']
+			if ILU_Logging then print("Found the curent entry!") end
+			if _G.ILU_Tier_Max == v['T'] then --if current names tier is already the max tier allowed
+				if ILU_Logging then print("Cannot upgrade anymore because of Max Tier mod option!") end
+				return nil
+			else
+				if ILU_Logging then print('Going from:',v['id'],' To:',v['next'],' ',v['T']) end
+				return v['next']
+			end
 		end
 	end
 	return nil

@@ -4,6 +4,7 @@ DefineClass.Rage_Focused_Scissorhands = {
 	__generated_by_class = "ModItemUnitAnimalCompositeDef",
 
 
+	comment = "T5",
 	object_class = "Scissorhands",
 	EventProgressValue = 1755,
 	SpawnDefWeight = 30,

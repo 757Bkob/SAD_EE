@@ -19,7 +19,6 @@ DefineClass.Shogu_T5 = {
 	},
 	EventProgressValue = 700,
 	CombatGroup = "Shogu",
-	CombatHostile = true,
 	HitNegationChance = {
 		HitNegationChance_energy = -45,
 		HitNegationChance_gas = 70,

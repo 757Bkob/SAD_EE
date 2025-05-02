@@ -4,6 +4,7 @@ DefineClass.Spellsword_Tecatli = {
 	__generated_by_class = "ModItemUnitAnimalCompositeDef",
 
 
+	comment = "T5",
 	object_class = "TecatliBase",
 	BypassTrapsChance = 90,
 	composite_part_target = "Spellsword_Tecatli",

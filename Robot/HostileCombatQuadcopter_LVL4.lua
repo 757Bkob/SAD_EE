@@ -16,7 +16,7 @@ DefineClass.HostileCombatQuadcopter_LVL4 = {
 	DisplayNameShort = T(283426405849, --[[ModItemRobotCompositeDef HostileCombatQuadcopter_LVL4 DisplayNameShort]] "DF4"),
 	DisplayNamePl = T(375497859599, --[[ModItemRobotCompositeDef HostileCombatQuadcopter_LVL4 DisplayNamePl]] "F Series Drones"),
 	Description = T(583067491707, --[[ModItemRobotCompositeDef HostileCombatQuadcopter_LVL4 Description]] "No major changes where announced for the F series. But it is considered a generally solid upgrade. Slightly faster to offset the fuel tank weight, better targeting software, and durable enough to take a single flak blast. Reception has been relatively positive. Has <color TechSubtitleBlue>15% Piercing Damage</color> <em>Reduction</em>."),
-	SalvageLootTable = "HostileQuadcopters",
+	SalvageLootTable = "ILU_Robot_Misc",
 	Skills = {
 		Combat = 5,
 	},

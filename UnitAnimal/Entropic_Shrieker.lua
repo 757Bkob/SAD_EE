@@ -4,6 +4,7 @@ DefineClass.Entropic_Shrieker = {
 	__generated_by_class = "ModItemUnitAnimalCompositeDef",
 
 
+	comment = "T3",
 	object_class = "Shrieker_Manhunting",
 	EventProgressValue = 750,
 	SpawnDefWeight = 30,

@@ -17,7 +17,6 @@ DefineClass.Noth_T4 = {
 	EventProgressValue = 600,
 	SightRange = 10000,
 	CombatGroup = "Noths",
-	CombatHostile = true,
 	HitNegationChance = {
 		HitNegationChance_energy = 40,
 		HitNegationChance_pacify = 60,

@@ -4,6 +4,7 @@ DefineClass.Hulk_Juno = {
 	__generated_by_class = "ModItemUnitAnimalCompositeDef",
 
 
+	comment = "T4",
 	object_class = "Juno",
 	EventProgressValue = 1100,
 	SpawnDefWeight = 30,

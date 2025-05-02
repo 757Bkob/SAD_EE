@@ -25,7 +25,6 @@ DefineClass.Draka_T3 = {
 	PainMask = "PainMask",
 	EventProgressValue = 450,
 	CombatGroup = "Drakkas",
-	CombatHostile = true,
 	HitNegationChance = {
 		HitNegationChance_blunt = 30,
 		HitNegationChance_energy = 30,
