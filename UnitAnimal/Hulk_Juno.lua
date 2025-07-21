@@ -60,6 +60,7 @@ DefineClass.Hulk_Juno = {
 	DailyPregnancyChance = 75,
 	PregnancyDuration = 2880000,
 	GrowDuration = 2880000,
+	NewbornClass = "Too_Angry_Too_Die_Juno",
 	UnitPerkFrenzy = true,
 	FrenzyHealthPct = 99,
 	FrenzyChance = 200,

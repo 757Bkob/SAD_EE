@@ -21,15 +21,18 @@ PlaceObj('ModItemOptionToggle', {
 PlaceObj('ModItemConstDef', {
 	group = "Gameplay",
 	id = "MaxAttackDropshipsCount",
+	save_in = "Mod/rtw6tLg",
 	value = 10,
 }),
 PlaceObj('ModItemConstDef', {
 	group = "Gameplay",
 	id = "MaxInvadersPerDropship",
+	save_in = "Mod/rtw6tLg",
 	value = 51,
 }),
 PlaceObj('ModItemConstDef', {
 	id = "InvaderRobotLoseWeaponChance",
+	save_in = "Mod/rtw6tLg",
 	scale = "%",
 	value = 15,
 }),
@@ -103,6 +106,7 @@ PlaceObj('ModItemBuildingCompositeDef', {
 	repair_cost = PlaceObj('ConstructionCost', {
 		Metal = 50000,
 	}),
+	save_in = "Mod/rtw6tLg",
 	soil_form = "circle",
 	terrain_change = "soil",
 }),
@@ -122,6 +126,7 @@ PlaceObj('ModItemFolder', {
 		group = "Field",
 		id = "field_dog_T5",
 		money_value = 50000000,
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 	}),
 	PlaceObj('ModItemTech', {
@@ -136,6 +141,7 @@ PlaceObj('ModItemFolder', {
 		group = "Field",
 		id = "field_dog_T3",
 		money_value = 50000000,
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 	}),
 	PlaceObj('ModItemTech', {
@@ -150,6 +156,7 @@ PlaceObj('ModItemFolder', {
 		group = "Field",
 		id = "field_dog_T1",
 		money_value = 50000000,
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 	}),
 	PlaceObj('ModItemTech', {
@@ -164,6 +171,7 @@ PlaceObj('ModItemFolder', {
 		group = "Field",
 		id = "FieldSkarabei",
 		money_value = 50000000,
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 		PlaceObj('RemoveLockedState', {
 			Class = "BuildingCompositeDef",
@@ -184,6 +192,7 @@ PlaceObj('ModItemFolder', {
 		group = "Field",
 		id = "FieldGlutch",
 		money_value = 50000000,
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 		PlaceObj('RemoveLockedState', {
 			Class = "BuildingCompositeDef",
@@ -204,6 +213,7 @@ PlaceObj('ModItemFolder', {
 		group = "Field",
 		id = "FieldScissorhands",
 		money_value = 50000000,
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 		PlaceObj('RemoveLockedState', {
 			Class = "BuildingCompositeDef",
@@ -224,6 +234,7 @@ PlaceObj('ModItemFolder', {
 		group = "Field",
 		id = "Field_Skarab_T1",
 		money_value = 50000000,
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 	}),
 	PlaceObj('ModItemTech', {
@@ -238,6 +249,7 @@ PlaceObj('ModItemFolder', {
 		group = "Field",
 		id = "Field_Skarab_T3",
 		money_value = 50000000,
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 	}),
 	PlaceObj('ModItemTech', {
@@ -252,6 +264,7 @@ PlaceObj('ModItemFolder', {
 		group = "Field",
 		id = "Field_Skarab_T4",
 		money_value = 50000000,
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 	}),
 	PlaceObj('ModItemTech', {
@@ -266,6 +279,7 @@ PlaceObj('ModItemFolder', {
 		group = "Field",
 		id = "Field_Glutch_T3",
 		money_value = 50000000,
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 	}),
 	PlaceObj('ModItemTech', {
@@ -280,6 +294,7 @@ PlaceObj('ModItemFolder', {
 		group = "Field",
 		id = "Field_Glutch_T4",
 		money_value = 50000000,
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 	}),
 	PlaceObj('ModItemTech', {
@@ -294,6 +309,7 @@ PlaceObj('ModItemFolder', {
 		group = "Field",
 		id = "Field_Dragonfly_T2",
 		money_value = 50000000,
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 	}),
 	PlaceObj('ModItemTech', {
@@ -308,6 +324,7 @@ PlaceObj('ModItemFolder', {
 		group = "Field",
 		id = "Field_Dragonfly_T4",
 		money_value = 50000000,
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 	}),
 	PlaceObj('ModItemTech', {
@@ -327,6 +344,7 @@ PlaceObj('ModItemFolder', {
 				Event = "ResourceUnlocked",
 			}),
 		},
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 	}),
 	PlaceObj('ModItemTech', {
@@ -341,6 +359,7 @@ PlaceObj('ModItemFolder', {
 		group = "Field",
 		id = "Field_Tecatli_T2",
 		money_value = 50000000,
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 	}),
 	PlaceObj('ModItemTech', {
@@ -355,6 +374,7 @@ PlaceObj('ModItemFolder', {
 		group = "Field",
 		id = "Field_Scissorhands_T2",
 		money_value = 50000000,
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 	}),
 	PlaceObj('ModItemTech', {
@@ -369,6 +389,7 @@ PlaceObj('ModItemFolder', {
 		group = "Field",
 		id = "Field_Scissorhands_T4",
 		money_value = 50000000,
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 	}),
 	PlaceObj('ModItemTech', {
@@ -383,6 +404,7 @@ PlaceObj('ModItemFolder', {
 		group = "Field",
 		id = "Field_Juno_T4",
 		money_value = 50000000,
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 	}),
 	PlaceObj('ModItemTech', {
@@ -397,6 +419,7 @@ PlaceObj('ModItemFolder', {
 		group = "Field",
 		id = "Field_Juno_T2",
 		money_value = 50000000,
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 	}),
 	PlaceObj('ModItemTech', {
@@ -411,11 +434,12 @@ PlaceObj('ModItemFolder', {
 		group = "Field",
 		id = "Field_Shrieker_T2",
 		money_value = 50000000,
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 	}),
 	PlaceObj('ModItemTech', {
 		Activity = "FieldResearch",
-		Description = T(235057115852, --[[ModItemTech Field_Shrieker_T4 Description]] "Shriekers have always been known to have hard to penetrate exoskeletons.... \nBut this truly eclipses any other creation we have seen. \n\nBlunt force explosions, armor piercing bullets, even neurotoxin gas attacks are inneffective. \n\nThe only thing we have to truly fight these creatures is radiation or energy signals. \nIt is absolutely critical we build and maintain energy weapons, or else these have the potential to single-handidly destroy our small base.\n\nEven worse, this is the third unique instance of self-healing based on the innate toxicity of checmicals produced by a species.\nJuno's, Glutches, and now Shriekers are now even less susceptible from indirect damage from wounds.\n\nThis has to be the Apex Predator of this world, but if what some of us are to believe.... these are intergalactic colonizers.\nHopefully they do not evolve to have more intelligence.....\n\nWe must ensure that we have ample <color TechSubtitleBlue>Piercing</color> and <color TextButton>Blunt</color> resistance to combat these."),
+		Description = T(235057115852, --[[ModItemTech Field_Shrieker_T4 Description]] "Shriekers have always been known to have hard to penetrate exoskeletons.... \nBut this truly eclipses any other creation we have seen. \n\nBlunt force explosions, armor piercing bullets, even neurotoxin gas attacks are inneffective. \n\nThe only thing we have to truly fight these creatures is radiation or energy signals. \nIt is absolutely critical we build and maintain energy weapons, or else these have the potential to single-handidly destroy our small base.\n\nEven worse, this is the third unique instance of self-healing based on the innate toxicity of chemicals produced by a species.\nJuno's, Glutches, and now Shriekers are now even less susceptible from indirect damage from wounds.\n\nThis has to be the Apex Predator of this world, but if what some of us are to believe.... these are intergalactic colonizers.\nHopefully they do not evolve to have more intelligence.....\n\nWe must ensure that we have ample <color TechSubtitleBlue>Piercing</color> and <color TextButton>Blunt</color> resistance to combat these."),
 		DisplayName = T(941477497395, --[[ModItemTech Field_Shrieker_T4 DisplayName]] "Spike-tailed insect"),
 		DisplayNamePl = T(653962007310, --[[ModItemTech Field_Shrieker_T4 DisplayNamePl]] "Spike-tailed insects"),
 		FieldResearchCategory = "Fauna",
@@ -425,6 +449,7 @@ PlaceObj('ModItemFolder', {
 		group = "Field",
 		id = "Field_Shrieker_T4",
 		money_value = 50000000,
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 	}),
 	PlaceObj('ModItemTech', {
@@ -439,6 +464,7 @@ PlaceObj('ModItemFolder', {
 		group = "Field",
 		id = "FieldHummingfly",
 		money_value = 50000000,
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 	}),
 	PlaceObj('ModItemTech', {
@@ -453,6 +479,7 @@ PlaceObj('ModItemFolder', {
 		group = "Field",
 		id = "FieldGujo",
 		money_value = 50000000,
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 		PlaceObj('RemoveLockedState', {
 			Class = "BuildingCompositeDef",
@@ -473,6 +500,7 @@ PlaceObj('ModItemFolder', {
 		group = "Field",
 		id = "FieldGujoT2",
 		money_value = 50000000,
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 	}),
 	PlaceObj('ModItemTech', {
@@ -487,6 +515,7 @@ PlaceObj('ModItemFolder', {
 		group = "Field",
 		id = "FieldGujoT4",
 		money_value = 50000000,
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 	}),
 	PlaceObj('ModItemTech', {
@@ -506,6 +535,7 @@ PlaceObj('ModItemFolder', {
 		group = "Field",
 		id = "FieldUlfenT3",
 		money_value = 50000000,
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 	}),
 	PlaceObj('ModItemTech', {
@@ -525,6 +555,7 @@ PlaceObj('ModItemFolder', {
 		group = "Field",
 		id = "FieldUlfenT5",
 		money_value = 50000000,
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 	}),
 	PlaceObj('ModItemTech', {
@@ -539,6 +570,7 @@ PlaceObj('ModItemFolder', {
 		group = "Field",
 		id = "FieldDraka_T3",
 		money_value = 50000000,
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 	}),
 	PlaceObj('ModItemTech', {
@@ -553,6 +585,7 @@ PlaceObj('ModItemFolder', {
 		group = "Field",
 		id = "FieldDraka_T5",
 		money_value = 50000000,
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 	}),
 	PlaceObj('ModItemTech', {
@@ -572,6 +605,7 @@ PlaceObj('ModItemFolder', {
 		group = "Field",
 		id = "FieldNothT3",
 		money_value = 50000000,
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 	}),
 	PlaceObj('ModItemTech', {
@@ -591,6 +625,7 @@ PlaceObj('ModItemFolder', {
 		group = "Field",
 		id = "FieldNothT5",
 		money_value = 50000000,
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 	}),
 	PlaceObj('ModItemTech', {
@@ -610,6 +645,7 @@ PlaceObj('ModItemFolder', {
 		group = "Field",
 		id = "FieldShoguT3",
 		money_value = 50000000,
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 	}),
 	PlaceObj('ModItemTech', {
@@ -629,6 +665,7 @@ PlaceObj('ModItemFolder', {
 		group = "Field",
 		id = "FieldShoguT5",
 		money_value = 50000000,
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 	}),
 	PlaceObj('ModItemTech', {
@@ -648,6 +685,7 @@ PlaceObj('ModItemFolder', {
 		group = "Field",
 		id = "FieldCamelT3",
 		money_value = 50000000,
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 	}),
 	PlaceObj('ModItemTech', {
@@ -667,6 +705,7 @@ PlaceObj('ModItemFolder', {
 		group = "Field",
 		id = "FieldCamelT5",
 		money_value = 50000000,
+		save_in = "Mod/rtw6tLg",
 		tradable = false,
 	}),
 	}),
@@ -677,82 +716,102 @@ PlaceObj('ModItemFolder', {
 	PlaceObj('ModItemUnitTags', {
 		SortKey = 10,
 		id = "assault_T1",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemUnitTags', {
 		SortKey = 11,
 		id = "assault_T2",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemUnitTags', {
 		SortKey = 11,
 		id = "Monk_T1",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemUnitTags', {
 		SortKey = 12,
 		id = "Monk_T2",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemUnitTags', {
 		SortKey = 12,
 		id = "Monk_T3",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemUnitTags', {
 		SortKey = 13,
 		id = "Monk_Special",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemUnitTags', {
 		SortKey = 14,
 		id = "Heavy_Slow_T1",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemUnitTags', {
 		SortKey = 15,
 		id = "Heavy_Slow_T2",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemUnitTags', {
 		SortKey = 16,
 		id = "Heavy_Shred_T1",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemUnitTags', {
 		SortKey = 17,
 		id = "Heavy_Shred_T2",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemUnitTags', {
 		SortKey = 18,
 		id = "Cyber_Eye",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemUnitTags', {
 		SortKey = 19,
 		id = "Scout_T1",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemUnitTags', {
 		SortKey = 20,
 		id = "Scout_T2",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemUnitTags', {
 		SortKey = 20,
 		id = "Heavy_Malus",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemUnitTags', {
 		SortKey = 20,
 		id = "APC_1",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemUnitTags', {
 		SortKey = 20,
 		id = "APC_2",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemUnitTags', {
 		SortKey = 20,
 		id = "APC_3",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemUnitTags', {
 		SortKey = 20,
 		id = "Demo_T1",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemUnitTags', {
 		SortKey = 20,
 		id = "Demo_T3",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemUnitTags', {
 		SortKey = 20,
 		id = "Demo_T5",
+		save_in = "Mod/rtw6tLg",
 	}),
 	}),
 PlaceObj('ModItemFolder', {
@@ -890,6 +949,7 @@ PlaceObj('ModItemFolder', {
 		money_value = 7200000,
 		progress = 30000,
 		quality = 50,
+		save_in = "Mod/rtw6tLg",
 		stack_entity = "ResourceBulk_Hat",
 		stack_size = 1000,
 		use_unfinished_item = "UnfinishedApparel",
@@ -1060,6 +1120,7 @@ PlaceObj('ModItemFolder', {
 		money_value = 15250000,
 		progress = 30000,
 		quality = 50,
+		save_in = "Mod/rtw6tLg",
 		stack_entity = "ResourceBulk_Apparel",
 		stack_size = 1000,
 		use_unfinished_item = "UnfinishedApparel",
@@ -1194,6 +1255,7 @@ PlaceObj('ModItemFolder', {
 		money_value = 10500000,
 		progress = 30000,
 		quality = 50,
+		save_in = "Mod/rtw6tLg",
 		stack_entity = "ResourceBulk_Apparel",
 		stack_size = 1000,
 		use_unfinished_item = "UnfinishedApparel",
@@ -1327,6 +1389,7 @@ PlaceObj('ModItemFolder', {
 		money_value = 8800000,
 		progress = 30000,
 		quality = 50,
+		save_in = "Mod/rtw6tLg",
 		stack_entity = "ResourceBulk_Shoes",
 		stack_size = 1000,
 		use_unfinished_item = "UnfinishedApparel",
@@ -1461,6 +1524,7 @@ PlaceObj('ModItemFolder', {
 		money_value = 7200000,
 		progress = 30000,
 		quality = 50,
+		save_in = "Mod/rtw6tLg",
 		stack_entity = "ResourceBulk_Hat",
 		stack_size = 1000,
 		use_unfinished_item = "UnfinishedApparel",
@@ -1631,6 +1695,7 @@ PlaceObj('ModItemFolder', {
 		money_value = 15250000,
 		progress = 30000,
 		quality = 50,
+		save_in = "Mod/rtw6tLg",
 		stack_entity = "ResourceBulk_Apparel",
 		stack_size = 1000,
 		use_unfinished_item = "UnfinishedApparel",
@@ -1765,6 +1830,7 @@ PlaceObj('ModItemFolder', {
 		money_value = 10500000,
 		progress = 30000,
 		quality = 50,
+		save_in = "Mod/rtw6tLg",
 		stack_entity = "ResourceBulk_Apparel",
 		stack_size = 1000,
 		use_unfinished_item = "UnfinishedApparel",
@@ -1898,6 +1964,7 @@ PlaceObj('ModItemFolder', {
 		money_value = 8800000,
 		progress = 30000,
 		quality = 50,
+		save_in = "Mod/rtw6tLg",
 		stack_entity = "ResourceBulk_Shoes",
 		stack_size = 1000,
 		use_unfinished_item = "UnfinishedApparel",
@@ -2037,6 +2104,7 @@ PlaceObj('ModItemFolder', {
 		money_value = 8500000,
 		progress = 40000,
 		quality = 50,
+		save_in = "Mod/rtw6tLg",
 		stack_entity = "ResourceBulk_Hat",
 		stack_size = 1000,
 		use_unfinished_item = "UnfinishedApparel",
@@ -2211,6 +2279,7 @@ PlaceObj('ModItemFolder', {
 		money_value = 24000000,
 		progress = 40000,
 		quality = 50,
+		save_in = "Mod/rtw6tLg",
 		stack_entity = "ResourceBulk_Apparel",
 		stack_size = 1000,
 		use_unfinished_item = "UnfinishedApparel",
@@ -2349,6 +2418,7 @@ PlaceObj('ModItemFolder', {
 		money_value = 16250000,
 		progress = 40000,
 		quality = 50,
+		save_in = "Mod/rtw6tLg",
 		stack_entity = "ResourceBulk_Apparel",
 		stack_size = 1000,
 		use_unfinished_item = "UnfinishedApparel",
@@ -2486,6 +2556,7 @@ PlaceObj('ModItemFolder', {
 		money_value = 13250000,
 		progress = 40000,
 		quality = 50,
+		save_in = "Mod/rtw6tLg",
 		stack_entity = "ResourceBulk_Shoes",
 		stack_size = 1000,
 		use_unfinished_item = "UnfinishedApparel",
@@ -2621,6 +2692,7 @@ PlaceObj('ModItemFolder', {
 		money_value = 23000000,
 		progress = 50000,
 		quality = 50,
+		save_in = "Mod/rtw6tLg",
 		stack_entity = "ResourceBulk_Hat",
 		stack_size = 1000,
 		use_unfinished_item = "UnfinishedApparel",
@@ -2791,6 +2863,7 @@ PlaceObj('ModItemFolder', {
 		money_value = 50500000,
 		progress = 50000,
 		quality = 50,
+		save_in = "Mod/rtw6tLg",
 		stack_entity = "ResourceBulk_Apparel",
 		stack_size = 1000,
 		use_unfinished_item = "UnfinishedApparel",
@@ -2925,6 +2998,7 @@ PlaceObj('ModItemFolder', {
 		money_value = 37000000,
 		progress = 50000,
 		quality = 50,
+		save_in = "Mod/rtw6tLg",
 		stack_entity = "ResourceBulk_Apparel",
 		stack_size = 1000,
 		use_unfinished_item = "UnfinishedApparel",
@@ -3058,6 +3132,7 @@ PlaceObj('ModItemFolder', {
 		money_value = 27500000,
 		progress = 50000,
 		quality = 50,
+		save_in = "Mod/rtw6tLg",
 		stack_entity = "ResourceBulk_Shoes",
 		stack_size = 1000,
 		use_unfinished_item = "UnfinishedApparel",
@@ -3193,6 +3268,7 @@ PlaceObj('ModItemFolder', {
 		money_value = 23000000,
 		progress = 50000,
 		quality = 50,
+		save_in = "Mod/rtw6tLg",
 		stack_entity = "ResourceBulk_Hat",
 		stack_size = 1000,
 		use_unfinished_item = "UnfinishedApparel",
@@ -3363,6 +3439,7 @@ PlaceObj('ModItemFolder', {
 		money_value = 50500000,
 		progress = 50000,
 		quality = 50,
+		save_in = "Mod/rtw6tLg",
 		stack_entity = "ResourceBulk_Apparel",
 		stack_size = 1000,
 		use_unfinished_item = "UnfinishedApparel",
@@ -3497,6 +3574,7 @@ PlaceObj('ModItemFolder', {
 		money_value = 37000000,
 		progress = 50000,
 		quality = 50,
+		save_in = "Mod/rtw6tLg",
 		stack_entity = "ResourceBulk_Apparel",
 		stack_size = 1000,
 		use_unfinished_item = "UnfinishedApparel",
@@ -3630,6 +3708,7 @@ PlaceObj('ModItemFolder', {
 		money_value = 27500000,
 		progress = 50000,
 		quality = 50,
+		save_in = "Mod/rtw6tLg",
 		stack_entity = "ResourceBulk_Shoes",
 		stack_size = 1000,
 		use_unfinished_item = "UnfinishedApparel",
@@ -3649,6 +3728,7 @@ PlaceObj('ModItemFolder', {
 		StackLimit = 8,
 		group = "Animals",
 		id = "Glutch_Bad_Trip",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemHappinessFactor', {
 		DisplayName = T(926126682575, --[[ModItemHappinessFactor AnimalWasBorn DisplayName]] "Domesticated"),
@@ -3683,6 +3763,7 @@ PlaceObj('ModItemFolder', {
 				param_bindings = false,
 			}),
 		},
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemHappinessFactor', {
 		DisplayName = T(268253262149, --[[ModItemHappinessFactor AnimalWasTamed DisplayName]] "Was tamed"),
@@ -3702,6 +3783,7 @@ PlaceObj('ModItemFolder', {
 				param_bindings = false,
 			}),
 		},
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemFolder', {
 		'name', "Equipment HCs",
@@ -3757,6 +3839,7 @@ PlaceObj('ModItemFolder', {
 			comment = "Simple step 4%, apply -1/+2/+4/+4 to align",
 			group = "ILU_Equip",
 			id = "armor_leather_simple",
+			save_in = "Mod/rtw6tLg",
 		}),
 		PlaceObj('ModItemHealthCondition', {
 			AffectableBodyParts = {
@@ -3807,6 +3890,7 @@ PlaceObj('ModItemFolder', {
 			comment = "Complex step 9/6/12/4, apply 4/4/12/4 to align",
 			group = "ILU_Equip",
 			id = "armor_leather_complex",
+			save_in = "Mod/rtw6tLg",
 		}),
 		PlaceObj('ModItemHealthCondition', {
 			AffectableBodyParts = {
@@ -3857,6 +3941,7 @@ PlaceObj('ModItemFolder', {
 			comment = "Simple steps 6%, apply 1/4/6/6 to align",
 			group = "ILU_Equip",
 			id = "armor_vleather_simple",
+			save_in = "Mod/rtw6tLg",
 		}),
 		PlaceObj('ModItemHealthCondition', {
 			AffectableBodyParts = {
@@ -3907,6 +3992,7 @@ PlaceObj('ModItemFolder', {
 			comment = "Complex vleather steps 11/8/14/5, adding 6/6/14/5 to align",
 			group = "ILU_Equip",
 			id = "armor_vleather_complex",
+			save_in = "Mod/rtw6tLg",
 		}),
 		PlaceObj('ModItemHealthCondition', {
 			AffectableBodyParts = {
@@ -3950,6 +4036,7 @@ PlaceObj('ModItemFolder', {
 			comment = "Simple steps 10%, apply 0/5/10/10 to align",
 			group = "ILU_Equip",
 			id = "armor_synth_simple",
+			save_in = "Mod/rtw6tLg",
 		}),
 		PlaceObj('ModItemHealthCondition', {
 			AffectableBodyParts = {
@@ -4002,6 +4089,7 @@ PlaceObj('ModItemFolder', {
 			comment = "Complex step 8/14/11/5, apply -2/9/11/5 to align",
 			group = "ILU_Equip",
 			id = "armor_synth_complex",
+			save_in = "Mod/rtw6tLg",
 		}),
 		PlaceObj('ModItemHealthCondition', {
 			AffectableBodyParts = {
@@ -4052,6 +4140,7 @@ PlaceObj('ModItemFolder', {
 			comment = "Simple step 13%, adding -2/3/13/13 to align",
 			group = "ILU_Equip",
 			id = "armor_badCarbon_simple",
+			save_in = "Mod/rtw6tLg",
 		}),
 		PlaceObj('ModItemHealthCondition', {
 			AffectableBodyParts = {
@@ -4102,6 +4191,7 @@ PlaceObj('ModItemFolder', {
 			comment = "Complex step 14/11/8/5, apply -1/+1/8/5 to align",
 			group = "ILU_Equip",
 			id = "armor_badCarbon_complex",
+			save_in = "Mod/rtw6tLg",
 		}),
 		PlaceObj('ModItemHealthCondition', {
 			AffectableBodyParts = {
@@ -4152,6 +4242,7 @@ PlaceObj('ModItemFolder', {
 			comment = "Simple steps 15%, apply -5/5/15/15 to align",
 			group = "ILU_Equip",
 			id = "armor_carbon_simple",
+			save_in = "Mod/rtw6tLg",
 		}),
 		PlaceObj('ModItemHealthCondition', {
 			AffectableBodyParts = {
@@ -4202,6 +4293,7 @@ PlaceObj('ModItemFolder', {
 			comment = "Complex steps 12/12/12/8, apply -8/2/12/8 to align",
 			group = "ILU_Equip",
 			id = "armor_carbon_complex",
+			save_in = "Mod/rtw6tLg",
 		}),
 		}),
 	PlaceObj('ModItemFolder', {
@@ -4290,6 +4382,7 @@ PlaceObj('ModItemFolder', {
 			Type = "Injury",
 			group = "Weapons_Insect",
 			id = "Shrieker_SpikePuncture_move",
+			save_in = "Mod/rtw6tLg",
 		}),
 		PlaceObj('ModItemHealthCondition', {
 			AffectableBodyParts = {
@@ -4362,6 +4455,7 @@ PlaceObj('ModItemFolder', {
 			Type = "Injury",
 			group = "Weapons_Insect",
 			id = "Shrieker_DeepPuncture_Move",
+			save_in = "Mod/rtw6tLg",
 		}),
 		PlaceObj('ModItemHealthCondition', {
 			AffectableBodyParts = {
@@ -4437,6 +4531,7 @@ PlaceObj('ModItemFolder', {
 			Type = "Injury",
 			group = "Weapons_Insect",
 			id = "Juno_hulk_smash",
+			save_in = "Mod/rtw6tLg",
 		}),
 		PlaceObj('ModItemHealthCondition', {
 			AffectableBodyParts = {
@@ -4512,6 +4607,7 @@ PlaceObj('ModItemFolder', {
 			Type = "Injury",
 			group = "Weapons_Insect",
 			id = "Juno_hulk_smash_crit",
+			save_in = "Mod/rtw6tLg",
 		}),
 		PlaceObj('ModItemHealthCondition', {
 			AffectableBodyParts = {
@@ -4586,6 +4682,7 @@ PlaceObj('ModItemFolder', {
 			Type = "Injury",
 			group = "Weapons_Insect",
 			id = "Scissorhands_duelist",
+			save_in = "Mod/rtw6tLg",
 		}),
 		PlaceObj('ModItemHealthCondition', {
 			AffectableBodyParts = {
@@ -4659,6 +4756,7 @@ PlaceObj('ModItemFolder', {
 			Type = "Injury",
 			group = "Weapons_Insect",
 			id = "Scissorhands_duelist_crit",
+			save_in = "Mod/rtw6tLg",
 		}),
 		PlaceObj('ModItemHealthCondition', {
 			AffectableBodyParts = {
@@ -4698,6 +4796,7 @@ PlaceObj('ModItemFolder', {
 			UnitTags = set( "Android", "Human" ),
 			group = "Weapons_Insect",
 			id = "Tecatli_special_bite",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyActivityEfficiency",
@@ -4741,6 +4840,7 @@ PlaceObj('ModItemFolder', {
 			UnitTags = set( "Android", "Human" ),
 			group = "Weapons_Insect",
 			id = "Tecatli_special_bite_crit",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyActivityEfficiency",
@@ -4775,6 +4875,7 @@ PlaceObj('ModItemFolder', {
 			UnitTags = set( "Android", "Human" ),
 			group = "Weapons_Insect",
 			id = "Tecatli_long_term",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyActivityEfficiency",
@@ -4802,6 +4903,7 @@ PlaceObj('ModItemFolder', {
 			UnitTags = set( "Animal" ),
 			group = "Special",
 			id = "Frenzy_Regen",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyAttackCooldown",
@@ -4829,6 +4931,7 @@ PlaceObj('ModItemFolder', {
 			UnitTags = set( "Animal" ),
 			group = "Special",
 			id = "Frenzy_Regen_Perfect",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyAttackCooldown",
@@ -4856,6 +4959,7 @@ PlaceObj('ModItemFolder', {
 			UnitTags = set( "Animal" ),
 			group = "Special",
 			id = "Frenzy_Conscious_1",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyAttackCooldown",
@@ -4883,6 +4987,7 @@ PlaceObj('ModItemFolder', {
 			UnitTags = set( "Animal" ),
 			group = "Special",
 			id = "Frenzy_Conscious_2",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyAttackCooldown",
@@ -4910,6 +5015,7 @@ PlaceObj('ModItemFolder', {
 			UnitTags = set( "Animal" ),
 			group = "Special",
 			id = "Frenzy_Conscious_3",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyAttackCooldown",
@@ -4937,6 +5043,7 @@ PlaceObj('ModItemFolder', {
 			UnitTags = set( "Animal" ),
 			group = "Special",
 			id = "Frenzy_Conscious_4",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyAttackCooldown",
@@ -4965,6 +5072,7 @@ PlaceObj('ModItemFolder', {
 			UnitTags = set( "Animal" ),
 			group = "Special",
 			id = "Frenzy_Conscious_Perfect",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyAttackCooldown",
@@ -4993,6 +5101,7 @@ PlaceObj('ModItemFolder', {
 			UnitTags = set( "Animal" ),
 			group = "Special",
 			id = "Frenzy_Fast",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyAttackCooldown",
@@ -5044,6 +5153,7 @@ PlaceObj('ModItemFolder', {
 			UnitTags = set( "Android", "Human" ),
 			group = "Weapons_Insect",
 			id = "Glutch_Bad_Trip",
+			save_in = "Mod/rtw6tLg",
 		}),
 		PlaceObj('ModItemHealthCondition', {
 			AffectableBodyParts = {
@@ -5118,6 +5228,7 @@ PlaceObj('ModItemFolder', {
 			Type = "Injury",
 			group = "Weapons_Human",
 			id = "Shred",
+			save_in = "Mod/rtw6tLg",
 		}),
 		PlaceObj('ModItemHealthCondition', {
 			AffectableBodyParts = {
@@ -5192,6 +5303,7 @@ PlaceObj('ModItemFolder', {
 			Type = "Injury",
 			group = "Weapons_Human",
 			id = "Shred_T2",
+			save_in = "Mod/rtw6tLg",
 		}),
 		PlaceObj('ModItemHealthCondition', {
 			AffectableBodyParts = {
@@ -5211,6 +5323,7 @@ PlaceObj('ModItemFolder', {
 			StackLimit = 3,
 			Type = "Debuff",
 			id = "EarBleed",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyAttackCooldown",
@@ -5261,6 +5374,7 @@ PlaceObj('ModItemFolder', {
 			Vomiting = true,
 			group = "Weapons_Insect",
 			id = "JunoskarPoison",
+			save_in = "Mod/rtw6tLg",
 		}),
 		PlaceObj('ModItemHealthCondition', {
 			AffectableBodyParts = {
@@ -5281,6 +5395,7 @@ PlaceObj('ModItemFolder', {
 			Type = "Buff",
 			group = "Special",
 			id = "ILU_dog_near_weak",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyAttackCooldown",
@@ -5310,6 +5425,7 @@ PlaceObj('ModItemFolder', {
 			Type = "Buff",
 			group = "Special",
 			id = "ILU_dog_near_strong",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyAttackCooldown",
@@ -5365,6 +5481,7 @@ PlaceObj('ModItemFolder', {
 			Type = "Injury",
 			group = "AnimalAttacker_InternalWound_Common",
 			id = "a_frost_bite",
+			save_in = "Mod/rtw6tLg",
 		}),
 		PlaceObj('ModItemHealthCondition', {
 			BleedingModifier = 6000,
@@ -5372,6 +5489,7 @@ PlaceObj('ModItemFolder', {
 			PainModifier = 10000,
 			Type = "Injury",
 			id = "nuerotoxin",
+			save_in = "Mod/rtw6tLg",
 		}),
 		PlaceObj('ModItemHealthCondition', {
 			AffectableBodyParts = {
@@ -5390,6 +5508,7 @@ PlaceObj('ModItemFolder', {
 			UnitTags = set( "Animal" ),
 			group = "Special",
 			id = "Domesticated_Buff",
+			save_in = "Mod/rtw6tLg",
 		}),
 		PlaceObj('ModItemHealthCondition', {
 			AffectableBodyParts = {
@@ -5408,6 +5527,7 @@ PlaceObj('ModItemFolder', {
 			UnitTags = set( "Animal" ),
 			group = "Special",
 			id = "Blood_Frenzy",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyDamageInflicted",
@@ -5450,6 +5570,7 @@ PlaceObj('ModItemFolder', {
 			UnitTags = set( "Animal" ),
 			group = "Special",
 			id = "Blood_FrenzyT3",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyDamageInflicted",
@@ -5502,6 +5623,7 @@ PlaceObj('ModItemFolder', {
 			UnitTags = set( "Animal" ),
 			group = "Special",
 			id = "Blood_FrenzyT5",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyDamageInflicted",
@@ -5554,6 +5676,7 @@ PlaceObj('ModItemFolder', {
 			UnitTags = set( "Animal" ),
 			group = "Special",
 			id = "ShrapnelArmor",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyDamageReceived",
@@ -5607,6 +5730,7 @@ PlaceObj('ModItemFolder', {
 			TreatmentStatus = "requires treatment",
 			Type = "Injury",
 			id = "APC_Shot",
+			save_in = "Mod/rtw6tLg",
 		}),
 		PlaceObj('ModItemHealthCondition', {
 			AffectableBodyParts = {
@@ -5625,6 +5749,7 @@ PlaceObj('ModItemFolder', {
 			StackLimit = 1,
 			Type = "Debuff",
 			id = "Glued",
+			save_in = "Mod/rtw6tLg",
 		}),
 		PlaceObj('ModItemHealthCondition', {
 			AffectableBodyParts = {
@@ -5655,6 +5780,7 @@ PlaceObj('ModItemFolder', {
 			TreatmentStatus = "requires treatment",
 			Type = "Injury",
 			id = "HitCannon",
+			save_in = "Mod/rtw6tLg",
 		}),
 		PlaceObj('ModItemHealthCondition', {
 			AffectableBodyParts = {
@@ -5676,6 +5802,7 @@ PlaceObj('ModItemFolder', {
 			TreatmentStatus = "treated",
 			Type = "Disease",
 			id = "ShellShocked",
+			save_in = "Mod/rtw6tLg",
 		}),
 		PlaceObj('ModItemHealthCondition', {
 			AffectableBodyParts = {
@@ -5741,6 +5868,7 @@ PlaceObj('ModItemFolder', {
 					param_bindings = false,
 				}),
 			},
+			save_in = "Mod/rtw6tLg",
 		}),
 		PlaceObj('ModItemHealthCondition', {
 			AffectableBodyParts = {
@@ -5760,6 +5888,7 @@ PlaceObj('ModItemFolder', {
 			StackLimit = 1,
 			Type = "Buff",
 			id = "UlfenHerd",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "OnObjUpdate",
@@ -5798,6 +5927,7 @@ PlaceObj('ModItemFolder', {
 			StackLimit = 1,
 			Type = "Buff",
 			id = "UlfRage",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "AvoidAttackModify",
@@ -5838,6 +5968,7 @@ PlaceObj('ModItemFolder', {
 			end,
 			Type = "Buff",
 			id = "Acoustic_T1",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "AvoidAttackModify",
@@ -5878,6 +6009,7 @@ PlaceObj('ModItemFolder', {
 			end,
 			Type = "Buff",
 			id = "Acoustic_T2",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "AvoidAttackModify",
@@ -5919,6 +6051,7 @@ PlaceObj('ModItemFolder', {
 			end,
 			Type = "Buff",
 			id = "Acoustic_T3",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "AvoidAttackModify",
@@ -5960,6 +6093,7 @@ PlaceObj('ModItemFolder', {
 			end,
 			Type = "Buff",
 			id = "Acoustic_T4",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "AvoidAttackModify",
@@ -6003,6 +6137,7 @@ PlaceObj('ModItemFolder', {
 			FloatingTextType = "Display name",
 			Type = "Injury",
 			id = "ResoBacklash",
+			save_in = "Mod/rtw6tLg",
 		}),
 		PlaceObj('ModItemHealthCondition', {
 			AffectableBodyParts = {
@@ -6022,6 +6157,7 @@ PlaceObj('ModItemFolder', {
 			FloatingTextType = "Display name",
 			Type = "Injury",
 			id = "ResoBacklash_2",
+			save_in = "Mod/rtw6tLg",
 		}),
 		PlaceObj('ModItemHealthCondition', {
 			AffectableBodyParts = {
@@ -6073,6 +6209,7 @@ PlaceObj('ModItemFolder', {
 			Type = "Injury",
 			group = "AnimalAttacker_SurfaceWound_Common",
 			id = "Noth_Shatter_t1",
+			save_in = "Mod/rtw6tLg",
 		}),
 		PlaceObj('ModItemHealthCondition', {
 			AffectableBodyParts = {
@@ -6124,6 +6261,7 @@ PlaceObj('ModItemFolder', {
 			Type = "Injury",
 			group = "AnimalAttacker_SurfaceWound_Common",
 			id = "Noth_Shatter_t2",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyDamageReceived",
@@ -6149,6 +6287,7 @@ PlaceObj('ModItemFolder', {
 			FloatingTextType = "Display name",
 			Type = "Buff",
 			id = "Shogu_Fly_Swarm",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyDamageReceived",
@@ -6179,6 +6318,7 @@ PlaceObj('ModItemFolder', {
 			FloatingTextType = "Display name",
 			Type = "Debuff",
 			id = "Shogu_Splash",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyAttackCooldown",
@@ -6230,6 +6370,7 @@ PlaceObj('ModItemFolder', {
 					param_bindings = false,
 				}),
 			},
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyAttackCooldown",
@@ -6266,6 +6407,7 @@ PlaceObj('ModItemFolder', {
 			StackLimit = 1,
 			UnitTags = set( "assault_T2" ),
 			id = "Assault_Frenzy_T2",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyAttackCooldown",
@@ -6336,6 +6478,7 @@ PlaceObj('ModItemFolder', {
 			StackLimit = 1,
 			UnitTags = set( "assault_T1", "assault_T2" ),
 			id = "Assault_Frenzy_cooldown",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyAttackCooldown",
@@ -6371,6 +6514,7 @@ PlaceObj('ModItemFolder', {
 			StackLimit = 1,
 			UnitTags = set( "Scout_T1" ),
 			id = "Scout_Spotting_T1",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyHitChance",
@@ -6416,6 +6560,7 @@ PlaceObj('ModItemFolder', {
 			StackLimit = 1,
 			UnitTags = set( "Scout_T2" ),
 			id = "Scout_Spotting_T2",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyHitChance",
@@ -6459,6 +6604,7 @@ PlaceObj('ModItemFolder', {
 			Polarity = "positive",
 			StackLimit = 1,
 			id = "RogerRoger",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyHitChance",
@@ -6488,6 +6634,7 @@ PlaceObj('ModItemFolder', {
 			Polarity = "positive",
 			StackLimit = 1,
 			id = "RogerRoger2",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyHitChance",
@@ -6522,6 +6669,7 @@ PlaceObj('ModItemFolder', {
 			StackLimit = 1,
 			UnitTags = set( "Cyber_Eye" ),
 			id = "CyberEye",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyWeaponRange",
@@ -6539,6 +6687,7 @@ PlaceObj('ModItemFolder', {
 			StackLimit = 1,
 			UnitTags = set( "Monk_T1" ),
 			id = "MonkDodgeT1",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyDamageReceived",
@@ -6564,6 +6713,7 @@ PlaceObj('ModItemFolder', {
 			StackLimit = 1,
 			UnitTags = set( "Monk_T2" ),
 			id = "MonkDodgeT2",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyDamageReceived",
@@ -6589,6 +6739,7 @@ PlaceObj('ModItemFolder', {
 			StackLimit = 1,
 			UnitTags = set( "Monk_T3" ),
 			id = "MonkDodgeT3",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyDamageReceived",
@@ -6617,6 +6768,7 @@ PlaceObj('ModItemFolder', {
 			StackLimit = 1,
 			UnitTags = set( "Monk_Special" ),
 			id = "Jedi_Yeet",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "AvoidAttackModify",
@@ -6670,6 +6822,7 @@ PlaceObj('ModItemFolder', {
 			StackLimit = 1,
 			UnitTags = set( "Heavy_Malus" ),
 			id = "Heavy_Range_Malus",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyWeaponRange",
@@ -6694,6 +6847,7 @@ PlaceObj('ModItemFolder', {
 			StackLimit = 1,
 			UnitTags = set( "Heavy_Slow_T1" ),
 			id = "Heavy_Boombox_T1",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyHitChance",
@@ -6720,6 +6874,7 @@ PlaceObj('ModItemFolder', {
 			StackLimit = 1,
 			UnitTags = set( "Heavy_Slow_T2" ),
 			id = "Heavy_Boombox_T2",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyHitChance",
@@ -6742,6 +6897,7 @@ PlaceObj('ModItemFolder', {
 			StackLimit = 1,
 			UnitTags = set( "Heavy_Shred_T1" ),
 			id = "ModdedLasPistol_T1",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "GatherHitEffects",
@@ -6766,6 +6922,7 @@ PlaceObj('ModItemFolder', {
 			StackLimit = 1,
 			UnitTags = set( "Heavy_Shred_T2" ),
 			id = "ModdedLasPistol_T2",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "GatherHitEffects",
@@ -6799,6 +6956,7 @@ PlaceObj('ModItemFolder', {
 			},
 			Polarity = "negative",
 			id = "slowwwdown",
+			save_in = "Mod/rtw6tLg",
 		}),
 		PlaceObj('ModItemRobotCondition', {
 			Description = T(500696629255, --[[ModItemRobotCondition JammedRadio Description]] "This robot's communication, internal and external, is being jammed by signals from a nearby robot!\n-5% attack speed per stack"),
@@ -6809,6 +6967,7 @@ PlaceObj('ModItemFolder', {
 			Polarity = "negative",
 			StackLimit = 3,
 			id = "JammedRadio",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyAttackCooldown",
@@ -6855,6 +7014,7 @@ PlaceObj('ModItemFolder', {
 			Polarity = "negative",
 			StackLimit = 5,
 			id = "RC_Shred",
+			save_in = "Mod/rtw6tLg",
 		}),
 		PlaceObj('ModItemRobotCondition', {
 			Description = T(526907378573, --[[ModItemRobotCondition RC_Shred_T2 Description]] "Has been hit by a scattered laser, damaging the armor and lowering this robot's deflection chance."),
@@ -6892,6 +7052,7 @@ PlaceObj('ModItemFolder', {
 			Polarity = "negative",
 			StackLimit = 10,
 			id = "RC_Shred_T2",
+			save_in = "Mod/rtw6tLg",
 		}),
 		PlaceObj('ModItemRobotCondition', {
 			Description = T(317084936250, --[[ModItemRobotCondition APC_T3 Description]] "Collects and quickly welds spent bullet casings to form makeshift armor.\nApplied to ally Robots in 5% damage resist increments.\n\nAt most welds once each second.\nConsumes a nearby Robot Corpse every 5 seconds.\nThis is enough scrap to weld 3 times.\n\nOccasionally this welding will fail, causing a small explosion in the Crawler. \nCausing it to damage itself."),
@@ -6905,6 +7066,7 @@ PlaceObj('ModItemFolder', {
 			StackLimit = 1,
 			UnitTags = set( "APC_3" ),
 			id = "APC_T3",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyHitChance",
@@ -6962,6 +7124,7 @@ PlaceObj('ModItemFolder', {
 			StackLimit = 1,
 			UnitTags = set( "APC_2" ),
 			id = "APC_T2",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyHitChance",
@@ -7019,6 +7182,7 @@ PlaceObj('ModItemFolder', {
 			StackLimit = 1,
 			UnitTags = set( "APC_1" ),
 			id = "APC_T1",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyHitChance",
@@ -7070,6 +7234,7 @@ PlaceObj('ModItemFolder', {
 			Polarity = "positive",
 			StackLimit = 5,
 			id = "SalvagedArmor",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyDamageReceived",
@@ -7089,6 +7254,7 @@ PlaceObj('ModItemFolder', {
 			Polarity = "negative",
 			StackLimit = 10,
 			id = "FailedArmorUp",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyDamageReceived",
@@ -7117,6 +7283,7 @@ PlaceObj('ModItemFolder', {
 			StackLimit = 1,
 			UnitTags = set( "Demo_T1" ),
 			id = "RC_Demo_T1",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyDamageInflicted",
@@ -7149,6 +7316,7 @@ PlaceObj('ModItemFolder', {
 			StackLimit = 1,
 			UnitTags = set( "Demo_T3" ),
 			id = "RC_Demo_T3",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyDamageInflicted",
@@ -7186,6 +7354,7 @@ PlaceObj('ModItemFolder', {
 			StackLimit = 1,
 			UnitTags = set( "Demo_T5" ),
 			id = "RC_Demo_T5",
+			save_in = "Mod/rtw6tLg",
 			unit_reactions = {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyDamageInflicted",
@@ -7224,6 +7393,7 @@ PlaceObj('ModItemFolder', {
 					local addedClassList = {}
 					spawnClassBest, addedClassList = check_count_and_upgrade("Dragonfly")
 					instance.SpawnClass = spawnClassBest
+					instance.AdditionalClassList  = {}
 					for i=1,#addedClassList do
 						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
 					end
@@ -7270,6 +7440,7 @@ PlaceObj('ModItemFolder', {
 			Log = "Modified by Ivan on 2021-Feb-25\nModified by Ivan on 2021-Mar-02\nModified by Gaby on 2021-Mar-25\nModified by Ivan on 2021-Apr-13\nModified by Ivan on 2021-May-10\nModified by Ivan on 2021-Jun-07\nModified by Ivan on 2021-Aug-10\nModified by Gaby on 2021-Sep-24\nModified by Gaby on 2021-Sep-28\nModified by Ivan on 2021-Nov-03\nModified by Gaby on 2021-Nov-08\nModified by Ivan on 2022-Mar-08\nModified by Ivan on 2022-Mar-28\nModified by Ivan on 2022-Apr-06\nModified by Ivan on 2022-May-21\nModified by Ivan on 2022-May-23\nModified by Ivan on 2022-May-30\nModified by Ivan on 2022-Jul-04\nModified by Ivan on 2022-Jul-07\nModified by Gaby on 2022-Nov-25",
 			param_bindings = false,
 		}),
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemStoryBit', {
 		Category = "AttackSpawns",
@@ -7331,6 +7502,7 @@ PlaceObj('ModItemFolder', {
 			Log = "Modified by Ivan on 2021-Feb-25\nModified by Ivan on 2021-Mar-02\nModified by Gaby on 2021-Mar-25\nModified by Ivan on 2021-Apr-13\nModified by Ivan on 2021-May-10\nModified by Ivan on 2021-Jun-07\nModified by Ivan on 2021-Aug-10\nModified by Gaby on 2021-Sep-24\nModified by Gaby on 2021-Sep-28\nModified by Ivan on 2021-Nov-03\nModified by Gaby on 2021-Nov-08\nModified by Ivan on 2022-Mar-08\nModified by Ivan on 2022-Apr-06\nModified by Ivan on 2022-May-21\nModified by Ivan on 2022-May-23\nModified by Ivan on 2022-May-30\nModified by Ivan on 2022-Jul-04\nModified by Gaby on 2023-Feb-02\nModified by Bobby on 2023-Mar-31",
 			param_bindings = false,
 		}),
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemStoryBit', {
 		Category = "AttackSpawns",
@@ -7372,6 +7544,7 @@ PlaceObj('ModItemFolder', {
 			Log = "Modified by Ivan on 2021-Feb-25\nModified by Ivan on 2021-Mar-02\nModified by Gaby on 2021-Mar-25\nModified by Ivan on 2021-Apr-13\nModified by Ivan on 2021-May-10\nModified by Ivan on 2021-Jun-07\nModified by Ivan on 2021-Aug-10\nModified by Gaby on 2021-Sep-24\nModified by Gaby on 2021-Sep-28\nModified by Ivan on 2021-Nov-03\nModified by Gaby on 2021-Nov-08\nModified by Ivan on 2022-Mar-08\nModified by Ivan on 2022-Apr-06\nModified by Ivan on 2022-May-21\nModified by Ivan on 2022-May-23\nModified by Ivan on 2022-May-30\nModified by Ivan on 2022-Jul-04\nModified by Gaby on 2023-Feb-02",
 			param_bindings = false,
 		}),
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemStoryBit', {
 		Category = "AttackSpawns",
@@ -7425,6 +7598,7 @@ PlaceObj('ModItemFolder', {
 			Log = "Modified by Ivan on 2021-Feb-25\nModified by Ivan on 2021-Mar-02\nModified by Gaby on 2021-Mar-25\nModified by Ivan on 2021-Apr-13\nModified by Ivan on 2021-May-10\nModified by Ivan on 2021-Jun-07\nModified by Ivan on 2021-Aug-10\nModified by Gaby on 2021-Sep-24\nModified by Gaby on 2021-Sep-28\nModified by Ivan on 2021-Nov-03\nModified by Gaby on 2021-Nov-08\nModified by Ivan on 2022-Mar-08\nModified by Ivan on 2022-Mar-28\nModified by Ivan on 2022-Apr-06\nModified by Ivan on 2022-May-21\nModified by Ivan on 2022-May-23\nModified by Ivan on 2022-May-30\nModified by Ivan on 2022-Jul-04\nModified by Ivan on 2022-Jul-07\nModified by Gaby on 2022-Nov-25",
 			param_bindings = false,
 		}),
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemStoryBit', {
 		Category = "AttackSpawns",
@@ -7483,6 +7657,7 @@ PlaceObj('ModItemFolder', {
 			Log = "Modified by Ivan on 2021-Feb-25\nModified by Ivan on 2021-Mar-02\nModified by Gaby on 2021-Mar-25\nModified by Ivan on 2021-Apr-13\nModified by Ivan on 2021-May-10\nModified by Ivan on 2021-Jun-07\nModified by Ivan on 2021-Aug-10\nModified by Gaby on 2021-Sep-24\nModified by Gaby on 2021-Sep-28\nModified by Ivan on 2021-Nov-03\nModified by Gaby on 2021-Nov-08\nModified by Ivan on 2022-Mar-08\nModified by Ivan on 2022-Apr-06\nModified by Ivan on 2022-May-21\nModified by Ivan on 2022-May-23\nModified by Ivan on 2022-May-30\nModified by Ivan on 2022-Jul-04\nModified by Ivan on 2022-Jul-07",
 			param_bindings = false,
 		}),
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemStoryBit', {
 		Category = "AttackSpawns",
@@ -7540,6 +7715,7 @@ PlaceObj('ModItemFolder', {
 			Log = "Modified by Ivan on 2021-Feb-25\nModified by Ivan on 2021-Mar-02\nModified by Gaby on 2021-Mar-25\nModified by Ivan on 2021-Apr-13\nModified by Ivan on 2021-May-10\nModified by Ivan on 2021-Jun-07\nModified by Ivan on 2021-Aug-10\nModified by Gaby on 2021-Sep-24\nModified by Gaby on 2021-Sep-28\nModified by Ivan on 2021-Nov-03\nModified by Gaby on 2021-Nov-08\nModified by Ivan on 2022-Mar-08\nModified by Ivan on 2022-Apr-06\nModified by Ivan on 2022-May-21\nModified by Ivan on 2022-May-23\nModified by Ivan on 2022-May-30\nModified by Ivan on 2022-Jul-04\nModified by Ivan on 2022-Jul-07\nModified by Ivan on 2022-Aug-02",
 			param_bindings = false,
 		}),
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemStoryBit', {
 		Category = "AttackSpawns",
@@ -7597,6 +7773,7 @@ PlaceObj('ModItemFolder', {
 			Log = "Modified by Ivan on 2021-Feb-25\nModified by Ivan on 2021-Mar-02\nModified by Gaby on 2021-Mar-25\nModified by Ivan on 2021-Apr-13\nModified by Ivan on 2021-May-10\nModified by Ivan on 2021-Jun-07\nModified by Ivan on 2021-Aug-10\nModified by Gaby on 2021-Sep-24\nModified by Gaby on 2021-Sep-28\nModified by Ivan on 2021-Nov-03\nModified by Gaby on 2021-Nov-08\nModified by Ivan on 2022-Mar-08\nModified by Ivan on 2022-Apr-06\nModified by Ivan on 2022-May-21\nModified by Ivan on 2022-May-23\nModified by Ivan on 2022-May-30\nModified by Ivan on 2022-Jul-04\nModified by Ivan on 2022-Jul-07",
 			param_bindings = false,
 		}),
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemStoryBit', {
 		Category = "AttackSpawns",
@@ -7654,6 +7831,7 @@ PlaceObj('ModItemFolder', {
 			Log = "Modified by Ivan on 2021-Feb-25\nModified by Ivan on 2021-Mar-02\nModified by Gaby on 2021-Mar-25\nModified by Ivan on 2021-Apr-13\nModified by Ivan on 2021-May-10\nModified by Ivan on 2021-Jun-07\nModified by Ivan on 2021-Aug-10\nModified by Gaby on 2021-Sep-24\nModified by Gaby on 2021-Sep-28\nModified by Ivan on 2021-Nov-03\nModified by Gaby on 2021-Nov-08\nModified by Ivan on 2022-Mar-08\nModified by Ivan on 2022-Apr-06\nModified by Ivan on 2022-May-21\nModified by Ivan on 2022-May-23\nModified by Ivan on 2022-May-30\nModified by Ivan on 2022-Jul-04\nModified by Ivan on 2022-Jul-07",
 			param_bindings = false,
 		}),
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemStoryBit', {
 		HasNotification = false,
@@ -7663,6 +7841,7 @@ PlaceObj('ModItemFolder', {
 		Title = T(985765584196, --[[ModItemStoryBit ILU_restart_required Title]] "Restart Required"),
 		group = "meta",
 		id = "ILU_restart_required",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemStoryBit', {
 		AllowedInScenarios = set( "Robots" ),
@@ -7907,7 +8086,7 @@ PlaceObj('ModItemFolder', {
 			},
 			param_bindings = false,
 		}),
-		save_in = "Robots",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemStoryBit', {
 		AllowedInScenarios = set( "Robots" ),
@@ -8139,7 +8318,7 @@ PlaceObj('ModItemFolder', {
 			},
 			param_bindings = false,
 		}),
-		save_in = "Robots",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemStoryBit', {
 		AllowedInScenarios = set( "Robots" ),
@@ -8167,7 +8346,7 @@ PlaceObj('ModItemFolder', {
 					local additional = {}
 					additional[1]={ temp, RobotDefs[temp]:GetProperty("SpawnDefWeight")}
 					if AsyncRand(100) > 40 then
-						additional[2]  = {'Crawl_Cannon_T1',RobotDefs['Crawl_Cannon_T1']:GetProperty("SpawnDefWeight")}
+						additional[2]  = {'Crawl_Cannon_T0',RobotDefs['Crawl_Cannon_T0']:GetProperty("SpawnDefWeight")}
 					else
 						temp = table.rand(support_choices, seed)
 						additional[2]={temp, RobotDefs[temp]:GetProperty("SpawnDefWeight")}
@@ -8399,7 +8578,7 @@ PlaceObj('ModItemFolder', {
 			},
 			param_bindings = false,
 		}),
-		save_in = "Robots",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemStoryBit', {
 		AllowedInScenarios = set( "Robots" ),
@@ -8641,7 +8820,7 @@ PlaceObj('ModItemFolder', {
 			},
 			param_bindings = false,
 		}),
-		save_in = "Robots",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemStoryBit', {
 		AllowedInScenarios = set( "Robots" ),
@@ -8681,7 +8860,7 @@ PlaceObj('ModItemFolder', {
 						end
 					end
 					additional[3]={temp2, RobotDefs[temp2]:GetProperty("SpawnDefWeight")}
-					additional[4]  = {'Crawl_Cannon_T1',RobotDefs['Crawl_Cannon_T1']:GetProperty("SpawnDefWeight")}
+					additional[4]  = {'Crawl_Cannon_T0',RobotDefs['Crawl_Cannon_T0']:GetProperty("SpawnDefWeight")}
 					
 					ILU_ActivateAttackDropshipSpawnDefs("Single_Robots", single_assault,additional)
 				end,
@@ -8901,7 +9080,7 @@ PlaceObj('ModItemFolder', {
 			},
 			param_bindings = false,
 		}),
-		save_in = "Robots",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemStoryBit', {
 		AllowedInScenarios = set( "Robots" ),
@@ -8959,7 +9138,7 @@ PlaceObj('ModItemFolder', {
 			},
 			param_bindings = false,
 		}),
-		save_in = "Robots",
+		save_in = "Mod/rtw6tLg",
 		PlaceObj('StoryBitReply', {
 			Text = T(642873090920, --[[ModItemStoryBit FinalAttack Text]] "Let them come!"),
 			param_bindings = false,
@@ -8980,7 +9159,7 @@ PlaceObj('ModItemFolder', {
 						additional[2] = {'HeavyHostileRobot_LVL1',RobotDefs['HeavyHostileRobot_LVL1']:GetProperty("SpawnDefWeight")}
 						additional[3] ={'Demo_1',RobotDefs['Demo_1']:GetProperty("SpawnDefWeight")}
 						additional[4] ={'HostileRobot_Scout_LVL1',RobotDefs['HostileRobot_Scout_LVL1']:GetProperty("SpawnDefWeight")}
-						additional[5] = {'Crawl_Cannon_T1',RobotDefs['Crawl_Cannon_T1']:GetProperty("SpawnDefWeight")}
+						additional[5] = {'Crawl_Cannon_T0',RobotDefs['Crawl_Cannon_T0']:GetProperty("SpawnDefWeight")}
 						additional[6] = {'HostileCombatQuadcopter_LVL1',RobotDefs['HostileCombatQuadcopter_LVL1']:GetProperty("SpawnDefWeight")}
 						additional[7] ={'HostileCrawler_LaserGun',RobotDefs['HostileCrawler_LaserGun']:GetProperty("SpawnDefWeight")}
 						
@@ -9125,6 +9304,7 @@ PlaceObj('ModItemFolder', {
 			},
 			param_bindings = false,
 		}),
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemStoryBit', {
 		Category = "AttackSpawns",
@@ -9213,6 +9393,7 @@ PlaceObj('ModItemFolder', {
 			},
 			param_bindings = false,
 		}),
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemStoryBit', {
 		Category = "AttackSpawns",
@@ -9321,6 +9502,7 @@ PlaceObj('ModItemFolder', {
 			},
 			param_bindings = false,
 		}),
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemStoryBit', {
 		Category = "AttackSpawns",
@@ -9419,6 +9601,7 @@ PlaceObj('ModItemFolder', {
 			},
 			param_bindings = false,
 		}),
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemStoryBit', {
 		Category = "AttackSpawns",
@@ -9522,6 +9705,7 @@ PlaceObj('ModItemFolder', {
 			},
 			param_bindings = false,
 		}),
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemStoryBit', {
 		Category = "AttackSpawns",
@@ -9631,6 +9815,7 @@ PlaceObj('ModItemFolder', {
 			},
 			param_bindings = false,
 		}),
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemStoryBit', {
 		Category = "AttackSpawns",
@@ -9729,6 +9914,7 @@ PlaceObj('ModItemFolder', {
 			},
 			param_bindings = false,
 		}),
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemStoryBit', {
 		Category = "AttackSpawns",
@@ -9837,6 +10023,7 @@ PlaceObj('ModItemFolder', {
 			},
 			param_bindings = false,
 		}),
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemStoryBit', {
 		Category = "AttackSpawns",
@@ -9931,6 +10118,7 @@ PlaceObj('ModItemFolder', {
 			},
 			param_bindings = false,
 		}),
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemInvaderSpawnDef', {
 		Behaviours = {
@@ -9962,6 +10150,7 @@ PlaceObj('ModItemFolder', {
 		TargetDistMin = 100000,
 		group = "StoryBits",
 		id = "PassiveAttack",
+		save_in = "Mod/rtw6tLg",
 	}),
 	}),
 PlaceObj('ModItemFolder', {
@@ -9992,44 +10181,53 @@ PlaceObj('ModItemFolder', {
 	}),
 	PlaceObj('ModItemAnimalPerk', {
 		id = "Regenerator",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemAnimalPerk', {
 		id = "Powerful_Regenerator",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemAnimalPerk', {
 		Description = T(928351759177, --[[ModItemAnimalPerk Default AP_Fast Description]] "Once combat is started, this creature will start to move faster than anyone expects. How their appendages achieve this is largely unexplored."),
 		DisplayName = T(303775262662, --[[ModItemAnimalPerk Default AP_Fast DisplayName]] "Sprinter"),
 		id = "AP_Fast",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemAnimalPerk', {
 		Description = T(869152471268, --[[ModItemAnimalPerk Default AP_Frenzy Description]] "This creature's attacks have become faster. Sustained combat or fire from this species is even less desirable for our colonists."),
 		DisplayName = T(190513549324, --[[ModItemAnimalPerk Default AP_Frenzy DisplayName]] "Frenzied Attacks"),
 		id = "AP_Frenzy",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemAnimalPerk', {
 		Description = T(652460753667, --[[ModItemAnimalPerk Default AP_StatDamage Description]] "This creatures attacks appear to do less damage to our colonists. I'm afraid to discover what this biologically has allowed this species to achieve....."),
 		DisplayName = T(877462907644, --[[ModItemAnimalPerk Default AP_StatDamage DisplayName]] "Odd Damage"),
 		id = "AP_StatDamage",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemAnimalPerk', {
 		Description = T(986849553778, --[[ModItemAnimalPerk Default AP_Conc_Immune Description]] "This creatures flesh will be unable to sustain life before the brain orders a coma or consciousness loss. Be very careful engaging, as to them, you will die or they will!"),
 		DisplayName = T(513671760767, --[[ModItemAnimalPerk Default AP_Conc_Immune DisplayName]] "Immune to Consciousness Damage"),
 		id = "AP_Conc_Immune",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemAnimalPerk', {
 		Description = T(143425111743, --[[ModItemAnimalPerk Default AP_Fortified Description]] "This Genus has evolved to be nearly immune to a very specific damage type. Great care should be taken when assigning what munitions are sent to greet this species!"),
 		DisplayName = T(400968352167, --[[ModItemAnimalPerk Default AP_Fortified DisplayName]] "Fortified"),
 		id = "AP_Fortified",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemAnimalPerk', {
 		Description = T(394353041056, --[[ModItemAnimalPerk Default AP_Regen Description]] "More dedicated firepower is needed to outright kill this species. As it's flesh will start to mend itself when under threat. Maybe rendering this creature unconscious is a faster way to render them non-threatening (At least while it remains asleep!)"),
 		DisplayName = T(276200807535, --[[ModItemAnimalPerk Default AP_Regen DisplayName]] "Regenerator"),
 		id = "AP_Regen",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemAnimalPerk', {
 		Description = T(389020561887, --[[ModItemAnimalPerk Default AP_Commander Description]] "Coordinating and herding the attacks of others species.\nThis is starting to look like more conventional warfare!\n\nThankfully Geneva is far far away, so take these things out first!"),
 		DisplayName = T(755867632288, --[[ModItemAnimalPerk Default AP_Commander DisplayName]] "Commander"),
 		id = "AP_Commander",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemCompositeBodyPreset', {
 		'Group', "Juno",
@@ -11632,6 +11830,7 @@ PlaceObj('ModItemFolder', {
 		Description = T(714684334806, --[[ModItemAnimalPerk Default UlfenRage Description]] "In a herd, and will call out when in danger!"),
 		DisplayName = T(111736795096, --[[ModItemAnimalPerk Default UlfenRage DisplayName]] "Ulfen Mafia"),
 		id = "UlfenRage",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemCompositeBodyPreset', {
 		'Group', "Noth",
@@ -11938,6 +12137,7 @@ PlaceObj('ModItemFolder', {
 		Description = T(530392310997, --[[ModItemAnimalPerk Default DrakaAcoustic Description]] "This animal is able to use it's imperfect exoskeleton to attack with sonic booms from built up vibrations."),
 		DisplayName = T(581820424831, --[[ModItemAnimalPerk Default DrakaAcoustic DisplayName]] "Acoustic"),
 		id = "DrakaAcoustic",
+		save_in = "Mod/rtw6tLg",
 	}),
 	PlaceObj('ModItemCompositeBodyPreset', {
 		'Group', "Shogu",
@@ -12111,6 +12311,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Animal",
 		id = "shriker_range_move",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 0,
 		transportable = false,
 		visible = false,
@@ -12152,6 +12353,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Animal",
 		id = "shriker_range_long",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 0,
 		transportable = false,
 		visible = false,
@@ -12216,6 +12418,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Animal",
 		id = "TecatliWeapon",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 0,
 		transportable = false,
 		visible = false,
@@ -12268,6 +12471,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Animal",
 		id = "Junoskar",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 0,
 		transportable = false,
 		visible = false,
@@ -12307,6 +12511,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Animal",
 		id = "Juno_Hulk",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 0,
 		transportable = false,
 		visible = false,
@@ -12346,6 +12551,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Animal",
 		id = "Scissorhands_duelist",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 0,
 		transportable = false,
 		visible = false,
@@ -12385,6 +12591,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Animal",
 		id = "Scissorhands_duelist_rage",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 0,
 		transportable = false,
 		visible = false,
@@ -12456,6 +12663,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Animal",
 		id = "VenomousRaptor",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 0,
 		transportable = false,
 		visible = false,
@@ -12507,6 +12715,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Animal",
 		id = "tecatli_spellsword",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 0,
 		transportable = false,
 		visible = false,
@@ -12549,6 +12758,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Animal",
 		id = "Dragonfly_faster_attack",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 0,
 		transportable = false,
 		visible = false,
@@ -12591,6 +12801,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Animal",
 		id = "Dragonfly_bomb",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 0,
 		transportable = false,
 		visible = false,
@@ -12631,6 +12842,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Animal",
 		id = "DragonflyRanged",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 0,
 		transportable = false,
 		visible = false,
@@ -12677,6 +12889,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Animal",
 		id = "Glutch_Bad_Trip",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 0,
 		transportable = false,
 		visible = false,
@@ -12725,6 +12938,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Animal",
 		id = "DogWeapon",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 0,
 		transportable = false,
 		visible = false,
@@ -12758,6 +12972,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Animal",
 		id = "SkarabeiWeapon",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 0,
 		transportable = false,
 		visible = false,
@@ -12794,6 +13009,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Animal",
 		id = "SkarabeiWeapon_PEx",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 0,
 		transportable = false,
 		visible = false,
@@ -12831,6 +13047,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Animal",
 		id = "SkarabeiDeathExplosion",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 0,
 		transportable = false,
 		visible = false,
@@ -12867,6 +13084,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Animal",
 		id = "ShriekerMelee",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 0,
 		transportable = false,
 		visible = false,
@@ -12908,6 +13126,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Animal",
 		id = "ShriekerBruteMelee",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 0,
 		transportable = false,
 		visible = false,
@@ -12949,6 +13168,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Animal",
 		id = "ShriekerRanged",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 0,
 		transportable = false,
 		visible = false,
@@ -12995,6 +13215,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Animal",
 		id = "ShriekerBruteRanged",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 0,
 		transportable = false,
 		visible = false,
@@ -13033,6 +13254,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Animal",
 		id = "ScissorhandsMelee",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 0,
 		transportable = false,
 		visible = false,
@@ -13071,6 +13293,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Animal",
 		id = "ScissorhandsMelee_Brute",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 0,
 		transportable = false,
 		visible = false,
@@ -13121,6 +13344,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Robots",
 		id = "Crawler_cannon",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 1000,
 		transportable = false,
 		visible = false,
@@ -13172,6 +13396,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Robots",
 		id = "Crawler_cannonT2",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 1000,
 		transportable = false,
 		visible = false,
@@ -13224,6 +13449,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Robots",
 		id = "Crawler_cannonT3",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 1000,
 		transportable = false,
 		visible = false,
@@ -13267,6 +13493,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Robots",
 		id = "APC_Gun",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 1000,
 		transportable = false,
 		visible = false,
@@ -13322,6 +13549,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Animal",
 		id = "UlfenT2",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 0,
 		transportable = false,
 		visible = false,
@@ -13377,6 +13605,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Animal",
 		id = "Resonance_T1",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 0,
 		transportable = false,
 		visible = false,
@@ -13413,6 +13642,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Animal",
 		id = "Noth_T2",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 0,
 		transportable = false,
 		visible = false,
@@ -13449,6 +13679,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Animal",
 		id = "Noth_T4",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 0,
 		transportable = false,
 		visible = false,
@@ -13497,6 +13728,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Animal",
 		id = "Shogu_poison",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 0,
 		transportable = false,
 		visible = false,
@@ -13536,6 +13768,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Animal",
 		id = "Camel_Spit",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 0,
 		transportable = false,
 		visible = false,
@@ -13576,6 +13809,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Animal",
 		id = "Camel_Spit_T2",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 0,
 		transportable = false,
 		visible = false,
@@ -13618,6 +13852,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_AutomatedTurret",
 		id = "toxic_gun",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 1000,
 		transportable = false,
 		visible = false,
@@ -13668,6 +13903,7 @@ PlaceObj('ModItemFolder', {
 		group = "Weapons_Robots",
 		id = "Crawler_cannon_weak",
 		progress = 0,
+		save_in = "Mod/rtw6tLg",
 		stack_size = 1000,
 		transportable = false,
 		visible = false,
@@ -19043,6 +19279,7 @@ PlaceObj('ModItemFolder', {
 			'DailyPregnancyChance', 75,
 			'PregnancyDuration', 2880000,
 			'GrowDuration', 2880000,
+			'NewbornClass', "Too_Angry_Too_Die_Juno",
 			'UnitPerkFrenzy', true,
 			'FrenzyHealthPct', 99,
 			'FrenzyChance', 200,
@@ -23051,6 +23288,7 @@ PlaceObj('ModItemTrait', {
 			end,
 		}),
 	},
+	save_in = "Mod/rtw6tLg",
 }),
 PlaceObj('ModItemFolder', {
 	'name', "Loot Defs",
@@ -23058,6 +23296,7 @@ PlaceObj('ModItemFolder', {
 	PlaceObj('ModItemLootDef', {
 		group = "Insects_Level_Up",
 		id = "ILU_Robot_Human",
+		save_in = "Mod/rtw6tLg",
 		PlaceObj('LootEntryResource', {
 			MaxAmount = 30000,
 			MinAmount = 15000,
@@ -23195,6 +23434,7 @@ PlaceObj('ModItemFolder', {
 	PlaceObj('ModItemLootDef', {
 		group = "Insects_Level_Up",
 		id = "ILU_Robot_Misc",
+		save_in = "Mod/rtw6tLg",
 		PlaceObj('LootEntryResource', {
 			MaxAmount = 40000,
 			MinAmount = 15000,
@@ -23317,6 +23557,7 @@ PlaceObj('ModItemFolder', {
 	PlaceObj('ModItemLootDef', {
 		group = "Insects_Level_Up",
 		id = "ILU_Robot_Crawler_Special",
+		save_in = "Mod/rtw6tLg",
 		PlaceObj('LootEntryResource', {
 			MaxAmount = 3000,
 			MinAmount = 3000,
@@ -23391,6 +23632,7 @@ PlaceObj('ModItemFolder', {
 	PlaceObj('ModItemLootDef', {
 		group = "Insects_Level_Up",
 		id = "ILU_Robot_Crawler_Mats",
+		save_in = "Mod/rtw6tLg",
 		PlaceObj('LootEntryResource', {
 			MaxAmount = 125000,
 			MinAmount = 100000,
@@ -23495,6 +23737,7 @@ PlaceObj('ModItemFolder', {
 	PlaceObj('ModItemLootDef', {
 		id = "ILU_Robot_Human_T1",
 		loot = "all",
+		save_in = "Mod/rtw6tLg",
 		PlaceObj('LootEntryLootDef', {
 			loot_def = "ILU_Robot_Human",
 		}),
@@ -23505,6 +23748,7 @@ PlaceObj('ModItemFolder', {
 	PlaceObj('ModItemLootDef', {
 		id = "ILU_Robot_Human_T2",
 		loot = "all",
+		save_in = "Mod/rtw6tLg",
 		PlaceObj('LootEntryLootDef', {
 			loot_def = "ILU_Robot_Human",
 		}),
@@ -23516,6 +23760,7 @@ PlaceObj('ModItemFolder', {
 	PlaceObj('ModItemLootDef', {
 		id = "ILU_Robot_Human_T3",
 		loot = "all",
+		save_in = "Mod/rtw6tLg",
 		PlaceObj('LootEntryLootDef', {
 			loot_def = "ILU_Robot_Human",
 		}),
@@ -23527,6 +23772,7 @@ PlaceObj('ModItemFolder', {
 	PlaceObj('ModItemLootDef', {
 		id = "ILU_Robot_Human_T4",
 		loot = "all",
+		save_in = "Mod/rtw6tLg",
 		PlaceObj('LootEntryLootDef', {
 			loot_def = "ILU_Robot_Human",
 		}),
@@ -23538,6 +23784,7 @@ PlaceObj('ModItemFolder', {
 	PlaceObj('ModItemLootDef', {
 		id = "ILU_Robot_Human_T5",
 		loot = "all",
+		save_in = "Mod/rtw6tLg",
 		PlaceObj('LootEntryLootDef', {
 			loot_def = "ILU_Robot_Human",
 		}),
@@ -23549,6 +23796,7 @@ PlaceObj('ModItemFolder', {
 	PlaceObj('ModItemLootDef', {
 		id = "ILU_Robot_Crawl_T5",
 		loot = "all",
+		save_in = "Mod/rtw6tLg",
 		PlaceObj('LootEntryLootDef', {
 			loot_def = "ILU_Robot_Crawler_Special",
 		}),
@@ -23564,6 +23812,7 @@ PlaceObj('ModItemFolder', {
 	PlaceObj('ModItemLootDef', {
 		id = "ILU_Robot_Crawl_T4",
 		loot = "all",
+		save_in = "Mod/rtw6tLg",
 		PlaceObj('LootEntryLootDef', {
 			loot_def = "ILU_Robot_Crawler_Special",
 		}),
@@ -23579,6 +23828,7 @@ PlaceObj('ModItemFolder', {
 	PlaceObj('ModItemLootDef', {
 		id = "ILU_Robot_Crawl_T3",
 		loot = "all",
+		save_in = "Mod/rtw6tLg",
 		PlaceObj('LootEntryLootDef', {
 			loot_def = "ILU_Robot_Crawler_Special",
 		}),
@@ -23593,6 +23843,7 @@ PlaceObj('ModItemFolder', {
 	PlaceObj('ModItemLootDef', {
 		id = "ILU_Robot_Crawl_T2",
 		loot = "all",
+		save_in = "Mod/rtw6tLg",
 		PlaceObj('LootEntryLootDef', {
 			loot_def = "ILU_Robot_Crawler_Special",
 		}),
@@ -23606,6 +23857,7 @@ PlaceObj('ModItemFolder', {
 	PlaceObj('ModItemLootDef', {
 		id = "ILU_Robot_Crawl_T1",
 		loot = "all",
+		save_in = "Mod/rtw6tLg",
 		PlaceObj('LootEntryLootDef', {
 			loot_def = "ILU_Robot_Crawler_Special",
 		}),
