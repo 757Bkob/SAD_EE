@@ -55,7 +55,7 @@ DefineClass.Draka = {
 		}),
 	},
 	SelectionRadius = 2000,
-	ChanceToBeMale = 30,
+	ChanceToBeMale = 40,
 	BodySize = "large",
 	ProduceResources = {
 		PlaceObj('ResAmount', {
@@ -67,7 +67,7 @@ DefineClass.Draka = {
 	CmdProduceResources = function (animal)
 		if not animal:IsTamed() then
 			if animal:Random(100, "no produce chance") > 40 then
-				return animal:UpdateProductionTime()
+				return animal:DoProduceResourcesDiminishingReturns()
 			end
 		end
 		return animal:DoProduceResources()
@@ -107,6 +107,7 @@ DefineClass.Draka = {
 	CombatSkillInitial = range(5, 6),
 	BondingChance = 5,
 	ReproductionType = "two sexes",
+	ReproductionGroup = "Draka",
 	DailyPregnancyChance = 55,
 	PregnancyDuration = 4800000,
 	GrowDuration = 4800000,

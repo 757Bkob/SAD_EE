@@ -1,6 +1,6 @@
 UndefineClass('Crawl_APC_LVL3')
 DefineClass.Crawl_APC_LVL3 = {
-	__parents = { "CrawlerMachineGun" },
+	__parents = { "CrawlerMachineGun", "UnitConsumer" },
 	__generated_by_class = "ModItemRobotCompositeDef",
 
 
@@ -31,5 +31,12 @@ DefineClass.Crawl_APC_LVL3 = {
 	ObservationDistanceMax = 5000,
 	WalkSpeed = 6000,
 	attack_weapon = "APC_Gun",
+	UnitConsumer = true,
+	res_consumed = "ScrapMetal",
+	res_max_stored = 50000,
+	res_used = 5000,
+	ConsumeDescription = T(954921916888, --[[ModItemRobotCompositeDef Crawl_APC_LVL3 ConsumeDescription]] "This unit boasts state of the art technology, able to pick up scrap metal and provide a patchwork set of armor to nearby allies."),
+	ConsumeTitle = T(522596411974, --[[ModItemRobotCompositeDef Crawl_APC_LVL3 ConsumeTitle]] "Combat Forge"),
+	ConsumeUIDetail = T(397227670203, --[[ModItemRobotCompositeDef Crawl_APC_LVL3 ConsumeUIDetail]] "Pieces of Scrap"),
 }
 

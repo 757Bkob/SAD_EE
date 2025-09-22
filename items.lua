@@ -1,7 +1,12 @@
 return {
+PlaceObj('ModItemOptionToggle', {
+	'name', "O_simple_combat",
+	'DisplayName', "Simplified Combat?",
+}),
 PlaceObj('ModItemOptionNumber', {
 	'name', "O_ILU_max",
-	'DisplayName', "Max Spawn before Upgrading",
+	'DisplayName', "Maximum units a single attack can spawn",
+	'Help', "Note this will not stop multiple sequential attacks from creating more than this number attacking you",
 	'DefaultValue', 150,
 	'MinValue', 100,
 	'MaxValue', 300,
@@ -15,8 +20,64 @@ PlaceObj('ModItemOptionNumber', {
 	'MaxValue', 6,
 }),
 PlaceObj('ModItemOptionToggle', {
-	'name', "O_simple_combat",
-	'DisplayName', "Simplified Combat?",
+	'name', "O_Man_Cap",
+	'DisplayName', "Manual Override Max Tames?",
+	'Help', "Caps are normally set based on the max a single attack. If this is set to true, the options below will set your caps.",
+}),
+PlaceObj('ModItemOptionNumber', {
+	'name', "DogsQuota",
+	'DisplayName', "Dogs",
+	'DefaultValue', 10,
+}),
+PlaceObj('ModItemOptionNumber', {
+	'name', "UlfenQuota",
+	'DisplayName', "Ulfens",
+	'DefaultValue', 20,
+}),
+PlaceObj('ModItemOptionNumber', {
+	'name', "GujoQuota",
+	'DisplayName', "Gujos",
+	'DefaultValue', 10,
+}),
+PlaceObj('ModItemOptionNumber', {
+	'name', "CamelQuota",
+	'DisplayName', "Camels",
+	'DefaultValue', 20,
+}),
+PlaceObj('ModItemOptionNumber', {
+	'name', "TecatliQuota",
+	'DisplayName', "Tecatlis",
+	'DefaultValue', 10,
+}),
+PlaceObj('ModItemOptionNumber', {
+	'name', "NothQuota",
+	'DisplayName', "Noths",
+	'DefaultValue', 20,
+}),
+PlaceObj('ModItemOptionNumber', {
+	'name', "ShoguQuota",
+	'DisplayName', "Shogus",
+	'DefaultValue', 10,
+}),
+PlaceObj('ModItemOptionNumber', {
+	'name', "DrakaQuota",
+	'DisplayName', "Drakas",
+	'DefaultValue', 20,
+}),
+PlaceObj('ModItemOptionNumber', {
+	'name', "ShriekersQuota",
+	'DisplayName', "Shriekers",
+	'DefaultValue', 10,
+}),
+PlaceObj('ModItemOptionNumber', {
+	'name', "ScissorhandsQuota",
+	'DisplayName', "Scissorhands",
+	'DefaultValue', 10,
+}),
+PlaceObj('ModItemOptionNumber', {
+	'name', "JunosQuota",
+	'DisplayName', "Junos",
+	'DefaultValue', 10,
 }),
 PlaceObj('ModItemConstDef', {
 	group = "Gameplay",
@@ -35,6 +96,10 @@ PlaceObj('ModItemConstDef', {
 	save_in = "Mod/rtw6tLg",
 	scale = "%",
 	value = 15,
+}),
+PlaceObj('ModItemCode', {
+	'name', "SpecialFuelClass",
+	'CodeFileName', "Code/SpecialFuelClass.lua",
 }),
 PlaceObj('ModItemCode', {
 	'name', "upgradeCall",
@@ -110,6 +175,40 @@ PlaceObj('ModItemBuildingCompositeDef', {
 	soil_form = "circle",
 	terrain_change = "soil",
 }),
+PlaceObj('ModItemSpawnDef', {
+	FindSpawnLoc = function (self, spawn_class, target, context)
+		local retry = 8
+		local center = MapGetFirst(true,'HotairBalloon')
+		local pf = g_Classes[spawn_class]
+		local rand = InteractionRandCreate('expedition_tame')
+		local radius = 14*guim
+		local near_balloon = terrain.FindPassable(center,pf,radius)
+		if not near_balloon then -- slowly increase radius finding first passable spot
+			for i=1, retry do
+				radius = radius + (10*guim)
+				near_balloon = terrain.FindPassable(center,pf,radius)
+				if near_balloon then return near_balloon end
+			end
+		else
+			return near_balloon
+		end
+	end,
+	PostSpawn = function (self, obj, target, context)
+		if IsKindOf(obj,'animal') then
+			obj:Tame()
+			obj.CombatHostile = false
+		elseif IsKindOf(obj,'ActivityInvaderRobotBase') then
+			if self.Invader then obj:CheatToggleInvader() end
+		end
+		if MapVarValues['nest_awaken_exp_tame'] and MapVarValues['nest_awaken_exp_tame'] ~= 'N/A' then
+			obj.DisplayName = T{987656789,MapVarValues['nest_awaken_exp_tame'],}
+			MapVarValues['nest_awaken_exp_tame'] = 'N/A'
+		end
+	end,
+	SpawnClass = "Camel",
+	id = "tamed_on_expedition",
+	save_in = "Mod/rtw6tLg",
+}),
 PlaceObj('ModItemFolder', {
 	'name', "Research",
 	'NameColor', RGBA(129, 175, 192, 255),
@@ -122,6 +221,11 @@ PlaceObj('ModItemFolder', {
 		FieldResearchCategory = "Fauna",
 		FieldResearchTemplateExpression = function (self) return Boxer end,
 		Icon = "UI/Messages/Research/res_Dogs",
+		Prerequisites = {
+			PlaceObj('CheckResource', {
+				ResourceGroup = "FoodProcessed",
+			}),
+		},
 		ResearchPoints = 6000,
 		group = "Field",
 		id = "field_dog_T5",
@@ -856,7 +960,7 @@ PlaceObj('ModItemFolder', {
 		OnEquip = PlaceObj('ScriptProgram', {
 			Params = "self, unit",
 			eval = function (self, unit)
-				if (ILU_combat_type == 'simple') then
+				if (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') then
 					unit:AddHealthCondition("armor_leather_simple", "mod", unit:PickBodyPart("WholeBody", "All"))
 				else
 					unit:AddHealthCondition("armor_leather_complex", "mod", unit:PickBodyPart("WholeBody", "All"))
@@ -865,7 +969,7 @@ PlaceObj('ModItemFolder', {
 			PlaceObj('ScriptIf', {
 				HasElse = true,
 				PlaceObj('ScriptExpression', {
-					Value = function () return (ILU_combat_type == 'simple') end,
+					Value = function () return (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') end,
 				}),
 			}),
 			PlaceObj('ScriptThen', {
@@ -997,7 +1101,7 @@ PlaceObj('ModItemFolder', {
 		OnEquip = PlaceObj('ScriptProgram', {
 			Params = "self, unit",
 			eval = function (self, unit)
-				if (ILU_combat_type == 'simple') then
+				if (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') then
 					unit:AddHealthCondition("armor_leather_simple", "mod", unit:PickBodyPart("WholeBody", "All"))
 					unit:AddHealthCondition("armor_leather_simple", "mod", unit:PickBodyPart("WholeBody", "All"))
 				else
@@ -1008,7 +1112,7 @@ PlaceObj('ModItemFolder', {
 			PlaceObj('ScriptIf', {
 				HasElse = true,
 				PlaceObj('ScriptExpression', {
-					Value = function () return (ILU_combat_type == 'simple') end,
+					Value = function () return (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') end,
 				}),
 			}),
 			PlaceObj('ScriptThen', {
@@ -1163,7 +1267,7 @@ PlaceObj('ModItemFolder', {
 		OnEquip = PlaceObj('ScriptProgram', {
 			Params = "self, unit",
 			eval = function (self, unit)
-				if (ILU_combat_type == 'simple') then
+				if (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') then
 					unit:AddHealthCondition("armor_leather_simple", "mod", unit:PickBodyPart("WholeBody", "All"))
 				else
 					unit:AddHealthCondition("armor_leather_complex", "mod", unit:PickBodyPart("WholeBody", "All"))
@@ -1172,7 +1276,7 @@ PlaceObj('ModItemFolder', {
 			PlaceObj('ScriptIf', {
 				HasElse = true,
 				PlaceObj('ScriptExpression', {
-					Value = function () return (ILU_combat_type == 'simple') end,
+					Value = function () return (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') end,
 				}),
 			}),
 			PlaceObj('ScriptThen', {
@@ -1298,7 +1402,7 @@ PlaceObj('ModItemFolder', {
 		OnEquip = PlaceObj('ScriptProgram', {
 			Params = "self, unit",
 			eval = function (self, unit)
-				if (ILU_combat_type == 'simple') then
+				if (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') then
 					unit:AddHealthCondition("armor_leather_simple", "mod", unit:PickBodyPart("WholeBody", "All"))
 				else
 					unit:AddHealthCondition("armor_leather_complex", "mod", unit:PickBodyPart("WholeBody", "All"))
@@ -1307,7 +1411,7 @@ PlaceObj('ModItemFolder', {
 			PlaceObj('ScriptIf', {
 				HasElse = true,
 				PlaceObj('ScriptExpression', {
-					Value = function () return (ILU_combat_type == 'simple') end,
+					Value = function () return (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') end,
 				}),
 			}),
 			PlaceObj('ScriptThen', {
@@ -1432,7 +1536,7 @@ PlaceObj('ModItemFolder', {
 		OnEquip = PlaceObj('ScriptProgram', {
 			Params = "self, unit",
 			eval = function (self, unit)
-				if (ILU_combat_type == 'simple') then
+				if (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') then
 					unit:AddHealthCondition("armor_vleather_simple", "mod", unit:PickBodyPart("WholeBody", "All"))
 				else
 					unit:AddHealthCondition("armor_vleather_complex", "mod", unit:PickBodyPart("WholeBody", "All"))
@@ -1441,7 +1545,7 @@ PlaceObj('ModItemFolder', {
 			PlaceObj('ScriptIf', {
 				HasElse = true,
 				PlaceObj('ScriptExpression', {
-					Value = function () return (ILU_combat_type == 'simple') end,
+					Value = function () return (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') end,
 				}),
 			}),
 			PlaceObj('ScriptThen', {
@@ -1572,7 +1676,7 @@ PlaceObj('ModItemFolder', {
 		OnEquip = PlaceObj('ScriptProgram', {
 			Params = "self, unit",
 			eval = function (self, unit)
-				if (ILU_combat_type == 'simple') then
+				if (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') then
 					unit:AddHealthCondition("armor_vleather_simple", "mod", unit:PickBodyPart("WholeBody", "All"))
 					unit:AddHealthCondition("armor_vleather_simple", "mod", unit:PickBodyPart("WholeBody", "All"))
 				else
@@ -1583,7 +1687,7 @@ PlaceObj('ModItemFolder', {
 			PlaceObj('ScriptIf', {
 				HasElse = true,
 				PlaceObj('ScriptExpression', {
-					Value = function () return (ILU_combat_type == 'simple') end,
+					Value = function () return (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') end,
 				}),
 			}),
 			PlaceObj('ScriptThen', {
@@ -1738,7 +1842,7 @@ PlaceObj('ModItemFolder', {
 		OnEquip = PlaceObj('ScriptProgram', {
 			Params = "self, unit",
 			eval = function (self, unit)
-				if (ILU_combat_type == 'simple') then
+				if (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') then
 					unit:AddHealthCondition("armor_vleather_simple", "mod", unit:PickBodyPart("WholeBody", "All"))
 				else
 					unit:AddHealthCondition("armor_vleather_complex", "mod", unit:PickBodyPart("WholeBody", "All"))
@@ -1747,7 +1851,7 @@ PlaceObj('ModItemFolder', {
 			PlaceObj('ScriptIf', {
 				HasElse = true,
 				PlaceObj('ScriptExpression', {
-					Value = function () return (ILU_combat_type == 'simple') end,
+					Value = function () return (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') end,
 				}),
 			}),
 			PlaceObj('ScriptThen', {
@@ -1873,7 +1977,7 @@ PlaceObj('ModItemFolder', {
 		OnEquip = PlaceObj('ScriptProgram', {
 			Params = "self, unit",
 			eval = function (self, unit)
-				if (ILU_combat_type == 'simple') then
+				if (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') then
 					unit:AddHealthCondition("armor_vleather_simple", "mod", unit:PickBodyPart("WholeBody", "All"))
 				else
 					unit:AddHealthCondition("armor_vleather_complex", "mod", unit:PickBodyPart("WholeBody", "All"))
@@ -1882,7 +1986,7 @@ PlaceObj('ModItemFolder', {
 			PlaceObj('ScriptIf', {
 				HasElse = true,
 				PlaceObj('ScriptExpression', {
-					Value = function () return (ILU_combat_type == 'simple') end,
+					Value = function () return (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') end,
 				}),
 			}),
 			PlaceObj('ScriptThen', {
@@ -2011,7 +2115,7 @@ PlaceObj('ModItemFolder', {
 		OnEquip = PlaceObj('ScriptProgram', {
 			Params = "self, unit",
 			eval = function (self, unit)
-				if (ILU_combat_type == 'simple') then
+				if (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') then
 					unit:AddHealthCondition("armor_synth_simple", "mod", unit:PickBodyPart("WholeBody", "All"))
 				else
 					unit:AddHealthCondition("armor_synth_complex", "mod", unit:PickBodyPart("WholeBody", "All"))
@@ -2020,7 +2124,7 @@ PlaceObj('ModItemFolder', {
 			PlaceObj('ScriptIf', {
 				HasElse = true,
 				PlaceObj('ScriptExpression', {
-					Value = function () return (ILU_combat_type == 'simple') end,
+					Value = function () return (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') end,
 				}),
 			}),
 			PlaceObj('ScriptThen', {
@@ -2091,6 +2195,42 @@ PlaceObj('ModItemFolder', {
 		carry_scale = 90,
 		carry_spot = "Tool",
 		carry_type = "HandsClose",
+		changed_props = {
+			PlaceObj('ModDef', {
+				'title', "[RFH] Akane Hayashi - The Onna-musha",
+				'description', '[h1]A character from my "Rescued From History" series[/h1]\n\n[h2]A samurai warrior from the ancient past finds herself lost in a modern world and escapes to the stars.[/h2]\n\n[h3]Make sure to read her bio for details on her story![/h3]\n\nBecome her friend, and she will protect you until her last breath.\n\nBecome her enemy, and you will know only death from her blade or spear.\n\nSet in her ways, she cares only to do what she knows and excels at. \n\nHighly proficient in melee combat, physical activity, and farming. Poor at healing, cooking, construction, and crafting. She\'s best used as a "tank" to draw enemy attacks and fight them up close while your other survivors deal ranged damage.\n\nCannot do research tasks as modern technology and science elude her understanding.\n\n[h3]Strengths:[/h3]\n[list]\n[*]4x attack and critical hit rate with any melee weapons.\n[*]Butchers animals 3x as fast.\n[*]Walks/runs 40% faster due to her excellent physical condition.\n[*]+200 Health and 3x HP regen.\n[*]Takes 5 less bleeding damage when injured.\n[*]Through meditation and having already lived through war and carnage, she\'s less likely to experience meltdowns.\n[*]With her excellent defensive skills, she has a base dodge chance of 25% of melee attacks and 15% of ranged attacks.\n[*]Equipping matching sets of medium or heavy armor grants additional dodge chance bonuses.\n	[*]Medium Armor - Synthetic, Carbon 1.0, Advanced Synthetic (Cyberpunks Mod only), Galactic (PX Mod only) - 5% melee, 2% ranged per equipped piece.\n	[*]Heavy Armor - Carbon 2.0, Silicon (Cyberpunks Mod only), Atomic/Cyberpunk (Cyberpunks Mod only), Cyber (PX Mod only), Alien (PX Mod only) - 7% melee, 5% ranged per equipped piece.\n[*]Automatically engages in combat against hostiles from within her sight range when drafted.\n[*]Comes equipped with a unique weapon, the Bisento Naginata.\n[*]Excellent at farming and physical labor.\n[/list]\n\n[h3]Weaknesses:[/h3]\n[list]\n[*]Miserable at ranged combat. 4x attack speed penalty. She should only have a melee weapon equipped at all times.\n[*]Becomes extremely violent towards people and objects when experiencing breakdowns. They will always either be Berserk or Bullying.\n[*]Can\'t research or observe, or perform Project-X related activities. Poor at everything except combat, farming, and physical labor.\n[*]Violent meltdowns. She\'ll either attack her fellow colonists or damage equipment. Don\'t piss her off.\n[/list]\n\n[h3]Techs/items known:[/h3]\n[list]\n[*]Weaponsmithing\n[*]Kimchi\n[*]Purpleleaf\n[*]Dandelion trees\n[*]Chew root\n[*]Mulchtubes\n[/list]\n\n[h3]To Do List for future versions:[/h3]\n[list]\n[*]Nada! She is feature complete.\n[/list]',
+				'image', "Mod/aGJMohS/Images/NewAkane3.PNG",
+				'last_changes', "Akane now comes with the Bisento Naginata, which causes damage to multiple enemies in front of her. This is a unique model.\n\nIf you play the Old Earth Tech - Redux mod, this weapon is between the Steel and Carbon naginatas in terms of damage.",
+				'dependencies', {
+					PlaceObj('ModDependency', {
+						'id', "sad_commonlib",
+						'title', "SAD_CommonLib",
+						'version_major', 1,
+						'version_minor', 10,
+					}),
+				},
+				'id', "aGJMohS",
+				'author', "Mantastic",
+				'version_major', 2,
+				'version_minor', 8,
+				'version', 160,
+				'lua_revision', 233360,
+				'saved_with_revision', 352677,
+				'entities', {
+					"BisentoNaginata",
+					"BisentoNaginataResource",
+				},
+				'code', {
+					"Entities/BisentoNaginata.lua",
+					"Entities/BisentoNaginataResource.lua",
+				},
+				'has_data', true,
+				'saved', 1747264136,
+				'code_hash', 3458515239294452229,
+				'steam_id', "3092478010",
+				'TagCharacters', true,
+			}),
+		},
 		color = 4278980900,
 		description = T(519164215076, --[[ModItemEquipResource Armor_Hat_Synthetic description]] "A durable helm made of synthetic textiles reinforced with metal frame."),
 		display_name = T(241567282723, --[[ModItemEquipResource Armor_Hat_Synthetic display_name]] "Synthetic helm"),
@@ -2107,6 +2247,11 @@ PlaceObj('ModItemFolder', {
 		save_in = "Mod/rtw6tLg",
 		stack_entity = "ResourceBulk_Hat",
 		stack_size = 1000,
+		tags = {
+			["Medium Armor"] = true,
+			MediumArmor = true,
+			"MediumArmor",
+		},
 		use_unfinished_item = "UnfinishedApparel",
 		visible = false,
 	}),
@@ -2156,7 +2301,7 @@ PlaceObj('ModItemFolder', {
 		OnEquip = PlaceObj('ScriptProgram', {
 			Params = "self, unit",
 			eval = function (self, unit)
-				if (ILU_combat_type == 'simple') then
+				if (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') then
 					unit:AddHealthCondition("armor_synth_simple", "mod", unit:PickBodyPart("WholeBody", "All"))
 					unit:AddHealthCondition("armor_synth_simple", "mod", unit:PickBodyPart("WholeBody", "All"))
 				else
@@ -2167,7 +2312,7 @@ PlaceObj('ModItemFolder', {
 			PlaceObj('ScriptIf', {
 				HasElse = true,
 				PlaceObj('ScriptExpression', {
-					Value = function () return (ILU_combat_type == 'simple') end,
+					Value = function () return (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') end,
 				}),
 			}),
 			PlaceObj('ScriptThen', {
@@ -2266,6 +2411,42 @@ PlaceObj('ModItemFolder', {
 		carry_scale = 80,
 		carry_spot = "Tool",
 		carry_type = "HandsClose",
+		changed_props = {
+			PlaceObj('ModDef', {
+				'title', "[RFH] Akane Hayashi - The Onna-musha",
+				'description', '[h1]A character from my "Rescued From History" series[/h1]\n\n[h2]A samurai warrior from the ancient past finds herself lost in a modern world and escapes to the stars.[/h2]\n\n[h3]Make sure to read her bio for details on her story![/h3]\n\nBecome her friend, and she will protect you until her last breath.\n\nBecome her enemy, and you will know only death from her blade or spear.\n\nSet in her ways, she cares only to do what she knows and excels at. \n\nHighly proficient in melee combat, physical activity, and farming. Poor at healing, cooking, construction, and crafting. She\'s best used as a "tank" to draw enemy attacks and fight them up close while your other survivors deal ranged damage.\n\nCannot do research tasks as modern technology and science elude her understanding.\n\n[h3]Strengths:[/h3]\n[list]\n[*]4x attack and critical hit rate with any melee weapons.\n[*]Butchers animals 3x as fast.\n[*]Walks/runs 40% faster due to her excellent physical condition.\n[*]+200 Health and 3x HP regen.\n[*]Takes 5 less bleeding damage when injured.\n[*]Through meditation and having already lived through war and carnage, she\'s less likely to experience meltdowns.\n[*]With her excellent defensive skills, she has a base dodge chance of 25% of melee attacks and 15% of ranged attacks.\n[*]Equipping matching sets of medium or heavy armor grants additional dodge chance bonuses.\n	[*]Medium Armor - Synthetic, Carbon 1.0, Advanced Synthetic (Cyberpunks Mod only), Galactic (PX Mod only) - 5% melee, 2% ranged per equipped piece.\n	[*]Heavy Armor - Carbon 2.0, Silicon (Cyberpunks Mod only), Atomic/Cyberpunk (Cyberpunks Mod only), Cyber (PX Mod only), Alien (PX Mod only) - 7% melee, 5% ranged per equipped piece.\n[*]Automatically engages in combat against hostiles from within her sight range when drafted.\n[*]Comes equipped with a unique weapon, the Bisento Naginata.\n[*]Excellent at farming and physical labor.\n[/list]\n\n[h3]Weaknesses:[/h3]\n[list]\n[*]Miserable at ranged combat. 4x attack speed penalty. She should only have a melee weapon equipped at all times.\n[*]Becomes extremely violent towards people and objects when experiencing breakdowns. They will always either be Berserk or Bullying.\n[*]Can\'t research or observe, or perform Project-X related activities. Poor at everything except combat, farming, and physical labor.\n[*]Violent meltdowns. She\'ll either attack her fellow colonists or damage equipment. Don\'t piss her off.\n[/list]\n\n[h3]Techs/items known:[/h3]\n[list]\n[*]Weaponsmithing\n[*]Kimchi\n[*]Purpleleaf\n[*]Dandelion trees\n[*]Chew root\n[*]Mulchtubes\n[/list]\n\n[h3]To Do List for future versions:[/h3]\n[list]\n[*]Nada! She is feature complete.\n[/list]',
+				'image', "Mod/aGJMohS/Images/NewAkane3.PNG",
+				'last_changes', "Akane now comes with the Bisento Naginata, which causes damage to multiple enemies in front of her. This is a unique model.\n\nIf you play the Old Earth Tech - Redux mod, this weapon is between the Steel and Carbon naginatas in terms of damage.",
+				'dependencies', {
+					PlaceObj('ModDependency', {
+						'id', "sad_commonlib",
+						'title', "SAD_CommonLib",
+						'version_major', 1,
+						'version_minor', 10,
+					}),
+				},
+				'id', "aGJMohS",
+				'author', "Mantastic",
+				'version_major', 2,
+				'version_minor', 8,
+				'version', 160,
+				'lua_revision', 233360,
+				'saved_with_revision', 352677,
+				'entities', {
+					"BisentoNaginata",
+					"BisentoNaginataResource",
+				},
+				'code', {
+					"Entities/BisentoNaginata.lua",
+					"Entities/BisentoNaginataResource.lua",
+				},
+				'has_data', true,
+				'saved', 1747264136,
+				'code_hash', 3458515239294452229,
+				'steam_id', "3092478010",
+				'TagCharacters', true,
+			}),
+		},
 		color = 4278980900,
 		description = T(377126490615, --[[ModItemEquipResource Armor_Jacket_Synthetic description]] "A durable armor piece made of synthetic textiles reinforced with metal frame."),
 		display_name = T(195691499869, --[[ModItemEquipResource Armor_Jacket_Synthetic display_name]] "Synthetic vest"),
@@ -2282,6 +2463,11 @@ PlaceObj('ModItemFolder', {
 		save_in = "Mod/rtw6tLg",
 		stack_entity = "ResourceBulk_Apparel",
 		stack_size = 1000,
+		tags = {
+			["Medium Armor"] = true,
+			MediumArmor = true,
+			"MediumArmor",
+		},
 		use_unfinished_item = "UnfinishedApparel",
 		visible = false,
 	}),
@@ -2326,7 +2512,7 @@ PlaceObj('ModItemFolder', {
 		OnEquip = PlaceObj('ScriptProgram', {
 			Params = "self, unit",
 			eval = function (self, unit)
-				if (ILU_combat_type == 'simple') then
+				if (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') then
 					unit:AddHealthCondition("armor_synth_simple", "mod", unit:PickBodyPart("WholeBody", "All"))
 				else
 					unit:AddHealthCondition("armor_synth_complex", "mod", unit:PickBodyPart("WholeBody", "All"))
@@ -2335,7 +2521,7 @@ PlaceObj('ModItemFolder', {
 			PlaceObj('ScriptIf', {
 				HasElse = true,
 				PlaceObj('ScriptExpression', {
-					Value = function () return (ILU_combat_type == 'simple') end,
+					Value = function () return (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') end,
 				}),
 			}),
 			PlaceObj('ScriptThen', {
@@ -2406,6 +2592,42 @@ PlaceObj('ModItemFolder', {
 		carry_scale = 80,
 		carry_spot = "Tool",
 		carry_type = "HandsClose",
+		changed_props = {
+			PlaceObj('ModDef', {
+				'title', "[RFH] Akane Hayashi - The Onna-musha",
+				'description', '[h1]A character from my "Rescued From History" series[/h1]\n\n[h2]A samurai warrior from the ancient past finds herself lost in a modern world and escapes to the stars.[/h2]\n\n[h3]Make sure to read her bio for details on her story![/h3]\n\nBecome her friend, and she will protect you until her last breath.\n\nBecome her enemy, and you will know only death from her blade or spear.\n\nSet in her ways, she cares only to do what she knows and excels at. \n\nHighly proficient in melee combat, physical activity, and farming. Poor at healing, cooking, construction, and crafting. She\'s best used as a "tank" to draw enemy attacks and fight them up close while your other survivors deal ranged damage.\n\nCannot do research tasks as modern technology and science elude her understanding.\n\n[h3]Strengths:[/h3]\n[list]\n[*]4x attack and critical hit rate with any melee weapons.\n[*]Butchers animals 3x as fast.\n[*]Walks/runs 40% faster due to her excellent physical condition.\n[*]+200 Health and 3x HP regen.\n[*]Takes 5 less bleeding damage when injured.\n[*]Through meditation and having already lived through war and carnage, she\'s less likely to experience meltdowns.\n[*]With her excellent defensive skills, she has a base dodge chance of 25% of melee attacks and 15% of ranged attacks.\n[*]Equipping matching sets of medium or heavy armor grants additional dodge chance bonuses.\n	[*]Medium Armor - Synthetic, Carbon 1.0, Advanced Synthetic (Cyberpunks Mod only), Galactic (PX Mod only) - 5% melee, 2% ranged per equipped piece.\n	[*]Heavy Armor - Carbon 2.0, Silicon (Cyberpunks Mod only), Atomic/Cyberpunk (Cyberpunks Mod only), Cyber (PX Mod only), Alien (PX Mod only) - 7% melee, 5% ranged per equipped piece.\n[*]Automatically engages in combat against hostiles from within her sight range when drafted.\n[*]Comes equipped with a unique weapon, the Bisento Naginata.\n[*]Excellent at farming and physical labor.\n[/list]\n\n[h3]Weaknesses:[/h3]\n[list]\n[*]Miserable at ranged combat. 4x attack speed penalty. She should only have a melee weapon equipped at all times.\n[*]Becomes extremely violent towards people and objects when experiencing breakdowns. They will always either be Berserk or Bullying.\n[*]Can\'t research or observe, or perform Project-X related activities. Poor at everything except combat, farming, and physical labor.\n[*]Violent meltdowns. She\'ll either attack her fellow colonists or damage equipment. Don\'t piss her off.\n[/list]\n\n[h3]Techs/items known:[/h3]\n[list]\n[*]Weaponsmithing\n[*]Kimchi\n[*]Purpleleaf\n[*]Dandelion trees\n[*]Chew root\n[*]Mulchtubes\n[/list]\n\n[h3]To Do List for future versions:[/h3]\n[list]\n[*]Nada! She is feature complete.\n[/list]',
+				'image', "Mod/aGJMohS/Images/NewAkane3.PNG",
+				'last_changes', "Akane now comes with the Bisento Naginata, which causes damage to multiple enemies in front of her. This is a unique model.\n\nIf you play the Old Earth Tech - Redux mod, this weapon is between the Steel and Carbon naginatas in terms of damage.",
+				'dependencies', {
+					PlaceObj('ModDependency', {
+						'id', "sad_commonlib",
+						'title', "SAD_CommonLib",
+						'version_major', 1,
+						'version_minor', 10,
+					}),
+				},
+				'id', "aGJMohS",
+				'author', "Mantastic",
+				'version_major', 2,
+				'version_minor', 8,
+				'version', 160,
+				'lua_revision', 233360,
+				'saved_with_revision', 352677,
+				'entities', {
+					"BisentoNaginata",
+					"BisentoNaginataResource",
+				},
+				'code', {
+					"Entities/BisentoNaginata.lua",
+					"Entities/BisentoNaginataResource.lua",
+				},
+				'has_data', true,
+				'saved', 1747264136,
+				'code_hash', 3458515239294452229,
+				'steam_id', "3092478010",
+				'TagCharacters', true,
+			}),
+		},
 		color = 4278980900,
 		description = T(218945996790, --[[ModItemEquipResource Armor_Pants_Synthetic description]] "Durable combat pants made of synthetic textiles reinforced with metal frame."),
 		display_name = T(339177433326, --[[ModItemEquipResource Armor_Pants_Synthetic display_name]] "Synthetic leggings"),
@@ -2421,6 +2643,11 @@ PlaceObj('ModItemFolder', {
 		save_in = "Mod/rtw6tLg",
 		stack_entity = "ResourceBulk_Apparel",
 		stack_size = 1000,
+		tags = {
+			["Medium Armor"] = true,
+			MediumArmor = true,
+			"MediumArmor",
+		},
 		use_unfinished_item = "UnfinishedApparel",
 		visible = false,
 	}),
@@ -2465,7 +2692,7 @@ PlaceObj('ModItemFolder', {
 		OnEquip = PlaceObj('ScriptProgram', {
 			Params = "self, unit",
 			eval = function (self, unit)
-				if (ILU_combat_type == 'simple') then
+				if (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') then
 					unit:AddHealthCondition("armor_synth_simple", "mod", unit:PickBodyPart("WholeBody", "All"))
 				else
 					unit:AddHealthCondition("armor_synth_complex", "mod", unit:PickBodyPart("WholeBody", "All"))
@@ -2474,7 +2701,7 @@ PlaceObj('ModItemFolder', {
 			PlaceObj('ScriptIf', {
 				HasElse = true,
 				PlaceObj('ScriptExpression', {
-					Value = function () return (ILU_combat_type == 'simple') end,
+					Value = function () return (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') end,
 				}),
 			}),
 			PlaceObj('ScriptThen', {
@@ -2544,6 +2771,42 @@ PlaceObj('ModItemFolder', {
 		carry_entity = "ResourceBulk_Shoes",
 		carry_spot = "Tool",
 		carry_type = "HandsClose",
+		changed_props = {
+			PlaceObj('ModDef', {
+				'title', "[RFH] Akane Hayashi - The Onna-musha",
+				'description', '[h1]A character from my "Rescued From History" series[/h1]\n\n[h2]A samurai warrior from the ancient past finds herself lost in a modern world and escapes to the stars.[/h2]\n\n[h3]Make sure to read her bio for details on her story![/h3]\n\nBecome her friend, and she will protect you until her last breath.\n\nBecome her enemy, and you will know only death from her blade or spear.\n\nSet in her ways, she cares only to do what she knows and excels at. \n\nHighly proficient in melee combat, physical activity, and farming. Poor at healing, cooking, construction, and crafting. She\'s best used as a "tank" to draw enemy attacks and fight them up close while your other survivors deal ranged damage.\n\nCannot do research tasks as modern technology and science elude her understanding.\n\n[h3]Strengths:[/h3]\n[list]\n[*]4x attack and critical hit rate with any melee weapons.\n[*]Butchers animals 3x as fast.\n[*]Walks/runs 40% faster due to her excellent physical condition.\n[*]+200 Health and 3x HP regen.\n[*]Takes 5 less bleeding damage when injured.\n[*]Through meditation and having already lived through war and carnage, she\'s less likely to experience meltdowns.\n[*]With her excellent defensive skills, she has a base dodge chance of 25% of melee attacks and 15% of ranged attacks.\n[*]Equipping matching sets of medium or heavy armor grants additional dodge chance bonuses.\n	[*]Medium Armor - Synthetic, Carbon 1.0, Advanced Synthetic (Cyberpunks Mod only), Galactic (PX Mod only) - 5% melee, 2% ranged per equipped piece.\n	[*]Heavy Armor - Carbon 2.0, Silicon (Cyberpunks Mod only), Atomic/Cyberpunk (Cyberpunks Mod only), Cyber (PX Mod only), Alien (PX Mod only) - 7% melee, 5% ranged per equipped piece.\n[*]Automatically engages in combat against hostiles from within her sight range when drafted.\n[*]Comes equipped with a unique weapon, the Bisento Naginata.\n[*]Excellent at farming and physical labor.\n[/list]\n\n[h3]Weaknesses:[/h3]\n[list]\n[*]Miserable at ranged combat. 4x attack speed penalty. She should only have a melee weapon equipped at all times.\n[*]Becomes extremely violent towards people and objects when experiencing breakdowns. They will always either be Berserk or Bullying.\n[*]Can\'t research or observe, or perform Project-X related activities. Poor at everything except combat, farming, and physical labor.\n[*]Violent meltdowns. She\'ll either attack her fellow colonists or damage equipment. Don\'t piss her off.\n[/list]\n\n[h3]Techs/items known:[/h3]\n[list]\n[*]Weaponsmithing\n[*]Kimchi\n[*]Purpleleaf\n[*]Dandelion trees\n[*]Chew root\n[*]Mulchtubes\n[/list]\n\n[h3]To Do List for future versions:[/h3]\n[list]\n[*]Nada! She is feature complete.\n[/list]',
+				'image', "Mod/aGJMohS/Images/NewAkane3.PNG",
+				'last_changes', "Akane now comes with the Bisento Naginata, which causes damage to multiple enemies in front of her. This is a unique model.\n\nIf you play the Old Earth Tech - Redux mod, this weapon is between the Steel and Carbon naginatas in terms of damage.",
+				'dependencies', {
+					PlaceObj('ModDependency', {
+						'id', "sad_commonlib",
+						'title', "SAD_CommonLib",
+						'version_major', 1,
+						'version_minor', 10,
+					}),
+				},
+				'id', "aGJMohS",
+				'author', "Mantastic",
+				'version_major', 2,
+				'version_minor', 8,
+				'version', 160,
+				'lua_revision', 233360,
+				'saved_with_revision', 352677,
+				'entities', {
+					"BisentoNaginata",
+					"BisentoNaginataResource",
+				},
+				'code', {
+					"Entities/BisentoNaginata.lua",
+					"Entities/BisentoNaginataResource.lua",
+				},
+				'has_data', true,
+				'saved', 1747264136,
+				'code_hash', 3458515239294452229,
+				'steam_id', "3092478010",
+				'TagCharacters', true,
+			}),
+		},
 		color = 4278980900,
 		description = T(923906804972, --[[ModItemEquipResource Armor_Shoes_Synthetic description]] "Durable combat boots made of synthetic textiles reinforced with metal frame."),
 		display_name = T(487627644867, --[[ModItemEquipResource Armor_Shoes_Synthetic display_name]] "Synthetic boots"),
@@ -2559,6 +2822,11 @@ PlaceObj('ModItemFolder', {
 		save_in = "Mod/rtw6tLg",
 		stack_entity = "ResourceBulk_Shoes",
 		stack_size = 1000,
+		tags = {
+			["Medium Armor"] = true,
+			MediumArmor = true,
+			"MediumArmor",
+		},
 		use_unfinished_item = "UnfinishedApparel",
 		visible = false,
 	}),
@@ -2599,7 +2867,7 @@ PlaceObj('ModItemFolder', {
 		OnEquip = PlaceObj('ScriptProgram', {
 			Params = "self, unit",
 			eval = function (self, unit)
-				if (ILU_combat_type == 'simple') then
+				if (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') then
 					unit:AddHealthCondition("armor_badCarbon_simple", "mod", unit:PickBodyPart("WholeBody", "All"))
 				else
 					unit:AddHealthCondition("armor_badCarbon_complex", "mod", unit:PickBodyPart("WholeBody", "All"))
@@ -2608,7 +2876,7 @@ PlaceObj('ModItemFolder', {
 			PlaceObj('ScriptIf', {
 				HasElse = true,
 				PlaceObj('ScriptExpression', {
-					Value = function () return (ILU_combat_type == 'simple') end,
+					Value = function () return (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') end,
 				}),
 			}),
 			PlaceObj('ScriptThen', {
@@ -2679,6 +2947,42 @@ PlaceObj('ModItemFolder', {
 		carry_scale = 90,
 		carry_spot = "Tool",
 		carry_type = "HandsClose",
+		changed_props = {
+			PlaceObj('ModDef', {
+				'title', "[RFH] Akane Hayashi - The Onna-musha",
+				'description', '[h1]A character from my "Rescued From History" series[/h1]\n\n[h2]A samurai warrior from the ancient past finds herself lost in a modern world and escapes to the stars.[/h2]\n\n[h3]Make sure to read her bio for details on her story![/h3]\n\nBecome her friend, and she will protect you until her last breath.\n\nBecome her enemy, and you will know only death from her blade or spear.\n\nSet in her ways, she cares only to do what she knows and excels at. \n\nHighly proficient in melee combat, physical activity, and farming. Poor at healing, cooking, construction, and crafting. She\'s best used as a "tank" to draw enemy attacks and fight them up close while your other survivors deal ranged damage.\n\nCannot do research tasks as modern technology and science elude her understanding.\n\n[h3]Strengths:[/h3]\n[list]\n[*]4x attack and critical hit rate with any melee weapons.\n[*]Butchers animals 3x as fast.\n[*]Walks/runs 40% faster due to her excellent physical condition.\n[*]+200 Health and 3x HP regen.\n[*]Takes 5 less bleeding damage when injured.\n[*]Through meditation and having already lived through war and carnage, she\'s less likely to experience meltdowns.\n[*]With her excellent defensive skills, she has a base dodge chance of 25% of melee attacks and 15% of ranged attacks.\n[*]Equipping matching sets of medium or heavy armor grants additional dodge chance bonuses.\n	[*]Medium Armor - Synthetic, Carbon 1.0, Advanced Synthetic (Cyberpunks Mod only), Galactic (PX Mod only) - 5% melee, 2% ranged per equipped piece.\n	[*]Heavy Armor - Carbon 2.0, Silicon (Cyberpunks Mod only), Atomic/Cyberpunk (Cyberpunks Mod only), Cyber (PX Mod only), Alien (PX Mod only) - 7% melee, 5% ranged per equipped piece.\n[*]Automatically engages in combat against hostiles from within her sight range when drafted.\n[*]Comes equipped with a unique weapon, the Bisento Naginata.\n[*]Excellent at farming and physical labor.\n[/list]\n\n[h3]Weaknesses:[/h3]\n[list]\n[*]Miserable at ranged combat. 4x attack speed penalty. She should only have a melee weapon equipped at all times.\n[*]Becomes extremely violent towards people and objects when experiencing breakdowns. They will always either be Berserk or Bullying.\n[*]Can\'t research or observe, or perform Project-X related activities. Poor at everything except combat, farming, and physical labor.\n[*]Violent meltdowns. She\'ll either attack her fellow colonists or damage equipment. Don\'t piss her off.\n[/list]\n\n[h3]Techs/items known:[/h3]\n[list]\n[*]Weaponsmithing\n[*]Kimchi\n[*]Purpleleaf\n[*]Dandelion trees\n[*]Chew root\n[*]Mulchtubes\n[/list]\n\n[h3]To Do List for future versions:[/h3]\n[list]\n[*]Nada! She is feature complete.\n[/list]',
+				'image', "Mod/aGJMohS/Images/NewAkane3.PNG",
+				'last_changes', "Akane now comes with the Bisento Naginata, which causes damage to multiple enemies in front of her. This is a unique model.\n\nIf you play the Old Earth Tech - Redux mod, this weapon is between the Steel and Carbon naginatas in terms of damage.",
+				'dependencies', {
+					PlaceObj('ModDependency', {
+						'id', "sad_commonlib",
+						'title', "SAD_CommonLib",
+						'version_major', 1,
+						'version_minor', 10,
+					}),
+				},
+				'id', "aGJMohS",
+				'author', "Mantastic",
+				'version_major', 2,
+				'version_minor', 8,
+				'version', 160,
+				'lua_revision', 233360,
+				'saved_with_revision', 352677,
+				'entities', {
+					"BisentoNaginata",
+					"BisentoNaginataResource",
+				},
+				'code', {
+					"Entities/BisentoNaginata.lua",
+					"Entities/BisentoNaginataResource.lua",
+				},
+				'has_data', true,
+				'saved', 1747264136,
+				'code_hash', 3458515239294452229,
+				'steam_id', "3092478010",
+				'TagCharacters', true,
+			}),
+		},
 		color = 4279703319,
 		description = T(374699573764, --[[ModItemEquipResource Armor_Hat_Carbon_Basic description]] "A high-end helm made of carbon nanotubes. Extremely resistant to heat, blast waves, blunt or piercing hits. "),
 		display_name = T(418908562674, --[[ModItemEquipResource Armor_Hat_Carbon_Basic display_name]] "Carbon helm"),
@@ -2695,6 +2999,11 @@ PlaceObj('ModItemFolder', {
 		save_in = "Mod/rtw6tLg",
 		stack_entity = "ResourceBulk_Hat",
 		stack_size = 1000,
+		tags = {
+			["Medium Armor"] = true,
+			MediumArmor = true,
+			"MediumArmor",
+		},
 		use_unfinished_item = "UnfinishedApparel",
 		visible = false,
 	}),
@@ -2740,7 +3049,7 @@ PlaceObj('ModItemFolder', {
 		OnEquip = PlaceObj('ScriptProgram', {
 			Params = "self, unit",
 			eval = function (self, unit)
-				if (ILU_combat_type == 'simple') then
+				if (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') then
 					unit:AddHealthCondition("armor_badCarbon_simple", "mod", unit:PickBodyPart("WholeBody", "All"))
 					unit:AddHealthCondition("armor_badCarbon_simple", "mod", unit:PickBodyPart("WholeBody", "All"))
 				else
@@ -2751,7 +3060,7 @@ PlaceObj('ModItemFolder', {
 			PlaceObj('ScriptIf', {
 				HasElse = true,
 				PlaceObj('ScriptExpression', {
-					Value = function () return (ILU_combat_type == 'simple') end,
+					Value = function () return (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') end,
 				}),
 			}),
 			PlaceObj('ScriptThen', {
@@ -2850,6 +3159,42 @@ PlaceObj('ModItemFolder', {
 		carry_scale = 80,
 		carry_spot = "Tool",
 		carry_type = "HandsClose",
+		changed_props = {
+			PlaceObj('ModDef', {
+				'title', "[RFH] Akane Hayashi - The Onna-musha",
+				'description', '[h1]A character from my "Rescued From History" series[/h1]\n\n[h2]A samurai warrior from the ancient past finds herself lost in a modern world and escapes to the stars.[/h2]\n\n[h3]Make sure to read her bio for details on her story![/h3]\n\nBecome her friend, and she will protect you until her last breath.\n\nBecome her enemy, and you will know only death from her blade or spear.\n\nSet in her ways, she cares only to do what she knows and excels at. \n\nHighly proficient in melee combat, physical activity, and farming. Poor at healing, cooking, construction, and crafting. She\'s best used as a "tank" to draw enemy attacks and fight them up close while your other survivors deal ranged damage.\n\nCannot do research tasks as modern technology and science elude her understanding.\n\n[h3]Strengths:[/h3]\n[list]\n[*]4x attack and critical hit rate with any melee weapons.\n[*]Butchers animals 3x as fast.\n[*]Walks/runs 40% faster due to her excellent physical condition.\n[*]+200 Health and 3x HP regen.\n[*]Takes 5 less bleeding damage when injured.\n[*]Through meditation and having already lived through war and carnage, she\'s less likely to experience meltdowns.\n[*]With her excellent defensive skills, she has a base dodge chance of 25% of melee attacks and 15% of ranged attacks.\n[*]Equipping matching sets of medium or heavy armor grants additional dodge chance bonuses.\n	[*]Medium Armor - Synthetic, Carbon 1.0, Advanced Synthetic (Cyberpunks Mod only), Galactic (PX Mod only) - 5% melee, 2% ranged per equipped piece.\n	[*]Heavy Armor - Carbon 2.0, Silicon (Cyberpunks Mod only), Atomic/Cyberpunk (Cyberpunks Mod only), Cyber (PX Mod only), Alien (PX Mod only) - 7% melee, 5% ranged per equipped piece.\n[*]Automatically engages in combat against hostiles from within her sight range when drafted.\n[*]Comes equipped with a unique weapon, the Bisento Naginata.\n[*]Excellent at farming and physical labor.\n[/list]\n\n[h3]Weaknesses:[/h3]\n[list]\n[*]Miserable at ranged combat. 4x attack speed penalty. She should only have a melee weapon equipped at all times.\n[*]Becomes extremely violent towards people and objects when experiencing breakdowns. They will always either be Berserk or Bullying.\n[*]Can\'t research or observe, or perform Project-X related activities. Poor at everything except combat, farming, and physical labor.\n[*]Violent meltdowns. She\'ll either attack her fellow colonists or damage equipment. Don\'t piss her off.\n[/list]\n\n[h3]Techs/items known:[/h3]\n[list]\n[*]Weaponsmithing\n[*]Kimchi\n[*]Purpleleaf\n[*]Dandelion trees\n[*]Chew root\n[*]Mulchtubes\n[/list]\n\n[h3]To Do List for future versions:[/h3]\n[list]\n[*]Nada! She is feature complete.\n[/list]',
+				'image', "Mod/aGJMohS/Images/NewAkane3.PNG",
+				'last_changes', "Akane now comes with the Bisento Naginata, which causes damage to multiple enemies in front of her. This is a unique model.\n\nIf you play the Old Earth Tech - Redux mod, this weapon is between the Steel and Carbon naginatas in terms of damage.",
+				'dependencies', {
+					PlaceObj('ModDependency', {
+						'id', "sad_commonlib",
+						'title', "SAD_CommonLib",
+						'version_major', 1,
+						'version_minor', 10,
+					}),
+				},
+				'id', "aGJMohS",
+				'author', "Mantastic",
+				'version_major', 2,
+				'version_minor', 8,
+				'version', 160,
+				'lua_revision', 233360,
+				'saved_with_revision', 352677,
+				'entities', {
+					"BisentoNaginata",
+					"BisentoNaginataResource",
+				},
+				'code', {
+					"Entities/BisentoNaginata.lua",
+					"Entities/BisentoNaginataResource.lua",
+				},
+				'has_data', true,
+				'saved', 1747264136,
+				'code_hash', 3458515239294452229,
+				'steam_id', "3092478010",
+				'TagCharacters', true,
+			}),
+		},
 		color = 4279703319,
 		description = T(678841793085, --[[ModItemEquipResource Armor_Jacket_Carbon_Basic description]] "A high-end chest armor made of carbon nanotubes. Extremely resistant to heat, blast waves, blunt or piercing hits."),
 		display_name = T(111636698906, --[[ModItemEquipResource Armor_Jacket_Carbon_Basic display_name]] "Carbon vest"),
@@ -2866,6 +3211,11 @@ PlaceObj('ModItemFolder', {
 		save_in = "Mod/rtw6tLg",
 		stack_entity = "ResourceBulk_Apparel",
 		stack_size = 1000,
+		tags = {
+			["Medium Armor"] = true,
+			MediumArmor = true,
+			"MediumArmor",
+		},
 		use_unfinished_item = "UnfinishedApparel",
 		visible = false,
 	}),
@@ -2906,7 +3256,7 @@ PlaceObj('ModItemFolder', {
 		OnEquip = PlaceObj('ScriptProgram', {
 			Params = "self, unit",
 			eval = function (self, unit)
-				if (ILU_combat_type == 'simple') then
+				if (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') then
 					unit:AddHealthCondition("armor_badCarbon_simple", "mod", unit:PickBodyPart("WholeBody", "All"))
 				else
 					unit:AddHealthCondition("armor_badCarbon_complex", "mod", unit:PickBodyPart("WholeBody", "All"))
@@ -2915,7 +3265,7 @@ PlaceObj('ModItemFolder', {
 			PlaceObj('ScriptIf', {
 				HasElse = true,
 				PlaceObj('ScriptExpression', {
-					Value = function () return (ILU_combat_type == 'simple') end,
+					Value = function () return (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') end,
 				}),
 			}),
 			PlaceObj('ScriptThen', {
@@ -2986,6 +3336,42 @@ PlaceObj('ModItemFolder', {
 		carry_scale = 80,
 		carry_spot = "Tool",
 		carry_type = "HandsClose",
+		changed_props = {
+			PlaceObj('ModDef', {
+				'title', "[RFH] Akane Hayashi - The Onna-musha",
+				'description', '[h1]A character from my "Rescued From History" series[/h1]\n\n[h2]A samurai warrior from the ancient past finds herself lost in a modern world and escapes to the stars.[/h2]\n\n[h3]Make sure to read her bio for details on her story![/h3]\n\nBecome her friend, and she will protect you until her last breath.\n\nBecome her enemy, and you will know only death from her blade or spear.\n\nSet in her ways, she cares only to do what she knows and excels at. \n\nHighly proficient in melee combat, physical activity, and farming. Poor at healing, cooking, construction, and crafting. She\'s best used as a "tank" to draw enemy attacks and fight them up close while your other survivors deal ranged damage.\n\nCannot do research tasks as modern technology and science elude her understanding.\n\n[h3]Strengths:[/h3]\n[list]\n[*]4x attack and critical hit rate with any melee weapons.\n[*]Butchers animals 3x as fast.\n[*]Walks/runs 40% faster due to her excellent physical condition.\n[*]+200 Health and 3x HP regen.\n[*]Takes 5 less bleeding damage when injured.\n[*]Through meditation and having already lived through war and carnage, she\'s less likely to experience meltdowns.\n[*]With her excellent defensive skills, she has a base dodge chance of 25% of melee attacks and 15% of ranged attacks.\n[*]Equipping matching sets of medium or heavy armor grants additional dodge chance bonuses.\n	[*]Medium Armor - Synthetic, Carbon 1.0, Advanced Synthetic (Cyberpunks Mod only), Galactic (PX Mod only) - 5% melee, 2% ranged per equipped piece.\n	[*]Heavy Armor - Carbon 2.0, Silicon (Cyberpunks Mod only), Atomic/Cyberpunk (Cyberpunks Mod only), Cyber (PX Mod only), Alien (PX Mod only) - 7% melee, 5% ranged per equipped piece.\n[*]Automatically engages in combat against hostiles from within her sight range when drafted.\n[*]Comes equipped with a unique weapon, the Bisento Naginata.\n[*]Excellent at farming and physical labor.\n[/list]\n\n[h3]Weaknesses:[/h3]\n[list]\n[*]Miserable at ranged combat. 4x attack speed penalty. She should only have a melee weapon equipped at all times.\n[*]Becomes extremely violent towards people and objects when experiencing breakdowns. They will always either be Berserk or Bullying.\n[*]Can\'t research or observe, or perform Project-X related activities. Poor at everything except combat, farming, and physical labor.\n[*]Violent meltdowns. She\'ll either attack her fellow colonists or damage equipment. Don\'t piss her off.\n[/list]\n\n[h3]Techs/items known:[/h3]\n[list]\n[*]Weaponsmithing\n[*]Kimchi\n[*]Purpleleaf\n[*]Dandelion trees\n[*]Chew root\n[*]Mulchtubes\n[/list]\n\n[h3]To Do List for future versions:[/h3]\n[list]\n[*]Nada! She is feature complete.\n[/list]',
+				'image', "Mod/aGJMohS/Images/NewAkane3.PNG",
+				'last_changes', "Akane now comes with the Bisento Naginata, which causes damage to multiple enemies in front of her. This is a unique model.\n\nIf you play the Old Earth Tech - Redux mod, this weapon is between the Steel and Carbon naginatas in terms of damage.",
+				'dependencies', {
+					PlaceObj('ModDependency', {
+						'id', "sad_commonlib",
+						'title', "SAD_CommonLib",
+						'version_major', 1,
+						'version_minor', 10,
+					}),
+				},
+				'id', "aGJMohS",
+				'author', "Mantastic",
+				'version_major', 2,
+				'version_minor', 8,
+				'version', 160,
+				'lua_revision', 233360,
+				'saved_with_revision', 352677,
+				'entities', {
+					"BisentoNaginata",
+					"BisentoNaginataResource",
+				},
+				'code', {
+					"Entities/BisentoNaginata.lua",
+					"Entities/BisentoNaginataResource.lua",
+				},
+				'has_data', true,
+				'saved', 1747264136,
+				'code_hash', 3458515239294452229,
+				'steam_id', "3092478010",
+				'TagCharacters', true,
+			}),
+		},
 		color = 4279703319,
 		description = T(782889658381, --[[ModItemEquipResource Armor_Pants_Carbon_Basic description]] "High-end combat pants made of carbon nanotubes. Extremely resistant to heat, blast waves, blunt or piercing hits."),
 		display_name = T(287207926983, --[[ModItemEquipResource Armor_Pants_Carbon_Basic display_name]] "Carbon leggings"),
@@ -3001,6 +3387,11 @@ PlaceObj('ModItemFolder', {
 		save_in = "Mod/rtw6tLg",
 		stack_entity = "ResourceBulk_Apparel",
 		stack_size = 1000,
+		tags = {
+			["Medium Armor"] = true,
+			MediumArmor = true,
+			"MediumArmor",
+		},
 		use_unfinished_item = "UnfinishedApparel",
 		visible = false,
 	}),
@@ -3041,7 +3432,7 @@ PlaceObj('ModItemFolder', {
 		OnEquip = PlaceObj('ScriptProgram', {
 			Params = "self, unit",
 			eval = function (self, unit)
-				if (ILU_combat_type == 'simple') then
+				if (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') then
 					unit:AddHealthCondition("armor_badCarbon_simple", "mod", unit:PickBodyPart("WholeBody", "All"))
 				else
 					unit:AddHealthCondition("armor_badCarbon_complex", "mod", unit:PickBodyPart("WholeBody", "All"))
@@ -3050,7 +3441,7 @@ PlaceObj('ModItemFolder', {
 			PlaceObj('ScriptIf', {
 				HasElse = true,
 				PlaceObj('ScriptExpression', {
-					Value = function () return (ILU_combat_type == 'simple') end,
+					Value = function () return (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') end,
 				}),
 			}),
 			PlaceObj('ScriptThen', {
@@ -3120,6 +3511,42 @@ PlaceObj('ModItemFolder', {
 		carry_entity = "ResourceBulk_Shoes",
 		carry_spot = "Tool",
 		carry_type = "HandsClose",
+		changed_props = {
+			PlaceObj('ModDef', {
+				'title', "[RFH] Akane Hayashi - The Onna-musha",
+				'description', '[h1]A character from my "Rescued From History" series[/h1]\n\n[h2]A samurai warrior from the ancient past finds herself lost in a modern world and escapes to the stars.[/h2]\n\n[h3]Make sure to read her bio for details on her story![/h3]\n\nBecome her friend, and she will protect you until her last breath.\n\nBecome her enemy, and you will know only death from her blade or spear.\n\nSet in her ways, she cares only to do what she knows and excels at. \n\nHighly proficient in melee combat, physical activity, and farming. Poor at healing, cooking, construction, and crafting. She\'s best used as a "tank" to draw enemy attacks and fight them up close while your other survivors deal ranged damage.\n\nCannot do research tasks as modern technology and science elude her understanding.\n\n[h3]Strengths:[/h3]\n[list]\n[*]4x attack and critical hit rate with any melee weapons.\n[*]Butchers animals 3x as fast.\n[*]Walks/runs 40% faster due to her excellent physical condition.\n[*]+200 Health and 3x HP regen.\n[*]Takes 5 less bleeding damage when injured.\n[*]Through meditation and having already lived through war and carnage, she\'s less likely to experience meltdowns.\n[*]With her excellent defensive skills, she has a base dodge chance of 25% of melee attacks and 15% of ranged attacks.\n[*]Equipping matching sets of medium or heavy armor grants additional dodge chance bonuses.\n	[*]Medium Armor - Synthetic, Carbon 1.0, Advanced Synthetic (Cyberpunks Mod only), Galactic (PX Mod only) - 5% melee, 2% ranged per equipped piece.\n	[*]Heavy Armor - Carbon 2.0, Silicon (Cyberpunks Mod only), Atomic/Cyberpunk (Cyberpunks Mod only), Cyber (PX Mod only), Alien (PX Mod only) - 7% melee, 5% ranged per equipped piece.\n[*]Automatically engages in combat against hostiles from within her sight range when drafted.\n[*]Comes equipped with a unique weapon, the Bisento Naginata.\n[*]Excellent at farming and physical labor.\n[/list]\n\n[h3]Weaknesses:[/h3]\n[list]\n[*]Miserable at ranged combat. 4x attack speed penalty. She should only have a melee weapon equipped at all times.\n[*]Becomes extremely violent towards people and objects when experiencing breakdowns. They will always either be Berserk or Bullying.\n[*]Can\'t research or observe, or perform Project-X related activities. Poor at everything except combat, farming, and physical labor.\n[*]Violent meltdowns. She\'ll either attack her fellow colonists or damage equipment. Don\'t piss her off.\n[/list]\n\n[h3]Techs/items known:[/h3]\n[list]\n[*]Weaponsmithing\n[*]Kimchi\n[*]Purpleleaf\n[*]Dandelion trees\n[*]Chew root\n[*]Mulchtubes\n[/list]\n\n[h3]To Do List for future versions:[/h3]\n[list]\n[*]Nada! She is feature complete.\n[/list]',
+				'image', "Mod/aGJMohS/Images/NewAkane3.PNG",
+				'last_changes', "Akane now comes with the Bisento Naginata, which causes damage to multiple enemies in front of her. This is a unique model.\n\nIf you play the Old Earth Tech - Redux mod, this weapon is between the Steel and Carbon naginatas in terms of damage.",
+				'dependencies', {
+					PlaceObj('ModDependency', {
+						'id', "sad_commonlib",
+						'title', "SAD_CommonLib",
+						'version_major', 1,
+						'version_minor', 10,
+					}),
+				},
+				'id', "aGJMohS",
+				'author', "Mantastic",
+				'version_major', 2,
+				'version_minor', 8,
+				'version', 160,
+				'lua_revision', 233360,
+				'saved_with_revision', 352677,
+				'entities', {
+					"BisentoNaginata",
+					"BisentoNaginataResource",
+				},
+				'code', {
+					"Entities/BisentoNaginata.lua",
+					"Entities/BisentoNaginataResource.lua",
+				},
+				'has_data', true,
+				'saved', 1747264136,
+				'code_hash', 3458515239294452229,
+				'steam_id', "3092478010",
+				'TagCharacters', true,
+			}),
+		},
 		color = 4279703319,
 		description = T(843869998620, --[[ModItemEquipResource Armor_Shoes_Carbon_Basic description]] "High-end combat boots made of carbon nanotubes. Extremely resistant to heat, blast waves, blunt or piercing hits."),
 		display_name = T(789002698746, --[[ModItemEquipResource Armor_Shoes_Carbon_Basic display_name]] "Carbon boots"),
@@ -3135,6 +3562,11 @@ PlaceObj('ModItemFolder', {
 		save_in = "Mod/rtw6tLg",
 		stack_entity = "ResourceBulk_Shoes",
 		stack_size = 1000,
+		tags = {
+			["Medium Armor"] = true,
+			MediumArmor = true,
+			"MediumArmor",
+		},
 		use_unfinished_item = "UnfinishedApparel",
 		visible = false,
 	}),
@@ -3175,7 +3607,7 @@ PlaceObj('ModItemFolder', {
 		OnEquip = PlaceObj('ScriptProgram', {
 			Params = "self, unit",
 			eval = function (self, unit)
-				if (ILU_combat_type == 'simple') then
+				if (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') then
 					unit:AddHealthCondition("armor_carbon_simple", "mod", unit:PickBodyPart("WholeBody", "All"))
 				else
 					unit:AddHealthCondition("armor_carbon_complex", "mod", unit:PickBodyPart("WholeBody", "All"))
@@ -3184,7 +3616,7 @@ PlaceObj('ModItemFolder', {
 			PlaceObj('ScriptIf', {
 				HasElse = true,
 				PlaceObj('ScriptExpression', {
-					Value = function () return (ILU_combat_type == 'simple') end,
+					Value = function () return (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') end,
 				}),
 			}),
 			PlaceObj('ScriptThen', {
@@ -3255,6 +3687,42 @@ PlaceObj('ModItemFolder', {
 		carry_scale = 90,
 		carry_spot = "Tool",
 		carry_type = "HandsClose",
+		changed_props = {
+			PlaceObj('ModDef', {
+				'title', "[RFH] Akane Hayashi - The Onna-musha",
+				'description', '[h1]A character from my "Rescued From History" series[/h1]\n\n[h2]A samurai warrior from the ancient past finds herself lost in a modern world and escapes to the stars.[/h2]\n\n[h3]Make sure to read her bio for details on her story![/h3]\n\nBecome her friend, and she will protect you until her last breath.\n\nBecome her enemy, and you will know only death from her blade or spear.\n\nSet in her ways, she cares only to do what she knows and excels at. \n\nHighly proficient in melee combat, physical activity, and farming. Poor at healing, cooking, construction, and crafting. She\'s best used as a "tank" to draw enemy attacks and fight them up close while your other survivors deal ranged damage.\n\nCannot do research tasks as modern technology and science elude her understanding.\n\n[h3]Strengths:[/h3]\n[list]\n[*]4x attack and critical hit rate with any melee weapons.\n[*]Butchers animals 3x as fast.\n[*]Walks/runs 40% faster due to her excellent physical condition.\n[*]+200 Health and 3x HP regen.\n[*]Takes 5 less bleeding damage when injured.\n[*]Through meditation and having already lived through war and carnage, she\'s less likely to experience meltdowns.\n[*]With her excellent defensive skills, she has a base dodge chance of 25% of melee attacks and 15% of ranged attacks.\n[*]Equipping matching sets of medium or heavy armor grants additional dodge chance bonuses.\n	[*]Medium Armor - Synthetic, Carbon 1.0, Advanced Synthetic (Cyberpunks Mod only), Galactic (PX Mod only) - 5% melee, 2% ranged per equipped piece.\n	[*]Heavy Armor - Carbon 2.0, Silicon (Cyberpunks Mod only), Atomic/Cyberpunk (Cyberpunks Mod only), Cyber (PX Mod only), Alien (PX Mod only) - 7% melee, 5% ranged per equipped piece.\n[*]Automatically engages in combat against hostiles from within her sight range when drafted.\n[*]Comes equipped with a unique weapon, the Bisento Naginata.\n[*]Excellent at farming and physical labor.\n[/list]\n\n[h3]Weaknesses:[/h3]\n[list]\n[*]Miserable at ranged combat. 4x attack speed penalty. She should only have a melee weapon equipped at all times.\n[*]Becomes extremely violent towards people and objects when experiencing breakdowns. They will always either be Berserk or Bullying.\n[*]Can\'t research or observe, or perform Project-X related activities. Poor at everything except combat, farming, and physical labor.\n[*]Violent meltdowns. She\'ll either attack her fellow colonists or damage equipment. Don\'t piss her off.\n[/list]\n\n[h3]Techs/items known:[/h3]\n[list]\n[*]Weaponsmithing\n[*]Kimchi\n[*]Purpleleaf\n[*]Dandelion trees\n[*]Chew root\n[*]Mulchtubes\n[/list]\n\n[h3]To Do List for future versions:[/h3]\n[list]\n[*]Nada! She is feature complete.\n[/list]',
+				'image', "Mod/aGJMohS/Images/NewAkane3.PNG",
+				'last_changes', "Akane now comes with the Bisento Naginata, which causes damage to multiple enemies in front of her. This is a unique model.\n\nIf you play the Old Earth Tech - Redux mod, this weapon is between the Steel and Carbon naginatas in terms of damage.",
+				'dependencies', {
+					PlaceObj('ModDependency', {
+						'id', "sad_commonlib",
+						'title', "SAD_CommonLib",
+						'version_major', 1,
+						'version_minor', 10,
+					}),
+				},
+				'id', "aGJMohS",
+				'author', "Mantastic",
+				'version_major', 2,
+				'version_minor', 8,
+				'version', 160,
+				'lua_revision', 233360,
+				'saved_with_revision', 352677,
+				'entities', {
+					"BisentoNaginata",
+					"BisentoNaginataResource",
+				},
+				'code', {
+					"Entities/BisentoNaginata.lua",
+					"Entities/BisentoNaginataResource.lua",
+				},
+				'has_data', true,
+				'saved', 1747264136,
+				'code_hash', 3458515239294452229,
+				'steam_id', "3092478010",
+				'TagCharacters', true,
+			}),
+		},
 		color = 4279703319,
 		description = T(955791274401, --[[ModItemEquipResource Armor_Hat_Carbon description]] "Improved version of the Carbon helm. Extremely resistant to heat, blast waves, blunt or piercing hits. "),
 		display_name = T(643587892461, --[[ModItemEquipResource Armor_Hat_Carbon display_name]] "Carbon helm 2.0"),
@@ -3271,6 +3739,11 @@ PlaceObj('ModItemFolder', {
 		save_in = "Mod/rtw6tLg",
 		stack_entity = "ResourceBulk_Hat",
 		stack_size = 1000,
+		tags = {
+			["Heavy Armor"] = true,
+			HeavyArmor = true,
+			"HeavyArmor",
+		},
 		use_unfinished_item = "UnfinishedApparel",
 		visible = false,
 	}),
@@ -3316,7 +3789,7 @@ PlaceObj('ModItemFolder', {
 		OnEquip = PlaceObj('ScriptProgram', {
 			Params = "self, unit",
 			eval = function (self, unit)
-				if (ILU_combat_type == 'simple') then
+				if (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') then
 					unit:AddHealthCondition("armor_carbon_simple", "mod", unit:PickBodyPart("WholeBody", "All"))
 					unit:AddHealthCondition("armor_carbon_simple", "mod", unit:PickBodyPart("WholeBody", "All"))
 				else
@@ -3327,7 +3800,7 @@ PlaceObj('ModItemFolder', {
 			PlaceObj('ScriptIf', {
 				HasElse = true,
 				PlaceObj('ScriptExpression', {
-					Value = function () return (ILU_combat_type == 'simple') end,
+					Value = function () return (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') end,
 				}),
 			}),
 			PlaceObj('ScriptThen', {
@@ -3426,6 +3899,42 @@ PlaceObj('ModItemFolder', {
 		carry_scale = 80,
 		carry_spot = "Tool",
 		carry_type = "HandsClose",
+		changed_props = {
+			PlaceObj('ModDef', {
+				'title', "[RFH] Akane Hayashi - The Onna-musha",
+				'description', '[h1]A character from my "Rescued From History" series[/h1]\n\n[h2]A samurai warrior from the ancient past finds herself lost in a modern world and escapes to the stars.[/h2]\n\n[h3]Make sure to read her bio for details on her story![/h3]\n\nBecome her friend, and she will protect you until her last breath.\n\nBecome her enemy, and you will know only death from her blade or spear.\n\nSet in her ways, she cares only to do what she knows and excels at. \n\nHighly proficient in melee combat, physical activity, and farming. Poor at healing, cooking, construction, and crafting. She\'s best used as a "tank" to draw enemy attacks and fight them up close while your other survivors deal ranged damage.\n\nCannot do research tasks as modern technology and science elude her understanding.\n\n[h3]Strengths:[/h3]\n[list]\n[*]4x attack and critical hit rate with any melee weapons.\n[*]Butchers animals 3x as fast.\n[*]Walks/runs 40% faster due to her excellent physical condition.\n[*]+200 Health and 3x HP regen.\n[*]Takes 5 less bleeding damage when injured.\n[*]Through meditation and having already lived through war and carnage, she\'s less likely to experience meltdowns.\n[*]With her excellent defensive skills, she has a base dodge chance of 25% of melee attacks and 15% of ranged attacks.\n[*]Equipping matching sets of medium or heavy armor grants additional dodge chance bonuses.\n	[*]Medium Armor - Synthetic, Carbon 1.0, Advanced Synthetic (Cyberpunks Mod only), Galactic (PX Mod only) - 5% melee, 2% ranged per equipped piece.\n	[*]Heavy Armor - Carbon 2.0, Silicon (Cyberpunks Mod only), Atomic/Cyberpunk (Cyberpunks Mod only), Cyber (PX Mod only), Alien (PX Mod only) - 7% melee, 5% ranged per equipped piece.\n[*]Automatically engages in combat against hostiles from within her sight range when drafted.\n[*]Comes equipped with a unique weapon, the Bisento Naginata.\n[*]Excellent at farming and physical labor.\n[/list]\n\n[h3]Weaknesses:[/h3]\n[list]\n[*]Miserable at ranged combat. 4x attack speed penalty. She should only have a melee weapon equipped at all times.\n[*]Becomes extremely violent towards people and objects when experiencing breakdowns. They will always either be Berserk or Bullying.\n[*]Can\'t research or observe, or perform Project-X related activities. Poor at everything except combat, farming, and physical labor.\n[*]Violent meltdowns. She\'ll either attack her fellow colonists or damage equipment. Don\'t piss her off.\n[/list]\n\n[h3]Techs/items known:[/h3]\n[list]\n[*]Weaponsmithing\n[*]Kimchi\n[*]Purpleleaf\n[*]Dandelion trees\n[*]Chew root\n[*]Mulchtubes\n[/list]\n\n[h3]To Do List for future versions:[/h3]\n[list]\n[*]Nada! She is feature complete.\n[/list]',
+				'image', "Mod/aGJMohS/Images/NewAkane3.PNG",
+				'last_changes', "Akane now comes with the Bisento Naginata, which causes damage to multiple enemies in front of her. This is a unique model.\n\nIf you play the Old Earth Tech - Redux mod, this weapon is between the Steel and Carbon naginatas in terms of damage.",
+				'dependencies', {
+					PlaceObj('ModDependency', {
+						'id', "sad_commonlib",
+						'title', "SAD_CommonLib",
+						'version_major', 1,
+						'version_minor', 10,
+					}),
+				},
+				'id', "aGJMohS",
+				'author', "Mantastic",
+				'version_major', 2,
+				'version_minor', 8,
+				'version', 160,
+				'lua_revision', 233360,
+				'saved_with_revision', 352677,
+				'entities', {
+					"BisentoNaginata",
+					"BisentoNaginataResource",
+				},
+				'code', {
+					"Entities/BisentoNaginata.lua",
+					"Entities/BisentoNaginataResource.lua",
+				},
+				'has_data', true,
+				'saved', 1747264136,
+				'code_hash', 3458515239294452229,
+				'steam_id', "3092478010",
+				'TagCharacters', true,
+			}),
+		},
 		color = 4279703319,
 		description = T(881253875953, --[[ModItemEquipResource Armor_Jacket_Carbon description]] "Improved version of the Carbon vest. Extremely resistant to heat, blast waves, blunt or piercing hits."),
 		display_name = T(815381641490, --[[ModItemEquipResource Armor_Jacket_Carbon display_name]] "Carbon vest 2.0"),
@@ -3442,6 +3951,11 @@ PlaceObj('ModItemFolder', {
 		save_in = "Mod/rtw6tLg",
 		stack_entity = "ResourceBulk_Apparel",
 		stack_size = 1000,
+		tags = {
+			["Heavy Armor"] = true,
+			HeavyArmor = true,
+			"HeavyArmor",
+		},
 		use_unfinished_item = "UnfinishedApparel",
 		visible = false,
 	}),
@@ -3482,7 +3996,7 @@ PlaceObj('ModItemFolder', {
 		OnEquip = PlaceObj('ScriptProgram', {
 			Params = "self, unit",
 			eval = function (self, unit)
-				if (ILU_combat_type == 'simple') then
+				if (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') then
 					unit:AddHealthCondition("armor_carbon_simple", "mod", unit:PickBodyPart("WholeBody", "All"))
 				else
 					unit:AddHealthCondition("armor_carbon_complex", "mod", unit:PickBodyPart("WholeBody", "All"))
@@ -3491,7 +4005,7 @@ PlaceObj('ModItemFolder', {
 			PlaceObj('ScriptIf', {
 				HasElse = true,
 				PlaceObj('ScriptExpression', {
-					Value = function () return (ILU_combat_type == 'simple') end,
+					Value = function () return (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') end,
 				}),
 			}),
 			PlaceObj('ScriptThen', {
@@ -3562,6 +4076,42 @@ PlaceObj('ModItemFolder', {
 		carry_scale = 80,
 		carry_spot = "Tool",
 		carry_type = "HandsClose",
+		changed_props = {
+			PlaceObj('ModDef', {
+				'title', "[RFH] Akane Hayashi - The Onna-musha",
+				'description', '[h1]A character from my "Rescued From History" series[/h1]\n\n[h2]A samurai warrior from the ancient past finds herself lost in a modern world and escapes to the stars.[/h2]\n\n[h3]Make sure to read her bio for details on her story![/h3]\n\nBecome her friend, and she will protect you until her last breath.\n\nBecome her enemy, and you will know only death from her blade or spear.\n\nSet in her ways, she cares only to do what she knows and excels at. \n\nHighly proficient in melee combat, physical activity, and farming. Poor at healing, cooking, construction, and crafting. She\'s best used as a "tank" to draw enemy attacks and fight them up close while your other survivors deal ranged damage.\n\nCannot do research tasks as modern technology and science elude her understanding.\n\n[h3]Strengths:[/h3]\n[list]\n[*]4x attack and critical hit rate with any melee weapons.\n[*]Butchers animals 3x as fast.\n[*]Walks/runs 40% faster due to her excellent physical condition.\n[*]+200 Health and 3x HP regen.\n[*]Takes 5 less bleeding damage when injured.\n[*]Through meditation and having already lived through war and carnage, she\'s less likely to experience meltdowns.\n[*]With her excellent defensive skills, she has a base dodge chance of 25% of melee attacks and 15% of ranged attacks.\n[*]Equipping matching sets of medium or heavy armor grants additional dodge chance bonuses.\n	[*]Medium Armor - Synthetic, Carbon 1.0, Advanced Synthetic (Cyberpunks Mod only), Galactic (PX Mod only) - 5% melee, 2% ranged per equipped piece.\n	[*]Heavy Armor - Carbon 2.0, Silicon (Cyberpunks Mod only), Atomic/Cyberpunk (Cyberpunks Mod only), Cyber (PX Mod only), Alien (PX Mod only) - 7% melee, 5% ranged per equipped piece.\n[*]Automatically engages in combat against hostiles from within her sight range when drafted.\n[*]Comes equipped with a unique weapon, the Bisento Naginata.\n[*]Excellent at farming and physical labor.\n[/list]\n\n[h3]Weaknesses:[/h3]\n[list]\n[*]Miserable at ranged combat. 4x attack speed penalty. She should only have a melee weapon equipped at all times.\n[*]Becomes extremely violent towards people and objects when experiencing breakdowns. They will always either be Berserk or Bullying.\n[*]Can\'t research or observe, or perform Project-X related activities. Poor at everything except combat, farming, and physical labor.\n[*]Violent meltdowns. She\'ll either attack her fellow colonists or damage equipment. Don\'t piss her off.\n[/list]\n\n[h3]Techs/items known:[/h3]\n[list]\n[*]Weaponsmithing\n[*]Kimchi\n[*]Purpleleaf\n[*]Dandelion trees\n[*]Chew root\n[*]Mulchtubes\n[/list]\n\n[h3]To Do List for future versions:[/h3]\n[list]\n[*]Nada! She is feature complete.\n[/list]',
+				'image', "Mod/aGJMohS/Images/NewAkane3.PNG",
+				'last_changes', "Akane now comes with the Bisento Naginata, which causes damage to multiple enemies in front of her. This is a unique model.\n\nIf you play the Old Earth Tech - Redux mod, this weapon is between the Steel and Carbon naginatas in terms of damage.",
+				'dependencies', {
+					PlaceObj('ModDependency', {
+						'id', "sad_commonlib",
+						'title', "SAD_CommonLib",
+						'version_major', 1,
+						'version_minor', 10,
+					}),
+				},
+				'id', "aGJMohS",
+				'author', "Mantastic",
+				'version_major', 2,
+				'version_minor', 8,
+				'version', 160,
+				'lua_revision', 233360,
+				'saved_with_revision', 352677,
+				'entities', {
+					"BisentoNaginata",
+					"BisentoNaginataResource",
+				},
+				'code', {
+					"Entities/BisentoNaginata.lua",
+					"Entities/BisentoNaginataResource.lua",
+				},
+				'has_data', true,
+				'saved', 1747264136,
+				'code_hash', 3458515239294452229,
+				'steam_id', "3092478010",
+				'TagCharacters', true,
+			}),
+		},
 		color = 4279703319,
 		description = T(782175597493, --[[ModItemEquipResource Armor_Pants_Carbon description]] "Improved version of the Carbon leggings. Extremely resistant to heat, blast waves, blunt or piercing hits."),
 		display_name = T(796469570521, --[[ModItemEquipResource Armor_Pants_Carbon display_name]] "Carbon leggings 2.0"),
@@ -3577,6 +4127,11 @@ PlaceObj('ModItemFolder', {
 		save_in = "Mod/rtw6tLg",
 		stack_entity = "ResourceBulk_Apparel",
 		stack_size = 1000,
+		tags = {
+			["Heavy Armor"] = true,
+			HeavyArmor = true,
+			"HeavyArmor",
+		},
 		use_unfinished_item = "UnfinishedApparel",
 		visible = false,
 	}),
@@ -3617,7 +4172,7 @@ PlaceObj('ModItemFolder', {
 		OnEquip = PlaceObj('ScriptProgram', {
 			Params = "self, unit",
 			eval = function (self, unit)
-				if (ILU_combat_type == 'simple') then
+				if (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') then
 					unit:AddHealthCondition("armor_carbon_simple", "mod", unit:PickBodyPart("WholeBody", "All"))
 				else
 					unit:AddHealthCondition("armor_carbon_complex", "mod", unit:PickBodyPart("WholeBody", "All"))
@@ -3626,7 +4181,7 @@ PlaceObj('ModItemFolder', {
 			PlaceObj('ScriptIf', {
 				HasElse = true,
 				PlaceObj('ScriptExpression', {
-					Value = function () return (ILU_combat_type == 'simple') end,
+					Value = function () return (MapVarValues['ILU_combat_type'] and  MapVarValues['ILU_combat_type']== 'simple') end,
 				}),
 			}),
 			PlaceObj('ScriptThen', {
@@ -3696,6 +4251,42 @@ PlaceObj('ModItemFolder', {
 		carry_entity = "ResourceBulk_Shoes",
 		carry_spot = "Tool",
 		carry_type = "HandsClose",
+		changed_props = {
+			PlaceObj('ModDef', {
+				'title', "[RFH] Akane Hayashi - The Onna-musha",
+				'description', '[h1]A character from my "Rescued From History" series[/h1]\n\n[h2]A samurai warrior from the ancient past finds herself lost in a modern world and escapes to the stars.[/h2]\n\n[h3]Make sure to read her bio for details on her story![/h3]\n\nBecome her friend, and she will protect you until her last breath.\n\nBecome her enemy, and you will know only death from her blade or spear.\n\nSet in her ways, she cares only to do what she knows and excels at. \n\nHighly proficient in melee combat, physical activity, and farming. Poor at healing, cooking, construction, and crafting. She\'s best used as a "tank" to draw enemy attacks and fight them up close while your other survivors deal ranged damage.\n\nCannot do research tasks as modern technology and science elude her understanding.\n\n[h3]Strengths:[/h3]\n[list]\n[*]4x attack and critical hit rate with any melee weapons.\n[*]Butchers animals 3x as fast.\n[*]Walks/runs 40% faster due to her excellent physical condition.\n[*]+200 Health and 3x HP regen.\n[*]Takes 5 less bleeding damage when injured.\n[*]Through meditation and having already lived through war and carnage, she\'s less likely to experience meltdowns.\n[*]With her excellent defensive skills, she has a base dodge chance of 25% of melee attacks and 15% of ranged attacks.\n[*]Equipping matching sets of medium or heavy armor grants additional dodge chance bonuses.\n	[*]Medium Armor - Synthetic, Carbon 1.0, Advanced Synthetic (Cyberpunks Mod only), Galactic (PX Mod only) - 5% melee, 2% ranged per equipped piece.\n	[*]Heavy Armor - Carbon 2.0, Silicon (Cyberpunks Mod only), Atomic/Cyberpunk (Cyberpunks Mod only), Cyber (PX Mod only), Alien (PX Mod only) - 7% melee, 5% ranged per equipped piece.\n[*]Automatically engages in combat against hostiles from within her sight range when drafted.\n[*]Comes equipped with a unique weapon, the Bisento Naginata.\n[*]Excellent at farming and physical labor.\n[/list]\n\n[h3]Weaknesses:[/h3]\n[list]\n[*]Miserable at ranged combat. 4x attack speed penalty. She should only have a melee weapon equipped at all times.\n[*]Becomes extremely violent towards people and objects when experiencing breakdowns. They will always either be Berserk or Bullying.\n[*]Can\'t research or observe, or perform Project-X related activities. Poor at everything except combat, farming, and physical labor.\n[*]Violent meltdowns. She\'ll either attack her fellow colonists or damage equipment. Don\'t piss her off.\n[/list]\n\n[h3]Techs/items known:[/h3]\n[list]\n[*]Weaponsmithing\n[*]Kimchi\n[*]Purpleleaf\n[*]Dandelion trees\n[*]Chew root\n[*]Mulchtubes\n[/list]\n\n[h3]To Do List for future versions:[/h3]\n[list]\n[*]Nada! She is feature complete.\n[/list]',
+				'image', "Mod/aGJMohS/Images/NewAkane3.PNG",
+				'last_changes', "Akane now comes with the Bisento Naginata, which causes damage to multiple enemies in front of her. This is a unique model.\n\nIf you play the Old Earth Tech - Redux mod, this weapon is between the Steel and Carbon naginatas in terms of damage.",
+				'dependencies', {
+					PlaceObj('ModDependency', {
+						'id', "sad_commonlib",
+						'title', "SAD_CommonLib",
+						'version_major', 1,
+						'version_minor', 10,
+					}),
+				},
+				'id', "aGJMohS",
+				'author', "Mantastic",
+				'version_major', 2,
+				'version_minor', 8,
+				'version', 160,
+				'lua_revision', 233360,
+				'saved_with_revision', 352677,
+				'entities', {
+					"BisentoNaginata",
+					"BisentoNaginataResource",
+				},
+				'code', {
+					"Entities/BisentoNaginata.lua",
+					"Entities/BisentoNaginataResource.lua",
+				},
+				'has_data', true,
+				'saved', 1747264136,
+				'code_hash', 3458515239294452229,
+				'steam_id', "3092478010",
+				'TagCharacters', true,
+			}),
+		},
 		color = 4279703319,
 		description = T(854301092890, --[[ModItemEquipResource Armor_Shoes_Carbon description]] "Improved version of the Carbon boots. Extremely resistant to heat, blast waves, blunt or piercing hits."),
 		display_name = T(777792800955, --[[ModItemEquipResource Armor_Shoes_Carbon display_name]] "Carbon boots 2.0"),
@@ -3711,6 +4302,11 @@ PlaceObj('ModItemFolder', {
 		save_in = "Mod/rtw6tLg",
 		stack_entity = "ResourceBulk_Shoes",
 		stack_size = 1000,
+		tags = {
+			["Heavy Armor"] = true,
+			HeavyArmor = true,
+			"HeavyArmor",
+		},
 		use_unfinished_item = "UnfinishedApparel",
 		visible = false,
 	}),
@@ -5817,6 +6413,7 @@ PlaceObj('ModItemFolder', {
 			Expiration = true,
 			ExpirationTime = 20000,
 			FloatingTextType = "Display name",
+			IsCompatible = function (self, owner, ...) return not CheckAnimalPregnancyQuotaReached(owner.ReproductionGroup or owner.class) end,
 			OnAdd = function (self, owner, ...)
 				self.ExpirationTime = owner.PregnancyDuration
 				owner:RefreshExpiration(self)
@@ -5842,7 +6439,6 @@ PlaceObj('ModItemFolder', {
 				PlaceObj('MsgReaction', {
 					Event = "NewDayStarted",
 					Handler = function (self, year, day)
-						refresh_tame_counts()
 						for _, animal in ipairs(UIPlayer.labels.TamedAnimals or empty_table) do
 							if animal.Gender == "female" and not animal:IsGrowingUp() and not animal:HasHealthConditionById(self.id) and IsAliveAndConscious(animal) and not animal:IsManuallyControlled() then
 								local get_live_preg_chance = new_preg_rate(animal.class,animal.DailyPregnancyChance)
@@ -6329,6 +6925,22 @@ PlaceObj('ModItemFolder', {
 				}),
 			},
 		}),
+		PlaceObj('ModItemHealthCondition', {
+			AffectableBodyParts = {
+				PlaceObj('HealthConditionBodyParts', {
+					BodyPart = "All",
+					param_bindings = false,
+				}),
+			},
+			ConsciousnessModifier = 10000,
+			Description = T(382335961807, --[[ModItemHealthCondition tamed_constipated Description]] "This animal would have produced some stuff, but the humans who take care of it have too much of it!\nSo instead of contributing to the hoard, this creature will instead recycle the material\n(Granting health regen and pain management)"),
+			DisplayName = T(235872890068, --[[ModItemHealthCondition tamed_constipated DisplayName]] "Constipated"),
+			HealthRegenModifier = 5000,
+			PainModifier = -10000,
+			Type = "Buff",
+			id = "tamed_constipated",
+			save_in = "Mod/rtw6tLg",
+		}),
 		}),
 	PlaceObj('ModItemFolder', {
 		'name', "Robot HCs",
@@ -6674,7 +7286,7 @@ PlaceObj('ModItemFolder', {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyWeaponRange",
 					Handler = function (self, target, range, weapon_def)
-						return range + range / 3
+						return range + DivRound(range,3)
 					end,
 					param_bindings = false,
 				}),
@@ -7058,7 +7670,6 @@ PlaceObj('ModItemFolder', {
 			Description = T(317084936250, --[[ModItemRobotCondition APC_T3 Description]] "Collects and quickly welds spent bullet casings to form makeshift armor.\nApplied to ally Robots in 5% damage resist increments.\n\nAt most welds once each second.\nConsumes a nearby Robot Corpse every 5 seconds.\nThis is enough scrap to weld 3 times.\n\nOccasionally this welding will fail, causing a small explosion in the Crawler. \nCausing it to damage itself."),
 			DisplayName = T(805570133128, --[[ModItemRobotCondition APC_T3 DisplayName]] "Mobile Armory and Salvage Station+"),
 			OnAdd = function (self, owner, ...)
-				owner.stacks = 0
 				owner.giveTime = GameTime()
 				owner.corpseCD = GameTime() + 5000
 			end,
@@ -7071,16 +7682,20 @@ PlaceObj('ModItemFolder', {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyHitChance",
 					Handler = function (self, target, base_chance, attacked_unit, weapon_def, target_dist)
-						target.stacks = target.stacks + 1
-						MapForEach(target,10*guim, "Robot", function(robot) 
-							if robot:IsDead() and target.corpseCD + 5000 < GameTime() then
+						target:Refuel(1)
+						if target.corpseCD + 5000 < GameTime() then
+							local corpse = MapGetFirst(target,10*guim, "Robot", function(robot) 
+								if robot:IsDead() then
+									return true
+								end
+							end)
+							if corpse then
 								target.corpseCD = GameTime()
-								DoneObject(robot)
-								target.stacks = target.stacks + 5
-								--print("Found a corpse!")
+								DoneObject(corpse)
+								target:Refuel(15)
 								return
 							end
-						end)
+						end
 						return base_chance
 					end,
 					param_bindings = false,
@@ -7088,24 +7703,24 @@ PlaceObj('ModItemFolder', {
 				PlaceObj('UnitReaction', {
 					Event = "OnObjUpdate",
 					Handler = function (self, target, time, update_interval)
-						if target.giveTime + 1000 < GameTime() and target.stacks > 5 then -- every 1 seconds
-							target.giveTime = GameTime()
-							target.stacks = target.stacks - 5
-							MapForEach(target,30*guim, "Robot", function(robot,target)
-								if not (robot.class == 'Crawl_APC_LVL1' or robot.class == 'Crawl_APC_LVL2' or robot.class == 'Crawl_APC_LVL3') 
-								and not robot:IsDead() 
-								and robot.Invader == target.Invader then
-									if target:Random(100, "miscast") > 25 then
-										--print("Sucessfully gave some armor! ")
-										robot:AddRobotCondition("SalvagedArmor")
-										return
+						if target.giveTime + 1000 < GameTime() then
+							if target.stacks > 5 then -- every 1 seconds
+								local ally = MapGetFirst(target,30*guim, "Robot", function(robot,target)
+									if not (robot.class == 'Crawl_APC_LVL1' or robot.class == 'Crawl_APC_LVL2' or robot.class == 'Crawl_APC_LVL3') 
+									and not robot:IsDead()
+									and robot.Invader == target.Invader then
+										return true
+									end
+								end)
+								if ally then
+									target:ConsumeFuel(5)
+									if target:Random(100,"miscast") > 25 then
+										ally:AddRobotCondition("SalvagedArmor")
 									else
-									--print("Failed to give some armor....")
 										target:AddRobotCondition("FailedArmorUp")
-										return
 									end
 								end
-							end,target)
+							end
 						end
 					end,
 					param_bindings = false,
@@ -7116,7 +7731,6 @@ PlaceObj('ModItemFolder', {
 			Description = T(881882077275, --[[ModItemRobotCondition APC_T2 Description]] "Collects and quickly welds spent bullet casings to form makeshift armor.\nApplied to ally Robots in 5% damage resist increments.\n\nAt most welds once each second.\nConsumes a nearby Robot Corpse every 5 seconds.\nThis is enough scrap to weld 3 times.\n\nQuite often this welding will fail, causing a small explosion in the Crawler. \nCausing it to damage itself."),
 			DisplayName = T(477258608179, --[[ModItemRobotCondition APC_T2 DisplayName]] "Mobile Armory and Salvage Station"),
 			OnAdd = function (self, owner, ...)
-				owner.stacks = 0
 				owner.giveTime = GameTime()
 				owner.corpseCD = GameTime() + 5000
 			end,
@@ -7129,16 +7743,20 @@ PlaceObj('ModItemFolder', {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyHitChance",
 					Handler = function (self, target, base_chance, attacked_unit, weapon_def, target_dist)
-						target.stacks = target.stacks + 1
-						MapForEach(target,10*guim, "Robot", function(robot) 
-							if robot:IsDead() and target.corpseCD + 5000 < GameTime() then
+						target:Refuel(1)
+						if target.corpseCD + 5000 < GameTime() then
+							local corpse = MapGetFirst(target,10*guim, "Robot", function(robot) 
+								if robot:IsDead() then
+									return true
+								end
+							end)
+							if corpse then
 								target.corpseCD = GameTime()
-								DoneObject(robot)
-								target.stacks = target.stacks + 5
-								--print("Found a corpse!")
+								DoneObject(corpse)
+								target:Refuel(15)
 								return
 							end
-						end)
+						end
 						return base_chance
 					end,
 					param_bindings = false,
@@ -7146,24 +7764,24 @@ PlaceObj('ModItemFolder', {
 				PlaceObj('UnitReaction', {
 					Event = "OnObjUpdate",
 					Handler = function (self, target, time, update_interval)
-						if target.giveTime + 1000 < GameTime() and target.stacks > 5 then -- every 1 seconds
-							target.giveTime = GameTime()
-							target.stacks = target.stacks - 5
-							MapForEach(target,30*guim, "Robot", function(robot,target)
-								if not (robot.class == 'Crawl_APC_LVL1' or robot.class == 'Crawl_APC_LVL2' or robot.class == 'Crawl_APC_LVL3') 
-								and not robot:IsDead() 
-								and robot.Invader == target.Invader then
-									if target:Random(100, "miscast") > 60 then
-										--print("Sucessfully gave some armor! ")
-										robot:AddRobotCondition("SalvagedArmor")
-										return
+						if target.giveTime + 1000 < GameTime() then
+							if target.stacks > 5 then -- every 1 seconds
+								local ally = MapGetFirst(target,30*guim, "Robot", function(robot,target)
+									if not (robot.class == 'Crawl_APC_LVL1' or robot.class == 'Crawl_APC_LVL2' or robot.class == 'Crawl_APC_LVL3') 
+									and not robot:IsDead()
+									and robot.Invader == target.Invader then
+										return true
+									end
+								end)
+								if ally then
+									target:ConsumeFuel(5)
+									if target:Random(100,"miscast") > 60 then
+										ally:AddRobotCondition("SalvagedArmor")
 									else
-									--print("Failed to give some armor....")
 										target:AddRobotCondition("FailedArmorUp")
-										return
 									end
 								end
-							end,target)
+							end
 						end
 					end,
 					param_bindings = false,
@@ -7174,7 +7792,6 @@ PlaceObj('ModItemFolder', {
 			Description = T(812514554536, --[[ModItemRobotCondition APC_T1 Description]] "Collects and quickly welds spent bullet casings to form makeshift armor.\nApplied to ally Robots in 5% damage resist increments.\n\nAt most welds once each second.\nOccasionally this welding will fail, causing a small explosion in the Crawler. \nCausing it to damage itself."),
 			DisplayName = T(264125341359, --[[ModItemRobotCondition APC_T1 DisplayName]] "Mobile Armory"),
 			OnAdd = function (self, owner, ...)
-				owner.stacks = 0
 				owner.giveTime = GameTime()
 				owner.corpseCD = GameTime() + 5000
 			end,
@@ -7187,16 +7804,20 @@ PlaceObj('ModItemFolder', {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyHitChance",
 					Handler = function (self, target, base_chance, attacked_unit, weapon_def, target_dist)
-						target.stacks = target.stacks + 1
-						MapForEach(target,10*guim, "Robot", function(robot) 
-							if robot:IsDead() and target.corpseCD + 5000 < GameTime() then
+						target:Refuel(1)
+						if target.corpseCD + 5000 < GameTime() then
+							local corpse = MapGetFirst(target,10*guim, "Robot", function(robot) 
+								if robot:IsDead() then
+									return true
+								end
+							end)
+							if corpse then
 								target.corpseCD = GameTime()
-								DoneObject(robot)
-								target.stacks = target.stacks + 5
-								--print("Found a corpse!")
+								DoneObject(corpse)
+								target:Refuel(15)
 								return
 							end
-						end)
+						end
 						return base_chance
 					end,
 					param_bindings = false,
@@ -7204,24 +7825,24 @@ PlaceObj('ModItemFolder', {
 				PlaceObj('UnitReaction', {
 					Event = "OnObjUpdate",
 					Handler = function (self, target, time, update_interval)
-						if target.giveTime + 1000 < GameTime() and target.stacks > 5 then -- every 1 seconds
-							target.giveTime = GameTime()
-							target.stacks = target.stacks - 5
-							MapForEach(target,30*guim, "Robot", function(robot,target)
-								if not (robot.class == 'Crawl_APC_LVL1' or robot.class == 'Crawl_APC_LVL2' or robot.class == 'Crawl_APC_LVL3') 
-								and not robot:IsDead() 
-								and robot.Invader == target.Invader then
-									if target:Random(100, "miscast") > 25 then
-										--print("Sucessfully gave some armor! ")
-										robot:AddRobotCondition("SalvagedArmor")
-										return
+						if target.giveTime + 1000 < GameTime() then
+							if target.stacks > 5 then -- every 1 seconds
+								local ally = MapGetFirst(target,30*guim, "Robot", function(robot,target)
+									if not (robot.class == 'Crawl_APC_LVL1' or robot.class == 'Crawl_APC_LVL2' or robot.class == 'Crawl_APC_LVL3') 
+									and not robot:IsDead()
+									and robot.Invader == target.Invader then
+										return true
+									end
+								end)
+								if ally then
+									target:ConsumeFuel(5)
+									if target:Random(100,"miscast") > 75 then
+										ally:AddRobotCondition("SalvagedArmor")
 									else
-									--print("Failed to give some armor....")
 										target:AddRobotCondition("FailedArmorUp")
-										return
 									end
 								end
-							end,target)
+							end
 						end
 					end,
 					param_bindings = false,
@@ -7266,7 +7887,7 @@ PlaceObj('ModItemFolder', {
 			},
 		}),
 		PlaceObj('ModItemRobotCondition', {
-			Description = T(821589537340, --[[ModItemRobotCondition RC_Demo_T1 Description]] "This unit is equipped with a pressurized acid filled fuel tank.\n<em>30 units of fuel</em>\nEach attack consumes 1 unit of fuel to deal 50% more integrity damage to structures.\n\nMakes the unit slightly slower."),
+			Description = T(821589537340, --[[ModItemRobotCondition RC_Demo_T1 Description]] "This unit is equipped with a pressurized acid filled fuel tank.\n<em>30 units of fuel</em>\nEach attack consumes 1 unit of fuel to deal 50% more integrity damage to structures.\n\nThis canister does make the unit slightly slower."),
 			DisplayName = T(302020336314, --[[ModItemRobotCondition RC_Demo_T1 DisplayName]] "Acid Fuel Canister"),
 			Modifiers = {
 				PlaceObj('ModifyRobot', {
@@ -7276,9 +7897,6 @@ PlaceObj('ModItemFolder', {
 					prop = "Movement",
 				}),
 			},
-			OnAdd = function (self, owner, ...)
-				owner.fuel = 30
-			end,
 			Polarity = "positive",
 			StackLimit = 1,
 			UnitTags = set( "Demo_T1" ),
@@ -7288,11 +7906,17 @@ PlaceObj('ModItemFolder', {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyDamageInflicted",
 					Handler = function (self, target, damage, weapon_def, attack_target)
-						local mod = 1
+						if not IsKindOf(attack_target,'Building') then return end
+						if target:ConsumeFuel() then
+							damage = damage + DivRound(damage,2)
+						end
+						return damage
+						--[[local mod = 1
 						if target.fuel > 1 and IsKindOf(attack_target,'Building') then
 							mod = mod + (1/2)
 						end
 						return damage * mod
+						--]]
 					end,
 					param_bindings = false,
 				}),
@@ -7321,7 +7945,13 @@ PlaceObj('ModItemFolder', {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyDamageInflicted",
 					Handler = function (self, target, damage, weapon_def, attack_target)
-						local mod = 1
+						if not IsKindOf(attack_target,'Building') then return end
+						damage = damage + DivRound(damage,2)
+						if not target:ConsumeFuel() then
+							target:ChangeHealth(-target.MaxHealth / 20)
+						end
+						return damage
+						--[[local mod = 1
 						if IsKindOf(attack_target,'Building') then
 							mod = mod + (3/4)
 							if target.fuel > 1 then
@@ -7330,7 +7960,7 @@ PlaceObj('ModItemFolder', {
 								target:ChangeHealth(-target.MaxHealth / 20)
 							end
 						end
-						return damage * mod
+						return damage * mod]]
 					end,
 					param_bindings = false,
 				}),
@@ -7359,7 +7989,12 @@ PlaceObj('ModItemFolder', {
 				PlaceObj('UnitReaction', {
 					Event = "ModifyDamageInflicted",
 					Handler = function (self, target, damage, weapon_def, attack_target)
-						local mod = 1
+						if not IsKindOf(attack_target,'Building') and not IsKindOf(attack_target,'UnitAnimal') and not IsKindOf(attack_target,'Human') then return end
+						if not target:ConsumeFuel() then
+							target:ChangeHealth(-target.MaxHealth / 20)
+						end
+						return damage + DivRound(damage*3,4)
+						--[[local mod = 1
 						if IsKindOf(attack_target,'Building') then
 							mod = mod + (3/4)
 							if target.fuel > 1 then
@@ -7370,7 +8005,7 @@ PlaceObj('ModItemFolder', {
 						elseif IsKindOf(attack_target,'UnitAnimal') or IsKindOf(attack_target,'Human') then
 							attack_target:AddHealthCondition("Glued")
 						end
-						return damage * mod
+						return damage * mod]]
 					end,
 					param_bindings = false,
 				}),
@@ -7393,7 +8028,6 @@ PlaceObj('ModItemFolder', {
 					local addedClassList = {}
 					spawnClassBest, addedClassList = check_count_and_upgrade("Dragonfly")
 					instance.SpawnClass = spawnClassBest
-					instance.AdditionalClassList  = {}
 					for i=1,#addedClassList do
 						instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
 					end
@@ -14794,8 +15428,6 @@ PlaceObj('ModItemFolder', {
 			'Id', "HeavyHostileRobot_LVL2",
 			'object_class', "HeavyCombatRobot",
 			'UnitTags', set( "Heavy_Malus", "Heavy_Slow_T1", "Robot" ),
-			'Health', 500000,
-			'MaxHealth', 500000,
 			'damage_reduction', {
 				blunt = 40,
 				energy = 30,
@@ -15155,6 +15787,13 @@ PlaceObj('ModItemFolder', {
 			'ObservationDistanceMax', 5000,
 			'WalkSpeed', 4000,
 			'attack_weapon', "APC_Gun",
+			'UnitConsumer', true,
+			'res_consumed', "ScrapMetal",
+			'res_max_stored', 25000,
+			'res_used', 5000,
+			'ConsumeDescription', T(648999997146, --[[ModItemRobotCompositeDef Crawl_APC_LVL1 ConsumeDescription]] "This unit will try and improve the armor of nearby allies, using it's fallen allies!"),
+			'ConsumeTitle', T(578747124766, --[[ModItemRobotCompositeDef Crawl_APC_LVL1 ConsumeTitle]] "Unstable Combat Forge"),
+			'ConsumeUIDetail', T(140845075912, --[[ModItemRobotCompositeDef Crawl_APC_LVL1 ConsumeUIDetail]] "Pieces of Scrap"),
 		}),
 		PlaceObj('ModItemRobotCompositeDef', {
 			'Id', "Crawl_APC_LVL2",
@@ -15185,6 +15824,13 @@ PlaceObj('ModItemFolder', {
 			'ObservationDistanceMax', 5000,
 			'WalkSpeed', 5000,
 			'attack_weapon', "APC_Gun",
+			'UnitConsumer', true,
+			'res_consumed', "ScrapMetal",
+			'res_max_stored', 25000,
+			'res_used', 5000,
+			'ConsumeDescription', T(305740292330, --[[ModItemRobotCompositeDef Crawl_APC_LVL2 ConsumeDescription]] "This unit will pick up scrap metal and attempt to provide a patchwork set of armor to nearby allies."),
+			'ConsumeTitle', T(328168777629, --[[ModItemRobotCompositeDef Crawl_APC_LVL2 ConsumeTitle]] "Unstable Combat Forge"),
+			'ConsumeUIDetail', T(535702786812, --[[ModItemRobotCompositeDef Crawl_APC_LVL2 ConsumeUIDetail]] "Pieces of Scrap"),
 		}),
 		PlaceObj('ModItemRobotCompositeDef', {
 			'Id', "Crawl_APC_LVL3",
@@ -15215,6 +15861,13 @@ PlaceObj('ModItemFolder', {
 			'ObservationDistanceMax', 5000,
 			'WalkSpeed', 6000,
 			'attack_weapon', "APC_Gun",
+			'UnitConsumer', true,
+			'res_consumed', "ScrapMetal",
+			'res_max_stored', 50000,
+			'res_used', 5000,
+			'ConsumeDescription', T(954921916888, --[[ModItemRobotCompositeDef Crawl_APC_LVL3 ConsumeDescription]] "This unit boasts state of the art technology, able to pick up scrap metal and provide a patchwork set of armor to nearby allies."),
+			'ConsumeTitle', T(522596411974, --[[ModItemRobotCompositeDef Crawl_APC_LVL3 ConsumeTitle]] "Combat Forge"),
+			'ConsumeUIDetail', T(397227670203, --[[ModItemRobotCompositeDef Crawl_APC_LVL3 ConsumeUIDetail]] "Pieces of Scrap"),
 		}),
 		PlaceObj('ModItemRobotCompositeDef', {
 			'Id', "HostileCombatQuadcopter_LVL2",
@@ -15236,6 +15889,14 @@ PlaceObj('ModItemFolder', {
 			'SpawnDefWeight', 50,
 			'SpawnTags', set( "Boss" ),
 			'FlightEscapeInside', true,
+			'UnitConsumer', true,
+			'res_consumed', "LiquidFuel",
+			'res_max_stored', 30000,
+			'res_used', 1000,
+			'res_stored', 30000,
+			'ConsumeDescription', T(576407424571, --[[ModItemRobotCompositeDef HostileCombatQuadcopter_LVL2 ConsumeDescription]] "A large bulk that contains highly corrosive acids. When applied, this acid quickly turns non-organic matter into a sludge."),
+			'ConsumeTitle', T(439485626440, --[[ModItemRobotCompositeDef HostileCombatQuadcopter_LVL2 ConsumeTitle]] "Fuel Tank"),
+			'ConsumeUIDetail', T(138275542972, --[[ModItemRobotCompositeDef HostileCombatQuadcopter_LVL2 ConsumeUIDetail]] "Liquid Left"),
 		}),
 		PlaceObj('ModItemRobotCompositeDef', {
 			'Id', "HostileCombatQuadcopter_LVL3",
@@ -15257,6 +15918,14 @@ PlaceObj('ModItemFolder', {
 			'SpawnDefWeight', 50,
 			'SpawnTags', set( "Boss" ),
 			'FlightEscapeInside', true,
+			'UnitConsumer', true,
+			'res_consumed', "LiquidFuel",
+			'res_max_stored', 30000,
+			'res_used', 1000,
+			'res_stored', 30000,
+			'ConsumeDescription', T(225420703757, --[[ModItemRobotCompositeDef HostileCombatQuadcopter_LVL3 ConsumeDescription]] "A large bulk that contains highly corrosive acids. When applied, this acid quickly turns non-organic matter into a sludge."),
+			'ConsumeTitle', T(653765519204, --[[ModItemRobotCompositeDef HostileCombatQuadcopter_LVL3 ConsumeTitle]] "Fuel Tank"),
+			'ConsumeUIDetail', T(533832556642, --[[ModItemRobotCompositeDef HostileCombatQuadcopter_LVL3 ConsumeUIDetail]] "Liquid Left"),
 		}),
 		PlaceObj('ModItemRobotCompositeDef', {
 			'Id', "HostileCombatQuadcopter_LVL4",
@@ -15281,6 +15950,14 @@ PlaceObj('ModItemFolder', {
 			'SpawnDefWeight', 50,
 			'SpawnTags', set( "Boss" ),
 			'FlightEscapeInside', true,
+			'UnitConsumer', true,
+			'res_consumed', "LiquidFuel",
+			'res_max_stored', 30000,
+			'res_used', 1000,
+			'res_stored', 30000,
+			'ConsumeDescription', T(677935543604, --[[ModItemRobotCompositeDef HostileCombatQuadcopter_LVL4 ConsumeDescription]] "A large bulk that contains highly corrosive acids. When applied, this acid quickly turns non-organic matter into a sludge."),
+			'ConsumeTitle', T(133522616833, --[[ModItemRobotCompositeDef HostileCombatQuadcopter_LVL4 ConsumeTitle]] "Fuel Tank"),
+			'ConsumeUIDetail', T(996236003650, --[[ModItemRobotCompositeDef HostileCombatQuadcopter_LVL4 ConsumeUIDetail]] "Liquid Left"),
 		}),
 		PlaceObj('ModItemRobotCompositeDef', {
 			'Id', "HostileCombatQuadcopter_LVL5",
@@ -15305,6 +15982,14 @@ PlaceObj('ModItemFolder', {
 			'SpawnDefWeight', 50,
 			'SpawnTags', set( "Boss" ),
 			'FlightEscapeInside', true,
+			'UnitConsumer', true,
+			'res_consumed', "LiquidFuel",
+			'res_max_stored', 30000,
+			'res_used', 1000,
+			'res_stored', 30000,
+			'ConsumeDescription', T(538054307369, --[[ModItemRobotCompositeDef HostileCombatQuadcopter_LVL5 ConsumeDescription]] "Multiple compartments are dedicated to the storage of unique chemical compounds, and are mixed to deadly effects in combat!"),
+			'ConsumeTitle', T(107150982322, --[[ModItemRobotCompositeDef HostileCombatQuadcopter_LVL5 ConsumeTitle]] "Portable Decanting Agent"),
+			'ConsumeUIDetail', T(463932196078, --[[ModItemRobotCompositeDef HostileCombatQuadcopter_LVL5 ConsumeUIDetail]] "Liquid Left"),
 		}),
 		PlaceObj('ModItemRobotCompositeDef', {
 			'Id', "Demo_1",
@@ -15364,6 +16049,11 @@ PlaceObj('ModItemFolder', {
 					},
 				}),
 			},
+			'res_consumed', "LiquidFuel",
+			'res_max_stored', 30000,
+			'res_used', 1000,
+			'res_stored', 30000,
+			'ConsumeUIDetail', T(674753995784, --[[ModItemRobotCompositeDef Demo_1 ConsumeUIDetail]] "Liquid Left"),
 		}),
 		PlaceObj('ModItemRobotCompositeDef', {
 			'Id', "Demo_2",
@@ -15424,6 +16114,14 @@ PlaceObj('ModItemFolder', {
 					},
 				}),
 			},
+			'UnitConsumer', true,
+			'res_consumed', "LiquidFuel",
+			'res_max_stored', 30000,
+			'res_used', 1000,
+			'res_stored', 30000,
+			'ConsumeDescription', T(437448100377, --[[ModItemRobotCompositeDef Demo_2 ConsumeDescription]] "An assortment of vials that are hydraulically pumped onto the tip of the units weapons."),
+			'ConsumeTitle', T(274271519094, --[[ModItemRobotCompositeDef Demo_2 ConsumeTitle]] "Acid Fanny-Pack"),
+			'ConsumeUIDetail', T(183635071217, --[[ModItemRobotCompositeDef Demo_2 ConsumeUIDetail]] "Liquid Left"),
 		}),
 		PlaceObj('ModItemRobotCompositeDef', {
 			'Id', "Demo_3",
@@ -15449,7 +16147,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayName', T(359047323734, --[[ModItemRobotCompositeDef Demo_3 DisplayName]] "D-E3-ch3m157"),
 			'DisplayNameShort', T(562208439146, --[[ModItemRobotCompositeDef Demo_3 DisplayNameShort]] "DE3"),
 			'DisplayNamePl', T(541755977736, --[[ModItemRobotCompositeDef Demo_3 DisplayNamePl]] "Drone Series E"),
-			'Description', T(971100673913, --[[ModItemRobotCompositeDef Demo_3 Description]] "The chemists have never stopped trying to improve upon the corrosive capabilities; and have improved the fuel formula. It is now much denser, but can properly disentigrates all major building materials. The increased weight has been offset by substantial improvements to the hydraulics for no net movement loss. Has <color TechSubtitleBlue>10% Piercing Damage</color> <em>Reduction</em>, <color TextButton>20% Blunt Damage</color><color TextEmphasis> Reduction</color>, <color TextNegative>15% Energy Damage</color><color TextEmphasis> Reduction</color>, <color TextPositive>35% Gas Damage</color><color TextEmphasis> Reduction</color>"),
+			'Description', T(971100673913, --[[ModItemRobotCompositeDef Demo_3 Description]] "The chemists have never stopped trying to improve upon the corrosive capabilities; and have improved the fuel formula. It is now much denser, but can properly disentigrate all major building materials. The increased weight has been offset by substantial improvements to the hydraulics for no net movement loss. Has <color TechSubtitleBlue>10% Piercing Damage</color> <em>Reduction</em>, <color TextButton>20% Blunt Damage</color><color TextEmphasis> Reduction</color>, <color TextNegative>15% Energy Damage</color><color TextEmphasis> Reduction</color>, <color TextPositive>35% Gas Damage</color><color TextEmphasis> Reduction</color>"),
 			'SalvageLootTable', "ILU_Robot_Human_T3",
 			'Skills', {
 				Combat = 7,
@@ -15484,6 +16182,14 @@ PlaceObj('ModItemFolder', {
 					},
 				}),
 			},
+			'UnitConsumer', true,
+			'res_consumed', "LiquidFuel",
+			'res_max_stored', 30000,
+			'res_used', 1000,
+			'res_stored', 30000,
+			'ConsumeDescription', T(841673020061, --[[ModItemRobotCompositeDef Demo_3 ConsumeDescription]] "An assortment of vials that are hydraulically pumped onto the tip of the units weapons."),
+			'ConsumeTitle', T(839486777911, --[[ModItemRobotCompositeDef Demo_3 ConsumeTitle]] "Acid Fanny-Pack"),
+			'ConsumeUIDetail', T(345769949241, --[[ModItemRobotCompositeDef Demo_3 ConsumeUIDetail]] "Liquid Left"),
 		}),
 		PlaceObj('ModItemRobotCompositeDef', {
 			'Id', "Demo_4",
@@ -15509,7 +16215,7 @@ PlaceObj('ModItemFolder', {
 			'DisplayName', T(446247297830, --[[ModItemRobotCompositeDef Demo_4 DisplayName]] "D-E4-5ulfur1c"),
 			'DisplayNameShort', T(970881324308, --[[ModItemRobotCompositeDef Demo_4 DisplayNameShort]] "DE4"),
 			'DisplayNamePl', T(414115315193, --[[ModItemRobotCompositeDef Demo_4 DisplayNamePl]] "Drone Series E"),
-			'Description', T(598057090716, --[[ModItemRobotCompositeDef Demo_4 Description]] "For an upcharge, a prospective robot army owner can purchase a survivability upgrade for the sabatoge model. This ensures that all units ship with the Consortium's modified Laser Spear. A tube runs from the fuel tank to the tip of the spear. Buildings cannot maintain structural integrity when a vat of acid is placed directly on it's support beams! Has <color TechSubtitleBlue>15% Piercing Damage</color> <em>Reduction</em>, <color TextButton>25% Blunt Damage</color><color TextEmphasis> Reduction</color>, <color TextNegative>20% Energy Damage</color><color TextEmphasis> Reduction</color>, <color TextPositive>45% Gas Damage</color><color TextEmphasis> Reduction</color>"),
+			'Description', T(598057090716, --[[ModItemRobotCompositeDef Demo_4 Description]] "For an upcharge, a prospective robot army owner can purchase a survivability upgrade for the sabotage model. This ensures that all units ship with the Consortium's modified Laser Spear. A tube runs from the fuel tank to the tip of the spear. Buildings cannot maintain structural integrity when a vat of acid is placed directly on it's support beams! Has <color TechSubtitleBlue>15% Piercing Damage</color> <em>Reduction</em>, <color TextButton>25% Blunt Damage</color><color TextEmphasis> Reduction</color>, <color TextNegative>20% Energy Damage</color><color TextEmphasis> Reduction</color>, <color TextPositive>45% Gas Damage</color><color TextEmphasis> Reduction</color>"),
 			'SalvageLootTable', "ILU_Robot_Human_T4",
 			'Skills', {
 				Combat = 8,
@@ -15531,6 +16237,14 @@ PlaceObj('ModItemFolder', {
 					},
 				}),
 			},
+			'UnitConsumer', true,
+			'res_consumed', "LiquidFuel",
+			'res_max_stored', 30000,
+			'res_used', 1000,
+			'res_stored', 30000,
+			'ConsumeDescription', T(590097868477, --[[ModItemRobotCompositeDef Demo_4 ConsumeDescription]] "An assortment of vials that are hydraulically pumped onto the tip of the units weapons."),
+			'ConsumeTitle', T(227356268223, --[[ModItemRobotCompositeDef Demo_4 ConsumeTitle]] "Acid Fanny-Pack"),
+			'ConsumeUIDetail', T(934392634709, --[[ModItemRobotCompositeDef Demo_4 ConsumeUIDetail]] "Liquid Left"),
 		}),
 		PlaceObj('ModItemRobotCompositeDef', {
 			'Id', "Demo_5",
@@ -15577,6 +16291,14 @@ PlaceObj('ModItemFolder', {
 					},
 				}),
 			},
+			'UnitConsumer', true,
+			'res_consumed', "LiquidFuel",
+			'res_max_stored', 30000,
+			'res_used', 1000,
+			'res_stored', 30000,
+			'ConsumeDescription', T(497780712834, --[[ModItemRobotCompositeDef Demo_5 ConsumeDescription]] "Assorted pouched and tubes run along this units exoskeleton into it's lazer spear."),
+			'ConsumeTitle', T(758157732441, --[[ModItemRobotCompositeDef Demo_5 ConsumeTitle]] "MicroDistillery"),
+			'ConsumeUIDetail', T(183231521661, --[[ModItemRobotCompositeDef Demo_5 ConsumeUIDetail]] "Liquid Left"),
 		}),
 		}),
 	PlaceObj('ModItemFolder', {
@@ -15652,6 +16374,9 @@ PlaceObj('ModItemFolder', {
 				}),
 			},
 			'ProduceResInterval', 2880000,
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"FallingFeathers",
 				"DraftableAnimal",
@@ -15689,6 +16414,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 5,
 			'ReproductionType', "two sexes",
+			'ReproductionGroup', "Gujo",
 			'DailyPregnancyChance', 60,
 			'PregnancyDuration', 1920000,
 			'GrowDuration', 1920000,
@@ -15777,6 +16503,9 @@ PlaceObj('ModItemFolder', {
 				}),
 			},
 			'ProduceResInterval', 2880000,
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"FallingFeathers",
 				"DraftableAnimal",
@@ -15814,6 +16543,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 5,
 			'ReproductionType', "two sexes",
+			'ReproductionGroup', "Gujo",
 			'DailyPregnancyChance', 75,
 			'PregnancyDuration', 1920000,
 			'GrowDuration', 1920000,
@@ -15903,6 +16633,9 @@ PlaceObj('ModItemFolder', {
 				}),
 			},
 			'ProduceResInterval', 2880000,
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"FallingFeathers",
 				"DraftableAnimal",
@@ -15938,6 +16671,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 5,
 			'ReproductionType', "two sexes",
+			'ReproductionGroup', "Gujo",
 			'DailyPregnancyChance', 65,
 			'PregnancyDuration', 2880000,
 			'GrowDuration', 2880000,
@@ -16027,6 +16761,9 @@ PlaceObj('ModItemFolder', {
 				}),
 			},
 			'ProduceResInterval', 2880000,
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"FallingFeathers",
 				"DraftableAnimal",
@@ -16062,6 +16799,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 5,
 			'ReproductionType', "two sexes",
+			'ReproductionGroup', "Gujo",
 			'DailyPregnancyChance', 55,
 			'PregnancyDuration', 4800000,
 			'GrowDuration', 4800000,
@@ -16141,6 +16879,9 @@ PlaceObj('ModItemFolder', {
 				}),
 			},
 			'ProduceResInterval', 2880000,
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"FallingFeathers",
 				"DraftableAnimal",
@@ -16176,6 +16917,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 5,
 			'ReproductionType', "two sexes",
+			'ReproductionGroup', "Gujo",
 			'DailyPregnancyChance', 60,
 			'PregnancyDuration', 3840000,
 			'GrowDuration', 3840000,
@@ -16263,6 +17005,9 @@ PlaceObj('ModItemFolder', {
 			},
 			'ChanceToBeMale', 50,
 			'BodySize', "small",
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"DraftableAnimal",
 				"AP_Commander",
@@ -16409,6 +17154,9 @@ PlaceObj('ModItemFolder', {
 			},
 			'ChanceToBeMale', 50,
 			'BodySize', "small",
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"DraftableAnimal",
 				"SmartPredator",
@@ -16554,6 +17302,9 @@ PlaceObj('ModItemFolder', {
 			},
 			'ChanceToBeMale', 50,
 			'BodySize', "small",
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"DraftableAnimal",
 				"SmartPredator",
@@ -16699,6 +17450,9 @@ PlaceObj('ModItemFolder', {
 			},
 			'ChanceToBeMale', 50,
 			'BodySize', "small",
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"DraftableAnimal",
 				"SmartPredator",
@@ -16839,6 +17593,9 @@ PlaceObj('ModItemFolder', {
 			'SelectionRadius', 100,
 			'ChanceToBeMale', 100,
 			'BodySize', "small",
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"AP_Fortified",
 			},
@@ -16943,6 +17700,9 @@ PlaceObj('ModItemFolder', {
 			'SelectionRadius', 100,
 			'ChanceToBeMale', 100,
 			'BodySize', "small",
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"AP_Fortified",
 			},
@@ -17046,6 +17806,9 @@ PlaceObj('ModItemFolder', {
 			'SelectionRadius', 100,
 			'ChanceToBeMale', 100,
 			'BodySize', "small",
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'radius', 200,
 			'movement_adjust', 2500,
 			'EnrageChanceOtherAnimals', 100,
@@ -17144,6 +17907,9 @@ PlaceObj('ModItemFolder', {
 			'SelectionRadius', 100,
 			'ChanceToBeMale', 100,
 			'BodySize', "small",
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'radius', 200,
 			'movement_adjust', 2500,
 			'EnrageChanceOtherAnimals', 100,
@@ -17231,6 +17997,9 @@ PlaceObj('ModItemFolder', {
 			'SelectionRadius', 1250,
 			'BodySize', "small",
 			'DeathWeapon', "GlutchWeapon",
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"AP_Regen",
 				"AP_StatDamage",
@@ -17331,6 +18100,9 @@ PlaceObj('ModItemFolder', {
 			'SelectionRadius', 1250,
 			'BodySize', "small",
 			'DeathWeapon', "GlutchWeapon",
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"AP_Regen",
 				"AP_StatDamage",
@@ -17431,6 +18203,9 @@ PlaceObj('ModItemFolder', {
 			'SelectionRadius', 1250,
 			'BodySize', "small",
 			'DeathWeapon', "GlutchWeapon",
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"AP_Regen",
 			},
@@ -17527,6 +18302,9 @@ PlaceObj('ModItemFolder', {
 			'SelectionRadius', 1250,
 			'BodySize', "small",
 			'DeathWeapon', "GlutchWeapon",
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"AP_Regen",
 			},
@@ -17619,6 +18397,9 @@ PlaceObj('ModItemFolder', {
 			},
 			'SelectionRadius', 1250,
 			'BodySize', "small",
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"AP_Fast",
 				"AP_Frenzy",
@@ -17729,6 +18510,9 @@ PlaceObj('ModItemFolder', {
 			},
 			'SelectionRadius', 1250,
 			'BodySize', "small",
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"AP_Frenzy",
 			},
@@ -17837,6 +18621,9 @@ PlaceObj('ModItemFolder', {
 			},
 			'SelectionRadius', 1250,
 			'BodySize', "small",
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"AP_Frenzy",
 			},
@@ -17941,6 +18728,9 @@ PlaceObj('ModItemFolder', {
 			},
 			'SelectionRadius', 1250,
 			'BodySize', "small",
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"AP_Frenzy",
 			},
@@ -18036,6 +18826,9 @@ PlaceObj('ModItemFolder', {
 					'max_amount', 30000,
 				}),
 			},
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"DraftableAnimal",
 				"AP_StatDamage",
@@ -18113,6 +18906,9 @@ PlaceObj('ModItemFolder', {
 					'max_amount', 30000,
 				}),
 			},
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"DraftableAnimal",
 				"AP_Fortified",
@@ -18191,6 +18987,9 @@ PlaceObj('ModItemFolder', {
 				}),
 			},
 			'ChanceToBeMale', 33,
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"DraftableAnimal",
 				"AP_Fortified",
@@ -18268,6 +19067,9 @@ PlaceObj('ModItemFolder', {
 					'max_amount', 30000,
 				}),
 			},
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"DraftableAnimal",
 			},
@@ -18343,6 +19145,9 @@ PlaceObj('ModItemFolder', {
 			'SelectionRadius', 2000,
 			'ChanceToBeMale', 33,
 			'BodySize', "medium",
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"DraftableAnimal",
 			},
@@ -18462,6 +19267,9 @@ PlaceObj('ModItemFolder', {
 				}),
 			},
 			'ProduceResInterval', 960000,
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"DraftableAnimal",
 				"BloodFrenzy",
@@ -18847,7 +19655,7 @@ PlaceObj('ModItemFolder', {
 			'ProduceResInterval', 1920000,
 			'CmdProduceResources', function (animal)
 				if not animal:IsTamed() then return animal:UpdateProductionTime() end
-				return animal:DoProduceResources()
+				return animal:DoProduceResourcesDiminishingReturns()
 			end,
 			'AnimalPerks', {
 				"StoneDigger",
@@ -18959,7 +19767,7 @@ PlaceObj('ModItemFolder', {
 			'ProduceResInterval', 1920000,
 			'CmdProduceResources', function (animal)
 				if not animal:IsTamed() then return animal:UpdateProductionTime() end
-				return animal:DoProduceResources()
+				return animal:DoProduceResourcesDiminishingReturns()
 			end,
 			'AnimalPerks', {
 				"StoneDigger",
@@ -19086,7 +19894,7 @@ PlaceObj('ModItemFolder', {
 			'ProduceResInterval', 1920000,
 			'CmdProduceResources', function (animal)
 				if not animal:IsTamed() then return animal:UpdateProductionTime() end
-				return animal:DoProduceResources()
+				return animal:DoProduceResourcesDiminishingReturns()
 			end,
 			'AnimalPerks', {
 				"StoneDigger",
@@ -19464,7 +20272,7 @@ PlaceObj('ModItemFolder', {
 			'ProduceResInterval', 1920000,
 			'CmdProduceResources', function (animal)
 				if not animal:IsTamed() then return animal:UpdateProductionTime() end
-				return animal:DoProduceResources()
+				return animal:DoProduceResourcesDiminishingReturns()
 			end,
 			'AnimalPerks', {
 				"StoneDigger",
@@ -19555,7 +20363,7 @@ PlaceObj('ModItemFolder', {
 			'ChanceToBeMale', 50,
 			'ProduceResources', {
 				PlaceObj('ResAmount', {
-					'resource', "Stone",
+					'resource', "CarbonNanotubes",
 					'amount', 75000,
 				}),
 			},
@@ -19641,7 +20449,7 @@ PlaceObj('ModItemFolder', {
 			'ChanceToBeMale', 50,
 			'ProduceResources', {
 				PlaceObj('ResAmount', {
-					'resource', "Stone",
+					'resource', "CarbonNanotubes",
 					'amount', 75000,
 				}),
 			},
@@ -19725,7 +20533,7 @@ PlaceObj('ModItemFolder', {
 			'ChanceToBeMale', 50,
 			'ProduceResources', {
 				PlaceObj('ResAmount', {
-					'resource', "Stone",
+					'resource', "CarbonNanotubes",
 					'amount', 75000,
 				}),
 			},
@@ -19821,14 +20629,14 @@ PlaceObj('ModItemFolder', {
 			'BodySize', "medium",
 			'ProduceResources', {
 				PlaceObj('ResAmount', {
-					'resource', "Stone",
+					'resource', "CarbonNanotubes",
 					'amount', 20000,
 				}),
 			},
 			'ProduceResInterval', 1920000,
 			'CmdProduceResources', function (animal)
 				if not animal:IsTamed() then return animal:UpdateProductionTime() end
-				return animal:DoProduceResources()
+				return animal:DoProduceResourcesDiminishingReturns()
 			end,
 			'AnimalPerks', {
 				"StoneDigger",
@@ -19909,12 +20717,6 @@ PlaceObj('ModItemFolder', {
 			'SelectionRadius', 600,
 			'ChanceToBeMale', 0,
 			'BodySize', "large",
-			'ProduceResources', {
-				PlaceObj('ResAmount', {
-					'resource', "CarbonNanotubes",
-					'amount', 20000,
-				}),
-			},
 			'ProduceResInterval', 2880000,
 			'AnimalPerks', {
 				"CarbonNanoGlands",
@@ -20024,7 +20826,7 @@ PlaceObj('ModItemFolder', {
 			'CmdProduceResources', function (animal)
 				if not animal:IsTamed() then
 					if animal:Random(100, "no produce chance") > 40 then
-						return animal:UpdateProductionTime()
+						return animal:DoProduceResourcesDiminishingReturns()
 					end
 				end
 				return animal:DoProduceResources()
@@ -20067,6 +20869,7 @@ PlaceObj('ModItemFolder', {
 			'TamedLifetimeMax', 138240000,
 			'BondingChance', 10,
 			'ReproductionType', "two sexes",
+			'ReproductionGroup', "Ulfen",
 			'DailyPregnancyChance', 60,
 			'PregnancyDuration', 3840000,
 			'GrowDuration', 3840000,
@@ -20159,7 +20962,7 @@ PlaceObj('ModItemFolder', {
 			'CmdProduceResources', function (animal)
 				if not animal:IsTamed() then
 					if animal:Random(100, "no produce chance") > 40 then
-						return animal:UpdateProductionTime()
+						return animal:DoProduceResourcesDiminishingReturns()
 					end
 				end
 				return animal:DoProduceResources()
@@ -20205,6 +21008,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 10,
 			'ReproductionType', "two sexes",
+			'ReproductionGroup', "Ulfen",
 			'DailyPregnancyChance', 55,
 			'PregnancyDuration', 4800000,
 			'GrowDuration', 4800000,
@@ -20301,7 +21105,7 @@ PlaceObj('ModItemFolder', {
 			'CmdProduceResources', function (animal)
 				if not animal:IsTamed() then
 					if animal:Random(100, "no produce chance") > 40 then
-						return animal:UpdateProductionTime()
+						return animal:DoProduceResourcesDiminishingReturns()
 					end
 				end
 				return animal:DoProduceResources()
@@ -20348,6 +21152,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 10,
 			'ReproductionType', "two sexes",
+			'ReproductionGroup', "Ulfen",
 			'DailyPregnancyChance', 65,
 			'PregnancyDuration', 2880000,
 			'GrowDuration', 2880000,
@@ -20450,7 +21255,7 @@ PlaceObj('ModItemFolder', {
 			'CmdProduceResources', function (animal)
 				if not animal:IsTamed() then
 					if animal:Random(100, "no produce chance") > 40 then
-						return animal:UpdateProductionTime()
+						return animal:DoProduceResourcesDiminishingReturns()
 					end
 				end
 				return animal:DoProduceResources()
@@ -20498,6 +21303,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 10,
 			'ReproductionType', "two sexes",
+			'ReproductionGroup', "Ulfen",
 			'DailyPregnancyChance', 75,
 			'PregnancyDuration', 2000000,
 			'GrowDuration', 2000000,
@@ -20618,7 +21424,7 @@ PlaceObj('ModItemFolder', {
 			'CmdProduceResources', function (animal)
 				if not animal:IsTamed() then
 					if animal:Random(100, "no produce chance") > 40 then
-						return animal:UpdateProductionTime()
+						return animal:DoProduceResourcesDiminishingReturns()
 					end
 				end
 				return animal:DoProduceResources()
@@ -20666,6 +21472,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 10,
 			'ReproductionType', "two sexes",
+			'ReproductionGroup', "Ulfen",
 			'DailyPregnancyChance', 60,
 			'PregnancyDuration', 1800000,
 			'GrowDuration', 1800000,
@@ -20753,6 +21560,7 @@ PlaceObj('ModItemFolder', {
 				}),
 			},
 			'SelectionRadius', 1500,
+			'ChanceToBeMale', 40,
 			'BodySize', "medium",
 			'ProduceResources', {
 				PlaceObj('ResAmount', {
@@ -20761,6 +21569,9 @@ PlaceObj('ModItemFolder', {
 				}),
 			},
 			'ProduceResInterval', 960000,
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"ManureProducer",
 			},
@@ -20791,6 +21602,7 @@ PlaceObj('ModItemFolder', {
 			'TamedLifetimeMax', 138240000,
 			'BondingChance', 10,
 			'ReproductionType', "two sexes",
+			'ReproductionGroup', "Noth",
 			'DailyPregnancyChance', 55,
 			'PregnancyDuration', 4800000,
 			'GrowDuration', 4800000,
@@ -20865,6 +21677,7 @@ PlaceObj('ModItemFolder', {
 				}),
 			},
 			'SelectionRadius', 1500,
+			'ChanceToBeMale', 40,
 			'BodySize', "medium",
 			'ProduceResources', {
 				PlaceObj('ResAmount', {
@@ -20873,6 +21686,9 @@ PlaceObj('ModItemFolder', {
 				}),
 			},
 			'ProduceResInterval', 960000,
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"ManureProducer",
 				"DraftableAnimal",
@@ -20905,6 +21721,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 10,
 			'ReproductionType', "two sexes",
+			'ReproductionGroup', "Noth",
 			'DailyPregnancyChance', 65,
 			'PregnancyDuration', 2880000,
 			'GrowDuration', 2880000,
@@ -20982,6 +21799,7 @@ PlaceObj('ModItemFolder', {
 				}),
 			},
 			'SelectionRadius', 1500,
+			'ChanceToBeMale', 40,
 			'BodySize', "medium",
 			'ProduceResources', {
 				PlaceObj('ResAmount', {
@@ -20990,6 +21808,9 @@ PlaceObj('ModItemFolder', {
 				}),
 			},
 			'ProduceResInterval', 960000,
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"ManureProducer",
 				"DraftableAnimal",
@@ -21023,6 +21844,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 10,
 			'ReproductionType', "two sexes",
+			'ReproductionGroup', "Noth",
 			'DailyPregnancyChance', 65,
 			'PregnancyDuration', 2880000,
 			'GrowDuration', 2880000,
@@ -21104,6 +21926,7 @@ PlaceObj('ModItemFolder', {
 				}),
 			},
 			'SelectionRadius', 1500,
+			'ChanceToBeMale', 40,
 			'BodySize', "medium",
 			'ProduceResources', {
 				PlaceObj('ResAmount', {
@@ -21112,6 +21935,9 @@ PlaceObj('ModItemFolder', {
 				}),
 			},
 			'ProduceResInterval', 960000,
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"ManureProducer",
 				"DraftableAnimal",
@@ -21145,6 +21971,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 10,
 			'ReproductionType', "two sexes",
+			'ReproductionGroup', "Noth",
 			'DailyPregnancyChance', 75,
 			'PregnancyDuration', 2000000,
 			'GrowDuration', 2000000,
@@ -21226,6 +22053,7 @@ PlaceObj('ModItemFolder', {
 				}),
 			},
 			'SelectionRadius', 1500,
+			'ChanceToBeMale', 40,
 			'BodySize', "medium",
 			'ProduceResources', {
 				PlaceObj('ResAmount', {
@@ -21234,6 +22062,9 @@ PlaceObj('ModItemFolder', {
 				}),
 			},
 			'ProduceResInterval', 960000,
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"ManureProducer",
 				"DraftableAnimal",
@@ -21267,6 +22098,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 10,
 			'ReproductionType', "two sexes",
+			'ReproductionGroup', "Noth",
 			'DailyPregnancyChance', 60,
 			'PregnancyDuration', 1800000,
 			'GrowDuration', 1800000,
@@ -21334,7 +22166,7 @@ PlaceObj('ModItemFolder', {
 				}),
 			},
 			'SelectionRadius', 2000,
-			'ChanceToBeMale', 30,
+			'ChanceToBeMale', 40,
 			'BodySize', "large",
 			'ProduceResources', {
 				PlaceObj('ResAmount', {
@@ -21346,7 +22178,7 @@ PlaceObj('ModItemFolder', {
 			'CmdProduceResources', function (animal)
 				if not animal:IsTamed() then
 					if animal:Random(100, "no produce chance") > 40 then
-						return animal:UpdateProductionTime()
+						return animal:DoProduceResourcesDiminishingReturns()
 					end
 				end
 				return animal:DoProduceResources()
@@ -21386,6 +22218,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 5,
 			'ReproductionType', "two sexes",
+			'ReproductionGroup', "Draka",
 			'DailyPregnancyChance', 55,
 			'PregnancyDuration', 4800000,
 			'GrowDuration', 4800000,
@@ -21467,7 +22300,7 @@ PlaceObj('ModItemFolder', {
 				}),
 			},
 			'SelectionRadius', 2000,
-			'ChanceToBeMale', 35,
+			'ChanceToBeMale', 40,
 			'BodySize', "large",
 			'ProduceResources', {
 				PlaceObj('ResAmount', {
@@ -21479,7 +22312,7 @@ PlaceObj('ModItemFolder', {
 			'CmdProduceResources', function (animal)
 				if not animal:IsTamed() then
 					if animal:Random(100, "no produce chance") > 40 then
-						return animal:UpdateProductionTime()
+						return animal:DoProduceResourcesDiminishingReturns()
 					end
 				end
 				return animal:DoProduceResources()
@@ -21521,6 +22354,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 5,
 			'ReproductionType', "two sexes",
+			'ReproductionGroup', "Draka",
 			'DailyPregnancyChance', 55,
 			'PregnancyDuration', 4800000,
 			'GrowDuration', 4800000,
@@ -21619,7 +22453,7 @@ PlaceObj('ModItemFolder', {
 			'CmdProduceResources', function (animal)
 				if not animal:IsTamed() then
 					if animal:Random(100, "no produce chance") > 40 then
-						return animal:UpdateProductionTime()
+						return animal:DoProduceResourcesDiminishingReturns()
 					end
 				end
 				return animal:DoProduceResources()
@@ -21661,6 +22495,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 5,
 			'ReproductionType', "two sexes",
+			'ReproductionGroup', "Draka",
 			'DailyPregnancyChance', 65,
 			'PregnancyDuration', 2880000,
 			'GrowDuration', 2880000,
@@ -21759,7 +22594,7 @@ PlaceObj('ModItemFolder', {
 			'CmdProduceResources', function (animal)
 				if not animal:IsTamed() then
 					if animal:Random(100, "no produce chance") > 40 then
-						return animal:UpdateProductionTime()
+						return animal:DoProduceResourcesDiminishingReturns()
 					end
 				end
 				return animal:DoProduceResources()
@@ -21801,6 +22636,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 5,
 			'ReproductionType', "two sexes",
+			'ReproductionGroup', "Draka",
 			'DailyPregnancyChance', 75,
 			'PregnancyDuration', 2000000,
 			'GrowDuration', 2000000,
@@ -21905,7 +22741,7 @@ PlaceObj('ModItemFolder', {
 			'CmdProduceResources', function (animal)
 				if not animal:IsTamed() then
 					if animal:Random(100, "no produce chance") > 40 then
-						return animal:UpdateProductionTime()
+						return animal:DoProduceResourcesDiminishingReturns()
 					end
 				end
 				return animal:DoProduceResources()
@@ -21947,6 +22783,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 5,
 			'ReproductionType', "two sexes",
+			'ReproductionGroup', "Draka",
 			'DailyPregnancyChance', 60,
 			'PregnancyDuration', 1800000,
 			'GrowDuration', 1800000,
@@ -22017,6 +22854,7 @@ PlaceObj('ModItemFolder', {
 					'max_amount', 30000,
 				}),
 			},
+			'ChanceToBeMale', 40,
 			'BodySize', "medium",
 			'ProduceResources', {
 				PlaceObj('ResAmount', {
@@ -22027,7 +22865,7 @@ PlaceObj('ModItemFolder', {
 			'ProduceResInterval', 1920000,
 			'CmdProduceResources', function (animal)
 				if not animal:IsTamed() then return animal:UpdateProductionTime() end
-				return animal:DoProduceResources()
+				return animal:DoProduceResourcesDiminishingReturns()
 			end,
 			'AnimalPerks', {
 				"ChewRootsDigger",
@@ -22068,6 +22906,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(2, 4),
 			'BondingChance', 5,
 			'ReproductionType', "two sexes",
+			'ReproductionGroup', "Shogu",
 			'DailyPregnancyChance', 70,
 			'PregnancyDuration', 4800000,
 			'GrowDuration', 4800000,
@@ -22146,6 +22985,7 @@ PlaceObj('ModItemFolder', {
 					'max_amount', 30000,
 				}),
 			},
+			'ChanceToBeMale', 40,
 			'BodySize', "medium",
 			'ProduceResources', {
 				PlaceObj('ResAmount', {
@@ -22156,7 +22996,7 @@ PlaceObj('ModItemFolder', {
 			'ProduceResInterval', 1920000,
 			'CmdProduceResources', function (animal)
 				if not animal:IsTamed() then return animal:UpdateProductionTime() end
-				return animal:DoProduceResources()
+				return animal:DoProduceResourcesDiminishingReturns()
 			end,
 			'AnimalPerks', {
 				"ChewRootsDigger",
@@ -22197,6 +23037,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 5,
 			'ReproductionType', "two sexes",
+			'ReproductionGroup', "Shogu",
 			'DailyPregnancyChance', 55,
 			'PregnancyDuration', 4800000,
 			'GrowDuration', 4800000,
@@ -22288,6 +23129,7 @@ PlaceObj('ModItemFolder', {
 					'max_amount', 30000,
 				}),
 			},
+			'ChanceToBeMale', 40,
 			'BodySize', "medium",
 			'ProduceResources', {
 				PlaceObj('ResAmount', {
@@ -22298,7 +23140,7 @@ PlaceObj('ModItemFolder', {
 			'ProduceResInterval', 1920000,
 			'CmdProduceResources', function (animal)
 				if not animal:IsTamed() then return animal:UpdateProductionTime() end
-				return animal:DoProduceResources()
+				return animal:DoProduceResourcesDiminishingReturns()
 			end,
 			'AnimalPerks', {
 				"ChewRootsDigger",
@@ -22341,6 +23183,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 5,
 			'ReproductionType', "two sexes",
+			'ReproductionGroup', "Shogu",
 			'DailyPregnancyChance', 65,
 			'PregnancyDuration', 2880000,
 			'GrowDuration', 2880000,
@@ -22430,6 +23273,7 @@ PlaceObj('ModItemFolder', {
 					'max_amount', 30000,
 				}),
 			},
+			'ChanceToBeMale', 40,
 			'BodySize', "medium",
 			'ProduceResources', {
 				PlaceObj('ResAmount', {
@@ -22440,7 +23284,7 @@ PlaceObj('ModItemFolder', {
 			'ProduceResInterval', 1920000,
 			'CmdProduceResources', function (animal)
 				if not animal:IsTamed() then return animal:UpdateProductionTime() end
-				return animal:DoProduceResources()
+				return animal:DoProduceResourcesDiminishingReturns()
 			end,
 			'AnimalPerks', {
 				"ChewRootsDigger",
@@ -22483,6 +23327,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 5,
 			'ReproductionType', "two sexes",
+			'ReproductionGroup', "Shogu",
 			'DailyPregnancyChance', 75,
 			'PregnancyDuration', 2000000,
 			'GrowDuration', 2000000,
@@ -22572,6 +23417,7 @@ PlaceObj('ModItemFolder', {
 					'max_amount', 30000,
 				}),
 			},
+			'ChanceToBeMale', 40,
 			'BodySize', "medium",
 			'ProduceResources', {
 				PlaceObj('ResAmount', {
@@ -22582,7 +23428,7 @@ PlaceObj('ModItemFolder', {
 			'ProduceResInterval', 1920000,
 			'CmdProduceResources', function (animal)
 				if not animal:IsTamed() then return animal:UpdateProductionTime() end
-				return animal:DoProduceResources()
+				return animal:DoProduceResourcesDiminishingReturns()
 			end,
 			'AnimalPerks', {
 				"ChewRootsDigger",
@@ -22625,6 +23471,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 5,
 			'ReproductionType', "two sexes",
+			'ReproductionGroup', "Shogu",
 			'DailyPregnancyChance', 60,
 			'PregnancyDuration', 1800000,
 			'GrowDuration', 1800000,
@@ -22717,6 +23564,9 @@ PlaceObj('ModItemFolder', {
 				}),
 			},
 			'ProduceResInterval', 1920000,
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"ManureProducer",
 			},
@@ -22749,6 +23599,7 @@ PlaceObj('ModItemFolder', {
 			'TamedLifetimeMax', 138240000,
 			'BondingChance', 10,
 			'ReproductionType', "two sexes",
+			'ReproductionGroup', "Camel",
 			'DailyPregnancyChance', 70,
 			'PregnancyDuration', 4800000,
 			'GrowDuration', 4800000,
@@ -22826,6 +23677,9 @@ PlaceObj('ModItemFolder', {
 				}),
 			},
 			'ProduceResInterval', 1920000,
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"ManureProducer",
 				"DraftableAnimal",
@@ -22862,6 +23716,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 10,
 			'ReproductionType', "two sexes",
+			'ReproductionGroup', "Camel",
 			'DailyPregnancyChance', 55,
 			'PregnancyDuration', 4800000,
 			'GrowDuration', 4800000,
@@ -22954,6 +23809,9 @@ PlaceObj('ModItemFolder', {
 				}),
 			},
 			'ProduceResInterval', 1920000,
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"ManureProducer",
 				"DraftableAnimal",
@@ -22990,6 +23848,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 10,
 			'ReproductionType', "two sexes",
+			'ReproductionGroup', "Camel",
 			'DailyPregnancyChance', 65,
 			'PregnancyDuration', 2880000,
 			'GrowDuration', 2880000,
@@ -23088,6 +23947,9 @@ PlaceObj('ModItemFolder', {
 				}),
 			},
 			'ProduceResInterval', 1920000,
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"ManureProducer",
 				"DraftableAnimal",
@@ -23124,6 +23986,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 10,
 			'ReproductionType', "two sexes",
+			'ReproductionGroup', "Camel",
 			'DailyPregnancyChance', 75,
 			'PregnancyDuration', 2000000,
 			'GrowDuration', 2000000,
@@ -23222,6 +24085,9 @@ PlaceObj('ModItemFolder', {
 				}),
 			},
 			'ProduceResInterval', 1920000,
+			'CmdProduceResources', function (animal)
+				return animal:DoProduceResourcesDiminishingReturns()
+			end,
 			'AnimalPerks', {
 				"ManureProducer",
 				"DraftableAnimal",
@@ -23258,6 +24124,7 @@ PlaceObj('ModItemFolder', {
 			'CombatSkillInitial', range(5, 6),
 			'BondingChance', 10,
 			'ReproductionType', "two sexes",
+			'ReproductionGroup', "Camel",
 			'DailyPregnancyChance', 60,
 			'PregnancyDuration', 1800000,
 			'GrowDuration', 1800000,
@@ -23506,37 +24373,27 @@ PlaceObj('ModItemFolder', {
 			weight = 15000,
 		}),
 		PlaceObj('LootEntryResource', {
-			MaxAmount = 6000,
-			MinAmount = 5000,
+			MaxAmount = 3000,
+			MinAmount = 2000,
 			Resource = "Grenades",
 			condition = "Difficulty Easy",
-			weight = 5000,
-		}),
-		PlaceObj('LootEntryResource', {
-			MaxAmount = 5000,
-			MinAmount = 4000,
-			Resource = "Grenades",
-			condition = "Difficulty Medium",
-			weight = 5000,
-		}),
-		PlaceObj('LootEntryResource', {
-			MaxAmount = 4000,
-			MinAmount = 3000,
-			Resource = "Grenades",
-			condition = "Difficulty Hard",
 			weight = 5000,
 		}),
 		PlaceObj('LootEntryResource', {
 			MaxAmount = 3000,
 			MinAmount = 2000,
 			Resource = "Grenades",
-			condition = "Difficulty VeryHard",
+			condition = "Difficulty Medium",
 			weight = 5000,
 		}),
 		PlaceObj('LootEntryResource', {
-			MaxAmount = 2000,
 			Resource = "Grenades",
-			condition = "Difficulty Insane",
+			condition = "Difficulty Hard",
+			weight = 5000,
+		}),
+		PlaceObj('LootEntryResource', {
+			Resource = "Grenades",
+			condition = "Difficulty VeryHard",
 			weight = 5000,
 		}),
 		PlaceObj('LootEntryResource', {
@@ -23866,4 +24723,102 @@ PlaceObj('ModItemFolder', {
 		}),
 	}),
 	}),
+PlaceObj('ModItemXTemplate', {
+	__is_kind_of = "InfopanelSection",
+	group = "Infopanel Sections",
+	id = "tabOverview_UnitFuel",
+	save_in = "Mod/rtw6tLg",
+	PlaceObj('XTemplateTemplate', {
+		'__context_of_kind', "UnitConsumer",
+		'__template', "InfopanelSection",
+		'Id', "idRobotConditions",
+		'OnContextUpdate', function (self, context, ...)
+			XContextWindow.OnContextUpdate(self, context, ...)
+			local unit = ResolvePropObj(context)
+			local conditions = {}
+			local counters = {}
+			unit:ForEachEffectByClass("RobotCondition", function(condition)
+				local count = counters[condition.id] or 0
+				if count == 0 then
+					conditions[#conditions + 1] = condition
+				end
+				counters[condition.id] = count + 1
+			end)
+			for _, condition in ipairs(conditions) do
+				condition.display_count = counters[condition.id]
+			end
+			
+			local container = self.idFactors
+			local sn, fn = #container, #conditions
+			
+			--clear all Ids to prevent duplication
+			for _, child in ipairs(container) do
+				child:SetId("")
+			end
+			
+			--repurpose
+			local min = Min(sn, fn)
+			for i=1,min do
+				local condition = conditions[i]
+				local child = container[i]
+				child:SetContext(condition)
+				child:SetId(condition.id)
+			end
+			--create new
+			for i = min+1, fn do
+				local condition = conditions[i]
+				local child = XTemplateSpawn("IPRobotCondition", container, condition)
+				child:SetId(condition.id)
+				child:Open()
+			end
+			--delete unused
+			for i = #container,fn+1,-1 do
+				local win = container[i]
+				if win then
+					win:delete()
+				end
+			end
+			self.idNone:SetVisible(#container == 0)
+		end,
+		'Title', T(247594438282, --[[ModItemXTemplate tabOverview_UnitFuel Title]] "<ConsumeTitle>"),
+	}, {
+		PlaceObj('XTemplateWindow', {
+			'__class', "XText",
+			'Id', "idNone",
+			'Visible', false,
+			'FoldWhenHidden', true,
+			'TextStyle', "InfopanelText",
+			'Translate', true,
+			'Text', T(144636022083, --[[ModItemXTemplate tabOverview_UnitFuel Text]] "<ConsumeDescription>"),
+		}),
+		PlaceObj('XTemplateWindow', {
+			'__condition', function (parent, context) return not context.UI_Bar_Percent end,
+			'__class', "FrameProgress",
+			'Id', "idFuelBar",
+			'BindTo', "IPConsume",
+			'BarColor', RGBA(221, 125, 60, 255),
+			'Text', T(791693791925, --[[ModItemXTemplate tabOverview_UnitFuel Text]] "<FuelBarShort(context)><right><FuelAbs(context)>"),
+		}),
+		PlaceObj('XTemplateWindow', {
+			'__condition', function (parent, context) return context.UI_Bar_Percent end,
+			'__class', "FrameProgress",
+			'Id', "idFuelBar",
+			'BindTo', "IPConsume",
+			'BarColor', RGBA(221, 125, 60, 255),
+			'Text', T(895702378977, --[[ModItemXTemplate tabOverview_UnitFuel Text]] "<FuelBarShort(context)><right><value>"),
+		}),
+		}),
+}),
+PlaceObj('ModItemNotificationPreset', {
+	expiration = 60000,
+	expiration_bar = true,
+	id = "Preg_mod_conflict",
+	press_on_expire = true,
+	priority = "Critical",
+	rollover_text = T(172234438238, --[[ModItemNotificationPreset Preg_mod_conflict rollover_text]] "Enemies Evolve now supports manual override of Tame Caps. The Pregnancy Quota mod is not needed. If you are the author, please message me on the SAD discord to improve this."),
+	rollover_title = T(444640975240, --[[ModItemNotificationPreset Preg_mod_conflict rollover_title]] "Details"),
+	save_in = "Mod/rtw6tLg",
+	suppressable = false,
+	text = T(771285565740, --[[ModItemNotificationPreset Preg_mod_conflict text]] "Pregnancy Quota Mod detected"),
+}),
 }

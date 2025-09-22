@@ -67,6 +67,9 @@ DefineClass.Bloated_Glutch = {
 	SelectionRadius = 1250,
 	BodySize = "small",
 	DeathWeapon = "GlutchWeapon",
+	CmdProduceResources = function (animal)
+		return animal:DoProduceResourcesDiminishingReturns()
+	end,
 	AnimalPerks = {
 		"AP_Regen",
 	},

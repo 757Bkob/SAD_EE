@@ -1,6 +1,6 @@
 UndefineClass('Demo_3')
 DefineClass.Demo_3 = {
-	__parents = { "HeavyCombatRobot" },
+	__parents = { "HeavyCombatRobot", "UnitConsumer" },
 	__generated_by_class = "ModItemRobotCompositeDef",
 
 
@@ -26,7 +26,7 @@ DefineClass.Demo_3 = {
 	DisplayName = T(359047323734, --[[ModItemRobotCompositeDef Demo_3 DisplayName]] "D-E3-ch3m157"),
 	DisplayNameShort = T(562208439146, --[[ModItemRobotCompositeDef Demo_3 DisplayNameShort]] "DE3"),
 	DisplayNamePl = T(541755977736, --[[ModItemRobotCompositeDef Demo_3 DisplayNamePl]] "Drone Series E"),
-	Description = T(971100673913, --[[ModItemRobotCompositeDef Demo_3 Description]] "The chemists have never stopped trying to improve upon the corrosive capabilities; and have improved the fuel formula. It is now much denser, but can properly disentigrates all major building materials. The increased weight has been offset by substantial improvements to the hydraulics for no net movement loss. Has <color TechSubtitleBlue>10% Piercing Damage</color> <em>Reduction</em>, <color TextButton>20% Blunt Damage</color><color TextEmphasis> Reduction</color>, <color TextNegative>15% Energy Damage</color><color TextEmphasis> Reduction</color>, <color TextPositive>35% Gas Damage</color><color TextEmphasis> Reduction</color>"),
+	Description = T(971100673913, --[[ModItemRobotCompositeDef Demo_3 Description]] "The chemists have never stopped trying to improve upon the corrosive capabilities; and have improved the fuel formula. It is now much denser, but can properly disentigrate all major building materials. The increased weight has been offset by substantial improvements to the hydraulics for no net movement loss. Has <color TechSubtitleBlue>10% Piercing Damage</color> <em>Reduction</em>, <color TextButton>20% Blunt Damage</color><color TextEmphasis> Reduction</color>, <color TextNegative>15% Energy Damage</color><color TextEmphasis> Reduction</color>, <color TextPositive>35% Gas Damage</color><color TextEmphasis> Reduction</color>"),
 	SalvageLootTable = "ILU_Robot_Human_T3",
 	Skills = {
 		Combat = 7,
@@ -61,5 +61,13 @@ DefineClass.Demo_3 = {
 			},
 		}),
 	},
+	UnitConsumer = true,
+	res_consumed = "LiquidFuel",
+	res_max_stored = 30000,
+	res_used = 1000,
+	res_stored = 30000,
+	ConsumeDescription = T(841673020061, --[[ModItemRobotCompositeDef Demo_3 ConsumeDescription]] "An assortment of vials that are hydraulically pumped onto the tip of the units weapons."),
+	ConsumeTitle = T(839486777911, --[[ModItemRobotCompositeDef Demo_3 ConsumeTitle]] "Acid Fanny-Pack"),
+	ConsumeUIDetail = T(345769949241, --[[ModItemRobotCompositeDef Demo_3 ConsumeUIDetail]] "Liquid Left"),
 }
 

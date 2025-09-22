@@ -2,10 +2,12 @@ AllSpeciesUpgrades = _G.Mods["rtw6tLg"] or false
 local title = "Insects Level up All Species"
 local separator = " :: "
 local debugMSG = {"New Game","Game Started"}
-
--- UIPlayer.research_center:IsTechResearched(SelectedObj['FieldResearchTech'])
+local hour_duration = const.HourDuration
+local day_duration = const.DayDuration
+local resource_scale = const.ResourceScale
 
 function SavegameFixups.ILU_fixes()
+	DebugPrint("Fixing up a save game due to older EE version present!\n")
 	MapForEach("map", "GujoT2", function(obj)
 		obj:ComposeBodyParts()
 		obj:InitEntity()
@@ -16,8 +18,14 @@ function SavegameFixups.ILU_fixes()
 		end
 		animal:InitEntity()
 	end
+	MapForEach("map", "TerritorialNest", function(nest)
+		nest:Init() -- resets nests from 1st and bad implementation
+	end)
 	refresh_tame_counts()
 end
+
+
+--------------- TABLE SECTION --------------------
 
 local lookup_table = {}
 -- Junos
@@ -167,9 +175,6 @@ lookup_table["Ulfen_T3"]="Ulfen_T4"
 lookup_table["Ulfen_T4"]="Ulfen_T5"
 lookup_table["Ulfen_T5"]=nil
 
-function get_next(class)
-	return lookup_table[class] or nil
-end
 
 local Juno = {["Juno"]=1,["Juno_Brute"]=2,["Angry_Juno"]=2,["Hulk_Juno"]=3,["Too_Angry_Too_Die_Juno"]=4,["Junoskar"]=5}
 local Tecatli = {["Tecatli"]=1,["VenomousRaptors"]=1,["Entombed_Tecatli"]=2,["Heat_Reinforced_Tecatli"]=3,["Intelligent_Tecatli"]=4,["Spellsword_Tecatli"]=5}
@@ -195,28 +200,36 @@ local organs = {
 	"Sintis","Nuedo","Bitherm","ToCo","Megdeb",""
 }
 
+local species_herd_mod = { -- all values * 10 to not have engine round to 0
+	{id='Ulfen',kc= 50 / 4}, -- 1.25x base
+	{id='Draka',kc= 50 / 4 }, -- 1.25x base
+	{id='Noth',kc= 10 / 2}, -- 0.5x base
+	{id='Shogu',kc= 10 / 2}, -- 0.5x base
+	{id='Camel',kc= 10 }, -- 1x base
+	{id='Gujo',kc= 70 / 10 }, -- 0.7x base
+	{id='Scissor',kc= 50 / 4}, -- 1.25x base
+	{id='Dog',kc= 70 / 10}, -- 0.7x base
+	{id='Shrieker',kc= 50 / 4 }, -- 1.25x base
+	{id='Tecatli',kc= 70 / 10 }, -- 0.7x base
+	{id='Juno',kc= 10 / 2}, -- 0.5x base
+}
+
+local preg_quota_cap = {}
+
+------------------ TABLE QUERYING -----------------------------
+
 local function is_organ(resource)
 	for _,v in ipairs(organs) do
 		if v == resource then
 			return true
-		end
+		end 
 	end
 	return false
 end
 
-local species_herd_mod = { -- all values * 10 to not have engine round to 0
-	{id='Ulfen',kc= 50 / 4},
-	{id='Draka',kc= 50 / 4 },
-	{id='Noth',kc= 10 / 2},
-	{id='Shogu',kc= 10 / 2},
-	{id='Camel',kc= 10 },
-	{id='Gujo',kc= 80 / 10 },
-	{id='Scissor',kc= 50 / 4},
-	{id='Dog',kc= 80 / 10},
-	{id='Shrieker',kc= 50 / 4 },
-	{id='Tecatli',kc= 80 / 10 },
-	{id='Juno',kc= 10 / 2},
-}
+function get_next(class)
+	return lookup_table[class] or nil
+end
 
 function get_tier(class_name)
 	if Juno[class_name] then return Juno[class_name]
@@ -258,62 +271,60 @@ function get_stop(class_name)
 	end
 end
 
-
-function carrying_capacity(species)
-	local cap = (_G.ILU_max / 10) + 5
-	local scaling = 400 - _g.ILU_max
-	local difficulty_scaling = nil
-	local moon_scaling = MoonInstance['modifications']['ProgressResourcesFactor']['mul']
-	local normalize_EP = EventProgress / moon_scaling
-	local cap_up_per_no = EventProgress / scaling
-	local stop = get_stop(species)
-	local mod = 1
-	for _,v in ipairs(species_herd_mod) do
-		if v['id']==stop then
-			mod = v['kc']
-		end
-	end
-	return (cap + cap_up_per_no) * mod / 10
-end
-
-function refresh_tame_counts()
-	local count_table = {}
-	for _,animal in ipairs(UIPlayer.labels.TamedAnimals or empty_table) do
-		local stop_animal = get_stop(animal.class)
-		local found = false
-		for __,entry in ipairs(count_table) do
-			if entry['id'] == stop_animal then
-				found = true
-				entry['count'] = entry['count']+1
-			end
-		end
-		if found == false then
-			count_table[#count_table+1] = {id=stop_animal,count=1}
-		end
-	end
-	--count_table has index,stop_name, & count
-	for _,v in ipairs(count_table) do
-		if MapVarValues[v['id']] then
-			MapVarValues[v['id']]=v['count']
-		else
-			MapVar(v['id'],v['count'])
-		end
+function print_preg_quota_table()
+	for _,v in ipairs(preg_quota_cap) do
+		print(v['id'],v['quota'])
 	end
 end
 
-function new_preg_rate(species_class,rate)
-	local base_rate = rate or 0
-	local stop = get_stop(species_class)
-	local no = MapVarValues[stop] or 0
-	local cc = carrying_capacity(species_class)
-	local fin_mod = 100*(cc - no) / cc
-	local to_return = fin_mod * base_rate / 100
-	return to_return
+function upsert_preg_quota(stop,quota)
+	if not stop or not quota then return end
+	local found_flag = false 
+	for s,q in ipairs(preg_quota_cap) do
+		if s == stop then
+			found_flag = true
+			preg_quota_cap[s] = quota
+			return
+		end
+	end
+	if not found_flag then
+		preg_quota_cap[#preg_quota_cap+1] = {id=stop,quota=quota}
+	end
 end
+
+function get_preg_quota(stop)
+	for _,v in ipairs(preg_quota_cap) do
+		if v['id'] == stop then
+			return v['quota']
+		end
+	end
+	return nil
+end
+
+-------------------------- Mini FUNCTIONS ----------------------------------
+
+local function lookupEP(name)
+	DebugPrint("Checking a species EP cost to spawn")
+	DebugPrint(name)
+	DebugPrint("\n")
+	local classdef = g_Classes[name or false]
+	local ep = classdef.EventProgressValue
+	return ep
+end
+
 
 local function are_organs_present(butcher_resources)
 	for _,v in ipairs(butcher_resources) do
 		if is_organ(v['resource']) then
+			return true
+		end
+	end
+	return false
+end
+
+local function is_preg_loaded()
+	for _,mod in ipairs(ModsLoaded) do
+		if mod.id == 'hy8RluH' then
 			return true
 		end
 	end
@@ -330,205 +341,16 @@ local function is_px_loaded()
 end
 
 local function is_animal(mod_item_id)
-	for _,v in ipairs(lookup_table) do
-		local to_check = v['id']
-		if mod_item_id == to_check then
-			return true
-		end
-	end
-	return false
-end
-
-function unloadTest()
-	if not is_px_loaded() then
-		local found_organs = false
-		for _,mod in ipairs(ModsLoaded) do 
-			if mod.id == 'rtw6tLg' then
-				mod:ForEachItem(function(mc)
-					if is_animal(mc.id) then
-						local local_id = mc.id
-						if are_organs_present(mc.ButcherResources) then
-							found_organs = true
-						end
-					end
-				end)
-				if found_organs then ForceActivateStoryBit("ILU_restart_required") end
-			end
-		end
-	end
-end
-
-
-local function flip_flop(flip_table)
-	local found_flip = true
-	while found_flip do
-		found_flip = false
-		MapForEach(true, "Human", function(unit,was_flipped)
-			for _,v in ipairs(flip_table) do
-				for _, effect in ipairs(unit.status_effects or empty_table) do
-					if IsKindOf(effect, "ModItemHealthCondition") and effect.id == v['id'] then
-						unit:RemoveHealthCondition(v['id'])
-						unit:AddHealthCondition(v['flip'],'combatflip')
-						-- this means we found at least one sc to flip and should check again
-						found_flip = true
-					end
-				end
-			end
-		end)
-	end
-end
-
-function ILU_update_armor_hcs()
-	-- if we are here, we already know we need to flip some scs
-	local flip_table = {}
-	if _G.ILU_combat_type == 'simple' then
-		flip_table = {
-			{id='armor_leather_complex',flip='armor_leather_simple'},
-			{id='armor_vleather_complex',flip='armor_vleather_simple'},
-			{id='armor_synth_complex',flip='armor_synth_simple'},
-			{id='armor_badCarbon_complex',flip='armor_badCarbon_simple'},
-			{id='armor_carbon_complex',flip='armor_carbon_simple'},
-		}
-	elseif _G.ILU_combat_type == 'complex' then
-		flip_table = {
-			{flip='armor_leather_complex',id='armor_leather_simple'},
-			{flip='armor_vleather_complex',id='armor_vleather_simple'},
-			{flip='armor_synth_complex',id='armor_synth_simple'},
-			{flip='armor_badCarbon_complex',id='armor_badCarbon_simple'},
-			{flip='armor_carbon_complex',id='armor_carbon_simple'},
-		}
-	end
-	_G.ILU_flipped = true -- setting true to force the first loop
-	while _G.ILU_flipped do
-		flip_flop(flip_table)
-	end
-end
-
-function ILU_set_mod_options(id)
-	id = id or CurrentModId
-	if CurrentModId ~= id or not CurrentModOptions then return end
-	--ilu_set_map_vars() --
-	local options = CurrentModOptions
-	_G.ILU_max = options.O_ILU_max
-	_G.ILU_Tier_Max = options.O_ILU_max_tier
-	if options.O_simple_combat == true then
-		_G.ILU_combat_type='simple'
-	elseif options.O_simple_combat == false then
-		_G.ILU_combat_type='complex'
-	end
-	ILU_update_armor_hcs()
-end
-
-if FirstLoad then
-	_G.ILU_max = 150
-	_G.ILU_Tier_Max = 6
-	_G.ILU_combat_type = "complex"
-	ILU_set_mod_options("rtw6tLg")
-end
-
-function ILU_QA()
-	EventProgress = 1000000 / 40
-	local start = false
-	local dropship_spawn_def = nil
-	local instance = {}
-	local robot_spawn_def = SpawnDefs['Single_Robots']
-	for _,v in ipairs(lookup_table) do
-		local classdef = g_Classes[v['id'] or false]
-		local ep = classdef.EventProgressValue
-		if v['id'] == 'LightHostileRobot_LVL1' then
-			start = true
-			dropship_spawn_def = SpawnDefs["Attack_Dropship"]
-			instance.spawnClass = 'LightHostileRobot_LVL1'
-			instance.AdditionalClassList = {}
-		elseif start then
-			instance.AdditionalClassList[#instance.AdditionalClassList+1] ={v['id'], 100}
-		end
-	end
-	robot_spawn_def = robot_spawn_def:CreateInstance(instance)
-	local count = 1
-	local mod = robot_spawn_def:CalculateInvadersCountMod(robot_spawn_def, 100) or 100
-	local seed = InteractionRand(nil, "AttackWave")
-	local rand = BraidRandomCreate(seed)
-	count = robot_spawn_def:ModifyCount(count, mod, rand)
-	local MaxInvadersPerDropship = const.Gameplay.MaxInvadersPerDropship
-	local MaxDropshipsPossible = const.Gameplay.MaxAttackDropshipsCount
-	local dropships = Min(DivCeil(count,MaxInvadersPerDropship), MaxDropshipsPossible)
-	robot_spawn_def.Count = count / dropships
-	instance = {}
-	instance.RobotSpawnDef = robot_spawn_def
-	instance.Count = dropships
-	dropship_spawn_def = dropship_spawn_def:CreateInstance(instance)
-	local context = { robot_spawn_def = robot_spawn_def }
-	dropship_spawn_def:ActivateSpawn(nil, context)
-end
-
-local function lookupEP(name)
-	local classdef = g_Classes[name or false]
-	local ep = classdef.EventProgressValue
-	return ep
-end
-
-local function upgrade(temp_class_list,flag)
-	flag = flag or nil
-	local upgrade_flag = false
-	local fully_upgraded = 0
-	local max_upgrades = 1 -- Just used to make sure we upgrade all species, not just the primary
-	local max_tier = _G.ILU_Tier_Max
-	local a = test()
-	for _,v in ipairs(temp_class_list) do
-		if v['up_count'] > max_upgrades then
-			max_upgrades = v['up_count']
-		end
-	end
-	while not upgrade_flag and fully_upgraded<=#temp_class_list do
-		for _,val_table in ipairs(temp_class_list) do
-			if val_table['up_count'] < max_upgrades and not upgrade_flag and max_upgrades <= max_tier then
-				local up_maybe = lookup_table[val_table['now']]
-				if up_maybe and flag then
-					val_table['up_count'] = val_table['up_count'] + 1
-					val_table['now'] = up_maybe
-					val_table['ep'] = lookupEP(up_maybe)
-					upgrade_flag = true
-					break
-				elseif up_maybe and not flag then --- Used when just wanting the name of the next tier
-					return true, up_maybe
-				else
-					fully_upgraded = fully_upgraded +1
-					if fully_upgraded >= #temp_class_list then
-						break
-					end
-				end
-			end
-		end
-		max_upgrades = max_upgrades +1
-	end
-	return upgrade_flag,temp_class_list
-end
-
-function CalculateInvaders(spawn_array, percent)
-	print("Inside calculate invaders!")
-	local event_progress = 0
-	local weight_sum = 0
-	for _,upgrade_value in ipairs(spawn_array) do
-		local classdef = g_Classes[upgrade_value['now'] or false]
-		local name, weight,ep = upgrade_value['now'], upgrade_value['weight'],upgrade_value['ep']
-		if classdef and (weight or 0) > 0 then
-			event_progress = event_progress + (classdef.EventProgressValue or 0) * weight
-			weight_sum = weight_sum + weight
-		end
-	end
-	print(weight_sum)
-	assert(weight_sum > 0)
-	if weight_sum == 0 then
-		event_progress = UnitInvader.EventProgressValue
+	if get_stop(mod_item_id) then
+		return true
 	else
-		event_progress = event_progress / weight_sum
+		return false
 	end
-	print((percent or 100) * EventProgress / Max(1, event_progress))
-	return (percent or 100) * EventProgress / Max(1, event_progress)
 end
+
 
 local function build_output(final_full_table)
+	DebugPrint("Building final spawn table\n")
 	local additional_class_list = {}
 	local final_main_name = ''
 	for i=1,#final_full_table do
@@ -541,14 +363,153 @@ local function build_output(final_full_table)
 	return final_main_name, additional_class_list
 end
 
+function carrying_capacity(species)
+	DebugPrint("Getting carrying capacity of a species")
+	DebugPrint(species)
+	DebugPrint("\n")
+	local stop = get_stop(species)
+	local max 
+	if MapVarValues.O_Man_Cap then
+		max = get_preg_quota(species)
+	end
+	if not max then
+		max = MapVarValues['ILU_max'] or 150
+		max = DivRound(max,6)
+		local mod = 1
+		for _,v in ipairs(species_herd_mod) do
+			if v['id']==stop then
+				mod = v['kc']
+			end
+		end
+		max = DivRound(max * mod,10)
+	end
+	return max or 30 -- just in case we **** a brick
+end
 
-function test(start_animal,additionalClassList,progress_percent)
+function refresh_tame_counts()
+	DebugPrint("Refreshing the tame counts\n")
+	if MapVarValues['tame_last_refresh'] then
+		MapVarValues['tame_last_refresh']= GameTime()
+	else
+		MapVar('tame_last_refresh',GameTime())
+	end
+	local count_table = {}
+	for _,animal in ipairs(UIPlayer.labels.TamedAnimals or empty_table) do
+		--print("looking at ",animal.class)
+		local stop_animal = get_stop(animal.class)
+		--print("It's stop category is: ",stop_animal)
+		local found = false
+		for __,entry in ipairs(count_table) do
+			if entry['id'] == stop_animal then
+				found = true
+				entry['count'] = entry['count']+1
+			end
+		end
+		if found == false then
+			--print("It is not in the table yet!")
+			count_table[#count_table+1] = {id=stop_animal,count=1}
+		end
+	end
+	--count_table has index,stop_name, & count
+	for _,v in ipairs(count_table) do
+		if MapVarValues[v['id']] then
+			MapVarValues[v['id']]=v['count']
+		else
+			MapVar(v['id'],v['count'])
+		end
+	end
+end
+
+
+---------------------- MAJOR FUNCTIONS -----------------------------
+
+function set_expedition_tame(id,name)
+	DebugPrint("Expedition tame being set!")
+	name = name or 'N/A'
+	if MapVarValues['nest_awaken_exp_tame'] or MapVarValues['nest_awaken_exp_tame'] == 'N/A' then
+		MapVarValues['nest_awaken_exp_tame'] = id
+	else
+		MapVar('nest_awaken_exp_tame',id)
+	end
+	if MapVarValues['nest_awaken_tame_name'] or MapVarValues['nest_awaken_exp_tame'] == 'N/A' then
+		MapVarValues['nest_awaken_tame_name'] = name
+	else
+		MapVar('nest_awaken_tame_name',id)
+	end
+end
+
+function new_preg_rate(species_class,rate)
+	DebugPrint("Getting new preg rate for a species ")
+	DebugPrint(species_class)
+	DebugPrint("\n")
+	local tame_check = MapVarValues['tame_last_refresh'] or 0
+	if tame_check + (2 * day_duration) < GameTime() then -- refresh every other day
+		refresh_tame_counts()
+	end
+	local base_rate = rate or 0
+	local stop = get_stop(species_class)
+	local no = MapVarValues[stop] or 0
+	local cc = carrying_capacity(species_class)
+	local fin_mod = 100*(cc - no) / cc
+	local to_return = fin_mod * base_rate / 100
+	local override = false
+	if override then
+		to_return = 0
+	end
+	return to_return
+end
+
+function ILU_update_armor_hcs()
+	DebugPrint("Updating the armor HCs")
+	local combat_type = MapVarValues['ILU_combat_type']
+	local flip_table = {}
+	if not combat_type then return
+	elseif combat_type == 'simple' then
+		flip_table = {
+			{id='armor_leather_complex',flip='armor_leather_simple'},
+			{id='armor_vleather_complex',flip='armor_vleather_simple'},
+			{id='armor_synth_complex',flip='armor_synth_simple'},
+			{id='armor_badCarbon_complex',flip='armor_badCarbon_simple'},
+			{id='armor_carbon_complex',flip='armor_carbon_simple'},
+		}
+	elseif combat_type == 'complex' then
+		flip_table = {
+			{flip='armor_leather_complex',id='armor_leather_simple'},
+			{flip='armor_vleather_complex',id='armor_vleather_simple'},
+			{flip='armor_synth_complex',id='armor_synth_simple'},
+			{flip='armor_badCarbon_complex',id='armor_badCarbon_simple'},
+			{flip='armor_carbon_complex',id='armor_carbon_simple'},
+		}
+	end
+	local found_flip = true
+	while found_flip do
+		found_flip = false
+		MapForEach(true, "Human", function(unit,was_flipped)
+			--print("Checking: ",unit.id)
+			for _,v in ipairs(flip_table) do
+				for _, effect in ipairs(unit.status_effects or empty_table) do
+					if IsKindOf(effect, "ModItemHealthCondition") and effect.id == v['id'] then
+						--print("Swapping a condition for the correct one (Based on mod option)")
+						unit:RemoveHealthCondition(v['id'])
+						unit:AddHealthCondition(v['flip'],'combatflip')
+						--print("Trying to mark var as flipped!")
+						found_flip = true
+					end
+				end
+			end
+		end)
+	end
+end
+
+-- meat based upgrading
+function check_count_and_upgrade(start_animal,additionalClassList,progress_percent)
+	DebugPrint("non-robot attack incoming\n")
 	progress_percent = progress_percent or 100
-	print("Attacking with an attack of ",progress_percent,'% power')
 	local actual_EP_Bank = DivRound((progress_percent*EventProgress),100)
-	print("We have ",actual_EP_Bank,' to spend!')
-	local min_average_cost = DivRound(actual_EP_Bank,_G.ILU_max)
-	print("With a max creature # of ",_G.ILU_max,' our average EP cost must be above ',min_average_cost)
+	local max_count = MapVarValues['ILU_max']
+	if not max_count then ILU_set_mod_options("rtw6tLg") end
+	local max_count = MapVarValues['ILU_max']
+	local min_average_cost = DivRound(actual_EP_Bank,max_count)
 	local start_ep = lookupEP(start_animal)
 	local temp_class_list = {
 	  {start = start_animal,weight=100,now=start_animal,up_count=0,ep=start_ep},
@@ -568,25 +529,22 @@ function test(start_animal,additionalClassList,progress_percent)
 		temp_class_list[i+1] = expansion
 	end
 	local this_defs_avg = DivRound(progress_and_weight,sum_weight)
-	print("The spawndef handed to me has an average cost of: ",this_defs_avg)
 	if this_defs_avg > min_average_cost then return build_output(temp_class_list) end
-	local max_upgrades = 15
+	local max_loops = 40
 	local up_tier = 1
-	local max_tier = _G.ILU_Tier_Max
+	local max_tier = GameVarValues['ILU_Tier_Max'] or 6
 	local i = 0
 	local capped = 0
 	local found_an_upgrade_this_loop = false
-	while i < max_upgrades and this_defs_avg < min_average_cost and capped < #temp_class_list do
+	while i < max_loops and this_defs_avg < min_average_cost and capped < #temp_class_list do
 		i = i + 1
 		found_an_upgrade_this_loop = false
 		for _,v in ipairs(temp_class_list) do
 			local next = get_next(v['now'])
 			local cur_tier = get_tier(v['now'])
-			print("The tier of the current unit is ",cur_tier)
-			print("Is there another tier unit? ",next)
-			print("Is this a maxxed tier according to user preference? ",cur_tier == max_tier)
-			if not next or cur_tier == max_tier then capped = capped + 1 end
-			if v['up_count'] < up_tier and next and not cur_tier == max_tier then
+			if not next or cur_tier == max_tier then
+				capped = capped + 1
+			elseif v['up_count'] < up_tier then
 				found_an_upgrade_this_loop = true
 				v['up_count'] = up_tier
 				local weighted_ep_old = DivRound(v['weight']*v['ep'],sum_weight)
@@ -598,87 +556,16 @@ function test(start_animal,additionalClassList,progress_percent)
 			end
 		end
 		if not found_an_upgrade_this_loop then
-			print("Did not upgrade this loop!")
 			up_tier = up_tier + 1
-			i = i - 1 -- don't count this loop as no upgrade occured
-		else
-			print("After the ",i,'nth upgrade; the avg cost is now ', this_defs_avg)
 		end
-		print('Have I looped too much? ',not (i < max_upgrades))
-		print('Are my avg costs high enough? ',not (this_defs_avg < min_average_cost))
-		print("Have I upgraded as much as I could? ",not (max_tier >= up_tier))
-		print("Have I max evolved everything? ",not (capped < #temp_class_list))
 	end
 	return build_output(temp_class_list)
 end
 
-function addSmallnextEvo(temp_class_list)
-	local flag,name = upgrade(temp_class_list,false)
-	if flag then
-		temp_class_list[#temp_class_list+1] = { now = name , weight = 5 }
-	end
-	return temp_class_list
-end
 
-
-function check_count_and_upgrade(start_animal,additionalClassList,progress_percent)
-	additionalClassList = additionalClassList or {}
-	local temp_class_list = {
-	  {start = start_animal,weight=100,now=start_animal,up_count=0,ep=lookupEP(start_animal)},
-	}
-	for i=1,#additionalClassList do
-		local expansion = {}
-		expansion['now']=additionalClassList[i][1]
-		expansion['start']=additionalClassList[i][1]
-		expansion['weight']=additionalClassList[i][2]
-		expansion['up_count']=0
-		expansion['ep']=lookupEP(additionalClassList[i][1])
-		temp_class_list[i+1] = expansion
-	end
-	progress_percent = progress_percent or 100
-	local upgrade_round = 0
-	local final_animal = start_animal
-	local final_class_list = additionalClassList
-	local count = CalculateInvaders(temp_class_list, progress_percent) /100
-	print('Number in this attack:')
-	print(count)
-	local br = 0
-	while (count > _G.ILU_max and br < 20) do
-		print("Which is too many!")
-		local flag, temp_class_list = upgrade(temp_class_list,true)
-		print(flag)
-		print(temp_class_list)
-		if not flag then
-			return build_output(temp_class_list)
-		end
-		count = CalculateInvaders(temp_class_list, progress_percent) / 100
-		br = br + 1
-		print("I have done this:")
-		print(br)
-	end
-	--[[If wave is generating 50%+ of spawn max, add a 5% chance to spawn the 'next' tier of the 'next' defined unit.]]
-	if count > _G.ILU_max / 2 then
-		temp_class_list = addSmallnextEvo(temp_class_list)
-	end
-	return build_output(temp_class_list)
-end
-
---[[
-local function HandleLoad()
-	ApplyAnimalSet("rtw6tLg")
-end
---]]
-local function ILU_mod_set_and_cc()
-	ILU_set_mod_options("rtw6tLg")
-	refresh_tame_counts()
-end
-
-local function ILU_set_and_test()
-	ILU_set_mod_options("rtw6tLg")
-	unloadTest()
-end
-
+-- robot attack upgrader
 function ILU_ActivateAttackDropshipSpawnDefs(robot_spawndef, main_unit,added_units, progress_mul)
+	DebugPrint("Robot attack incoming\n")
 	local robot_spawn_def = SpawnDefs[robot_spawndef]
 	if not robot_spawn_def then return end
 	local dropship_spawn_def = SpawnDefs["Attack_Dropship"]
@@ -688,6 +575,8 @@ function ILU_ActivateAttackDropshipSpawnDefs(robot_spawndef, main_unit,added_uni
 	local instance = {}
 	instance.spawnClass, addedClassList = check_count_and_upgrade(main_unit,added_units)
 	instance.AdditionalClassList = {}
+	--print("First assault chosen", instance.spawnClass)
+	--print(addedClassList)
 	for i=1,#addedClassList do
 		instance.AdditionalClassList[#instance.AdditionalClassList+1] ={addedClassList[i]['id'], addedClassList[i]['weight']}
 	end
@@ -712,7 +601,137 @@ function ILU_ActivateAttackDropshipSpawnDefs(robot_spawndef, main_unit,added_uni
 	dropship_spawn_def:ActivateSpawn(nil, context)
 end
 
+--UIPlayer:GetStoredResAmount('ScrapMetal')
+local ProduceResource = ProduceResource
+local PlaceResourcePile = PlaceResourcePile
+local params = { disable_requests = true }
+function UnitAnimal:DoProduceResourcesDiminishingReturns()
+	DebugPrint("Animal doing a new res call")
+	if self:IsTamed() then
+		local happiness_pct = Min(self.Happiness / 1000, 100)
+		for _, res_amount in ipairs(self.ProduceResources) do
+			local amount = res_amount.amount
+			local happiness_mod = MulDivRound(amount, happiness_pct, 100)
+			if happiness_mod > resource_scale then
+				amount = amount + RoundResourceAmount(happiness_mod)
+			end
+			if UIPlayer:GetStoredResAmount(res_amount.resource) >= const.ResourceScale * 300 then
+				self:AddHealthCondition('tamed_constipated','too_many_resources')
+			elseif self:HasHealthCondition('tamed_constipated') then
+				self:RemoveHealthCondition('tamed_constipated','resources_normalized')
+				ProduceResource(nil, self, res_amount.resource, amount)
+			else
+				ProduceResource(nil, self, res_amount.resource, amount)
+			end
+		end
+	else
+		for _, res_amount in ipairs(self.ProduceResources) do
+			PlaceResourcePile(self, res_amount.resource, res_amount.amount, false, params)
+		end
+	end
+	self:UpdateProductionTime()
+end
+
+
+------------------------ META FUNCTIONS ------------------
+--[[
+function ILU_reset_vars()
+	local map = GetMap()
+	if not map or map == "" then return end
+	MapVar('ILU_max', 150)
+	MapVar('ILU_Tier_Max', 6)
+	MapVar('ILU_combat_type',"complex")
+	MapVarValues['ILU_max']=150
+	MapVarValues['ILU_Tier_Max']=6
+	MapVarValues['ILU_combat_type']='complex'
+end]]
+
+function ILU_set_mod_options(id)
+	id = id or CurrentModId
+	if is_preg_loaded() then
+		DebugPrint("Pregnancy Mod detected!\n")
+		AddGameNotification('Preg_mod_conflict')
+	end
+	local options = CurrentModOptions
+	if CurrentModId ~= id or not CurrentModOptions then
+		return
+	end
+	DebugPrint("EE Mod Options applied!\n")
+	DebugPrint('Override tame cap found? ')
+	DebugPrint(options.O_Man_Cap)
+	DebugPrint("\n")
+	if options.O_Man_Cap then
+		if not MapVarValues.O_Man_Cap then MapVar("O_Man_Cap",true) end
+		upsert_preg_quota('Ulfen',options.UlfenQuota or 20)
+		upsert_preg_quota('Draka',options.DrakaQuota or 20)
+		upsert_preg_quota('Noth',options.NothQuota or 20)
+		upsert_preg_quota('Shogu',options.ShoguQuota or 10)
+		upsert_preg_quota('Camel',options.CamelQuota or 20)
+		upsert_preg_quota('Gujo',options.GujoQuota or 10)
+		upsert_preg_quota('Scissor',options.ScissorQuota or 10)
+		upsert_preg_quota('Dog',options.DogQuota or 10)
+		upsert_preg_quota('Tecatli',options.TecatliQuota or 10)
+		upsert_preg_quota('Juno',options.JunoQuota or 10)
+		--print_preg_quota_table()
+	end
+	if MapVarValues.ILU_max then
+		MapVarValues.ILU_max = options.O_ILU_max or 150
+		MapVarValues.ILU_Tier_Max = options.O_ILU_max_tier or 6
+	else
+		MapVar('ILU_max', options.O_ILU_max or 150)
+		MapVar('ILU_Tier_Max', options.O_ILU_max_tier or 6)
+	end
+	if options.O_simple_combat == true then
+		MapVarValues.ILU_combat_type='simple'
+	elseif options.O_simple_combat == false then
+		MapVarValues.ILU_combat_type='complex'
+	else
+		MapVarValues.ILU_combat_type='complex'
+	end
+	ILU_update_armor_hcs()
+end
+
+if FirstLoad then
+	--ILU_reset_vars()
+	ILU_set_mod_options("rtw6tLg")
+end
+
+function unloadTest()
+	if not is_px_loaded() then
+		--print("Project-X not found, checking for organ remnants")
+		local found_organs = false
+		for _,mod in ipairs(ModsLoaded) do 
+			if mod.id == 'rtw6tLg' then
+				mod:ForEachItem(function(mc)
+					if is_animal(mc.id) then
+						local local_id = mc.id
+						if are_organs_present(mc.ButcherResources) then
+					 		--print("Organs found in animal: ",mc.id)
+							found_organs = true
+						end
+					end
+				end)
+				if found_organs then ForceActivateStoryBit("ILU_restart_required") end
+			end
+		end
+	end
+end
+
+local function ILU_mod_set_and_cc()
+	ILU_set_mod_options("rtw6tLg")
+	refresh_tame_counts()
+end
+
+local function ILU_set_and_test()
+	ILU_set_mod_options("rtw6tLg")
+	unloadTest()
+end
+
 OnMsg.ApplyModOptions = ILU_set_mod_options
-OnMsg.ModsReloaded = ILU_set_and_test
+--OnMsg.ModsReloaded = ILU_set_and_test
 OnMsg.LoadGame = ILU_mod_set_and_cc
-OnMsg.GameStarted = ILU_mod_set_and_cc
+OnMsg.GameStarted = ILU_set_and_test
+
+--function OnMsg.NewGame(game)
+--	ILU_reset_vars()
+--end

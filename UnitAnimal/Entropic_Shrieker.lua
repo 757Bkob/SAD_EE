@@ -43,7 +43,7 @@ DefineClass.Entropic_Shrieker = {
 	ChanceToBeMale = 50,
 	ProduceResources = {
 		PlaceObj('ResAmount', {
-			'resource', "Stone",
+			'resource', "CarbonNanotubes",
 			'amount', 75000,
 		}),
 	},

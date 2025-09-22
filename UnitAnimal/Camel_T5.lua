@@ -83,6 +83,9 @@ DefineClass.Camel_T5 = {
 		}),
 	},
 	ProduceResInterval = 1920000,
+	CmdProduceResources = function (animal)
+		return animal:DoProduceResourcesDiminishingReturns()
+	end,
 	AnimalPerks = {
 		"ManureProducer",
 		"DraftableAnimal",
@@ -119,6 +122,7 @@ DefineClass.Camel_T5 = {
 	CombatSkillInitial = range(5, 6),
 	BondingChance = 10,
 	ReproductionType = "two sexes",
+	ReproductionGroup = "Camel",
 	DailyPregnancyChance = 60,
 	PregnancyDuration = 1800000,
 	GrowDuration = 1800000,

@@ -1,6 +1,6 @@
 UndefineClass('HostileCombatQuadcopter_LVL5')
 DefineClass.HostileCombatQuadcopter_LVL5 = {
-	__parents = { "CombatQuadcopter" },
+	__parents = { "CombatQuadcopter", "UnitConsumer" },
 	__generated_by_class = "ModItemRobotCompositeDef",
 
 
@@ -25,5 +25,13 @@ DefineClass.HostileCombatQuadcopter_LVL5 = {
 	SpawnDefWeight = 50,
 	SpawnTags = set( "Boss" ),
 	FlightEscapeInside = true,
+	UnitConsumer = true,
+	res_consumed = "LiquidFuel",
+	res_max_stored = 30000,
+	res_used = 1000,
+	res_stored = 30000,
+	ConsumeDescription = T(538054307369, --[[ModItemRobotCompositeDef HostileCombatQuadcopter_LVL5 ConsumeDescription]] "Multiple compartments are dedicated to the storage of unique chemical compounds, and are mixed to deadly effects in combat!"),
+	ConsumeTitle = T(107150982322, --[[ModItemRobotCompositeDef HostileCombatQuadcopter_LVL5 ConsumeTitle]] "Portable Decanting Agent"),
+	ConsumeUIDetail = T(463932196078, --[[ModItemRobotCompositeDef HostileCombatQuadcopter_LVL5 ConsumeUIDetail]] "Liquid Left"),
 }
 

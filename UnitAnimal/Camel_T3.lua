@@ -77,6 +77,9 @@ DefineClass.Camel_T3 = {
 		}),
 	},
 	ProduceResInterval = 1920000,
+	CmdProduceResources = function (animal)
+		return animal:DoProduceResourcesDiminishingReturns()
+	end,
 	AnimalPerks = {
 		"ManureProducer",
 		"DraftableAnimal",
@@ -113,6 +116,7 @@ DefineClass.Camel_T3 = {
 	CombatSkillInitial = range(5, 6),
 	BondingChance = 10,
 	ReproductionType = "two sexes",
+	ReproductionGroup = "Camel",
 	DailyPregnancyChance = 65,
 	PregnancyDuration = 2880000,
 	GrowDuration = 2880000,

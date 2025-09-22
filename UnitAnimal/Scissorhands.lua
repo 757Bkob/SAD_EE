@@ -63,7 +63,7 @@ DefineClass.Scissorhands = {
 	ProduceResInterval = 1920000,
 	CmdProduceResources = function (animal)
 		if not animal:IsTamed() then return animal:UpdateProductionTime() end
-		return animal:DoProduceResources()
+		return animal:DoProduceResourcesDiminishingReturns()
 	end,
 	AnimalPerks = {
 		"StoneDigger",

@@ -78,6 +78,9 @@ DefineClass.PEx_Skarabei = {
 	SelectionRadius = 100,
 	ChanceToBeMale = 100,
 	BodySize = "small",
+	CmdProduceResources = function (animal)
+		return animal:DoProduceResourcesDiminishingReturns()
+	end,
 	radius = 200,
 	movement_adjust = 2500,
 	EnrageChanceOtherAnimals = 100,

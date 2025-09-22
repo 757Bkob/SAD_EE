@@ -70,6 +70,9 @@ DefineClass.GujoT2 = {
 		}),
 	},
 	ProduceResInterval = 2880000,
+	CmdProduceResources = function (animal)
+		return animal:DoProduceResourcesDiminishingReturns()
+	end,
 	AnimalPerks = {
 		"FallingFeathers",
 		"DraftableAnimal",
@@ -105,6 +108,7 @@ DefineClass.GujoT2 = {
 	CombatSkillInitial = range(5, 6),
 	BondingChance = 5,
 	ReproductionType = "two sexes",
+	ReproductionGroup = "Gujo",
 	DailyPregnancyChance = 55,
 	PregnancyDuration = 4800000,
 	GrowDuration = 4800000,

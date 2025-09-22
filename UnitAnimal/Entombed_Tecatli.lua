@@ -48,6 +48,9 @@ DefineClass.Entombed_Tecatli = {
 			'max_amount', 30000,
 		}),
 	},
+	CmdProduceResources = function (animal)
+		return animal:DoProduceResourcesDiminishingReturns()
+	end,
 	AnimalPerks = {
 		"DraftableAnimal",
 	},

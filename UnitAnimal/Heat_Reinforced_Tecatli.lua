@@ -49,6 +49,9 @@ DefineClass.Heat_Reinforced_Tecatli = {
 		}),
 	},
 	ChanceToBeMale = 33,
+	CmdProduceResources = function (animal)
+		return animal:DoProduceResourcesDiminishingReturns()
+	end,
 	AnimalPerks = {
 		"DraftableAnimal",
 		"AP_Fortified",

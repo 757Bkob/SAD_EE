@@ -40,12 +40,6 @@ DefineClass.Shrieker_Manhunting_Mother = {
 	SelectionRadius = 600,
 	ChanceToBeMale = 0,
 	BodySize = "large",
-	ProduceResources = {
-		PlaceObj('ResAmount', {
-			'resource', "CarbonNanotubes",
-			'amount', 20000,
-		}),
-	},
 	ProduceResInterval = 2880000,
 	AnimalPerks = {
 		"CarbonNanoGlands",

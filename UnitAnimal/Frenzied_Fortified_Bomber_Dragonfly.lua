@@ -62,6 +62,9 @@ DefineClass.Frenzied_Fortified_Bomber_Dragonfly = {
 	},
 	SelectionRadius = 1250,
 	BodySize = "small",
+	CmdProduceResources = function (animal)
+		return animal:DoProduceResourcesDiminishingReturns()
+	end,
 	AnimalPerks = {
 		"AP_Frenzy",
 	},

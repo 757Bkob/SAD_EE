@@ -41,7 +41,7 @@ DefineClass.Sniping_Entropy_Shielded_Shrieker = {
 	ChanceToBeMale = 50,
 	ProduceResources = {
 		PlaceObj('ResAmount', {
-			'resource', "Stone",
+			'resource', "CarbonNanotubes",
 			'amount', 75000,
 		}),
 	},

@@ -81,7 +81,7 @@ DefineClass.Ulfen_T2 = {
 	CmdProduceResources = function (animal)
 		if not animal:IsTamed() then
 			if animal:Random(100, "no produce chance") > 40 then
-				return animal:UpdateProductionTime()
+				return animal:DoProduceResourcesDiminishingReturns()
 			end
 		end
 		return animal:DoProduceResources()
@@ -127,6 +127,7 @@ DefineClass.Ulfen_T2 = {
 	CombatSkillInitial = range(5, 6),
 	BondingChance = 10,
 	ReproductionType = "two sexes",
+	ReproductionGroup = "Ulfen",
 	DailyPregnancyChance = 55,
 	PregnancyDuration = 4800000,
 	GrowDuration = 4800000,

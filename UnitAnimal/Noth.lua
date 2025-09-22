@@ -55,6 +55,7 @@ DefineClass.Noth = {
 		}),
 	},
 	SelectionRadius = 1500,
+	ChanceToBeMale = 40,
 	BodySize = "medium",
 	ProduceResources = {
 		PlaceObj('ResAmount', {
@@ -63,6 +64,9 @@ DefineClass.Noth = {
 		}),
 	},
 	ProduceResInterval = 960000,
+	CmdProduceResources = function (animal)
+		return animal:DoProduceResourcesDiminishingReturns()
+	end,
 	AnimalPerks = {
 		"ManureProducer",
 	},
@@ -93,6 +97,7 @@ DefineClass.Noth = {
 	TamedLifetimeMax = 138240000,
 	BondingChance = 10,
 	ReproductionType = "two sexes",
+	ReproductionGroup = "Noth",
 	DailyPregnancyChance = 55,
 	PregnancyDuration = 4800000,
 	GrowDuration = 4800000,

@@ -1,6 +1,6 @@
 UndefineClass('Demo_2')
 DefineClass.Demo_2 = {
-	__parents = { "HeavyCombatRobot" },
+	__parents = { "HeavyCombatRobot", "UnitConsumer" },
 	__generated_by_class = "ModItemRobotCompositeDef",
 
 
@@ -61,5 +61,13 @@ DefineClass.Demo_2 = {
 			},
 		}),
 	},
+	UnitConsumer = true,
+	res_consumed = "LiquidFuel",
+	res_max_stored = 30000,
+	res_used = 1000,
+	res_stored = 30000,
+	ConsumeDescription = T(437448100377, --[[ModItemRobotCompositeDef Demo_2 ConsumeDescription]] "An assortment of vials that are hydraulically pumped onto the tip of the units weapons."),
+	ConsumeTitle = T(274271519094, --[[ModItemRobotCompositeDef Demo_2 ConsumeTitle]] "Acid Fanny-Pack"),
+	ConsumeUIDetail = T(183635071217, --[[ModItemRobotCompositeDef Demo_2 ConsumeUIDetail]] "Liquid Left"),
 }
 

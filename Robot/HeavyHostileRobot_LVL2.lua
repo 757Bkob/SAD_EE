@@ -6,8 +6,6 @@ DefineClass.HeavyHostileRobot_LVL2 = {
 
 	object_class = "HeavyCombatRobot",
 	UnitTags = set( "Heavy_Malus", "Heavy_Slow_T1", "Robot" ),
-	Health = 500000,
-	MaxHealth = 500000,
 	damage_reduction = {
 		blunt = 40,
 		energy = 30,

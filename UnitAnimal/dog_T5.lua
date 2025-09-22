@@ -69,6 +69,9 @@ DefineClass.dog_T5 = {
 	},
 	ChanceToBeMale = 50,
 	BodySize = "small",
+	CmdProduceResources = function (animal)
+		return animal:DoProduceResourcesDiminishingReturns()
+	end,
 	AnimalPerks = {
 		"DraftableAnimal",
 		"AP_Commander",

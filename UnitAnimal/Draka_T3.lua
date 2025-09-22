@@ -82,7 +82,7 @@ DefineClass.Draka_T3 = {
 	CmdProduceResources = function (animal)
 		if not animal:IsTamed() then
 			if animal:Random(100, "no produce chance") > 40 then
-				return animal:UpdateProductionTime()
+				return animal:DoProduceResourcesDiminishingReturns()
 			end
 		end
 		return animal:DoProduceResources()
@@ -124,6 +124,7 @@ DefineClass.Draka_T3 = {
 	CombatSkillInitial = range(5, 6),
 	BondingChance = 5,
 	ReproductionType = "two sexes",
+	ReproductionGroup = "Draka",
 	DailyPregnancyChance = 65,
 	PregnancyDuration = 2880000,
 	GrowDuration = 2880000,

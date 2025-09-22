@@ -67,6 +67,7 @@ DefineClass.Noth_T5 = {
 		}),
 	},
 	SelectionRadius = 1500,
+	ChanceToBeMale = 40,
 	BodySize = "medium",
 	ProduceResources = {
 		PlaceObj('ResAmount', {
@@ -75,6 +76,9 @@ DefineClass.Noth_T5 = {
 		}),
 	},
 	ProduceResInterval = 960000,
+	CmdProduceResources = function (animal)
+		return animal:DoProduceResourcesDiminishingReturns()
+	end,
 	AnimalPerks = {
 		"ManureProducer",
 		"DraftableAnimal",
@@ -108,6 +112,7 @@ DefineClass.Noth_T5 = {
 	CombatSkillInitial = range(5, 6),
 	BondingChance = 10,
 	ReproductionType = "two sexes",
+	ReproductionGroup = "Noth",
 	DailyPregnancyChance = 60,
 	PregnancyDuration = 1800000,
 	GrowDuration = 1800000,

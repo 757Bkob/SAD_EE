@@ -77,6 +77,9 @@ DefineClass.VenomousRaptors = {
 		}),
 	},
 	ProduceResInterval = 960000,
+	CmdProduceResources = function (animal)
+		return animal:DoProduceResourcesDiminishingReturns()
+	end,
 	AnimalPerks = {
 		"DraftableAnimal",
 		"BloodFrenzy",

@@ -81,6 +81,9 @@ DefineClass.Mutated_PEx_Skarabei_Brute = {
 	SelectionRadius = 100,
 	ChanceToBeMale = 100,
 	BodySize = "small",
+	CmdProduceResources = function (animal)
+		return animal:DoProduceResourcesDiminishingReturns()
+	end,
 	AnimalPerks = {
 		"AP_Fortified",
 	},

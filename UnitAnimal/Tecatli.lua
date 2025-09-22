@@ -47,6 +47,9 @@ DefineClass.Tecatli = {
 	SelectionRadius = 2000,
 	ChanceToBeMale = 33,
 	BodySize = "medium",
+	CmdProduceResources = function (animal)
+		return animal:DoProduceResourcesDiminishingReturns()
+	end,
 	AnimalPerks = {
 		"DraftableAnimal",
 	},

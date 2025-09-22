@@ -60,5 +60,10 @@ DefineClass.Demo_1 = {
 			},
 		}),
 	},
+	res_consumed = "LiquidFuel",
+	res_max_stored = 30000,
+	res_used = 1000,
+	res_stored = 30000,
+	ConsumeUIDetail = T(674753995784, --[[ModItemRobotCompositeDef Demo_1 ConsumeUIDetail]] "Liquid Left"),
 }
 

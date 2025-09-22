@@ -63,6 +63,9 @@ DefineClass.Camel = {
 		}),
 	},
 	ProduceResInterval = 1920000,
+	CmdProduceResources = function (animal)
+		return animal:DoProduceResourcesDiminishingReturns()
+	end,
 	AnimalPerks = {
 		"ManureProducer",
 	},
@@ -95,6 +98,7 @@ DefineClass.Camel = {
 	TamedLifetimeMax = 138240000,
 	BondingChance = 10,
 	ReproductionType = "two sexes",
+	ReproductionGroup = "Camel",
 	DailyPregnancyChance = 70,
 	PregnancyDuration = 4800000,
 	GrowDuration = 4800000,

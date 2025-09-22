@@ -50,6 +50,9 @@ DefineClass.Spellsword_Tecatli = {
 			'max_amount', 30000,
 		}),
 	},
+	CmdProduceResources = function (animal)
+		return animal:DoProduceResourcesDiminishingReturns()
+	end,
 	AnimalPerks = {
 		"DraftableAnimal",
 		"AP_StatDamage",

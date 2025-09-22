@@ -67,6 +67,7 @@ DefineClass.Shogu_T2 = {
 			'max_amount', 30000,
 		}),
 	},
+	ChanceToBeMale = 40,
 	BodySize = "medium",
 	ProduceResources = {
 		PlaceObj('ResAmount', {
@@ -77,7 +78,7 @@ DefineClass.Shogu_T2 = {
 	ProduceResInterval = 1920000,
 	CmdProduceResources = function (animal)
 		if not animal:IsTamed() then return animal:UpdateProductionTime() end
-		return animal:DoProduceResources()
+		return animal:DoProduceResourcesDiminishingReturns()
 	end,
 	AnimalPerks = {
 		"ChewRootsDigger",
@@ -118,6 +119,7 @@ DefineClass.Shogu_T2 = {
 	CombatSkillInitial = range(5, 6),
 	BondingChance = 5,
 	ReproductionType = "two sexes",
+	ReproductionGroup = "Shogu",
 	DailyPregnancyChance = 55,
 	PregnancyDuration = 4800000,
 	GrowDuration = 4800000,

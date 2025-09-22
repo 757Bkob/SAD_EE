@@ -1,6 +1,6 @@
 UndefineClass('HostileCombatQuadcopter_LVL2')
 DefineClass.HostileCombatQuadcopter_LVL2 = {
-	__parents = { "CombatQuadcopter" },
+	__parents = { "CombatQuadcopter", "UnitConsumer" },
 	__generated_by_class = "ModItemRobotCompositeDef",
 
 
@@ -22,5 +22,13 @@ DefineClass.HostileCombatQuadcopter_LVL2 = {
 	SpawnDefWeight = 50,
 	SpawnTags = set( "Boss" ),
 	FlightEscapeInside = true,
+	UnitConsumer = true,
+	res_consumed = "LiquidFuel",
+	res_max_stored = 30000,
+	res_used = 1000,
+	res_stored = 30000,
+	ConsumeDescription = T(576407424571, --[[ModItemRobotCompositeDef HostileCombatQuadcopter_LVL2 ConsumeDescription]] "A large bulk that contains highly corrosive acids. When applied, this acid quickly turns non-organic matter into a sludge."),
+	ConsumeTitle = T(439485626440, --[[ModItemRobotCompositeDef HostileCombatQuadcopter_LVL2 ConsumeTitle]] "Fuel Tank"),
+	ConsumeUIDetail = T(138275542972, --[[ModItemRobotCompositeDef HostileCombatQuadcopter_LVL2 ConsumeUIDetail]] "Liquid Left"),
 }
 
