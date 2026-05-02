@@ -412,6 +412,7 @@ function OnMsg.ModsReloaded()
 			end
 		end)
 	end
+	build_pivot_tables()
 end
 
 --Input: evo_pivot[unit_id] output: evo unit list
@@ -492,10 +493,6 @@ end
 
 function get_evo_Table()
 	return EE_evo_pivot
-end
-
-function OnMsg.ModsReloaded()
-	build_pivot_tables()
 end
 
 function Get_unit_classes()
