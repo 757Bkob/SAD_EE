@@ -926,8 +926,6 @@ function check_count_and_upgrade(start_animal, additionalClassList, progress_per
 	progress_percent = progress_percent or 100
 	local actual_EP_Bank = DivRound((progress_percent * EventProgress), 100)
 	local max_count = ILU_max
-	if not max_count then ILU_set_mod_options("rtw6tLg") end
-	local max_count = ILU_max
 	local min_average_cost = DivRound(actual_EP_Bank, max_count)
 	local start_ep = g_Classes[start_animal].EventProgressValue --lookupEP(start_animal)
 	local temp_class_list = {
