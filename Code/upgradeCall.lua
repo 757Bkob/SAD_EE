@@ -524,14 +524,16 @@ end
 
 
 function EE_get_evo(unit_class)
-	if #EE_evo_pivot == 0 then
+	-- # is 0 on a string-keyed table, so the old `#pivot == 0` was always true and rebuilt every call;
+	-- next() is the real emptiness test, so the pivot now builds once and caches.
+	if next(EE_evo_pivot) == nil then
 		Build_evo_pivot()
 	end
 	return EE_evo_pivot[unit_class]
 end
 
 function EE_get_tier(unit_class)
-	if #EE_tier_pivot == 0 then
+	if next(EE_tier_pivot) == nil then
 		Build_tier_pivot()
 	end
 	return EE_tier_pivot[unit_class]
