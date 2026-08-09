@@ -100,6 +100,7 @@ DefineClass.Tecatli_T1_venom = {
 	SleepStartAnim = "sleep_Start",
 	SleepIdleAnim = "sleep_Idle",
 	SleepEndAnim = "sleep_End",
+	SleepInterruptedAnim = "sleep_Interupted",
 	Tameable = true,
 	TamingFood = "RawMeat",
 	TamingFoodAmount = 40000,

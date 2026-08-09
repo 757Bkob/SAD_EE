@@ -68,6 +68,7 @@ DefineClass.Tecatli = {
 	SleepStartAnim = "sleep_Start",
 	SleepIdleAnim = "sleep_Idle",
 	SleepEndAnim = "sleep_End",
+	SleepInterruptedAnim = "sleep_Interupted",
 	Tameable = true,
 	TamingFood = "RawMeat",
 	TamingFoodAmount = 20000,
