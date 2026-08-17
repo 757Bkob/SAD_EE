@@ -64,7 +64,7 @@ PlaceObj('ModItemFolder', {
 	}),
 	PlaceObj('ModItemOptionNumber', {
 		'name', "CamelQuota",
-		'DisplayName', "Camels",
+		'DisplayName', "Drommadas",
 		'DefaultValue', 20,
 	}),
 	PlaceObj('ModItemOptionNumber', {
@@ -5858,7 +5858,7 @@ PlaceObj('ModItemFolder', {
 					Handler = function (self, year, day)
 						for _, animal in ipairs(UIPlayer.labels.TamedAnimals or empty_table) do
 							if animal.Gender == "female" and not animal:IsGrowingUp() and not animal:HasHealthConditionById(self.id) and IsAliveAndConscious(animal) and not animal:IsManuallyControlled() then
-								local get_live_preg_chance = new_preg_rate(animal.class,animal.DailyPregnancyChance)
+								local get_live_preg_chance = new_preg_rate(animal,animal.DailyPregnancyChance)
 								if animal:Random(100, "Breeding") < get_live_preg_chance then
 									local male = false
 									animal:UpdatePfClass() -- for CheckConnectivity
@@ -6385,8 +6385,7 @@ PlaceObj('ModItemFolder', {
 					Handler = function (self, target, time, update_interval)
 						if not IsKindOf(target,'UnitTemperature') then
 							self:RemoveFromOwner(target)
-						end
-						if target:GetBodyTemperature() > target.TemperatureLow then
+						elseif target:GetBodyTemperature() > target.TemperatureLow then
 							self:RemoveFromOwner(target)
 						end
 					end,

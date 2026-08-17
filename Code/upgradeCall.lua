@@ -779,7 +779,8 @@ function carrying_capacity(species)
 	local herd_mod = Presets.UnitSpeciesGroup.Default[species].herd_size_modifier or 100
 	local max
 	if EE_hard_cap then
-		max = MapVarValues[species] --get_preg_quota(species)
+		local sub_s = species:sub(2)
+		max = _G['S'..sub_s..'_cap']
 	end
 	if not max then
 		max = DivRound(DivRound(ILU_max or 150, 6) * herd_mod, 100)
@@ -787,6 +788,20 @@ function carrying_capacity(species)
 	Bkob_Log("The maxx for this species is: ", max)
 	return max or 30 -- just in case we **** a brick
 end
+
+--[[
+MapVar("Species_shrieker_cap",20)
+MapVar("Species_scissorhands_cap",10)
+MapVar("Species_draka_cap",20)
+MapVar("Species_ulfen_cap",20)
+MapVar("Species_noth_cap",20)
+MapVar("Species_shogu_cap",10)
+MapVar("Species_camel_cap",20)
+MapVar("Species_gujo_cap",10)
+MapVar("Species_dogs_cap",20)
+MapVar("Species_tecatli_cap",10)
+MapVar("Species_juno_cap",10)
+]]
 
 ---------------------- MAJOR FUNCTIONS -----------------------------
 
@@ -802,7 +817,7 @@ function new_preg_rate(specific_species, rate)
 			count = count + 1
 		end
 	end
-	if count < 2 then return rate or 60 end
+	if count <= 2 then return rate or 60 end
 	local no = count or 0
 	local cc = carrying_capacity(species)
 	local fin_mod = 100 * (cc - no) / cc
